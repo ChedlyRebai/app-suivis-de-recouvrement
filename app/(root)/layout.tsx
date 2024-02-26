@@ -65,7 +65,7 @@ export default function RootLayout({
         <body class="h-full">
         ```
       */}
-      <div>
+      <div className="">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -92,7 +92,7 @@ export default function RootLayout({
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-700">
+              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-700">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -131,13 +131,13 @@ export default function RootLayout({
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-indigo-800 text-white"
-                            : "text-indigo-100 hover:bg-indigo-600",
+                            ? "bg-gray-800 text-white"
+                            : "text-gray-100 hover:bg-gray-600",
                           "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         )}
                       >
                         <item.icon
-                          className="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300"
+                          className="mr-4 flex-shrink-0 h-6 w-6 text-gray-300"
                           aria-hidden="true"
                         />
                         {item.name}
@@ -156,11 +156,11 @@ export default function RootLayout({
         {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow pt-5 bg-indigo-700 overflow-y-auto">
-            <div className="flex items-center flex-shrink-0 px-4">
+          <div className="flex flex-col flex-grow pt-5 bg-gray-700 overflow-y-auto">
+            <div className="flex items-center justify-center flex-shrink-0 px-4">
               <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
+                className="h-16 center"
+                src={"/images/logo.png"}
                 alt="Workflow"
               />
             </div>
@@ -172,13 +172,13 @@ export default function RootLayout({
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-indigo-800 text-white"
-                        : "text-indigo-100 hover:bg-indigo-600",
+                        ? "bg-gray-800 text-white"
+                        : "text-gray-100 hover:bg-gray-600",
                       "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
                   >
                     <item.icon
-                      className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300"
+                      className="mr-3 flex-shrink-0 h-6 w-6 text-gray-300"
                       aria-hidden="true"
                     />
                     {item.name}
@@ -273,7 +273,7 @@ export default function RootLayout({
             </div>
           </div>
 
-          <main>
+          <main className="">
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <h1 className="text-2xl font-semibold text-gray-900">
