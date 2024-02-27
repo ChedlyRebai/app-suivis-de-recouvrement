@@ -1,4 +1,4 @@
-export type droit = {
+export type droit_accees = {
   ordre1: number;
   ordre2: number;
   nom: String;

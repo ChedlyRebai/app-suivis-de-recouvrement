@@ -24,6 +24,7 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
+import { droit_accees } from "@/Models/droit_accees.model";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -34,39 +35,82 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
- 
+export const columns: ColumnDef<droit_accees>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "module",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Module
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+    accessorKey: "modulep",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          ModuleP
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
     },
   },
+  {
+    accessorKey: "code",
+    header: "Code Fonction",
+  },
+  {
+    accessorKey: "acces",
+    header: "Accés",
+  },
+  {
+    accessorKey: "creation",
+    header: "Creation",
+  },
+  {
+    accessorKey: "modification",
+    header: "Modification",
+  },
+  {
+    accessorKey: "suppression",
+    header: "Suppression",
+  },
+  // {
+  //   accessorKey: "email",
+  // header: ({ column }) => {
+  //   return (
+  //     <Button
+  //       variant="ghost"
+  //       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //     >
+  //       Email
+  //       <ArrowUpDown className="ml-2 h-4 w-4" />
+  //     </Button>
+  //   );
+  // },
+  // },
+  // {
+  //   accessorKey: "amount",
+  //   header: () => <div className="text-right">Amount</div>,
+  //   cell: ({ row }) => {
+  //     const amount = parseFloat(row.getValue("amount"));
+  //     const formatted = new Intl.NumberFormat("en-US", {
+  //       style: "currency",
+  //       currency: "USD",
+  //     }).format(amount);
+
+  //     return <div className="text-right font-medium">{formatted}</div>;
+  //   },
+  // },
   {
     id: "actions",
     cell: ({ row }) => {
@@ -82,9 +126,7 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
+            <DropdownMenuItem onClick={() => {}}>
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
