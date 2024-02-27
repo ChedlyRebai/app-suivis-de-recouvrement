@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 
 import { ClipLoader } from "react-spinners";
-
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -37,15 +37,27 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const instance = axios.create({
+      baseURL: process.env.API_URL,
+    });
 
-  const getUsername = (values: z.infer<typeof formSchema>) => {
+    await axios
+      .get(`http://localhost:10000/users/getUsername/`)
+      .then((username: any) => {
+        console.log(username);
+      });
+    console.log(values);
+  };
+
+  const getUsername = async (values: z.infer<typeof formSchema>) => {
     if (values.matricule.length < 4) return;
-    console.log(values.matricule);
+    await axios
+      .get(`${process.env.API_URL}/users/getUsername`)
+      .then((username: any) => {
+        console.log(username);
+      });
+    console.log(values);
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -74,7 +86,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   <FormItem>
                     <FormLabel>Matricule</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="Matricule" {...field} />
+                      <Input type="number" placeholder="Matricule" {...field} />
                     </FormControl>
                     <FormDescription>{username}</FormDescription>
                     <FormMessage />
