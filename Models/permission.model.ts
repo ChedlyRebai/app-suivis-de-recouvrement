@@ -1,0 +1,22 @@
+export type droit = {
+  ordre1: number;
+  ordre2: number;
+  nom: String;
+  icon: String;
+  valeur: number;
+  sup: number;
+  nom_module: String;
+  flg_url: String;
+  indice_alerte: number;
+  icon_alerte: String;
+  code_fonction: number;
+  acces: String;
+  creation: String;
+  modification: String;
+  suppression: String;
+  sup_alerte: number;
+  flag_acces_dos: String;
+  req: String;
+  req2: String;
+  id: number;
+};
