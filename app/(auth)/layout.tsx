@@ -79,7 +79,8 @@ export default function RootLayout({
                 Enter your email below to log in
               </p>
             </div>
-            <UserAuthForm />
+
+            {children}
           </div>
         </div>
       </div>

@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import { UserAuthForm } from "../_components/user_auth";
 
 const Page = () => {
   return (
-    <div>sss
-      
-    </div>
-  )
-}
+    <>
+      <UserAuthForm />
+    </>
+  );
+};
 
-export default Page
+export default Page;
