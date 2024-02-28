@@ -1,17 +1,19 @@
+"use client";
+import useEditDroit from "@/hooks/use-edit-droit-modal";
+import Modal from "./Modal";
 
 const EditDroit = () => {
+  const { id, isOpen, onOpen, onClose } = useEditDroit();
   return (
-    return (
-        <Modal
-          title="Liste des fontions"
-          description="Rechercher une fonction"
-          isOpen={isOpen}
-          onChange={onClose}
-        >
-          <DataTable columns={columns} data={data} />
-        </Modal>
-      );
-  )
-}
+    <Modal
+      title="Liste des fontions"
+      description="Rechercher une fonction"
+      isOpen={isOpen}
+      onChange={onClose}
+    >
+      id
+    </Modal>
+  );
+};
 
-export default EditDroit
+export default EditDroit;

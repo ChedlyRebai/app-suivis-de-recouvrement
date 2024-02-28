@@ -29,6 +29,7 @@ import {
   SearchIcon,
   BellIcon,
 } from "lucide-react";
+import SearchFonctionModal from "@/components/shared/Search-Fonction-Modal";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -66,6 +67,7 @@ export default function RootLayout({
         ```
       */}
       <div className="">
+        <SearchFonctionModal />
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
