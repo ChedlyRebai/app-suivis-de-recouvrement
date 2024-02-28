@@ -2,7 +2,7 @@
 import useEditDroit from "@/hooks/use-edit-droit-modal";
 import Modal from "./Modal";
 
-const EditDroit = () => {
+const EditDroitModal = () => {
   const { id, isOpen, onOpen, onClose } = useEditDroit();
   return (
     <Modal
@@ -16,4 +16,4 @@ const EditDroit = () => {
   );
 };
 
-export default EditDroit;
+export default EditDroitModal;

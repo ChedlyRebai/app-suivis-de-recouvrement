@@ -26,6 +26,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { droit_accees } from "@/Models/droit_accees.model";
 import { Badge } from "@/components/ui/badge";
+import useEditDroit from "@/hooks/use-edit-droit-modal";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -169,7 +170,7 @@ export const columns: ColumnDef<droit_accees>[] = [
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original;
-
+      const { onOpen } = useEditDroit();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -180,7 +181,7 @@ export const columns: ColumnDef<droit_accees>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => {}}>Edit Accees</DropdownMenuItem>
+            <DropdownMenuItem onClick={onOpen}>Edit Accees</DropdownMenuItem>
 
             {/* <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
