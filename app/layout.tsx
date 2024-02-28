@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import axios from "axios";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,9 +13,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  axios.defaults.baseURL = "https://api.example.com";
   return (
     <html lang="en">
-      <body className="">{children}</body>
+      <body className="">{children} </body>
     </html>
   );
 }

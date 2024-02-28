@@ -25,6 +25,7 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { droit_accees } from "@/Models/droit_accees.model";
+import { Badge } from "@/components/ui/badge";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -37,7 +38,7 @@ export type Payment = {
 
 export const columns: ColumnDef<droit_accees>[] = [
   {
-    accessorKey: "module",
+    accessorKey: "nom",
     header: ({ column }) => {
       return (
         <Button
@@ -51,7 +52,7 @@ export const columns: ColumnDef<droit_accees>[] = [
     },
   },
   {
-    accessorKey: "modulep",
+    accessorKey: "nom_module",
     header: ({ column }) => {
       return (
         <Button
@@ -64,6 +65,7 @@ export const columns: ColumnDef<droit_accees>[] = [
       );
     },
   },
+
   {
     accessorKey: "code",
     header: "Code Fonction",
@@ -71,18 +73,70 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "acces",
     header: "Accés",
+    cell: ({ row }) => {
+      return (
+        <span
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+            row.getValue("acces") === "O"
+              ? "bg-gray-100 text-gray-800"
+              : "bg-red-100 text-red-800"
+          } `}
+        >
+          {row.getValue("acces") === "O" ? "oui" : "non"}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "creation",
     header: "Creation",
+    cell: ({ row }) => {
+      return (
+        <span
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+            row.getValue("creation") === "O"
+              ? "bg-gray-100 text-gray-800"
+              : "bg-red-100 text-red-800"
+          } `}
+        >
+          {row.getValue("creation") === "O" ? "oui" : "non"}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "modification",
     header: "Modification",
+    cell: ({ row }) => {
+      return (
+        <span
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+            row.getValue("modification") === "O"
+              ? "bg-gray-100 text-gray-800"
+              : "bg-red-100 text-red-800"
+          } `}
+        >
+          {row.getValue("modification") === "O" ? "oui" : "non"}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "suppression",
     header: "Suppression",
+    cell: ({ row }) => {
+      return (
+        <span
+          className={`inline-flex justify-center items-center px-2.5 py-0.5 rounded-md text-lg  font-medium ${
+            row.getValue("suppression") === "O"
+              ? "bg-gray-100 text-gray-800"
+              : "bg-red-100 text-red-800"
+          } `}
+        >
+          {row.getValue("suppression") === "O" ? "oui" : "non"}
+        </span>
+      );
+    },
   },
   // {
   //   accessorKey: "email",
@@ -126,12 +180,10 @@ export const columns: ColumnDef<droit_accees>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => {}}>
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => {}}>Edit Accees</DropdownMenuItem>
+            {/* <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       );
