@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -8,28 +9,26 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import useAuthModal from "@/hooks/use-fonction-search-modal";
+
 interface ModalProps {
   isOpen: boolean;
-  onChange: (open: boolean) => void;
+  onChange: () => void;
   title: string;
   description: string;
   children: React.ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({
-  isOpen,
   onChange,
   title,
   description,
   children,
+  isOpen,
 }) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
+    <Dialog open={isOpen}>
+      <DialogClose onClick={onChange} />
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

@@ -1,5 +1,6 @@
 "use server";
 
+import { droit_accees } from "@/Models/droit_accees.model";
 import axios from "axios";
 
 export const getAllDroitAccess = async () => {
@@ -7,4 +8,17 @@ export const getAllDroitAccess = async () => {
   const res = await axios.get(`${process.env.API_URL}/droit`);
   console.log(res);
   return res;
+};
+
+export const getDroitAccessByCodeFonction = async (code: string) => {
+  console.log(
+    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}`
+  );
+  const res = await axios.get(
+    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}`
+  );
+
+  console.log(res.data);
+
+  return res.data;
 };

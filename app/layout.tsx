@@ -13,7 +13,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  axios.defaults.baseURL = "https://api.example.com";
+  axios.defaults.baseURL = "http://localhost:10000/";
   return (
     <html lang="en">
       <body className="">{children} </body>

@@ -1,8 +1,11 @@
+import { fontion } from "@/Models/fonction.model";
 import axios from "axios";
 
 export const getAllFunctions = async () => {
   console.log(`${process.env.API_URL}/fonction`);
-  const res = await axios.get(`${process.env.API_URL}/fonction`);
-  console.log(res);
+  axios.defaults.baseURL = "http://localhost:10000/";
+
+  const res = await axios.get<fontion[]>(`/fonction`);
+
   return res;
 };

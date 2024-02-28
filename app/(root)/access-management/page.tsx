@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getAllDroitAccess } from "@/actions/droit_accees.action";
 import { droit_accees } from "@/Models/droit_accees.model";
+import SearchFonctionModal from "@/components/shared/Search-Fonction-Modal";
 
 async function getData(): Promise<droit_accees[]> {
   // Fetch data from your API here.
@@ -112,11 +113,12 @@ async function getData(): Promise<droit_accees[]> {
 }
 
 export default async function Page() {
-  const dat = await getAllDroitAccess();
   const data = await getData();
+
   return (
     <div>
-      <DataTable columns={columns} data={data} />
+      <SearchFonctionModal />
+      <DataTable columns={columns} />
     </div>
   );
 }

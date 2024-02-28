@@ -11,6 +11,7 @@ import {
   VisibilityState,
   ColumnFiltersState,
   getFilteredRowModel,
+  Row,
 } from "@tanstack/react-table";
 import {
   Table,
@@ -21,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -32,34 +33,25 @@ import {
 import { SearchIcon } from "lucide-react";
 import useAuthModal from "@/hooks/use-fonction-search-modal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getDroitAccessByCodeFonction } from "@/actions/droit_accees.action";
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
 export function DataTable<TData, TValue>({
   columns,
+  data,
 }: DataTableProps<TData, TValue>) {
-  const [data, setData] = useState([]);
-
+  console.log(data);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const Params = searchParams.get("code") || "";
-    if (Params?.length > 0) {
-      console.log(searchParams.get("code") || "");
-    }
-    const fetchData = async () => {
-      const res = await getDroitAccessByCodeFonction("11");
-      console.log(res);
-      setData(res);
-    };
-    fetchData();
-  }, []);
-  const { isOpen, onOpen } = useAuthModal();
+  const test = () => {
+    searchParams.append();
+  };
+
+  const { isOpen, onOpen, onClose } = useAuthModal();
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -83,50 +75,45 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+  const [inputValue, setInputValue] = useState("");
+  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
+  useEffect(() => {
+    setSearch(`${searchParams.get("code")}`);
+    console.log(search);
+  }, [searchParams.get("code")]);
+
+  const addQuery = (row: any) => {
+    console.log();
+    router.push(
+      pathname +
+        "?" +
+        createQueryString("code", `${row.code_fonction as string}`)
+    );
+  };
+  const [selectedCode, setSelectedCode] = useState("");
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-">
         <Input
-          placeholder="Filter Module..."
-          value={(table.getColumn("nom")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("nom")?.setFilterValue(event.target.value)
-          }
+          placeholder="Filter code_fonction"
+          value={inputValue}
+          onChange={(event) => {
+            setInputValue(event.target.value);
+            table
+              .getColumn("code_fonction")
+              ?.setFilterValue(event.target.value as unknown as number);
+          }}
           className="max-w-sm"
         />
-        <Button
-          variant="outline"
-          onClick={() => onOpen()}
-          className="ml-2 w-auto "
-        >
-          Search for fonction
-        </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(checked: boolean) =>
-                      column.toggleVisibility(checked)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -152,6 +139,23 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="cursor-pointer "
+                  onClick={() => {
+                    setInputValue(
+                      (row.original as { code_fonction: string }).code_fonction
+                    );
+                    if (
+                      selectedCode ===
+                      (row.original as { code_fonction: string }).code_fonction
+                    ) {
+                      setSelectedCode("");
+                    } else {
+                      setSelectedCode(
+                        (row.original as { code_fonction: string })
+                          .code_fonction
+                      );
+                    }
+                  }}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -178,22 +182,21 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end space-x-2 ">
         <Button
-          variant="outline"
+          onClick={() => {
+            onClose();
+            router.push(
+              pathname + "?" + createQueryString("code", `${selectedCode}`)
+            );
+          }}
+          variant="default"
           size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          OK
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
+        <Button onClick={() => onClose()} variant="outline" size="sm">
+          Annuler
         </Button>
       </div>
     </>
