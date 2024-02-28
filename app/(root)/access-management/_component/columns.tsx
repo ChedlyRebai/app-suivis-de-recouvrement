@@ -170,7 +170,7 @@ export const columns: ColumnDef<droit_accees>[] = [
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original;
-      const { onOpen } = useEditDroit();
+      const { onOpen, setId } = useEditDroit();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -181,7 +181,15 @@ export const columns: ColumnDef<droit_accees>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={onOpen}>Edit Accees</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                onOpen();
+                console.log(row);
+                setId(`${row.original.id}`);
+              }}
+            >
+              Edit Accees
+            </DropdownMenuItem>
 
             {/* <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>

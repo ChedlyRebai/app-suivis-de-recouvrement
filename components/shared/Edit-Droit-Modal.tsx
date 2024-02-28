@@ -11,7 +11,7 @@ const EditDroitModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      id
+      {id}
     </Modal>
   );
 };
