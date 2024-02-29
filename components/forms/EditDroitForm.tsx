@@ -49,7 +49,7 @@ const EditDroitForm = () => {
     modification,
     creation,
   } = useEditDroit();
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmi(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -66,11 +66,8 @@ const EditDroitForm = () => {
     console.log(acces);
   };
 
-  const onSubmi = () => {
-    console.log(acces);
-    console.log(creation);
-    console.log(modification);
-    console.log(suppression);
+  const onSubmit = async () => {
+    const response = await update;
   };
 
   return (
@@ -144,7 +141,7 @@ const EditDroitForm = () => {
         </Select>
       </div>
       <div className="flex items-center justify-end space-x-2 ">
-        <Button variant="default" onClick={onSubmi} size="sm">
+        <Button variant="default" onClick={onSubmit} size="sm">
           Mettre A Jour
         </Button>
         <Button onClick={onClose} variant="outline" size="sm">

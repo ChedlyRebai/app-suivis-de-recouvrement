@@ -24,7 +24,7 @@ export const getDroitAccessByCodeFonction = async (code: string) => {
 };
 
 //localhost:10000/droit/updateDroit
-export const getDroitAccessById = async (
+export const updateDroitAccessById = async (
   id: number,
   suppression: string,
   modification: string,
