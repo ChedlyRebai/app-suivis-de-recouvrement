@@ -22,3 +22,28 @@ export const getDroitAccessByCodeFonction = async (code: string) => {
 
   return res.data;
 };
+
+//localhost:10000/droit/updateDroit
+export const getDroitAccessById = async (
+  id: number,
+  suppression: string,
+  modification: string,
+  creation: string,
+  acces: string
+) => {
+  console.log(`${process.env.API_URL}/droit/droit/updateDroit`);
+  const res = await axios.put(
+    `${process.env.API_URL}/droit/droit/updateDroit`,
+    {
+      id,
+      suppression,
+      modification,
+      creation,
+      acces,
+    }
+  );
+  console.log(id, suppression, modification, creation, acces);
+  console.log(res.data);
+
+  return res.data;
+};
