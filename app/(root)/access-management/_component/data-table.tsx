@@ -46,6 +46,7 @@ export function DataTable<TData, TValue>({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const Params = searchParams.get("code") || "";
@@ -53,12 +54,20 @@ export function DataTable<TData, TValue>({
       console.log(searchParams.get("code") || "");
     }
     const fetchData = async () => {
-      const res = await getDroitAccessByCodeFonction("11");
-      console.log(res);
-      setData(res);
+      setIsLoading(true);
+      const res = await getDroitAccessByCodeFonction(Params)
+        .then((data) => {
+          setData(data);
+          console.log("not");
+        })
+        .then(() => {
+          console.log("finish");
+          setIsLoading(false);
+        });
     };
     fetchData();
-  }, []);
+  }, [searchParams.get("code")]);
+
   const { isOpen, onOpen } = useAuthModal();
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -149,7 +158,16 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}

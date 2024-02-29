@@ -14,14 +14,14 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-import { toast } from "@/components/ui/use-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 import { Label } from "@radix-ui/react-label";
 
 import { useState } from "react";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
 import { updateDroitAccessById } from "@/actions/droit_accees.action";
+import { CircleIcon, XIcon } from "lucide-react";
 
 interface EditDoitProps {
   id: string;
@@ -50,16 +50,7 @@ const EditDroitForm = () => {
     modification,
     creation,
   } = useEditDroit();
-  function onSubmi(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
+  function onSubmi(data: z.infer<typeof FormSchema>) {}
 
   const valueChange = (n: string) => {
     setAccess(n);
@@ -75,8 +66,9 @@ const EditDroitForm = () => {
       creation,
       acces
     );
-    if (response.ok) {
-      console.log(response);
+    if (response) {
+      toast.success("Mis à jour avec succés");
+      onClose();
     }
   };
 

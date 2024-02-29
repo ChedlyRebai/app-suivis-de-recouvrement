@@ -2,6 +2,7 @@
 
 import { droit_accees } from "@/Models/droit_accees.model";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 export const getAllDroitAccess = async () => {
   console.log(`${process.env.API_URL}/droit`);
@@ -41,6 +42,8 @@ export const updateDroitAccessById = async (
   });
   console.log(id, suppression, modification, creation, acces);
   console.log(res.data);
+
+  revalidatePath("/access-management");
 
   return res.data;
 };

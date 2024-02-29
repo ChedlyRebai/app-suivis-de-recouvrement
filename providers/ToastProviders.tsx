@@ -1,7 +1,7 @@
-import { Toaster } from "@/components/ui/toaster";
+import toast, { Toaster } from "react-hot-toast";
 
 const ToastProviders = () => {
-  return <Toaster />;
+  return <Toaster position="top-right" />;
 };
 
 export default ToastProviders;
