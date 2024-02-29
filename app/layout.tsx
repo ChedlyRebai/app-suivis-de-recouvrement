@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import axios from "axios";
+import ToastProviders from "@/providers/ToastProviders";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,10 @@ export default function RootLayout({
   axios.defaults.baseURL = "http://localhost:10000/";
   return (
     <html lang="en">
-      <body className="">{children} </body>
+      <body className="">
+        {children}
+        <ToastProviders />
+      </body>
     </html>
   );
 }
