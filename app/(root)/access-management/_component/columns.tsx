@@ -70,6 +70,11 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "code_fonction",
     header: "Code Fonction",
+    cell: ({ row }) => {
+      return (
+        <Badge className="text-lg ">{row.getValue("code_fonction")}</Badge>
+      );
+    },
   },
   {
     accessorKey: "acces",

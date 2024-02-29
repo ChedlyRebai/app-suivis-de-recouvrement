@@ -21,6 +21,7 @@ import { Label } from "@radix-ui/react-label";
 
 import { useState } from "react";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
+import { updateDroitAccessById } from "@/actions/droit_accees.action";
 
 interface EditDoitProps {
   id: string;
@@ -67,7 +68,16 @@ const EditDroitForm = () => {
   };
 
   const onSubmit = async () => {
-    const response = await update;
+    const response = await updateDroitAccessById(
+      parseInt(id),
+      suppression,
+      modification,
+      creation,
+      acces
+    );
+    if (response.ok) {
+      console.log(response);
+    }
   };
 
   return (
