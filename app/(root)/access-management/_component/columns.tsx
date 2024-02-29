@@ -170,7 +170,15 @@ export const columns: ColumnDef<droit_accees>[] = [
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original;
-      const { onOpen, setId } = useEditDroit();
+      const {
+        onOpen,
+        setId,
+        setAccess,
+        setCreation,
+        setModification,
+        setSuppresion,
+        acces,
+      } = useEditDroit();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -185,7 +193,14 @@ export const columns: ColumnDef<droit_accees>[] = [
               onClick={() => {
                 onOpen();
                 console.log(row);
+
                 setId(`${row.original.id}`);
+
+                setAccess(`${row.original.acces}`);
+                console.log(acces);
+                setCreation(`${row.original.creation}`);
+                setSuppresion(`${row.original.suppression}`);
+                setModification(`${row.original.modification}`);
               }}
             >
               Edit Accees
