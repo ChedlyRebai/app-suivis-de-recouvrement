@@ -12,7 +12,7 @@ const EditDroitModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      <EditDroitForm id={id} />
+      <EditDroitForm />
     </Modal>
   );
 };

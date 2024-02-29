@@ -83,7 +83,7 @@ export const columns: ColumnDef<droit_accees>[] = [
               : "bg-red-100 text-red-800"
           } `}
         >
-          {row.getValue("acces") === "O" ? "oui" : "non"}
+          {row.getValue("acces") === "O" ? "Oui" : "Non"}
         </span>
       );
     },
@@ -100,7 +100,7 @@ export const columns: ColumnDef<droit_accees>[] = [
               : "bg-red-100 text-red-800"
           } `}
         >
-          {row.getValue("creation") === "O" ? "oui" : "non"}
+          {row.getValue("creation") === "O" ? "Oui" : "Non"}
         </span>
       );
     },
@@ -117,7 +117,7 @@ export const columns: ColumnDef<droit_accees>[] = [
               : "bg-red-100 text-red-800"
           } `}
         >
-          {row.getValue("modification") === "O" ? "oui" : "non"}
+          {row.getValue("modification") === "O" ? "Oui" : "Non"}
         </span>
       );
     },
@@ -134,7 +134,7 @@ export const columns: ColumnDef<droit_accees>[] = [
               : "bg-red-100 text-red-800"
           } `}
         >
-          {row.getValue("suppression") === "O" ? "oui" : "non"}
+          {row.getValue("suppression") === "O" ? "Oui" : "Non"}
         </span>
       );
     },
@@ -192,12 +192,11 @@ export const columns: ColumnDef<droit_accees>[] = [
             <DropdownMenuItem
               onClick={() => {
                 onOpen();
-                console.log(row);
-
+                console.log(`${row.original.id}`);
                 setId(`${row.original.id}`);
 
                 setAccess(`${row.original.acces}`);
-                console.log(acces);
+
                 setCreation(`${row.original.creation}`);
                 setSuppresion(`${row.original.suppression}`);
                 setModification(`${row.original.modification}`);
