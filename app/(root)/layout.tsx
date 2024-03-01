@@ -29,7 +29,7 @@ import {
   SearchIcon,
   BellIcon,
 } from "lucide-react";
-import SearchFonctionModal from "@/components/shared/Search-Fonction-Modal";
+import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Modal";
 import ModalProviders from "@/providers/ModalProviders";
 
 const navigation = [

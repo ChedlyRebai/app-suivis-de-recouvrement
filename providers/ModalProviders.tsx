@@ -1,5 +1,5 @@
-import EditDroitModal from "@/components/shared/Edit-Droit-Modal";
-import SearchFonctionModal from "@/components/shared/Search-Fonction-Modal";
+import EditDroitModal from "@/components/shared/Modals/Edit-Droit-Modal";
+import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Modal";
 import React from "react";
 
 const ModalProviders = () => {

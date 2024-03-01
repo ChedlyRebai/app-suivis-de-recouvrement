@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import useAuthModal from "@/hooks/use-fonction-search-modal";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { getAllDroitAccess } from "@/actions/droit_accees.action";
-import { DataTable } from "./Search-Fonction-DataTable";
+import { DataTable } from "../Search-Fonction-DataTable";
 import { droit_accees } from "@/Models/droit_accees.model";
 import { fontion } from "@/Models/fonction.model";
 import { getAllFunctions } from "@/actions/fonction.action";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "../ui/checkbox";
+import { Checkbox } from "../../ui/checkbox";
 
 function SearchFonctionModal() {
   const { onClose, isOpen } = useAuthModal();
