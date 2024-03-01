@@ -199,6 +199,7 @@ export const columns: ColumnDef<droit_accees>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
+              className="cursor-pointer"
               onClick={() => {
                 onOpen();
                 console.log(`${row.original.id}`);
@@ -211,7 +212,7 @@ export const columns: ColumnDef<droit_accees>[] = [
                 setModification(`${row.original.modification}`);
               }}
             >
-              Edit Accees
+              Edit
             </DropdownMenuItem>
 
             {/* <DropdownMenuSeparator />

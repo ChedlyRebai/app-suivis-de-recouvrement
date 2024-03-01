@@ -1,7 +1,8 @@
 "use client";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
-import Modal from "../Modal";
+
 import EditDroitForm from "../../forms/EditDroitForm";
+import Modal from "./Modal";
 
 const EditDroitModal = () => {
   const { id, isOpen, onOpen, onClose } = useEditDroit();
