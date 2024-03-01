@@ -72,7 +72,11 @@ export const columns: ColumnDef<droit_accees>[] = [
     header: "Code Fonction",
     cell: ({ row }) => {
       return (
-        <Badge className="text-lg ">{row.getValue("code_fonction")}</Badge>
+        <span
+          className={`inline-flex bg-gray-100 text-gray-800 items-center px-2.5 py-0.5 rounded-md text-lg font-medium `}
+        >
+          {row.getValue("code_fonction")}
+        </span>
       );
     },
   },
@@ -84,7 +88,7 @@ export const columns: ColumnDef<droit_accees>[] = [
         <span
           className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
             row.getValue("acces") === "O"
-              ? "bg-gray-100 text-gray-800"
+              ? "bg-green-100 text-green-800"
               : "bg-red-100 text-red-800"
           } `}
         >
@@ -101,7 +105,7 @@ export const columns: ColumnDef<droit_accees>[] = [
         <span
           className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
             row.getValue("creation") === "O"
-              ? "bg-gray-100 text-gray-800"
+              ? "bg-green-100 text-green-800"
               : "bg-red-100 text-red-800"
           } `}
         >
@@ -118,7 +122,7 @@ export const columns: ColumnDef<droit_accees>[] = [
         <span
           className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
             row.getValue("modification") === "O"
-              ? "bg-gray-100 text-gray-800"
+              ? "bg-green-100 text-green-800"
               : "bg-red-100 text-red-800"
           } `}
         >
@@ -135,7 +139,7 @@ export const columns: ColumnDef<droit_accees>[] = [
         <span
           className={`inline-flex justify-center items-center px-2.5 py-0.5 rounded-md text-lg  font-medium ${
             row.getValue("suppression") === "O"
-              ? "bg-gray-100 text-gray-800"
+              ? "bg-green-100 text-green-800"
               : "bg-red-100 text-red-800"
           } `}
         >

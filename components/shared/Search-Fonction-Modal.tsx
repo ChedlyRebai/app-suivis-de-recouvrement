@@ -63,9 +63,9 @@ function SearchFonctionModal() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getAllFunctions();
-      console.log(response);
-      setData(response.data);
+      const data = await getAllFunctions();
+      console.log(data);
+      setData(data);
     };
 
     fetchData();

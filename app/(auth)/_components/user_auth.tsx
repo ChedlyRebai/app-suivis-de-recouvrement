@@ -3,14 +3,11 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { Label } from "@/components/ui/label";
-
-import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,6 +20,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormEvent, useState } from "react";
+import { Login } from "@/actions/auth.action";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -36,28 +36,39 @@ const formSchema = z.object({
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
-
+  const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const instance = axios.create({
       baseURL: process.env.API_URL,
     });
 
-    await axios
-      .get(`http://localhost:10000/users/getUsername/`)
-      .then((username: any) => {
-        console.log(username);
-      });
-    console.log(values);
+    setIsLoading(true);
+    const res = await Login(values.matricule, values.password);
+    setIsLoading(false);
+    console.log(res);
+    // Cookies.set("token", res.token);
+    // if (res.status === 200) {
+    //   toast.success(res.message);
+    //   router.push("/");
+    // }
+
+    // Cookies.set('token', token);
+    // Cookies
+    // await axios
+    //   .get(`http://localhost:10000/users/getUsername/`)
+    //   .then((username: any) => {
+    //     console.log(username);
+    //   });
   };
 
   const getUsername = async (values: z.infer<typeof formSchema>) => {
-    if (values.matricule.length < 4) return;
-    await axios
-      .get(`${process.env.API_URL}/users/getUsername`)
-      .then((username: any) => {
-        console.log(username);
-      });
-    console.log(values);
+    // if (values.matricule.length < 4) return;
+    // await axios
+    //   .get(`${process.env.API_URL}/users/getUsername`)
+    //   .then((username: any) => {
+    //     console.log(username);
+    //   });
+    // console.log(values);
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -112,9 +123,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               />
             </div>
             <Button type="submit" disabled={isLoading}>
-              {isLoading && (
+              {/* {isLoading && (
                 <ClipLoader className="mr-2 h-4 w-4 animate-spin" />
-              )}
+              )} */}
               LogIn
             </Button>
           </div>

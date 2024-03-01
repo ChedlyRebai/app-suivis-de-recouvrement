@@ -27,13 +27,16 @@ const Modal: React.FC<ModalProps> = ({
   isOpen,
 }) => {
   return (
-    <Dialog open={isOpen}>
-      <DialogClose onClick={onChange} />
+    <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          {/* this is how it can be used */}
+          <DialogClose />
+        </DialogFooter>
         {children}
       </DialogContent>
     </Dialog>
