@@ -124,13 +124,18 @@ export function DataTable<TData, TValue>({
         >
           Search for fonction
         </Button>
+        <Button variant="default" className="ml-auto">
+          <MixerHorizontalIcon className="mr-2 h-4 w-4" />
+          View
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="default" className="ml-auto">
+            <Button variant="default" className="ml-">
               <MixerHorizontalIcon className="mr-2 h-4 w-4" />
               View
             </Button>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()

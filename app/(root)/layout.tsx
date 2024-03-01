@@ -212,10 +212,10 @@ export default function RootLayout({
                       {/* <SearchIcon className="h-5 w-5" aria-hidden="true" /> */}
                       <div className="flex mb-1 items-center text-gray-900">
                         <HomeIcon
-                          className="h-6 w-6 text-gray-900"
+                          className="h-5 w-5 text-gray-900"
                           aria-hidden="true"
                         />
-                        <p className="pl-2 text-lg text-gray-900 font-semibold  ">
+                        <p className="pl-2 text-base text-gray-900 font-semibold  ">
                           chedly
                         </p>
                       </div>
