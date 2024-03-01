@@ -192,7 +192,7 @@ export default function RootLayout({
           </div>
         </div>
         <div className="md:pl-64 flex flex-col flex-1">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
+          <div className="sticky top-0 z-10 flex-shrink-0 flex h-20 bg-white shadow">
             <button
               type="button"
               className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -207,11 +207,27 @@ export default function RootLayout({
                   <label htmlFor="search-field" className="sr-only">
                     Search
                   </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                  <div className="relative w-full text-black focus-within:text-gray-600">
+                    <div className="justify-start absolute inset-y-0 left-0 flex flex-col  pointer-events-none  pt-3">
                       {/* <SearchIcon className="h-5 w-5" aria-hidden="true" /> */}
-                      <h6>d</h6>
-                      <p>s</p>
+                      <div className="flex mb-1 items-center text-gray-900">
+                        <HomeIcon
+                          className="h-6 w-6 text-gray-900"
+                          aria-hidden="true"
+                        />
+                        <p className="pl-2 text-lg text-gray-900 font-semibold  ">
+                          chedly
+                        </p>
+                      </div>
+                      <div className="flex items-center  ">
+                        <UsersIcon
+                          className="h-5 w-5 text-gray-600"
+                          aria-hidden="true"
+                        />
+                        <p className="pl-2 text-base text-gray-600 font-semibold  ">
+                          chedly
+                        </p>
+                      </div>
                     </div>
                     {/* <input
                       id="search-field"
