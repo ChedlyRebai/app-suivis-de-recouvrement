@@ -35,7 +35,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SearchIcon } from "lucide-react";
+import { ListPlusIcon, SearchIcon } from "lucide-react";
 import useAuthModal from "@/hooks/use-fonction-search-modal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getDroitAccessByCodeFonction } from "@/actions/droit_accees.action";
@@ -47,6 +47,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
+import useAddDroitModal from "@/hooks/useAddDroitModal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -83,6 +84,7 @@ export function DataTable<TData, TValue>({
   }, [searchParams.get("code")]);
 
   const { isOpen, onOpen } = useAuthModal();
+  const { isOpen: isOpenAddDroit, onOpen: onOpenAddDroit } = useAddDroitModal();
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -120,17 +122,14 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           onClick={() => onOpen()}
-          className="ml-2 w-auto "
+          className="mr-auto w-auto ml-1 "
         >
           Search for fonction
         </Button>
-        <Button variant="default" className="ml-auto">
-          <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
-        </Button>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="default" className="ml-">
+            <Button variant="outline" className="ml-auto mr-1">
               <MixerHorizontalIcon className="mr-2 h-4 w-4" />
               View
             </Button>
@@ -156,6 +155,11 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <Button onClick={() => onOpenAddDroit()} variant="default" className="">
+          <ListPlusIcon className="mr-2 h-4 w-4" />
+          Add Droit
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>

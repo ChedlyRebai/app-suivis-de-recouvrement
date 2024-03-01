@@ -6,10 +6,10 @@ interface AddDroitModalStore {
   onClose: () => void;
 }
 
-const useAuthModal = create<AddDroitModalStore>((set) => ({
+const useAddDroitModal = create<AddDroitModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useAuthModal;
+export default useAddDroitModal;

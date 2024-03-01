@@ -1,6 +1,6 @@
 "use client";
-import useEditDroit from "@/hooks/use-edit-droit-modal";
 
+import useEditDroit from "@/hooks/use-edit-droit-modal";
 import EditDroitForm from "../../forms/EditDroitForm";
 import Modal from "./Modal";
 
