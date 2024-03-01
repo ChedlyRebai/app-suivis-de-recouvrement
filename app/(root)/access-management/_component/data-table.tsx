@@ -1,5 +1,5 @@
 "use client";
-
+import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import {
   ColumnDef,
   flexRender,
@@ -113,7 +113,8 @@ export function DataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="default" className="ml-auto">
-              Columns
+              <MixerHorizontalIcon className="mr-2 h-4 w-4" />
+              View
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
