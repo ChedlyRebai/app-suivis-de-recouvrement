@@ -22,7 +22,8 @@ import { Input } from "@/components/ui/input";
 import { FormEvent, useState } from "react";
 import { Login } from "@/actions/auth.action";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { getSession, login } from "@/lib";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -38,14 +39,22 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [username, setUsername] = useState<string>("");
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const instance = axios.create({
+    await login(values.matricule, values.password)
+      .then(() => {
+        toast.success("dd");
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("error");
+      });
+    //   router.push("/");
+    /*const instance = axios.create({
       baseURL: process.env.API_URL,
-    });
-
-    setIsLoading(true);
-    const res = await Login(values.matricule, values.password);
-    setIsLoading(false);
-    console.log(res);
+    });*/
+    // setIsLoading(true);
+    // const res = await Login(values.matricule, values.password);
+    // setIsLoading(false);
+    // console.log(res);
     // Cookies.set("token", res.token);
     // if (res.status === 200) {
     //   toast.success(res.message);
@@ -131,24 +140,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
         </form>
       </Form>
-      {/*<div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
-          <ClipLoader className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <ClipLoader className="mr-2 h-4 w-4" />
-        )}{" "}
-        GitHub
-        </Button>*/}
     </div>
   );
 }
