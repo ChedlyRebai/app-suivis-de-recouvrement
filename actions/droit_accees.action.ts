@@ -30,6 +30,9 @@ export const updateDroitAccessById = async (
   acces: string
 ) => {
   console.log(`${process.env.API_URL}/droit/droit/updateDroit`);
+  revalidatePath("/access-management");
+  revalidatePath("/");
+  revalidatePath("/access-management");
   const res = await axios.put(`${process.env.API_URL}/droit/updateDroit`, {
     id,
     suppression,
@@ -39,8 +42,8 @@ export const updateDroitAccessById = async (
   });
   console.log(id, suppression, modification, creation, acces);
   console.log(res.data);
-
+  revalidatePath("/access-management?code=11");
   revalidatePath("/access-management");
-
+  revalidatePath("/");
   return res.data;
 };
