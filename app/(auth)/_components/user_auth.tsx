@@ -24,6 +24,8 @@ import { Login } from "@/actions/auth.action";
 import toast from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
 import { getSession, login } from "@/lib";
+import WrongPassword from "./WrongPassword";
+import { getUserBuMatricule } from "@/actions/utilisateur.action";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -37,15 +39,23 @@ const formSchema = z.object({
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
+  const [invalidCredential, setInvalidCredential] = useState(null);
+
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     await login(values.matricule, values.password)
-      .then(() => {
-        toast.success("dd");
+      .then((e) => {
+        console.log(e);
+        toast.success("Bienvenu");
+        router.push("/access-management");
       })
       .catch((e) => {
         console.log(e);
-        toast.error("error");
+        <WrongPassword />;
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
     //   router.push("/");
     /*const instance = axios.create({
@@ -71,7 +81,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   };
 
   const getUsername = async (values: z.infer<typeof formSchema>) => {
-    // if (values.matricule.length < 4) return;
+    setUsername("");
+    console.log(values.matricule);
+    if (values.matricule.length < 4) return;
+    const response = await getUserBuMatricule(values.matricule);
+    console.log("response");
+    console.log(response);
+    setUsername(response);
     // await axios
     //   .get(`${process.env.API_URL}/users/getUsername`)
     //   .then((username: any) => {
