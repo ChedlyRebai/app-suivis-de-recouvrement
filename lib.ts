@@ -12,17 +12,20 @@ const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
   console.log("payload", payload);
+  const expirationTime = Math.floor(Date.now() / 1000) + 10 * 60 * 60; // 10 hours from now
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 hour from now")
+    .setExpirationTime(expirationTime)
     .sign(key);
 }
 
 export async function decrypt(input: string): Promise<any> {
+  console.log(input);
   const { payload } = await jwtVerify(input, key, {
     algorithms: ["HS256"],
   });
+  console.log(payload);
   return payload;
 }
 
@@ -34,7 +37,7 @@ export async function login(matricule: string, password: string) {
   const session = await encrypt({ user, expires });
   console.log("session");
   console.log(session);
-  cookies().set("session", session, { httpOnly: true });
+  cookies().set("session", session, { expires, httpOnly: true });
 }
 
 export async function logout() {
@@ -51,7 +54,7 @@ export async function updateSession(request: NextRequest) {
   const session = request.cookies.get("session")?.value;
   if (!session) return;
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 10 * 1000);
+  parsed.expires = Math.floor(Date.now() / 1000) + 10 * 60 * 60;
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",

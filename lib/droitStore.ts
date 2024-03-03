@@ -1,19 +1,35 @@
-export type Actions = {
-  addDroit: () => void;
-  deleteDroit: (id: string) => void;
-  updateDroit: () => void;
-  createDroit: () => void;
-};
-
 import {
   getAllDroitAccess,
   getDroitAccessByCodeFonction,
   updateDroitAccessById,
 } from "@/actions/droit_accees.action";
+import { droit_accees } from "@/Models/droit_accees.model";
+import { fonction } from "@/Models/fonction.model";
 import { object } from "zod";
 import create from "zustand";
 
-const useStore = create((set) => ({
+export type State = {
+  droitAccess: droit_accees[];
+  fetchAllDroitAccess: () => Promise<void>;
+  fetchDroitAccessByCodeFonction: (code: string) => Promise<void>;
+  updateDroitAccessById: (
+    id: number,
+    suppression: string,
+    modification: string,
+    creation: string,
+    acces: string
+  ) => Promise<void>;
+  creatDroit: (
+    nom: string,
+    nom_module: string,
+    suppression: string,
+    modification: string,
+    creation: string,
+    acces: string
+  ) => void;
+};
+
+const useStore = create<State>((set) => ({
   droitAccess: [],
   fetchAllDroitAccess: async () => {
     const data = await getAllDroitAccess();
@@ -22,7 +38,9 @@ const useStore = create((set) => ({
   fetchDroitAccessByCodeFonction: async (code: string) => {
     const data = await getDroitAccessByCodeFonction(code);
     set({ droitAccess: data });
+    return data;
   },
+
   updateDroitAccessById: async (
     id: number,
     suppression: string,
@@ -42,6 +60,18 @@ const useStore = create((set) => ({
         item.id === id ? data : item
       );
       return { droitAccess: updatedDroitAccess };
+    });
+  },
+  creatDroit(
+    nom: string,
+    nom_module: string,
+    suppression: string,
+    modification: string,
+    creation: string,
+    acces: string
+  ) {
+    set((state: any) => {
+      return {};
     });
   },
 }));

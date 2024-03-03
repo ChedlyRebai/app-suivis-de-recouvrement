@@ -48,41 +48,86 @@ import {
 } from "@/components/ui/select";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
+
+import useStore, { State } from "@/lib/droitStore";
+import { droit_accees } from "@/Models/droit_accees.model";
+import toast from "react-hot-toast";
 import { getSession } from "@/lib";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<droit_accees, TValue> {
+  columns: ColumnDef<droit_accees, TValue>[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<droit_accees, TValue>({
   columns,
-}: DataTableProps<TData, TValue>) {
-  const [data, setData] = useState([]);
+}: DataTableProps<droit_accees, TValue>) {
+  const [data, setData] = useState<droit_accees[]>([]);
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 
+  // const droitAccess = useStore((state: State) => state.droitAccess);
+  // const fetchAllDroitAccess = useStore(
+  //   (state: any) => state.fetchAllDroitAccess
+  // );
+  // console.log(droitAccess);
+
+  // useEffect(() => {
+  //   fetchAllDroitAccess();
+  // }, [fetchAllDroitAccess]);
+
+  const droitAccess = useStore((state: State) => state.droitAccess);
+  const fetchAllDroitAccess = useStore(
+    (state: State) => state.fetchAllDroitAccess
+  );
+  const fetchDroitAccessByCodeFonction = useStore(
+    (state: State) => state.fetchDroitAccessByCodeFonction
+  );
+
+  useEffect(() => {
+    fetchAllDroitAccess();
+  }, [fetchAllDroitAccess]);
   useEffect(() => {
     const Params = searchParams.get("code") || "";
     if (Params?.length > 0) {
-      console.log(searchParams.get("code") || "");
+      toast.promise(
+        fetchDroitAccessByCodeFonction(Params).then((d: any) => {
+          //console.log(d);
+          setData(d as droit_accees[]);
+        }),
+        {
+          loading: "Loading...",
+          success: "Success",
+          error: <b>Could not save.</b>,
+        }
+      );
     }
-    const fetchData = async () => {
-      setIsLoading(true);
-      const res = await getDroitAccessByCodeFonction(Params)
-        .then((data) => {
-          setData(data);
-          console.log("not");
-        })
-        .then(() => {
-          console.log("finish");
-          setIsLoading(false);
-        });
-    };
-    fetchData();
-  }, [searchParams.get("code")]);
+  }, [searchParams.get("code"), fetchDroitAccessByCodeFonction]);
+  // useEffect(() => {
+  //   const Params = searchParams.get("code") || "";
+  //   if (Params?.length > 0) {
+  //     console.log(searchParams.get("code") || "");
+  //   }
+
+  //   const d = useStore((state: State) => state.droitAccess);
+  //   setData(d as droit_accees[]);
+  //   console.log(data);
+  // const fetchData = async () => {
+  //   setIsLoading(true);
+  //   const res = await getDroitAccessByCodeFonction(Params)
+  //     .then((data) => {
+  //       setData(data);
+  //       console.log("not");
+  //     })
+  //     .then(() => {
+  //       console.log("finish");
+  //       setIsLoading(false);
+  //     });
+  // };
+  // fetchData();
+  //}, [searchParams.get("code")]);
 
   const { isOpen, onOpen } = useAuthModal();
   const { isOpen: isOpenAddDroit, onOpen: onOpenAddDroit } = useAddDroitModal();

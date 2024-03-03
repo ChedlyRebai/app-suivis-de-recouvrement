@@ -1,6 +1,6 @@
 import { utilisateur } from "./utilisateur.model";
 
-export type fontion = {
+export type fonction = {
   code_fonction: number;
   lib_fonction: String;
   code_aff?: String;

@@ -28,6 +28,8 @@ import { DialogFooter } from "../ui/dialog";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
 import { useEffect, useState } from "react";
 import { getAllFunctions } from "@/actions/fonction.action";
+import { useStore } from "zustand";
+import { State } from "@/lib/droitStore";
 
 const formSchema = z.object({
   Module: z.string().min(1, {
@@ -71,9 +73,12 @@ const AddDroitForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+
+const addDroit = useStore((state:);
+
+const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const response = useStore();
+};
   const { onClose } = useAddDroitModal();
   const [fonctions, setFonctions] = useState<any>([]);
   console.log(fonctions);

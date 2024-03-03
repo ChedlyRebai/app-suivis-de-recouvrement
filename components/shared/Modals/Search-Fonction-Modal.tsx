@@ -6,7 +6,7 @@ import { Button } from "../../ui/button";
 import { getAllDroitAccess } from "@/actions/droit_accees.action";
 import { DataTable } from "../Search-Fonction-DataTable";
 import { droit_accees } from "@/Models/droit_accees.model";
-import { fontion } from "@/Models/fonction.model";
+import { fonction } from "@/Models/fonction.model";
 import { getAllFunctions } from "@/actions/fonction.action";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../../ui/checkbox";
@@ -20,7 +20,7 @@ function SearchFonctionModal() {
     }
   };
 
-  const columns: ColumnDef<fontion>[] = [
+  const columns: ColumnDef<fonction>[] = [
     {
       accessorKey: "code_fonction",
       header: "Code Fonction",
@@ -37,7 +37,7 @@ function SearchFonctionModal() {
     },
   ];
 
-  function getData(): fontion[] {
+  function getData(): fonction[] {
     // Fetch data from your API here.
     return [
       {

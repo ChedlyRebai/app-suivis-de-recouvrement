@@ -1,4 +1,4 @@
-import { fontion } from "./fonction.model";
+import { fonction } from "./fonction.model";
 
 export type utilisateur = {
   usr_matricule: String;
@@ -12,5 +12,5 @@ export type utilisateur = {
   affectation_c: String;
   affectation_d: String;
   affectation_sog: String;
-  fonction: fontion;
+  fonction: fonction;
 };
