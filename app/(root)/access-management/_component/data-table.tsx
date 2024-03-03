@@ -58,7 +58,7 @@ export function DataTable<TData, TValue>({
   columns,
 }: DataTableProps<TData, TValue>) {
   const [data, setData] = useState([]);
-  const session = getSession();
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

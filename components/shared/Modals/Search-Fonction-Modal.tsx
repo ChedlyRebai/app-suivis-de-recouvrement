@@ -67,7 +67,6 @@ function SearchFonctionModal() {
       console.log(data);
       setData(data);
     };
-
     fetchData();
   }, []);
   const d2 = getData();
