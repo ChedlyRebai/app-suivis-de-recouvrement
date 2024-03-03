@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import axios from "axios";
 import ToastProviders from "@/providers/ToastProviders";
+import ModalProviders from "@/providers/ModalProviders";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className="">
         {children}
         <ToastProviders />
+        <ModalProviders />
       </body>
     </html>
   );

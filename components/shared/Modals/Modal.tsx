@@ -33,7 +33,6 @@ const Modal: React.FC<ModalProps> = ({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-
         {children}
       </DialogContent>
     </Dialog>

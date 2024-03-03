@@ -26,24 +26,29 @@ import { redirect, useRouter } from "next/navigation";
 import { getSession, login } from "@/lib";
 import WrongPassword from "./WrongPassword";
 import { getUserBuMatricule } from "@/actions/utilisateur.action";
+import useInvalidCredentialModal from "@/hooks/useInvalidCredential";
+import useAddDroitModal from "@/hooks/useAddDroitModal";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const formSchema = z.object({
   matricule: z.string().min(4, {
-    message: "matricule must be at least 4 characters.",
+    message: "Matricule doit comporter au moins 4 caractères.",
   }),
-  password: z.string().min(2),
+  password: z.string().min(1, {
+    message: "Mot de passe doit comporter au moins 1 caractères.",
+  }),
 });
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [invalidCredential, setInvalidCredential] = useState(null);
-
+  const { isOpen, onOpen } = useInvalidCredentialModal();
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
+
     await login(values.matricule, values.password)
       .then((e) => {
         console.log(e);
@@ -51,8 +56,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         router.push("/access-management");
       })
       .catch((e) => {
-        console.log(e);
-        <WrongPassword />;
+        onOpen();
       })
       .finally(() => {
         setIsLoading(false);
@@ -124,7 +128,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     <FormControl>
                       <Input type="number" placeholder="Matricule" {...field} />
                     </FormControl>
-                    <FormDescription>{username}</FormDescription>
+                    <FormDescription className="text-gray-800">
+                      {username}
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

@@ -48,6 +48,7 @@ import {
 } from "@/components/ui/select";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
+import { getSession } from "@/lib";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -57,7 +58,7 @@ export function DataTable<TData, TValue>({
   columns,
 }: DataTableProps<TData, TValue>) {
   const [data, setData] = useState([]);
-
+  const session = getSession();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

@@ -1,6 +1,7 @@
+"use client";
+
 import React from "react";
 import Modal from "./Modal";
-
 import useAddDroitModal from "@/hooks/useAddDroitModal";
 import AddDroitForm from "@/components/forms/AddDroitForm";
 
