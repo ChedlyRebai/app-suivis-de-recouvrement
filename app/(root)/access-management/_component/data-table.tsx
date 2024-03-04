@@ -63,8 +63,6 @@ export function DataTable<droit_accees, TValue>({
 }: DataTableProps<droit_accees, TValue>) {
   const [data, setData] = useState<droit_accees[]>([]);
 
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 

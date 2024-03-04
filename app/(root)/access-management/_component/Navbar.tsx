@@ -96,7 +96,6 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
         ```
       */}
       <div className="">
-        <ModalProviders />
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -412,7 +411,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                   </div>
                 </form>
               </div>
-              <div className="ml-4 flex items-center md:ml-6">
+              {/* <div className="ml-4 flex items-center md:ml-6">
                 <button
                   type="button"
                   className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -421,7 +420,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Profile dropdown */}
+                {/* Profile dropdown 
                 <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -461,7 +460,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-              </div>
+              </div> */}
             </div>
           </div>
 

@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
       rowSelection,
     },
   });
-
+  const [selectedCode, setSelectedCode] = useState("");
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -82,7 +82,7 @@ export function DataTable<TData, TValue>({
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams, selectedCode]
   );
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
@@ -94,20 +94,19 @@ export function DataTable<TData, TValue>({
   const addQuery = (row: any) => {
     console.log();
     router.push(
-      pathname +
-        "?" +
-        createQueryString("code", `${row.code_fonction as string}`)
+      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
     );
   };
-  const [selectedCode, setSelectedCode] = useState("");
+
   return (
     <>
       <div className="flex items-center py-">
         <Input
           placeholder="Filter code_fonction"
-          value={inputValue}
+          value={selectedCode}
           onChange={(event) => {
             setInputValue(event.target.value);
+            setSelectedCode(event.target.value);
             table
               .getColumn("code_fonction")
               ?.setFilterValue(event.target.value as unknown as number);
