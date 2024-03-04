@@ -17,12 +17,14 @@ import {
 import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Modal";
 import ModalProviders from "@/providers/ModalProviders";
 import { getSession } from "@/lib";
+import { IconMap } from "@/constants";
 
 interface NavBarProps {
   children: ReactNode;
   session: any;
+  links: any[];
 }
-const Navbar = ({ children, session }: NavBarProps) => {
+const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
   const navigaion = [
     { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
     { name: "Team", href: "#", icon: UsersIcon, current: false },
@@ -37,13 +39,15 @@ const Navbar = ({ children, session }: NavBarProps) => {
     { name: "Sign out", href: "#" },
   ];
 
+  console.log(navigation);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function classNames(...classes: String[]) {
     return classes.filter(Boolean).join(" ");
   }
 
-  const navigation = [
+  const navigaton = [
     { name: "Dashboard", icon: HomeIcon, current: true, href: "#" },
     {
       name: "Team",
@@ -119,7 +123,7 @@ const Navbar = ({ children, session }: NavBarProps) => {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-700">
+              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -164,15 +168,16 @@ const Navbar = ({ children, session }: NavBarProps) => {
                               "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                             )}
                           >
-                            <item.icon
+                            {/* <item.icon
                               className={classNames(
                                 item.current
                                   ? "text-gray-500"
-                                  : "text-gray-400 group-hover:text-gray-500",
+                                  : "text-gray-400  group-hover:text-gray-300
+                              ",
                                 "mr-3 flex-shrink-0 h-6 w-6"
                               )}
                               aria-hidden="true"
-                            />
+                            /> */}
                             {item.name}n
                           </a>
                         </div>
@@ -182,51 +187,58 @@ const Navbar = ({ children, session }: NavBarProps) => {
                           key={item.name}
                           className="space-y-1"
                         >
-                          {({ open }) => (
-                            <>
-                              <Disclosure.Button
-                                className={classNames(
-                                  item.current
-                                    ? "bg-gray-900 text-white"
-                                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                  "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                )}
-                              >
-                                <item.icon
-                                  className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                <span className="flex-1">{item.name}</span>
-                                <svg
+                          {({ open }) => {
+                            let Icon = IconMap[item.icon || "consicons/users"];
+                            return (
+                              <>
+                                <Disclosure.Button
                                   className={classNames(
-                                    open
-                                      ? "text-gray-400 rotate-90"
-                                      : "text-gray-300",
-                                    "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                                    item.current
+                                      ? "bg-gray-900 text-white"
+                                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                   )}
-                                  viewBox="0 0 20 20"
-                                  aria-hidden="true"
                                 >
-                                  <path
-                                    d="M6 6L14 10L6 14V6Z"
-                                    fill="currentColor"
+                                  <Icon
+                                    className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400  group-hover:text-gray-300
+                              "
+                                    aria-hidden="true"
                                   />
-                                </svg>
-                              </Disclosure.Button>
-                              <Disclosure.Panel className="space-y-1">
-                                {item.children.map((subItem) => (
-                                  <Disclosure.Button
-                                    key={subItem.name}
-                                    as="a"
-                                    href={subItem.href}
-                                    className="group w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
+
+                                  <span className="flex-1 capitalize">
+                                    {item.name}
+                                  </span>
+                                  <svg
+                                    className={classNames(
+                                      open
+                                        ? "text-gray-400 rotate-90"
+                                        : "text-gray-300",
+                                      "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                                    )}
+                                    viewBox="0 0 20 20"
+                                    aria-hidden="true"
                                   >
-                                    {subItem.name}q
-                                  </Disclosure.Button>
-                                ))}
-                              </Disclosure.Panel>
-                            </>
-                          )}
+                                    <path
+                                      d="M6 6L14 10L6 14V6Z"
+                                      fill="currentColor"
+                                    />
+                                  </svg>
+                                </Disclosure.Button>
+                                <Disclosure.Panel className="space-y-1">
+                                  {item.children.map((subItem: any) => (
+                                    <Disclosure.Button
+                                      key={subItem.name}
+                                      as="a"
+                                      href={subItem.href}
+                                      className="group capitalize w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
+                                    >
+                                      {subItem.name}
+                                    </Disclosure.Button>
+                                  ))}
+                                </Disclosure.Panel>
+                              </>
+                            );
+                          }}
                         </Disclosure>
                       )
                     )}
@@ -243,7 +255,7 @@ const Navbar = ({ children, session }: NavBarProps) => {
         {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow pt-5 bg-gray-700 overflow-y-auto">
+          <div className="flex flex-col flex-grow pt-5 bg-gray-800 overflow-y-auto">
             <div className="flex items-center justify-center flex-shrink-0 px-4">
               <img
                 className="h-16 center"
@@ -265,65 +277,86 @@ const Navbar = ({ children, session }: NavBarProps) => {
                           "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                         )}
                       >
-                        <item.icon
+                        {/* <item.icon
                           className={classNames(
                             item.current
                               ? "text-gray-500"
-                              : "text-gray-400 group-hover:text-gray-500",
+                              : "text-gray-400  group-hover:text-gray-300
+                              ",
                             "mr-3 flex-shrink-0 h-6 w-6"
                           )}
                           aria-hidden="true"
-                        />
-                        {item.name}n
+                        /> */}
+                        {item.name}
                       </a>
                     </div>
                   ) : (
                     <Disclosure as="div" key={item.name} className="space-y-1">
-                      {({ open }) => (
-                        <>
-                          <Disclosure.Button
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            )}
-                          >
-                            <item.icon
-                              className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                              aria-hidden="true"
-                            />
-                            <span className="flex-1">{item.name}</span>
-                            <svg
+                      {({ open }) => {
+                        let Icon = IconMap[item.icon || "consicons/users"];
+                        return (
+                          <>
+                            <Disclosure.Button
                               className={classNames(
-                                open
-                                  ? "text-gray-400 rotate-90"
-                                  : "text-gray-300",
-                                "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                                item.current
+                                  ? "bg-gray-900 text-white"
+                                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "group capitalize w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                               )}
-                              viewBox="0 0 20 20"
-                              aria-hidden="true"
                             >
-                              <path
-                                d="M6 6L14 10L6 14V6Z"
-                                fill="currentColor"
+                              <Icon
+                                className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-300"
+                                aria-hidden="true"
                               />
-                            </svg>
-                          </Disclosure.Button>
-                          <Disclosure.Panel className="space-y-1">
-                            {item.children.map((subItem) => (
-                              <Disclosure.Button
-                                key={subItem.name}
-                                as="a"
-                                href={subItem.href}
-                                className="group w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
+                              <span className="flex-1 capitalize">
+                                {item.name}
+                              </span>
+                              <svg
+                                className={classNames(
+                                  open
+                                    ? "text-gray-400 rotate-90"
+                                    : "text-gray-300",
+                                  "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                                )}
+                                viewBox="0 0 20 20"
+                                aria-hidden="true"
                               >
-                                {subItem.name}q
-                              </Disclosure.Button>
-                            ))}
-                          </Disclosure.Panel>
-                        </>
-                      )}
+                                <path
+                                  d="M6 6L14 10L6 14V6Z"
+                                  fill="currentColor"
+                                />
+                              </svg>
+                            </Disclosure.Button>
+                            <Disclosure.Panel className="space-y-1">
+                              {item.children.map((subItem: any) => {
+                                let Icon =
+                                  IconMap[subItem.icon || "consicons/ug"];
+                                return (
+                                  <>
+                                    <Disclosure.Button
+                                      className={classNames(
+                                        item.current
+                                          ? "bg-gray-900 text-white"
+                                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                        "group w-full flex items-center pl-4 pr-0 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                      )}
+                                    >
+                                      <Icon
+                                        className="mr-3 flex-shrink-0 h-5 w-5 text-gray-400  group-hover:text-gray-300
+                              "
+                                        aria-hidden="true"
+                                      />
+                                      <span className="flex-1 capitalize">
+                                        {subItem.name}
+                                      </span>
+                                    </Disclosure.Button>
+                                  </>
+                                );
+                              })}
+                            </Disclosure.Panel>
+                          </>
+                        );
+                      }}
                     </Disclosure>
                   )
                 )}

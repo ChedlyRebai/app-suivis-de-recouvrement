@@ -30,6 +30,7 @@ import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Moda
 import ModalProviders from "@/providers/ModalProviders";
 import Navbar from "./access-management/_component/Navbar";
 import { getSession } from "@/lib";
+import { getLinksByCodeFonction } from "@/actions/navbar.action";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -54,6 +55,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const links = await getLinksByCodeFonction();
+  console.log("links");
+  console.log(links);
   const session = await getSession();
-  return <Navbar session={session}>{children}</Navbar>;
+  return (
+    <Navbar links={links} session={session}>
+      {children}
+    </Navbar>
+  );
 }

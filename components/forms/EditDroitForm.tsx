@@ -1,7 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Select,
@@ -16,12 +14,11 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
 
-import { Label } from "@radix-ui/react-label";
-
 import { useState } from "react";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
 import { updateDroitAccessById } from "@/actions/droit_accees.action";
 import { CircleIcon, XIcon } from "lucide-react";
+import { Label } from "../ui/label";
 
 interface EditDoitProps {
   id: string;
@@ -67,6 +64,7 @@ const EditDroitForm = () => {
       acces
     );
     if (response) {
+      console.log(response);
       toast.success("Mis à jour avec succés");
       onClose();
     }

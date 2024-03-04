@@ -16,6 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   axios.defaults.baseURL = "http://localhost:10000/";
+
   return (
     <html lang="en">
       <body className="">
