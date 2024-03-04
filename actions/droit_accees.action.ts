@@ -47,3 +47,41 @@ export const updateDroitAccessById = async (
   revalidatePath("/");
   return res.data;
 };
+
+export const createDroit = async (
+  nom: string,
+  nom_module: string,
+  code_fonction: string,
+  suppression: string,
+  modification: string,
+  creation: string,
+  acces: string
+) => {
+  console.log(`${process.env.API_URL}/droit/addDroit`);
+  try {
+    console.log(
+      nom,
+      nom_module,
+      suppression,
+      modification,
+      creation,
+      acces,
+      code_fonction
+    );
+
+    const res = await axios.post(`${process.env.API_URL}/droit/addDroit`, {
+      nom,
+      nom_module,
+      code_fonction,
+      acces,
+      creation,
+      modification,
+      suppression,
+    });
+    console.log(nom, nom_module, suppression, modification, creation, acces);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -33,7 +33,7 @@ export async function login(matricule: string, password: string) {
   const user = await Login(matricule, password);
   console.log("user");
   console.log(user);
-  const expires = new Date(Date.now() + 1000 * 1000);
+  const expires = new Date(Date.now() + 1000 * 1000 * 1000);
   const session = await encrypt({ user, expires });
   console.log("session");
   console.log(session);

@@ -78,7 +78,9 @@ export function DataTable<droit_accees, TValue>({
   //   fetchAllDroitAccess();
   // }, [fetchAllDroitAccess]);
 
-  const droitAccess = useStore((state: State) => state.droitAccess);
+  const [droitAccess, setDroiAccess] = useStore(
+    (state: State) => state.droitAccess
+  );
   const fetchAllDroitAccess = useStore(
     (state: State) => state.fetchAllDroitAccess
   );
@@ -86,9 +88,6 @@ export function DataTable<droit_accees, TValue>({
     (state: State) => state.fetchDroitAccessByCodeFonction
   );
 
-  useEffect(() => {
-    fetchAllDroitAccess();
-  }, [fetchAllDroitAccess]);
   useEffect(() => {
     const Params = searchParams.get("code") || "";
     if (Params?.length > 0) {

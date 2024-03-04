@@ -1,4 +1,5 @@
 import {
+  createDroit,
   getAllDroitAccess,
   getDroitAccessByCodeFonction,
   updateDroitAccessById,
@@ -19,14 +20,16 @@ export type State = {
     creation: string,
     acces: string
   ) => Promise<void>;
+
   creatDroit: (
     nom: string,
     nom_module: string,
+    code_fonction: string,
     suppression: string,
     modification: string,
     creation: string,
     acces: string
-  ) => void;
+  ) => Promise<void>;
 };
 
 const useStore = create<State>((set) => ({
@@ -62,17 +65,28 @@ const useStore = create<State>((set) => ({
       return { droitAccess: updatedDroitAccess };
     });
   },
-  creatDroit(
+
+  creatDroit: async (
     nom: string,
     nom_module: string,
+    code_fonction: string,
     suppression: string,
     modification: string,
     creation: string,
     acces: string
-  ) {
-    set((state: any) => {
-      return {};
-    });
+  ) => {
+    const data = await createDroit(
+      nom,
+      nom_module,
+      code_fonction,
+      suppression,
+      modification,
+      creation,
+      acces
+    );
+    set((state: any) => ({
+      droitAccess: [...state.droitAccess, data], // Fix typo in property name
+    }));
   },
 }));
 

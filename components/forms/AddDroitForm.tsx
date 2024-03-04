@@ -28,8 +28,8 @@ import { DialogFooter } from "../ui/dialog";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
 import { useEffect, useState } from "react";
 import { getAllFunctions } from "@/actions/fonction.action";
-import { useStore } from "zustand";
-import { State } from "@/lib/droitStore";
+import useStore from "@/lib/droitStore";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   Module: z.string().min(1, {
@@ -72,14 +72,28 @@ const AddDroitForm = () => {
       Suppression: "N",
     },
   });
-
-
-const addDroit = useStore((state:);
-
-const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const response = useStore();
-};
   const { onClose } = useAddDroitModal();
+  const createDroit = useStore((state) => state.creatDroit);
+  //const creatDroit = useStore((state) => state.creatDroit) as any;
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    createDroit(
+      values.Module,
+      values.ModuleP,
+      values.codefonction,
+      values.Suppression,
+      values.Modification,
+      values.Creation,
+      values.acces
+    )
+      .then(() => {
+        toast.success("success");
+        onClose();
+      })
+      .catch(() => {
+        toast.error("error");
+      });
+  };
+
   const [fonctions, setFonctions] = useState<any>([]);
   console.log(fonctions);
   useEffect(() => {
