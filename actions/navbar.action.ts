@@ -14,6 +14,7 @@ export const getLinksByCodeFonction = async (matricule: string) => {
     console.log(response.data);
     return response.data || [];
   } catch (error) {
+    console.log(error);
     return "";
   }
 };
