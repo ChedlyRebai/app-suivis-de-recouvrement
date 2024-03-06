@@ -19,6 +19,7 @@ import useEditDroit from "@/hooks/use-edit-droit-modal";
 import { updateDroitAccessById } from "@/actions/droit_accees.action";
 import { CircleIcon, XIcon } from "lucide-react";
 import { Label } from "../ui/label";
+import useStore from "@/lib/droitStore";
 
 interface EditDoitProps {
   id: string;
@@ -55,19 +56,30 @@ const EditDroitForm = () => {
     console.log(acces);
   };
 
+  const editDroit = useStore((state) => state.updateDroitAccessById);
   const onSubmit = async () => {
-    const response = await updateDroitAccessById(
+    onClose();
+    toast.promise(
+      editDroit(parseInt(id), suppression, modification, creation, acces),
+      {
+        loading: "Saving...",
+        success: <b>saved!</b>,
+        error: <b>Could not save.</b>,
+      }
+    );
+    /* const response = await updateDroitAccessById(
       parseInt(id),
       suppression,
       modification,
       creation,
       acces
     );
+    
     if (response) {
       console.log(response);
       toast.success("Mis à jour avec succés");
       onClose();
-    }
+    }*/
   };
 
   return (

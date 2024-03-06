@@ -44,7 +44,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [invalidCredential, setInvalidCredential] = useState(null);
-  const { isOpen, onOpen } = useInvalidCredentialModal();
+
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
@@ -55,9 +55,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         toast.success("Bienvenu");
         router.push("/access-management");
       })
-      .catch((e) => {
-        onOpen();
-      })
+      .catch((e) => {})
       .finally(() => {
         setIsLoading(false);
       });
@@ -86,8 +84,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   const getUsername = async (values: z.infer<typeof formSchema>) => {
     setUsername("");
-    console.log(values.matricule);
-    if (values.matricule.length < 4) return;
+
     const response = await getUserBuMatricule(values.matricule);
     console.log("response");
     console.log(response);
@@ -126,7 +123,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   <FormItem>
                     <FormLabel>Matricule</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Matricule" {...field} />
+                      <Input type="number" placeholder="e.g: 1234" {...field} />
                     </FormControl>
                     <FormDescription className="text-gray-800">
                       {username}
@@ -144,7 +141,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="password"
+                        placeholder="e.g: 1234"
                         {...field}
                       />
                     </FormControl>
@@ -157,7 +154,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               {/* {isLoading && (
                 <ClipLoader className="mr-2 h-4 w-4 animate-spin" />
               )} */}
-              LogIn
+              Connexion
             </Button>
           </div>
         </form>

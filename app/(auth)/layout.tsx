@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { UserAuthForm } from "./_components/user_auth";
 
 export default function RootLayout({
   children,
@@ -73,13 +72,12 @@ export default function RootLayout({
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Log in to your account
+                Connectez-vous à votre compte
               </h1>
               <p className="text-sm text-muted-foreground">
-                Enter your email below to log in
+                Entrez votre matricule ci-dessous pour vous connecter
               </p>
             </div>
-
             {children}
           </div>
         </div>

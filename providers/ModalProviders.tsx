@@ -11,7 +11,6 @@ const ModalProviders = () => {
       <EditDroitModal />
       <AddDroitModal />
       <SearchFonctionModal />
-      <InvalidCredentialModal />
     </>
   );
 };

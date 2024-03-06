@@ -167,7 +167,7 @@ export function DataTable<droit_accees, TValue>({
           onClick={() => onOpen()}
           className="mr-auto w-auto ml-1 "
         >
-          Search for fonction
+          Recherche de fonction
         </Button>
 
         <DropdownMenu>
@@ -201,7 +201,7 @@ export function DataTable<droit_accees, TValue>({
 
         <Button onClick={() => onOpenAddDroit()} variant="default" className="">
           <ListPlusIcon className="mr-2 h-4 w-4" />
-          Add Droit
+          Ajouter un droit
         </Button>
       </div>
       <div className="rounded-md border">

@@ -105,7 +105,7 @@ export function DataTable<TData, TValue>({
           placeholder="Filter code_fonction"
           value={selectedCode}
           onChange={(event) => {
-            setInputValue(event.target.value);
+            //setInputValue(event.target.value);
             setSelectedCode(event.target.value);
             table
               .getColumn("code_fonction")
