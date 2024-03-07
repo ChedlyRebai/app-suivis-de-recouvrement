@@ -4,6 +4,7 @@ import "./globals.css";
 import axios from "axios";
 import ToastProviders from "@/providers/ToastProviders";
 import ModalProviders from "@/providers/ModalProviders";
+import ThemesProviders from "@/providers/ThemesProviders";
 
 export const metadata: Metadata = {
   title: "Amen Bank",
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        {children}
-        <ToastProviders />
-        <ModalProviders />
+        <ThemesProviders>
+          {children}
+          <ToastProviders />
+          <ModalProviders />
+        </ThemesProviders>
       </body>
     </html>
   );
