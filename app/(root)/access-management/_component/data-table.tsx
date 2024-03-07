@@ -153,7 +153,7 @@ export function DataTable<droit_accees, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 flex-wrap">
         <Input
           placeholder="Filter Module..."
           value={(table.getColumn("nom")?.getFilterValue() as string) ?? ""}

@@ -24,14 +24,12 @@ import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Moda
 import ModalProviders from "@/providers/ModalProviders";
 import { getSession } from "@/lib";
 import { IconMap } from "@/constants";
-import NavbarItem from "./NavbarItem";
 
 interface NavBarProps {
   children: ReactNode;
   session: any;
   links: any[];
 }
-
 const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
   const navigaion = [
     { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -55,6 +53,43 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const navigaton = [
+    { name: "Dashboard", icon: HomeIcon, current: true, href: "#" },
+    {
+      name: "Team",
+      icon: UsersIcon,
+      current: false,
+      children: [
+        { name: "Overview", href: "#" },
+        { name: "Members", href: "#" },
+        { name: "Calendar", href: "#" },
+        { name: "Settings", href: "#" },
+      ],
+    },
+    {
+      name: "Projects",
+      icon: FolderIcon,
+      current: false,
+      children: [
+        { name: "Overview", href: "#" },
+        { name: "Members", href: "#" },
+        { name: "Calendar", href: "#" },
+        { name: "Settings", href: "#" },
+      ],
+    },
+    {
+      name: "Calendar",
+      icon: CalendarIcon,
+      current: false,
+      children: [
+        { name: "Overview", href: "#" },
+        { name: "Members", href: "#" },
+        { name: "Calendar", href: "#" },
+        { name: "Settings", href: "#" },
+      ],
+    },
+  ];
+
   return (
     <>
       {" "}
@@ -68,7 +103,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
       */}
       <ResizablePanelGroup
         direction="horizontal"
-        className="flex flex-row w-screen min-h-screen h-screen"
+        className="flex flex-row w-screen h-screen"
       >
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -229,7 +264,6 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-
         <ResizablePanel
           defaultSize={20}
           minSize={20}
@@ -246,15 +280,110 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
             </div>
             <div className="mt-5 flex-1 flex flex-col h-screen">
               <nav className="flex-1 px-2 pb-4 space-y-1">
-                {navigation &&
+                {navigaion &&
                   Array.isArray(navigation) &&
-                  navigation.map((item: any, i) => (
-                    <NavbarItem
-                      children={item.children}
-                      name={item.name}
-                      icon={item.Icon}
-                    />
-                  ))}
+                  navigation.map((item) =>
+                    !item.children ? (
+                      <div key={item.name}>
+                        <a
+                          href="#"
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          )}
+                        >
+                          {/* <item.icon
+                          className={classNames(
+                            item.current
+                              ? "text-gray-500"
+                              : "text-gray-400  group-hover:text-gray-300
+                              ",
+                            "mr-3 flex-shrink-0 h-6 w-6"
+                          )}
+                          aria-hidden="true"
+                        /> */}
+                          {item.name}
+                        </a>
+                      </div>
+                    ) : (
+                      <Disclosure
+                        as="div"
+                        key={item.name}
+                        className="space-y-1"
+                      >
+                        {({ open }) => {
+                          let Icon = IconMap[item.icon || "consicons/users"];
+                          return (
+                            <>
+                              <Disclosure.Button
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-900 text-white"
+                                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                  "group capitalize w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                )}
+                              >
+                                <Icon
+                                  className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-300"
+                                  aria-hidden="true"
+                                />
+                                <span className="flex-1 capitalize">
+                                  {item.name}
+                                </span>
+                                <svg
+                                  className={classNames(
+                                    open
+                                      ? "text-gray-400 rotate-90"
+                                      : "text-gray-300",
+                                    "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                                  )}
+                                  viewBox="0 0 20 20"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M6 6L14 10L6 14V6Z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                              </Disclosure.Button>
+                              <Disclosure.Panel className="space-y-1">
+                                {item.children.map(
+                                  (subItem: any, index: number) => {
+                                    let Icon =
+                                      IconMap[subItem.icon || "consicons/ug"];
+                                    return (
+                                      <>
+                                        <Disclosure.Button
+                                          key={index}
+                                          className={classNames(
+                                            item.current
+                                              ? "bg-gray-900 text-white"
+                                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                            "group w-full flex items-center pl-4 pr-0 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                          )}
+                                        >
+                                          <Icon
+                                            className="mr-3 flex-shrink-0 h-5 w-5 text-gray-400  group-hover:text-gray-300
+                              "
+                                            aria-hidden="true"
+                                          />
+                                          <span className="flex-1 capitalize">
+                                            {subItem.name}
+                                          </span>
+                                        </Disclosure.Button>
+                                      </>
+                                    );
+                                  }
+                                )}
+                              </Disclosure.Panel>
+                            </>
+                          );
+                        }}
+                      </Disclosure>
+                    )
+                  )}
               </nav>
             </div>
           </div>

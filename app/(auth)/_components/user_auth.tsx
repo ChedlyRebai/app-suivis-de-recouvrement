@@ -76,7 +76,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     // Cookies.set('token', token);
     // Cookies
     // await axios
-    //   .get(`http://localhost:10000/users/getUsername/`)
+    //   .get(`https://app-suivis-de-recouvrement-server-37up.vercel.app/users/getUsername/`)
     //   .then((username: any) => {
     //     console.log(username);
     //   });

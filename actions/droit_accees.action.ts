@@ -11,9 +11,7 @@ export const getAllDroitAccess = async () => {
 };
 
 export const getDroitAccessByCodeFonction = async (code: string) => {
-  console.log(
-    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}`
-  );
+  console.log(`${process.env.API_URL} `);
   const res = await axios.get(
     `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}`
   );

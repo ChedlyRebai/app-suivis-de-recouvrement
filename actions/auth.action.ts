@@ -4,8 +4,10 @@ import { STATUS_CODES } from "http";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 export const Login = async (matricule: string, password: string) => {
+  axios.defaults.baseURL =
+    "https://app-suivis-de-recouvrement-server-37up.vercel.app/";
   console.log(`${process.env.API_URL}/login`);
-  const res = await axios.post(`${process.env.API_URL}/auth/login`, {
+  const res = await axios.post(`/auth/login`, {
     matricule,
     password,
   });

@@ -15,11 +15,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  axios.defaults.baseURL = "http://localhost:10000/";
+  axios.defaults.baseURL =
+    "https://app-suivis-de-recouvrement-server-37up.vercel.app/";
 
   return (
     <html lang="en">
-      <body className="">
+      <body className="min-h-screen">
         {children}
         <ToastProviders />
         <ModalProviders />
