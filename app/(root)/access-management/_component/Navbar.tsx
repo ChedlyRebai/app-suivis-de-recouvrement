@@ -25,6 +25,7 @@ import ModalProviders from "@/providers/ModalProviders";
 import { getSession } from "@/lib";
 import { IconMap } from "@/constants";
 import NavbarItem from "./NavbarItem";
+import ThemeButton from "@/components/shared/ThemeButton";
 
 interface NavBarProps {
   children: ReactNode;
@@ -236,7 +237,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
           className="hidden w-1/4 md:flex md:w-fit md:flex-col md:fixd md:inset-y-0"
         >
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow pt-5 light: bg-gray-800 overflow-y-auto">
+          <div className="flex flex-col flex-grow pt-5 light: bg-gray-800 dark:bg-inherit  overflow-y-auto">
             <div className="flex items-center justify-center flex-shrink-0 px-4">
               <img
                 className="h-16 center"
@@ -261,7 +262,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={80} className="  flex flex-col flex-1">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-20 bg-white backdrop-blur-lg shadow">
+          <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-lg shadow dark:border-b ">
             <button
               type="button"
               className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -279,21 +280,21 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                   <div className="relative justify-between items-center flex w-full text-black focus-within:text-gray-600">
                     <div className="justify-start mr-auto absolute inset-y-0 left-0 flex flex-col  pointer-events-none  pt-3">
                       {/* <SearchIcon className="h-5 w-5" aria-hidden="true" /> */}
-                      <div className="flex mb-1 items-center text-gray-900">
+                      <div className="flex mb-1 items-center text-gray-900 dark:text-white">
                         <HomeIcon
-                          className="h-5 w-5 text-gray-900"
+                          className="h-5 w-5 text-gray-900 dark:text-white"
                           aria-hidden="true"
                         />
-                        <p className="pl-2 text-base text-gray-900 font-semibold  ">
+                        <p className="pl-2 text-base text-gray-900 dark:text-white font-semibold  ">
                           {session?.user?.matricule}
                         </p>
                       </div>
                       <div className="flex items-center  ">
                         <UsersIcon
-                          className="h-5 w-5 text-gray-600"
+                          className="h-5 w-5 text-gray-600 dark:text-gray-300"
                           aria-hidden="true"
                         />
-                        <p className="pl-2 text-base text-gray-600 font-semibold  ">
+                        <p className="pl-2 text-base text-gray-600 font-semibold dark:text-gray-300  ">
                           {session?.user?.role}
                         </p>
                       </div>
@@ -308,10 +309,9 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                     />  */}
                   </div>
                 </form>
-                <div>chedly2</div>
               </div>
 
-              {/* <div className="ml-4 flex items-center md:ml-6">
+              <div className="ml-4 flex items-center md:ml-6">
                 <button
                   type="button"
                   className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -319,8 +319,8 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+                <ThemeButton />
 
-                {/* Profile dropdown 
                 <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -360,12 +360,12 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="py-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              <h1 className="text-2xl font-semibold text-gray-900">
+              <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
                 Gestion de droit d'accés
               </h1>
             </div>

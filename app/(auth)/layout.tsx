@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import ThemeButton from "@/components/shared/ThemeButton";
 
 export default function RootLayout({
   children,
@@ -35,6 +36,9 @@ export default function RootLayout({
         >
           <Image src="/images/logo.png" width={180} height={143} alt={"logo"} />
         </Link>
+        <div className="absolute left-[53%] top-7  md:top-8">
+          <ThemeButton />
+        </div>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
           <Image
             className="absolute inset-0 object-covr bg-zinc-900"
