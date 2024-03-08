@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import axios from "axios";
 import ToastProviders from "@/providers/ToastProviders";
 import ModalProviders from "@/providers/ModalProviders";
@@ -14,14 +14,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  params: { locale },
+}: {
   children: React.ReactNode;
-}>) {
+  params: { locale: string };
+}) {
   axios.defaults.baseURL =
     "https://app-suivis-de-recouvrement-server-37up.vercel.app/";
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className="min-h-screen">
         <ThemesProviders>
           {children}

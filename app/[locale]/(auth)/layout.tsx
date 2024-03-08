@@ -5,12 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ThemeButton from "@/components/shared/ThemeButton";
-
+import { useTranslations } from "next-intl";
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const t = useTranslations("login");
   return (
     <>
       <div className="hidden">
@@ -46,6 +47,7 @@ export default function RootLayout({
             src={"/images/handshake.jpg"}
             alt={"test"}
           />
+
           {/*<div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,11 +78,9 @@ export default function RootLayout({
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Connectez-vous à votre compte
+                {t("title")}
               </h1>
-              <p className="text-sm text-muted-foreground">
-                Entrez votre matricule ci-dessous pour vous connecter
-              </p>
+              <p className="text-sm text-muted-foreground">{t("desc")}</p>
             </div>
             {children}
           </div>

@@ -2,10 +2,11 @@ import React from "react";
 import { UserAuthForm } from "../_components/user_auth";
 import { getSession } from "@/lib";
 import InvalidCredentialModal from "@/components/shared/Modals/Invalid-Credential-Modal";
-
+import { useTranslations } from "next-intl";
 const Page = async () => {
   const session = await getSession();
   console.log("session1");
+  const test = useTranslations("Index");
   if (session?.user) console.log(session.user.role);
   return (
     <>
