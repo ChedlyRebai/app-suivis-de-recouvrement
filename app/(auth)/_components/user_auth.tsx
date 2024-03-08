@@ -125,7 +125,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     <FormControl>
                       <Input type="number" placeholder="e.g: 1234" {...field} />
                     </FormControl>
-                    <FormDescription className="text-gray-800">
+                    <FormDescription className=" text-inherit">
                       {username}
                     </FormDescription>
                     <FormMessage />
