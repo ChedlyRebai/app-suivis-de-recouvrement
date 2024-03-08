@@ -5,6 +5,7 @@ import axios from "axios";
 import ToastProviders from "@/providers/ToastProviders";
 import ModalProviders from "@/providers/ModalProviders";
 import ThemesProviders from "@/providers/ThemesProviders";
+import ThemeButton from "@/components/shared/ThemeButton";
 
 export const metadata: Metadata = {
   title: "Amen Bank",
