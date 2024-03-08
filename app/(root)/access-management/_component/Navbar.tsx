@@ -236,7 +236,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
           className="hidden w-1/4 md:flex md:w-fit md:flex-col md:fixd md:inset-y-0"
         >
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow pt-5 bg-gray-800 overflow-y-auto">
+          <div className="flex flex-col flex-grow pt-5 light: bg-gray-800 overflow-y-auto">
             <div className="flex items-center justify-center flex-shrink-0 px-4">
               <img
                 className="h-16 center"
@@ -261,7 +261,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={80} className="  flex flex-col flex-1">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-20 bg-white shadow">
+          <div className="sticky top-0 z-10 flex-shrink-0 flex h-20 bg-white backdrop-blur-lg shadow">
             <button
               type="button"
               className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -270,14 +270,14 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
               <span className="sr-only">Open sidebar</span>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </button>
-            <div className="flex-1 px-4 flex justify-between">
+            <div className="flex-1 backdrop-blur-md px-4 flex justify-between">
               <div className="flex-1 flex">
                 <form className="w-full flex md:ml-0" action="#" method="GET">
                   <label htmlFor="search-field" className="sr-only">
                     Search
                   </label>
-                  <div className="relative w-full text-black focus-within:text-gray-600">
-                    <div className="justify-start absolute inset-y-0 left-0 flex flex-col  pointer-events-none  pt-3">
+                  <div className="relative justify-between items-center flex w-full text-black focus-within:text-gray-600">
+                    <div className="justify-start mr-auto absolute inset-y-0 left-0 flex flex-col  pointer-events-none  pt-3">
                       {/* <SearchIcon className="h-5 w-5" aria-hidden="true" /> */}
                       <div className="flex mb-1 items-center text-gray-900">
                         <HomeIcon
@@ -298,6 +298,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                         </p>
                       </div>
                     </div>
+
                     {/* <input
                       id="search-field"
                       className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
@@ -307,7 +308,9 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                     />  */}
                   </div>
                 </form>
+                <div>chedly2</div>
               </div>
+
               {/* <div className="ml-4 flex items-center md:ml-6">
                 <button
                   type="button"
