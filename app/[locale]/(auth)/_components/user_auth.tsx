@@ -29,7 +29,10 @@ import { getUserBuMatricule } from "@/actions/utilisateur.action";
 import useInvalidCredentialModal from "@/hooks/useInvalidCredential";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
+  matricule: string;
+  password: string;
+}
 
 const formSchema = z.object({
   matricule: z.string().min(4, {
@@ -40,7 +43,12 @@ const formSchema = z.object({
   }),
 });
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function UserAuthForm({
+  className,
+  password,
+  matricule,
+  ...props
+}: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [invalidCredential, setInvalidCredential] = useState(null);
@@ -121,7 +129,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 name="matricule"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Matricule</FormLabel>
+                    <FormLabel>{matricule}</FormLabel>
                     <FormControl>
                       <Input type="number" placeholder="e.g: 1234" {...field} />
                     </FormControl>
@@ -137,7 +145,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Mot de passe</FormLabel>
+                    <FormLabel>{password}</FormLabel>
                     <FormControl>
                       <Input
                         type="password"

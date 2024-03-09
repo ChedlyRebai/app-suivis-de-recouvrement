@@ -1,8 +1,22 @@
 {
   "login": {
     "title": "Sign into your account",
-    "desc":"Entrez votre matricule ci-dessous pour vous connecter",
-    "matricule":"Matricule",
-    "password":"Password"
+    "desc": "Enter your number below to log in",
+    "matricule": "Matricule",
+    "password": "Password",
+    "login": "Login"
+  },
+  "access-management": {
+    "title": "access-management",
+    "searchf": "Function search",
+    "View": "View",
+    "Add": "Add an access ",
+    "Nom": "Name",
+    "ModuleP": "ModuleP",
+    "Codef": "Function Code",
+    "Accés": "Access",
+    "Creat": "Creation",
+    "Modif": "Edit",
+    "Supp": "Deletion"
   }
 }

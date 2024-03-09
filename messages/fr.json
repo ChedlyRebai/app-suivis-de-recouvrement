@@ -1,10 +1,23 @@
-
-
 {
   "login": {
     "title": "Connectez-vous à votre compte",
-    "desc":"Enter your number below to log in",
-    "matricule":"Matricule",
-    "password":"Mot de passe"
+
+    "desc": "Entrez votre matricule ci-dessous pour vous connecter",
+    "matricule": "Matricule",
+    "password": "Mot de passe",
+    "login": "Connexion"
+  },
+  "access-management": {
+    "title": "Gestion de droit d'accés",
+    "searchf": "Recherche de fonction",
+    "View": "View",
+    "Add": "Ajouter un droit ",
+    "Nom": "Non",
+    "ModuleP": "ModuleP",
+    "Codef": "Code Fonction",
+    "Accés": "Accéss",
+    "Creat": "Creation",
+    "Modif": "modification",
+    "Supp": "suppression"
   }
 }

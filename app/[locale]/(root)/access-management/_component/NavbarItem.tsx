@@ -101,13 +101,15 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                           let Icon = IconMap[subItem.icon || "consicons/ug"];
                           console.log(subItem.children);
                           return (
-                            <>
+                            <div
+                              style={{ marginLeft: `${subItem.level * 4}px` }}
+                            >
                               <NavbarItem
                                 children={subItem.children}
                                 icon={subItem.icon}
                                 name={subItem.name}
                               />
-                            </>
+                            </div>
                           );
                         })}
                     </Disclosure.Panel>
