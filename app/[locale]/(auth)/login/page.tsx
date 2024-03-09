@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 const Page = async () => {
   const session = await getSession();
   console.log("session1");
-  const test = useTranslations("Index");
+
   if (session?.user) console.log(session.user.role);
   return (
     <>
