@@ -61,7 +61,7 @@ export function UserAuthForm({
     await login(values.matricule, values.password)
       .then((e) => {
         console.log(e);
-        router.push(`${local}/access-management`);
+        router.push(`access-management`);
         toast.success("Bienvenu");
         //setIsLoading(false);
       })
