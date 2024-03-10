@@ -27,6 +27,7 @@ import { IconMap } from "@/constants";
 import NavbarItem from "./NavbarItem";
 import ThemeButton from "@/components/shared/ThemeButton";
 import { useTranslations } from "next-intl";
+import LocalSwitcher from "@/components/shared/Local-switcher";
 
 interface NavBarProps {
   children: ReactNode;
@@ -326,7 +327,7 @@ const Navbar = ({
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <ThemeButton />
-
+                <LocalSwitcher />
                 <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
