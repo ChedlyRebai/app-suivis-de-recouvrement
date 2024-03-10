@@ -26,14 +26,21 @@ import { getSession } from "@/lib";
 import { IconMap } from "@/constants";
 import NavbarItem from "./NavbarItem";
 import ThemeButton from "@/components/shared/ThemeButton";
+import { useTranslations } from "next-intl";
 
 interface NavBarProps {
   children: ReactNode;
   session: any;
+  title: string;
   links: any[];
 }
 
-const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
+const Navbar = ({
+  children,
+  session,
+  links: navigation,
+  title,
+}: NavBarProps) => {
   const navigaion = [
     { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
     { name: "Team", href: "#", icon: UsersIcon, current: false },
@@ -47,8 +54,6 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ];
-
-  console.log(navigation);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -251,6 +256,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
                   Array.isArray(navigation) &&
                   navigation.map((item: any, i) => (
                     <NavbarItem
+                      key={item.name}
                       children={item.children}
                       name={item.name}
                       icon={item.Icon}
@@ -366,7 +372,7 @@ const Navbar = ({ children, session, links: navigation }: NavBarProps) => {
           <div className="py-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
               <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Gestion de droit d'accés
+                {title}
               </h1>
             </div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">

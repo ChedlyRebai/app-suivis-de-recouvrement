@@ -31,6 +31,8 @@ import ModalProviders from "@/providers/ModalProviders";
 import Navbar from "./access-management/_component/Navbar";
 import { getSession } from "@/lib";
 import { getLinksByCodeFonction } from "@/actions/navbar.action";
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -56,11 +58,25 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const links = await getLinksByCodeFonction();
-  console.log("links");
-  console.log(links);
+  const t = await getTranslations("access-management");
   const session = await getSession();
+
+  const b = {
+    title: t("title"),
+    searchf: t("searchf"),
+    View: t("View"),
+    Add: t("Add"),
+    Nom: t("Nom"),
+    ModuleP: t("ModuleP"),
+    Codef: t("Codef"),
+    acces: t("Accés"),
+    Creat: t("Creat"),
+    Modif: t("Modif"),
+    Supp: t("Supp"),
+  };
+  console.log(b);
   return (
-    <Navbar links={links} session={session}>
+    <Navbar links={links} title={t("title")} session={session}>
       {children}
     </Navbar>
   );

@@ -19,5 +19,9 @@
     "Creat": "Creation",
     "Modif": "modification",
     "Supp": "suppression"
+  },
+  "pagination": {
+    "rpp": "Lignes par page",
+    "of": "sur"
   }
 }

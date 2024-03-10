@@ -4,10 +4,10 @@
     "desc": "Enter your number below to log in",
     "matricule": "Matricule",
     "password": "Password",
-    "login": "Login"
+    "login": "Login "
   },
   "access-management": {
-    "title": "access-management",
+    "title": "Access management",
     "searchf": "Function search",
     "View": "View",
     "Add": "Add an access ",
@@ -18,5 +18,9 @@
     "Creat": "Creation",
     "Modif": "Edit",
     "Supp": "Deletion"
+  },
+  "pagination": {
+    "rpp": "Rows per page",
+    "of": "of"
   }
 }

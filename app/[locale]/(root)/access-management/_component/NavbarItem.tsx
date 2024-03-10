@@ -105,6 +105,7 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                               style={{ marginLeft: `${subItem.level * 4}px` }}
                             >
                               <NavbarItem
+                                key={subItem.name}
                                 children={subItem.children}
                                 icon={subItem.icon}
                                 name={subItem.name}

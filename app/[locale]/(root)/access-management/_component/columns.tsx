@@ -1,18 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -20,33 +8,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
 import { droit_accees } from "@/Models/droit_accees.model";
-import { Badge } from "@/components/ui/badge";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+import useStore from "@/hooks/useLangStore";
+import useLangStore from "@/hooks/useLangStore";
 
 export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "nom",
     header: ({ column }) => {
+      console.log("column lang");
+      const lang = useLangStore((state) => state.lang.Nom);
+      console.log(lang);
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nom
+          {lang}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -55,12 +37,13 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "nom_module",
     header: ({ column }) => {
+      const lang = useLangStore((state) => state.lang.ModuleP);
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          ModuleP
+          {lang}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -69,7 +52,10 @@ export const columns: ColumnDef<droit_accees>[] = [
 
   {
     accessorKey: "code_fonction",
-    header: "Code Fonction",
+    header: ({ column }) => {
+      const lang = useLangStore((state) => state.lang.Codef);
+      return <span>{lang}</span>;
+    },
     cell: ({ row }) => {
       return (
         <span
@@ -82,7 +68,10 @@ export const columns: ColumnDef<droit_accees>[] = [
   },
   {
     accessorKey: "acces",
-    header: "Accés",
+    header: ({ column }) => {
+      const lang = useLangStore((state) => state.lang.acces);
+      return <span>{lang}</span>;
+    },
     cell: ({ row }) => {
       return (
         <span
@@ -99,7 +88,10 @@ export const columns: ColumnDef<droit_accees>[] = [
   },
   {
     accessorKey: "creation",
-    header: "Creation",
+    header: ({ column }) => {
+      const lang = useLangStore((state) => state.lang.Creat);
+      return <span>{lang}</span>;
+    },
     cell: ({ row }) => {
       return (
         <span
@@ -116,7 +108,10 @@ export const columns: ColumnDef<droit_accees>[] = [
   },
   {
     accessorKey: "modification",
-    header: "Modification",
+    header: ({ column }) => {
+      const lang = useLangStore((state) => state.lang.Modif);
+      return <span>{lang}</span>;
+    },
     cell: ({ row }) => {
       return (
         <span
@@ -133,7 +128,10 @@ export const columns: ColumnDef<droit_accees>[] = [
   },
   {
     accessorKey: "suppression",
-    header: "Suppression",
+    header: ({ column }) => {
+      const lang = useLangStore((state) => state.lang.Supp);
+      return <span>{lang}</span>;
+    },
     cell: ({ row }) => {
       return (
         <span
