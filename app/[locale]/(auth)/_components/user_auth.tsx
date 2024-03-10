@@ -28,6 +28,7 @@ import WrongPassword from "./WrongPassword";
 import { getUserBuMatricule } from "@/actions/utilisateur.action";
 import useInvalidCredentialModal from "@/hooks/useInvalidCredential";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
+import { useLocale } from "next-intl";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   matricule: string;
@@ -52,7 +53,7 @@ export function UserAuthForm({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [invalidCredential, setInvalidCredential] = useState(null);
-
+  const local = useLocale();
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
@@ -60,13 +61,14 @@ export function UserAuthForm({
     await login(values.matricule, values.password)
       .then((e) => {
         console.log(e);
+        router.push(`${local}/access-management`);
         toast.success("Bienvenu");
-        router.push("/access-management");
+        //setIsLoading(false);
       })
-      .catch((e) => {})
-      .finally(() => {
+      .catch((e) => {
         setIsLoading(false);
-      });
+      })
+      .finally(() => {});
     //   router.push("/");
     /*const instance = axios.create({
       baseURL: process.env.API_URL,

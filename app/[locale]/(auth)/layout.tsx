@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ThemeButton from "@/components/shared/ThemeButton";
 import { useTranslations } from "next-intl";
+import LocalSwitcher from "@/components/shared/Local-switcher";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,8 +38,10 @@ export default function RootLayout({
         >
           <Image src="/images/logo.png" width={180} height={143} alt={"logo"} />
         </Link>
-        <div className="absolute left-[53%] top-7  md:top-8">
+        <div className="absolute flex items-center justify-between left-[5%] lg:left-[53%] top-7  md:top-8">
           <ThemeButton />
+          <div className="mx-1" />
+          <LocalSwitcher />
         </div>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
           <Image
