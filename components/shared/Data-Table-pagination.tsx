@@ -14,6 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
@@ -22,11 +24,12 @@ interface DataTablePaginationProps<TData> {
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
+  const lang = useTranslations("pagination");
   return (
     <div className="mt-2 flex items-center justify-end px-2">
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Lignes par page</p>
+          <p className="text-sm font-medium">{lang("rpp")}</p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -46,7 +49,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} sur{" "}
+          Page {table.getState().pagination.pageIndex + 1} {lang("of")}{" "}
           {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">
