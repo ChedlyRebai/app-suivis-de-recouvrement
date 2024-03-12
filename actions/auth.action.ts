@@ -9,7 +9,7 @@ export const Logn = async (matricule: string, password: string) => {
   //2axios.defaults.baseURL =
   //"https://app-suivis-de-recouvrement-server-37up.vercel.app/";
   console.log(`/login`);
-  const res = await axios.post(`http://localhost:10000/auth/login`, {
+  const res = await axios.post(`${process.env.API_URL}/auth/login`, {
     matricule,
     password,
   });
@@ -27,7 +27,7 @@ export const Logn = async (matricule: string, password: string) => {
 };
 export const Login = async (matricule: string, password: string) => {
   try {
-    const res = await axios.post(`http://localhost:10000/auth/login`, {
+    const res = await axios.post(`${process.env.API_URL}/auth/login`, {
       matricule,
       password,
     });

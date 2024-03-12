@@ -293,7 +293,7 @@ const Navbar = ({
                           aria-hidden="true"
                         />
                         <p className="pl-2 text-base text-gray-900 dark:text-white font-semibold  ">
-                          {session?.user?.matricule}
+                          {session?.matricule}
                         </p>
                       </div>
                       <div className="flex items-center  ">
@@ -302,7 +302,7 @@ const Navbar = ({
                           aria-hidden="true"
                         />
                         <p className="pl-2 text-base text-gray-600 font-semibold dark:text-gray-300  ">
-                          {session?.user?.role}
+                          {session?.role}
                         </p>
                       </div>
                     </div>
