@@ -61,20 +61,6 @@ export default async function RootLayout({
   const t = await getTranslations("access-management");
   const session = await getSession();
 
-  const b = {
-    title: t("title"),
-    searchf: t("searchf"),
-    View: t("View"),
-    Add: t("Add"),
-    Nom: t("Nom"),
-    ModuleP: t("ModuleP"),
-    Codef: t("Codef"),
-    acces: t("Accés"),
-    Creat: t("Creat"),
-    Modif: t("Modif"),
-    Supp: t("Supp"),
-  };
-  console.log(b);
   return (
     <Navbar links={links} title={t("title")} session={session}>
       {children}

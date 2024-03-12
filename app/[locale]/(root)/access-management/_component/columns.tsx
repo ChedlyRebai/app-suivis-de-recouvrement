@@ -13,17 +13,13 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { droit_accees } from "@/Models/droit_accees.model";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
-import useStore from "@/hooks/useLangStore";
-import useLangStore from "@/hooks/useLangStore";
+
 import { useTranslations } from "next-intl";
 
 export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "nom",
     header: ({ column }) => {
-      console.log("column lang");
-      //const lang = useLangStore((state) => state.lang.Nom);
-      //console.log(lang);
       const lang = useTranslations();
       return (
         <Button

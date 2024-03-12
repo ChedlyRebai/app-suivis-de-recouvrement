@@ -53,29 +53,19 @@ import useStore, { State } from "@/lib/droitStore";
 import { droit_accees } from "@/Models/droit_accees.model";
 import toast from "react-hot-toast";
 import { getSession } from "@/lib";
-import useLangStore from "@/hooks/useLangStore";
+import { useTranslations } from "next-intl";
 
 interface DataTableProps<droit_accees, TValue> {
   columns: ColumnDef<droit_accees, TValue>[];
-  lang: any;
 }
 
 export function DataTable<droit_accees, TValue>({
   columns,
-  lang,
 }: DataTableProps<droit_accees, TValue>) {
   const [data, setData] = useState<droit_accees[]>([]);
 
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
-  const langStore = useLangStore((state) => state.lang);
-  const setLang = useLangStore((state) => state.setLang);
-  console.log("lang:", lang);
-
-  useEffect(() => {
-    setLang(lang);
-  }, [lang]);
-  console.log(langStore);
 
   // const droitAccess = useStore((state: State) => state.droitAccess);
   // const fetchAllDroitAccess = useStore(
@@ -136,7 +126,7 @@ export function DataTable<droit_accees, TValue>({
   // };
   // fetchData();
   //}, [searchParams.get("code")]);
-
+  const lang = useTranslations();
   const { isOpen, onOpen } = useAuthModal();
   const { isOpen: isOpenAddDroit, onOpen: onOpenAddDroit } = useAddDroitModal();
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -178,14 +168,14 @@ export function DataTable<droit_accees, TValue>({
           onClick={() => onOpen()}
           className="mr-auto w-auto ml-1 "
         >
-          {lang.searchf}
+          {lang("access-management.searchf")}
         </Button>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto mr-1">
               <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-              {lang.View}
+              {lang("access-management.View")}
             </Button>
           </DropdownMenuTrigger>
 
@@ -212,7 +202,7 @@ export function DataTable<droit_accees, TValue>({
 
         <Button onClick={() => onOpenAddDroit()} variant="default" className="">
           <ListPlusIcon className="mr-2 h-4 w-4" />
-          {lang.Add}
+          {lang("access-management.Add")}
         </Button>
       </div>
       <div className="rounded-md border">
