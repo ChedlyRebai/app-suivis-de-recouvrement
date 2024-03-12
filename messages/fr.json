@@ -20,6 +20,13 @@
     "Modif": "modification",
     "Supp": "suppression"
   },
+  "funcModal": {
+    "title": "Liste des fonctions",
+    "desc": "Rechercher une fonction",
+    "codef": "Code Fonction",
+    "lib": "Libellé",
+    "cancel": "Annuler"
+  },
   "pagination": {
     "rpp": "Lignes par page",
     "of": "sur"

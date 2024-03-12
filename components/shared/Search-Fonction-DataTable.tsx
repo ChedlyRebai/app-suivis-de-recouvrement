@@ -24,15 +24,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { SearchIcon } from "lucide-react";
+
 import useAuthModal from "@/hooks/use-fonction-search-modal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -97,6 +92,7 @@ export function DataTable<TData, TValue>({
       pathname + "?" + createQueryString("code", `${selectedCode as string}`)
     );
   };
+  const lang = useTranslations();
 
   return (
     <>
@@ -143,6 +139,18 @@ export function DataTable<TData, TValue>({
                     setInputValue(
                       (row.original as { code_fonction: string }).code_fonction
                     );
+                    onClose();
+                    router.push(
+                      pathname +
+                        "?" +
+                        createQueryString(
+                          "code",
+                          `${
+                            (row.original as { code_fonction: string })
+                              .code_fonction
+                          }`
+                        )
+                    );
                     if (
                       selectedCode ===
                       (row.original as { code_fonction: string }).code_fonction
@@ -182,7 +190,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 ">
-        <Button
+        {/* <Button
           onClick={() => {
             onClose();
             router.push(
@@ -193,9 +201,9 @@ export function DataTable<TData, TValue>({
           size="sm"
         >
           OK
-        </Button>
+        </Button> */}
         <Button onClick={() => onClose()} variant="outline" size="sm">
-          Annuler
+          {lang("funcModal.cancel")}
         </Button>
       </div>
     </>

@@ -10,6 +10,8 @@ import { fonction } from "@/Models/fonction.model";
 import { getAllFunctions } from "@/actions/fonction.action";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../../ui/checkbox";
+import { useTranslations } from "next-intl";
+import { ArrowUpDown } from "lucide-react";
 
 function SearchFonctionModal() {
   const { onClose, isOpen } = useAuthModal();
@@ -19,11 +21,22 @@ function SearchFonctionModal() {
       onClose();
     }
   };
-
+  const lang = useTranslations();
   const columns: ColumnDef<fonction>[] = [
     {
       accessorKey: "code_fonction",
-      header: "Code Fonction",
+      header: ({ column }) => {
+        return (
+          <Button
+            className="px-1 flex "
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {lang("funcModal.codef")}
+            <ArrowUpDown className="ml-1 h-4 w-4" />
+          </Button>
+        );
+      },
       cell: ({ row }) => {
         return <>{`${row.getValue("code_fonction")}`}</>;
       },
@@ -33,31 +46,20 @@ function SearchFonctionModal() {
     },
     {
       accessorKey: "lib_fonction",
-      header: "Libelle",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            className="w-fit px-"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {lang("funcModal.lib")}
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
     },
   ];
-
-  function getData(): fonction[] {
-    // Fetch data from your API here.
-    return [
-      {
-        code_fonction: 1,
-        lib_fonction: "eeeee",
-      },
-      {
-        code_fonction: 1,
-        lib_fonction: "eeeee",
-      },
-      {
-        code_fonction: 5,
-        lib_fonction: "eeeee",
-      },
-      {
-        code_fonction: 8,
-        lib_fonction: "eeeee",
-      },
-    ];
-  }
 
   const [data, setData] = useState<any>([]);
 
@@ -69,11 +71,11 @@ function SearchFonctionModal() {
     };
     fetchData();
   }, []);
-  const d2 = getData();
+
   return (
     <Modal
-      title="Liste des fontions"
-      description="Rechercher une fonction"
+      title={lang("funcModal.title")}
+      description={lang("funcModal.desc")}
       isOpen={isOpen}
       onChange={onClose}
     >

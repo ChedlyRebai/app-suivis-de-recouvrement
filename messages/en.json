@@ -19,6 +19,13 @@
     "Modif": "Edit",
     "Supp": "Deletion"
   },
+  "funcModal": {
+    "title": "List of functions",
+    "desc": "Search for a function",
+    "codef": "Code Function ",
+    "lib": "Title",
+    "cancel": "Cancel"
+  },
   "pagination": {
     "rpp": "Rows per page",
     "of": "of"
