@@ -16,12 +16,12 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 const InvalidCredentialModal = () => {
-  const { isOpen, onOpen, onClose } = useInvalidCredentialModal();
+  const { isOpen, onOpen, onClose, textError } = useInvalidCredentialModal();
   console.log("invelid");
   return (
     <Modal
       title="Les informations d'identification invalides"
-      description="Vérifiez votre Matricule et votre mot de passe et réessayez"
+      description={textError}
       isOpen={isOpen}
       onChange={onClose}
     >

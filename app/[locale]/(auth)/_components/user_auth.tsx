@@ -54,27 +54,57 @@ export function UserAuthForm({
   const [username, setUsername] = useState<string>("");
   const [invalidCredential, setInvalidCredential] = useState(null);
   const local = useLocale();
+  const { onOpen, setTextError } = useInvalidCredentialModal();
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsLoading(true);
+    // await Login(values.matricule, values.password)
+    //   .then((message) => {
+    //     console.log(message);
+    //     toast.success("Bienvenu");
+    //   })
+    //   .catch((e) => {
+    //     console.log("errrInfRONt");
+    //     console.log(typeof e);
+    //     console.log(e?.response?.data?.message);
 
-    await login(values.matricule, values.password)
-      .then((e) => {
-        console.log(e);
-        router.push(`access-management`);
-        toast.success("Bienvenu");
-        //setIsLoading(false);
-      })
-      .catch((e) => {
+    //     if (e === "User not found") {
+    //       // Handle case when user is not found
+    //       toast.error("User not found");
+    //     } else {
+    //       // Handle other errors
+    //       onOpen();
+    //     }
+
+    //     setIsLoading(false);
+    //   })
+    //   .finally(() => {});
+
+    try {
+      setIsLoading(true);
+      const res = await Login(values.matricule, values.password);
+      console.log(res);
+      if (res?.status === 200) {
+        toast.success(res.data);
+        router.push("access-management");
+      } else {
+        setTextError(res?.data as string);
+        onOpen();
         setIsLoading(false);
-      })
-      .finally(() => {});
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+
     //   router.push("/");
     /*const instance = axios.create({
       baseURL: process.env.API_URL,
     });*/
     // setIsLoading(true);
-    // const res = await Login(values.matricule, values.password);
+    // await Login(values.matricule, values.password)
+    //   .then((e) => console.log(e))
+    //   .catch((e) => console.log(e.data));
+
     // setIsLoading(false);
     // console.log(res);
     // Cookies.set("token", res.token);

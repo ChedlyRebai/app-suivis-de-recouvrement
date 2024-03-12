@@ -3,22 +3,45 @@ import axios from "axios";
 import { STATUS_CODES } from "http";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
-export const Login = async (matricule: string, password: string) => {
-  axios.defaults.baseURL =
-    "https://app-suivis-de-recouvrement-server-37up.vercel.app/";
-  console.log(`${process.env.API_URL}/login`);
-  const res = await axios.post(`/auth/login`, {
+import { encrypt } from "@/lib";
+import { cookies } from "next/headers";
+export const Logn = async (matricule: string, password: string) => {
+  //2axios.defaults.baseURL =
+  //"https://app-suivis-de-recouvrement-server-37up.vercel.app/";
+  console.log(`/login`);
+  const res = await axios.post(`http://localhost:10000/auth/login`, {
     matricule,
     password,
   });
-  const cookie = (res.headers["set-cookie"] || [""])[0];
-  const token = cookie.split(";")[0];
-  console.log("token");
-  console.log(token);
   console.log(res.data);
-  const decoded = jwtDecode(token);
-  Cookies.set("token", res.data);
-
-  if (res.status === 200) return decoded;
+  // const cookie = (res.headers["set-cookie"] || [""])[0];
+  // const token = cookie.split(";")[0];
+  // console.log("token");
+  // console.log(token);
+  // console.log("********************************************************");
+  // console.log(res.data.message);
+  // console.log("********************************************************");
+  // const decoded = jwtDecode(token);
+  // if(res.status === 200) return decoded;
   return {};
+};
+export const Login = async (matricule: string, password: string) => {
+  try {
+    const res = await axios.post(`http://localhost:10000/auth/login`, {
+      matricule,
+      password,
+    });
+
+    if (res.status === 200) {
+      const expires = new Date(Date.now() + 1000 * 1000 * 1000);
+      cookies().set("session", res.data.token, { expires, httpOnly: true });
+      return Promise.resolve({ status: res.status, data: res.data.message });
+    }
+  } catch (error: any) {
+    console.error("Login error:", error?.response?.data?.message);
+    return Promise.resolve({
+      status: error?.response.status,
+      data: error?.response?.data?.message,
+    }); // Or any other generic error message
+  }
 };
