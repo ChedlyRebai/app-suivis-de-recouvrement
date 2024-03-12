@@ -57,28 +57,6 @@ export function UserAuthForm({
   const { onOpen, setTextError } = useInvalidCredentialModal();
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // await Login(values.matricule, values.password)
-    //   .then((message) => {
-    //     console.log(message);
-    //     toast.success("Bienvenu");
-    //   })
-    //   .catch((e) => {
-    //     console.log("errrInfRONt");
-    //     console.log(typeof e);
-    //     console.log(e?.response?.data?.message);
-
-    //     if (e === "User not found") {
-    //       // Handle case when user is not found
-    //       toast.error("User not found");
-    //     } else {
-    //       // Handle other errors
-    //       onOpen();
-    //     }
-
-    //     setIsLoading(false);
-    //   })
-    //   .finally(() => {});
-
     try {
       setIsLoading(true);
       const res = await Login(values.matricule, values.password);
@@ -95,46 +73,13 @@ export function UserAuthForm({
       setIsLoading(false);
       console.log(error);
     }
-
-    //   router.push("/");
-    /*const instance = axios.create({
-      baseURL: process.env.API_URL,
-    });*/
-    // setIsLoading(true);
-    // await Login(values.matricule, values.password)
-    //   .then((e) => console.log(e))
-    //   .catch((e) => console.log(e.data));
-
-    // setIsLoading(false);
-    // console.log(res);
-    // Cookies.set("token", res.token);
-    // if (res.status === 200) {
-    //   toast.success(res.message);
-    //   router.push("/");
-    // }
-
-    // Cookies.set('token', token);
-    // Cookies
-    // await axios
-    //   .get(`https://app-suivis-de-recouvrement-server-37up.vercel.app/users/getUsername/`)
-    //   .then((username: any) => {
-    //     console.log(username);
-    //   });
   };
 
   const getUsername = async (values: z.infer<typeof formSchema>) => {
-    setUsername("");
-
     const response = await getUserBuMatricule(values.matricule);
     console.log("response");
     console.log(response);
     setUsername(response);
-    // await axios
-    //   .get(`${process.env.API_URL}/users/getUsername`)
-    //   .then((username: any) => {
-    //     console.log(username);
-    //   });
-    // console.log(values);
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
