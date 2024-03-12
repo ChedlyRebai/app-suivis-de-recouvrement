@@ -55,6 +55,7 @@ const Navbar = ({
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ];
+  console.log(navigation);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

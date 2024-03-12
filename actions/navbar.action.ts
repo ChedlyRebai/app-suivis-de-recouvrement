@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getLinksByCodeFonction = async () => {
   try {
-    const { user } = await getSession();
+    const user = await getSession();
     console.log(user);
     console.log(`${process.env.API_URL}/getlinks`);
     console.log(user.code_function);
