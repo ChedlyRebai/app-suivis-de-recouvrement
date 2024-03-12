@@ -102,10 +102,11 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                           console.log(subItem.children);
                           return (
                             <div
+                              key={subItem.href}
                               style={{ marginLeft: `${subItem.level * 4}px` }}
                             >
                               <NavbarItem
-                                key={subItem.name}
+                                key={subItem.href}
                                 children={subItem.children}
                                 icon={subItem.icon}
                                 name={subItem.name}

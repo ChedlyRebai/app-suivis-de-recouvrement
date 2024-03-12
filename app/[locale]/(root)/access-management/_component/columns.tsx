@@ -15,20 +15,22 @@ import { droit_accees } from "@/Models/droit_accees.model";
 import useEditDroit from "@/hooks/use-edit-droit-modal";
 import useStore from "@/hooks/useLangStore";
 import useLangStore from "@/hooks/useLangStore";
+import { useTranslations } from "next-intl";
 
 export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "nom",
     header: ({ column }) => {
       console.log("column lang");
-      const lang = useLangStore((state) => state.lang.Nom);
-      console.log(lang);
+      //const lang = useLangStore((state) => state.lang.Nom);
+      //console.log(lang);
+      const lang = useTranslations();
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {lang}
+          {lang("access-management.Nom")}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -37,13 +39,13 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "nom_module",
     header: ({ column }) => {
-      const lang = useLangStore((state) => state.lang.ModuleP);
+      const lang = useTranslations();
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {lang}
+          {lang("access-management.ModuleP")}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -53,8 +55,8 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "code_fonction",
     header: ({ column }) => {
-      const lang = useLangStore((state) => state.lang.Codef);
-      return <span>{lang}</span>;
+      const lang = useTranslations();
+      return <span>{lang("access-management.Codef")}</span>;
     },
     cell: ({ row }) => {
       return (
@@ -69,8 +71,8 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "acces",
     header: ({ column }) => {
-      const lang = useLangStore((state) => state.lang.acces);
-      return <span>{lang}</span>;
+      const lang = useTranslations();
+      return <span>{lang("access-management.Acces")}</span>;
     },
     cell: ({ row }) => {
       return (
@@ -89,8 +91,8 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "creation",
     header: ({ column }) => {
-      const lang = useLangStore((state) => state.lang.Creat);
-      return <span>{lang}</span>;
+      const lang = useTranslations();
+      return <span>{lang("access-management.Creat")}</span>;
     },
     cell: ({ row }) => {
       return (
@@ -109,8 +111,8 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "modification",
     header: ({ column }) => {
-      const lang = useLangStore((state) => state.lang.Modif);
-      return <span>{lang}</span>;
+      const lang = useTranslations();
+      return <span>{lang("access-management.Modif")}</span>;
     },
     cell: ({ row }) => {
       return (
@@ -129,8 +131,8 @@ export const columns: ColumnDef<droit_accees>[] = [
   {
     accessorKey: "suppression",
     header: ({ column }) => {
-      const lang = useLangStore((state) => state.lang.Supp);
-      return <span>{lang}</span>;
+      const lang = useTranslations();
+      return <span>{lang("access-management.Supp")}</span>;
     },
     cell: ({ row }) => {
       return (
