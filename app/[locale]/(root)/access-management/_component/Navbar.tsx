@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, ReactNode, useState } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   HomeIcon,
@@ -26,8 +26,9 @@ import { getSession } from "@/lib";
 import { IconMap } from "@/constants";
 import NavbarItem from "./NavbarItem";
 import ThemeButton from "@/components/shared/ThemeButton";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import LocalSwitcher from "@/components/shared/Local-switcher";
+import { usePathname } from "next/navigation";
 
 interface NavBarProps {
   children: ReactNode;
@@ -58,6 +59,20 @@ const Navbar = ({
   console.log(navigation);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [defaultSize, setDefaultSize] = useState(20);
+  const pathname = usePathname();
+  const local = useLocale();
+  console.log(pathname);
+  useEffect(() => {
+    if (pathname === `/${local}`) {
+      console.log(pathname !== `/${local}`);
+
+      console.log(defaultSize);
+    }
+    setDefaultSize(0);
+  }, []);
+
+  console.log(local);
 
   function classNames(...classes: String[]) {
     return classes.filter(Boolean).join(" ");
@@ -147,7 +162,7 @@ const Navbar = ({
                               className={classNames(
                                 item.current
                                   ? "bg-gray-900 text-white"
-                                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                  : "text-white hover:bg-gray-700 hover:text-white",
                                 "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                               )}
                             >
@@ -179,12 +194,12 @@ const Navbar = ({
                                     className={classNames(
                                       item.current
                                         ? "bg-gray-900 text-white"
-                                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                        : "text-white hover:bg-gray-700 hover:text-white",
                                       "group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                     )}
                                   >
                                     <Icon
-                                      className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400  group-hover:text-gray-300
+                                      className="mr-3 flex-shrink-0 h-4 w-4 text-white  group-hover:text-gray-300
                               "
                                       aria-hidden="true"
                                     />
@@ -195,9 +210,9 @@ const Navbar = ({
                                     <svg
                                       className={classNames(
                                         open
-                                          ? "text-gray-400 rotate-90"
+                                          ? "text-white rotate-90"
                                           : "text-gray-300",
-                                        "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                                        "ml-3 flex-shrink-0 h-4 w-4 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
                                       )}
                                       viewBox="0 0 20 20"
                                       aria-hidden="true"
@@ -239,9 +254,8 @@ const Navbar = ({
         {/* Static sidebar for desktop */}
 
         <ResizablePanel
-          defaultSize={20}
-          minSize={20}
-          className="hidden w-1/4 md:flex md:w-fit md:flex-col md:fixd md:inset-y-0"
+          defaultSize={defaultSize}
+          className="hidden w-1/4 md:flex max-h-screen md:w-fit md:flex-col md:fixd md:inset-y-0"
         >
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-col flex-grow pt-5 light: bg-gray-800 dark:bg-inherit  overflow-y-auto">
@@ -253,7 +267,7 @@ const Navbar = ({
               />
             </div>
             <div className="mt-5 flex-1 flex flex-col h-screen">
-              <nav className="flex-1 px-2 pb-4 space-y-1">
+              <nav className="flex-1 px-2 pb-4 space-y-1 ">
                 {navigation &&
                   Array.isArray(navigation) &&
                   navigation.map((item: any, i) => (
@@ -269,7 +283,7 @@ const Navbar = ({
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={80} className="  flex flex-col flex-1">
+        <ResizablePanel className="  flex flex-col flex-1">
           <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-lg shadow dark:border-b ">
             <button
               type="button"

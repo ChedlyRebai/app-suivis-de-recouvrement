@@ -35,13 +35,14 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ListPlusIcon, SearchIcon } from "lucide-react";
+import { ArrowUpDown, ListPlusIcon, SearchIcon } from "lucide-react";
 import useAuthModal from "@/hooks/use-fonction-search-modal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getDroitAccessByCodeFonction } from "@/actions/droit_accees.action";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -50,19 +51,223 @@ import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
 
 import useStore, { State } from "@/lib/droitStore";
-import { droit_accees } from "@/Models/droit_accees.model";
 import toast from "react-hot-toast";
-import { getSession } from "@/lib";
 import { useTranslations } from "next-intl";
 
 interface DataTableProps<droit_accees, TValue> {
-  columns: ColumnDef<droit_accees, TValue>[];
+  //columns: ColumnDef<droit_accees, TValue>[];
 }
 
-export function DataTable<droit_accees, TValue>({
-  columns,
-}: DataTableProps<droit_accees, TValue>) {
+export function DataTable<droit_accees, TValue>({}: DataTableProps<
+  droit_accees,
+  TValue
+>) {
   const [data, setData] = useState<droit_accees[]>([]);
+
+  const columns: ColumnDef<droit_accees>[] = [
+    {
+      accessorKey: "id",
+    },
+    {
+      accessorKey: "nom",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {lang("access-management.Nom")}
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "nom_module",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {lang("access-management.ModuleP")}
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+
+    {
+      accessorKey: "code_fonction",
+      header: ({ column }) => {
+        return <span>{lang("access-management.Codef")}</span>;
+      },
+      cell: ({ row }) => {
+        return (
+          <span
+            className={`inline-flex bg-gray-100 text-gray-800 items-center px-2.5 py-0.5 rounded-md text-lg font-medium `}
+          >
+            {row.getValue("code_fonction")}
+          </span>
+        );
+      },
+    },
+    {
+      accessorKey: "acces",
+      header: ({ column }) => {
+        return <span>{lang("access-management.Acces")}</span>;
+      },
+      cell: ({ row }) => {
+        return (
+          // <span
+          //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+          //     row.getValue("acces") === "O"
+          //       ? "bg-green-100 text-green-800"
+          //       : "bg-red-100 text-red-800"
+          //   } `}
+          // >
+          //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
+          // </span>
+          <Select
+            onValueChange={(newValue) =>
+              update(
+                row.getValue("code_fonction"),
+                row.getValue("id"),
+                newValue,
+                "acces"
+              )
+            }
+            defaultValue={row.getValue("acces")}
+          >
+            <SelectTrigger className="w-fit">
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup id="acces">
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+    {
+      accessorKey: "creation",
+      header: ({ column }) => {
+        return <span>{lang("access-management.Creat")}</span>;
+      },
+      // cell: ({ row }) => {
+      //   return (
+      //     <span
+      //       className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+      //         row.getValue("creation") === "O"
+      //           ? "bg-green-100 text-green-800"
+      //           : "bg-red-100 text-red-800"
+      //       } `}
+      //     >
+      //       {row.getValue("creation") === "O" ? "Oui" : "Non"}
+      //     </span>
+      //   );
+      // },
+      cell: ({ row }) => {
+        return (
+          <Select
+            onValueChange={(newValue) =>
+              update(
+                row.getValue("code_fonction"),
+                row.getValue("id"),
+                newValue,
+                "creation"
+              )
+            }
+            defaultValue={row.getValue("creation")}
+          >
+            <SelectTrigger className="w-fit">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+    {
+      accessorKey: "modification",
+      header: ({ column }) => {
+        return <span>{lang("access-management.Modif")}</span>;
+      },
+      cell: ({ row }) => {
+        return (
+          <Select
+            onValueChange={(newValue) =>
+              update(
+                row.getValue("code_fonction"),
+                row.getValue("id"),
+                newValue,
+                "modification"
+              )
+            }
+            defaultValue={row.getValue("modification")}
+          >
+            <SelectTrigger className="w-fit">
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+    {
+      accessorKey: "suppression",
+      header: ({ column }) => {
+        return <span>{lang("access-management.Supp")}</span>;
+      },
+      cell: ({ row }) => {
+        return (
+          // <span
+          //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+          //     row.getValue("acces") === "O"
+          //       ? "bg-green-100 text-green-800"
+          //       : "bg-red-100 text-red-800"
+          //   } `}
+          // >
+          //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
+          // </span>
+          <Select
+            onValueChange={(newValue) =>
+              update(
+                row.getValue("code_fonction"),
+                row.getValue("id"),
+                newValue,
+                "suppression"
+              )
+            }
+            defaultValue={row.getValue("suppression")}
+          >
+            <SelectTrigger className="w-fit">
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+  ];
 
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -77,15 +282,41 @@ export function DataTable<droit_accees, TValue>({
   //   fetchAllDroitAccess();
   // }, [fetchAllDroitAccess]);
 
-  const [droitAccess, setDroiAccess] = useStore(
+  let [droitAccess, setDroiAccess] = useStore(
     (state: State) => state.droitAccess
   );
+
+  const updateDroit = useStore((state: State) => state.updateDroit);
+
   const fetchAllDroitAccess = useStore(
     (state: State) => state.fetchAllDroitAccess
   );
   const fetchDroitAccessByCodeFonction = useStore(
     (state: State) => state.fetchDroitAccessByCodeFonction
   );
+
+  const update = async (
+    codef: number,
+    id: number,
+    value: string,
+    champ: string
+  ) => {
+    console.log(codef, id, value, champ);
+    const response = await updateDroit(id, codef, value, champ);
+    console.log(response);
+    // Find the index of the updated row in the data array
+    const rowIndex = data.findIndex((row: any) => row.id === id);
+    console.log(rowIndex);
+    if (rowIndex !== -1) {
+      // Create a copy of the data array
+      const newData = [...data];
+      // Update the specific row
+      newData[rowIndex] = { ...newData[rowIndex], [champ]: value };
+      // Set the updated data
+      console.log(newData);
+      setData(newData);
+    }
+  };
 
   useEffect(() => {
     const Params = searchParams.get("code") || "";
@@ -103,6 +334,7 @@ export function DataTable<droit_accees, TValue>({
       );
     }
   }, [searchParams.get("code"), fetchDroitAccessByCodeFonction]);
+
   // useEffect(() => {
   //   const Params = searchParams.get("code") || "";
   //   if (Params?.length > 0) {
@@ -152,6 +384,7 @@ export function DataTable<droit_accees, TValue>({
     },
   });
 
+  console.log(data);
   return (
     <>
       <div className="flex items-center py-4 flex-wrap">

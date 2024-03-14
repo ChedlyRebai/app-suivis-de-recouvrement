@@ -20,9 +20,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  axios.defaults.baseURL =
-    "https://app-suivis-de-recouvrement-server-37up.vercel.app/";
-
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;

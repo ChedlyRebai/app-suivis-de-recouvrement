@@ -11,7 +11,7 @@ export default async function Page() {
 
   return (
     <div>
-      <DataTable columns={columns} />
+      <DataTable />
     </div>
   );
 }

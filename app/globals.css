@@ -65,6 +65,9 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 @layer base {
   * {

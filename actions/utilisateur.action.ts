@@ -6,8 +6,7 @@ export const getUserBuMatricule = async (matricule: string) => {
   try {
     console.log(`${process.env.API_URL}/user`);
 
-    axios.defaults.baseURL =
-      "https://app-suivis-de-recouvrement-server-37up.vercel.app/";
+    axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get(
       `/users/getUsername?matricule=${matricule}`
     );

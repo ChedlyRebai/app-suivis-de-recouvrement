@@ -7,8 +7,7 @@ export const getLinksByCodeFonction = async () => {
     console.log(user);
     console.log(`${process.env.API_URL}/getlinks`);
     console.log(user.code_function);
-    axios.defaults.baseURL =
-      "https://app-suivis-de-recouvrement-server-37up.vercel.app";
+    axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get(
       `/droit/getLinks?codeFunction=${user.code_function}`
     );

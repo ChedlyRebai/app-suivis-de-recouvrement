@@ -48,7 +48,7 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                   item.current
                     ? "bg-gray-900 text-white"
                     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                  "group flex items-center px-2 py-2 text-md font-medium rounded-md"
                 )}
               >
                 {/* <item.icon
@@ -74,18 +74,18 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                       className={classNames(
                         item.current
                           ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "group capitalize w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          : "text-white hover:bg-gray-700 hover:text-white",
+                        "group capitalize w-full flex items-center pl-2 pr-1 py-2 text-left text-md font-medium rounded-md focus:outline-none "
                       )}
                     >
                       <Icon
-                        className="mr-3 flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-300"
+                        className="mr-3 flex-shrink-0 h-5 w-5 text-white group-hover:text-gray-300"
                         aria-hidden="true"
                       />
                       <span className="flex-1 capitalize">{item.name}</span>
                       <svg
                         className={classNames(
-                          open ? "text-gray-400 rotate-90" : "text-gray-300",
+                          open ? "text-white rotate-90" : "text-gray-300",
                           "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
                         )}
                         viewBox="0 0 20 20"
@@ -103,7 +103,7 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                           return (
                             <div
                               key={subItem.href}
-                              style={{ marginLeft: `${subItem.level * 4}px` }}
+                              style={{ marginLeft: `${subItem.level * 5}px` }}
                             >
                               <NavbarItem
                                 key={subItem.href}

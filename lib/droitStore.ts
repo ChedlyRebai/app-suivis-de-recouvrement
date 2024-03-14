@@ -2,7 +2,7 @@ import {
   createDroit,
   getAllDroitAccess,
   getDroitAccessByCodeFonction,
-  updateDroitAccessById,
+  updateDroitAction,
 } from "@/actions/droit_accees.action";
 import { droit_accees } from "@/Models/droit_accees.model";
 import { fonction } from "@/Models/fonction.model";
@@ -13,15 +13,14 @@ export type State = {
   droitAccess: droit_accees[];
   fetchAllDroitAccess: () => Promise<void>;
   fetchDroitAccessByCodeFonction: (code: string) => Promise<void>;
-  updateDroitAccessById: (
+  updateDroit: (
     id: number,
-    suppression: string,
-    modification: string,
-    creation: string,
-    acces: string
-  ) => Promise<void>;
+    codef: number,
+    value: string,
+    champ: string
+  ) => void;
 
-  creatDroit: (
+  createDroit: (
     nom: string,
     nom_module: string,
     code_fonction: string,
@@ -44,29 +43,18 @@ const useStore = create<State>((set) => ({
     return data;
   },
 
-  updateDroitAccessById: async (
+  updateDroit: async (
     id: number,
-    suppression: string,
-    modification: string,
-    creation: string,
-    acces: string
+    codef: number,
+    value: string,
+    champ: string
   ) => {
-    const data = await updateDroitAccessById(
-      id,
-      suppression,
-      modification,
-      creation,
-      acces
-    );
-    set((state: any) => {
-      const updatedDroitAccess = state.droitAccess.map((item: any) =>
-        item.id === id ? data : item
-      );
-      return { droitAccess: updatedDroitAccess };
-    });
+    console.log("update in store");
+    const data: any = await updateDroitAction(id, codef, value, champ);
+    console.log("data1", data);
   },
 
-  creatDroit: async (
+  createDroit: async (
     nom: string,
     nom_module: string,
     code_fonction: string,
@@ -85,7 +73,7 @@ const useStore = create<State>((set) => ({
       acces
     );
     set((state: any) => ({
-      droitAccess: [...state.droitAccess, data], // Fix typo in property name
+      droitAccess: [...state.droitAccess, data],
     }));
   },
 }));

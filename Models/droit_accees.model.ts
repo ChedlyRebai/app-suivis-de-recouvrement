@@ -1,4 +1,5 @@
 export type droit_accees = {
+  id: number;
   ordre1: number;
   ordre2: number;
   nom: String;
@@ -18,5 +19,4 @@ export type droit_accees = {
   flag_acces_dos?: String;
   req?: String;
   req2?: String;
-  id: number;
 };
