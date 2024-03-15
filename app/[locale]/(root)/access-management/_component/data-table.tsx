@@ -53,6 +53,7 @@ import useAddDroitModal from "@/hooks/useAddDroitModal";
 import useStore, { State } from "@/lib/droitStore";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { Oval } from "react-loading-icons";
 
 interface DataTableProps<droit_accees, TValue> {
   //columns: ColumnDef<droit_accees, TValue>[];
@@ -321,11 +322,15 @@ export function DataTable<droit_accees, TValue>({}: DataTableProps<
   useEffect(() => {
     const Params = searchParams.get("code") || "";
     if (Params?.length > 0) {
+      setIsLoading(true);
       toast.promise(
-        fetchDroitAccessByCodeFonction(Params).then((d: any) => {
-          //console.log(d);
-          setData(d as droit_accees[]);
-        }),
+        fetchDroitAccessByCodeFonction(Params)
+          .then((d: any) => {
+            //console.log(d);
+            setData(d as droit_accees[]);
+            // Move setIsLoading(false) inside the success callback
+          })
+          .then(() => setIsLoading(false)),
         {
           loading: "Loading...",
           success: "Success",
@@ -387,7 +392,7 @@ export function DataTable<droit_accees, TValue>({}: DataTableProps<
   console.log(data);
   return (
     <>
-      <div className="flex items-center py-4 flex-wrap">
+      <div className="flex  items-center py-4 flex-wrap">
         <Input
           placeholder="Filter Module..."
           value={(table.getColumn("nom")?.getFilterValue() as string) ?? ""}
@@ -438,7 +443,7 @@ export function DataTable<droit_accees, TValue>({}: DataTableProps<
           {lang("access-management.Add")}
         </Button>
       </div>
-      <div className="rounded-md border">
+      <div className={`rounded-md border ${isLoading && "animate-pulse"}`}>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -458,8 +463,9 @@ export function DataTable<droit_accees, TValue>({}: DataTableProps<
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
-            {isLoading ? (
+            {/* {isLoading ? (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -468,32 +474,46 @@ export function DataTable<droit_accees, TValue>({}: DataTableProps<
                   Loading...
                 </TableCell>
               </TableRow>
-            ) : table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
+            ) :*/}
+
+            {/* {isLoading ? (
+              // Replace <div>Loading...</div> with your custom loading component
+              <TableRow className="text-center">
+                <TableCell>
+                  <Oval />
                 </TableCell>
               </TableRow>
-            )}
+            ) : ( */}
+            <>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                // Replace <TableCell>No results.</TableCell> with your custom no results component
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </>
+            {/* )} */}
           </TableBody>
         </Table>
       </div>

@@ -254,7 +254,7 @@ const Navbar = ({
         {/* Static sidebar for desktop */}
 
         <ResizablePanel
-          defaultSize={defaultSize}
+          defaultSize={20}
           className="hidden w-1/4 md:flex max-h-screen md:w-fit md:flex-col md:fixd md:inset-y-0"
         >
           {/* Sidebar component, swap this element with another sidebar if you like */}
@@ -283,7 +283,7 @@ const Navbar = ({
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel className="  flex flex-col flex-1">
+        <ResizablePanel defaultSize={80} className="  flex flex-col flex-1">
           <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-lg shadow dark:border-b ">
             <button
               type="button"
