@@ -4,11 +4,11 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Navbar from "./(root)/access-management/_component/Navbar";
 
-export default async function Home({
+const Page = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   const links = await getLinksByCodeFonction();
   const t = await getTranslations("access-management");
   const session = await getSession();
@@ -18,4 +18,6 @@ export default async function Home({
       {children}
     </Navbar>
   );
-}
+};
+
+export default Page;
