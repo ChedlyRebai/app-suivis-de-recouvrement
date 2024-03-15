@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import axios from "axios";
 import ToastProviders from "@/providers/ToastProviders";
 import ModalProviders from "@/providers/ModalProviders";
