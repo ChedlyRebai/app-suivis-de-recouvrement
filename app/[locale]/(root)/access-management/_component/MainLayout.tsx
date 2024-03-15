@@ -29,19 +29,24 @@ import ThemeButton from "@/components/shared/ThemeButton";
 import { useLocale, useTranslations } from "next-intl";
 import LocalSwitcher from "@/components/shared/Local-switcher";
 import { usePathname } from "next/navigation";
+import Navbar from "@/components/shared/Navbar";
 
 interface NavBarProps {
-  children: ReactNode;
+  children?: ReactNode;
+  Resizpanel?: ReactNode;
+  showSidebar?: boolean;
   session: any;
   title: string;
   links: any[];
 }
 
-const Navbar = ({
+const Mainlayout = ({
   children,
   session,
+  Resizpanel,
   links: navigation,
   title,
+  showSidebar,
 }: NavBarProps) => {
   const navigaion = [
     { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -60,13 +65,14 @@ const Navbar = ({
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [defaultSize, setDefaultSize] = useState(20);
+
   const pathname = usePathname();
   const local = useLocale();
   console.log(pathname);
   useEffect(() => {
-    if (pathname === `/${local}`) {
+    if (pathname !== `/${local}`) {
       console.log(pathname !== `/${local}`);
-
+      // SetShowSideBar(false);
       console.log(defaultSize);
     }
     setDefaultSize(0);
@@ -252,158 +258,50 @@ const Navbar = ({
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-
-        <ResizablePanel
-          defaultSize={20}
-          className="hidden w-1/4 md:flex max-h-screen md:w-fit md:flex-col md:fixd md:inset-y-0"
-        >
-          {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow pt-5 light: bg-gray-800 dark:bg-inherit  overflow-y-auto">
-            <div className="flex items-center justify-center flex-shrink-0 px-4">
-              <img
-                className="h-16 center"
-                src={"/images/logo.png"}
-                alt="Workflow"
-              />
-            </div>
-            <div className="mt-5 flex-1 flex flex-col h-screen">
-              <nav className="flex-1 px-2 pb-4 space-y-1 ">
-                {navigation &&
-                  Array.isArray(navigation) &&
-                  navigation.map((item: any, i) => (
-                    <NavbarItem
-                      key={item.name}
-                      children={item.children}
-                      name={item.name}
-                      icon={item.Icon}
-                    />
-                  ))}
-              </nav>
-            </div>
-          </div>
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={80} className="  flex flex-col flex-1">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-lg shadow dark:border-b ">
-            <button
-              type="button"
-              className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
-              onClick={() => setSidebarOpen(true)}
+        {/* <Resizpanel /> */}
+        {showSidebar && (
+          <>
+            <ResizablePanel
+              defaultSize={20}
+              className="hidden w-1/4 md:flex max-h-screen md:w-fit md:flex-col md:fixd md:inset-y-0"
             >
-              <span className="sr-only">Open sidebar</span>
-              <MenuIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
-            <div className="flex-1 backdrop-blur-md px-4 flex justify-between">
-              <div className="flex-1 flex">
-                <form className="w-full flex md:ml-0" action="#" method="GET">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative justify-between items-center flex w-full text-black focus-within:text-gray-600">
-                    <div className="justify-start mr-auto absolute inset-y-0 left-0 flex flex-col  pointer-events-none  pt-3">
-                      {/* <SearchIcon className="h-5 w-5" aria-hidden="true" /> */}
-                      <div className="flex mb-1 items-center text-gray-900 dark:text-white">
-                        <HomeIcon
-                          className="h-5 w-5 text-gray-900 dark:text-white"
-                          aria-hidden="true"
-                        />
-                        <p className="pl-2 text-base text-gray-900 dark:text-white font-semibold  ">
-                          {session?.matricule}
-                        </p>
-                      </div>
-                      <div className="flex items-center  ">
-                        <UsersIcon
-                          className="h-5 w-5 text-gray-600 dark:text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <p className="pl-2 text-base text-gray-600 font-semibold dark:text-gray-300  ">
-                          {session?.role}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* <input
-                      id="search-field"
-                      className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                      name="search"
-                    />  */}
-                  </div>
-                </form>
-              </div>
-
-              <div className="ml-4 flex items-center md:ml-6">
-                <button
-                  type="button"
-                  className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-                <ThemeButton />
-                <LocalSwitcher />
-                <Menu as="div" className="ml-3 relative">
-                  <div>
-                    <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            </div>
-          </div>
-          <div className="py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {title}
-              </h1>
-            </div>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              {/* Replace with your content 
-                <div className="py-4">
-                  <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
+              {/* Sidebar component, swap this element with another sidebar if you
+            like */}
+              <div className="flex flex-col flex-grow pt-5 light: bg-gray-800 dark:bg-inherit  overflow-y-auto">
+                <div className="flex items-center justify-center flex-shrink-0 px-4">
+                  <img
+                    className="h-16 center"
+                    src={"/images/logo.png"}
+                    alt="Workflow"
+                  />
                 </div>
-                {/* /End replace */}
-              {children}
-            </div>
-          </div>
+                <div className="mt-5 flex-1 flex flex-col h-screen">
+                  <nav className="flex-1 px-2 pb-4 space-y-1 ">
+                    {navigation &&
+                      Array.isArray(navigation) &&
+                      navigation.map((item: any, i) => (
+                        <NavbarItem
+                          key={item.name}
+                          children={item.children}
+                          name={item.name}
+                          icon={item.Icon}
+                        />
+                      ))}
+                  </nav>
+                </div>
+              </div>
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+          </>
+        )}
+
+        <ResizablePanel defaultSize={80} className="  flex flex-col flex-1">
+          <Navbar session={session} onChange={setSidebarOpen} />
+          {children}
         </ResizablePanel>
       </ResizablePanelGroup>
     </>
   );
 };
 
-export default Navbar;
+export default Mainlayout;

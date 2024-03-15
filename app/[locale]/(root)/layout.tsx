@@ -21,18 +21,13 @@ import {
   CalendarIcon,
   InboxIcon,
   BarChart2Icon,
-  XIcon,
-  MenuIcon,
-  SearchIcon,
-  BellIcon,
 } from "lucide-react";
-import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Modal";
-import ModalProviders from "@/providers/ModalProviders";
-import Navbar from "./access-management/_component/Navbar";
+
 import { getSession } from "@/lib";
 import { getLinksByCodeFonction } from "@/actions/navbar.action";
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import Mainlayout from "./access-management/_component/MainLayout";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -62,8 +57,13 @@ export default async function RootLayout({
   const session = await getSession();
 
   return (
-    <Navbar links={links} title={t("title")} session={session}>
+    <Mainlayout
+      showSidebar={false}
+      links={links}
+      title={t("title")}
+      session={session}
+    >
       {children}
-    </Navbar>
+    </Mainlayout>
   );
 }
