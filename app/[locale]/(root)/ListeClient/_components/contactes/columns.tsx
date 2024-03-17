@@ -1,14 +1,28 @@
+"use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 
 export const columns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "cli",
-    header: "Client ID",
+    header: ({ column }) => {
+      return (
+        <Button variant="ghost">
+          ID Client
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "nom",
     header: "Name",
+  },
+  {
+    accessorKey: "status",
+    header: "status",
   },
   {
     accessorKey: "groupe",
