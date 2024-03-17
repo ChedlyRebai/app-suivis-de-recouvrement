@@ -59,10 +59,10 @@ interface DataTableProps<droit_accees, TValue> {
   //columns: ColumnDef<droit_accees, TValue>[];
 }
 
-export function DataTable<droit_accees, TValue>({}: DataTableProps<
+export function AccessManagementDataTable<
   droit_accees,
   TValue
->) {
+>({}: DataTableProps<droit_accees, TValue>) {
   const [data, setData] = useState<droit_accees[]>([]);
 
   const columns: ColumnDef<droit_accees>[] = [

@@ -1,7 +1,7 @@
 "use server";
 import { getAllFunctions } from "@/actions/fonction.action";
 import { columns } from "./_component/columns";
-import { DataTable } from "./_component/data-table";
+import { AccessManagementDataTable } from "./_component/data-table";
 import { getSession } from "@/lib";
 import { getTranslations } from "next-intl/server";
 
@@ -23,7 +23,7 @@ export default async function Page() {
                   <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
                 </div>
                 {/* /End replace */}
-          <DataTable />
+          <AccessManagementDataTable />
         </div>
       </div>
     </div>
