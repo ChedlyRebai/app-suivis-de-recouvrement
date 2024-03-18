@@ -35,6 +35,7 @@ import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import { DataTableToolbar } from "./data-table-toolbar";
 import React from "react";
+import { ab_client } from "@/Models/ab_client.model";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -75,17 +76,36 @@ export function DataTableContactes<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  const getTotals = (data: any, key: string) => {
+
+  const calculateTotal = (attribute: string) => {
     let total = 0;
-    data.forEach((item: any) => {
-      total += item[key];
+    data.map((item: any) => {
+      console.log(+item[attribute]);
+      total += +item[attribute] || 0; // Ensure attribute value is a number
     });
+    console.log("total", total);
     return total;
   };
 
-  data.unshift({
-    TOT_IMP: getTotals(data, "TOT_IMP"),
-  } as TData);
+  const TOT_IMP = calculateTotal("mnt_imp");
+  const TOT_DEP = calculateTotal("depassement");
+  const TOT_IRR = calculateTotal("tot_creance");
+  const TOT_ENG = calculateTotal("engagement");
+
+  // Add the totals as a new row at the beginning of the data array
+  const newData = [
+    {
+      TOT_IMP,
+      TOT_DEP,
+      TOT_IRR,
+      TOT_ENG,
+    },
+    ...data,
+  ];
+  console.log(TOT_DEP);
+  console.log(TOT_IMP);
+  console.log(TOT_IRR);
+  console.log(TOT_ENG);
 
   return (
     <>
@@ -180,6 +200,12 @@ export function DataTableContactes<TData, TValue>({
               </TableRow>
             )}
           </TableBody>
+          <TableRow>
+            <TableCell className="font-bold">TOT IMP: {TOT_IMP}</TableCell>
+            <TableCell className="font-bold">TOT DEP: {TOT_DEP}</TableCell>
+            <TableCell className="font-bold">TOT IRR: {TOT_IRR}</TableCell>
+            <TableCell className="font-bold">TOT ENG: {TOT_ENG}</TableCell>
+          </TableRow>
         </Table>
       </div>
       <DataTablePagination table={table} />

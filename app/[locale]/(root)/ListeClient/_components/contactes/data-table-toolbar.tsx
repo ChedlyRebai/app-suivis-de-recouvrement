@@ -92,7 +92,7 @@ export function DataTableToolbar<TData>({
     <>
       <>
         <Input
-          placeholder="Filter tasks..."
+          placeholder="Client ID"
           value={(table.getColumn("cli")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("cli")?.setFilterValue(event.target.value)

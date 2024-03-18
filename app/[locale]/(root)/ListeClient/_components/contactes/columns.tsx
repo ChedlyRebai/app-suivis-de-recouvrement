@@ -18,12 +18,9 @@ export const columns: ColumnDef<ab_client>[] = [
   },
   {
     accessorKey: "nom",
-    header: "Name",
+    header: "Non",
   },
-  {
-    accessorKey: "status",
-    header: "status",
-  },
+
   {
     accessorKey: "groupe",
     header: "Groupe",
