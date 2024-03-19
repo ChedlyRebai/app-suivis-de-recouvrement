@@ -73,7 +73,7 @@ const AddDroitForm = () => {
     },
   });
   const { onClose } = useAddDroitModal();
-  const createDroit = useStore((state) => state.creatDroit);
+  const createDroit = useStore((state) => state.createDroit);
   //const creatDroit = useStore((state) => state.creatDroit) as any;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     createDroit(
@@ -95,7 +95,7 @@ const AddDroitForm = () => {
   };
 
   const [fonctions, setFonctions] = useState<any>([]);
-  console.log(fonctions);
+  //(fonctions);
   useEffect(() => {
     const fetchData = async () => {
       const fonction = await getAllFunctions();

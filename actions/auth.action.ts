@@ -13,7 +13,7 @@ export const Logn = async (matricule: string, password: string) => {
     matricule,
     password,
   });
-  console.log(res.data);
+  // console.log(res.data);
   // const cookie = (res.headers["set-cookie"] || [""])[0];
   // const token = cookie.split(";")[0];
   // console.log("token");

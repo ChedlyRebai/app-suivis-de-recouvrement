@@ -37,7 +37,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  console.log(data);
+  //console.log(data);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

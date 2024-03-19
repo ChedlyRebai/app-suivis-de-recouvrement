@@ -83,7 +83,7 @@ export function DataTableContactes<TData, TValue>({
       console.log(+item[attribute]);
       total += +item[attribute] || 0; // Ensure attribute value is a number
     });
-    console.log("total", total);
+
     return total;
   };
 
@@ -102,10 +102,6 @@ export function DataTableContactes<TData, TValue>({
     },
     ...data,
   ];
-  console.log(TOT_DEP);
-  console.log(TOT_IMP);
-  console.log(TOT_IRR);
-  console.log(TOT_ENG);
 
   return (
     <>
@@ -208,7 +204,7 @@ export function DataTableContactes<TData, TValue>({
           </TableRow>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination totalPages={10} table={table} />
     </>
   );
 }

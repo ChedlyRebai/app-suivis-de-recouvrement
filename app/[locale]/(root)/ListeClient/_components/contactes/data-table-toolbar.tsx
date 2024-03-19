@@ -41,27 +41,22 @@ export const statuses = [
   {
     value: "backlog",
     label: "Backlog",
-    icon: QuestionMarkCircledIcon,
   },
   {
     value: "todo",
     label: "Todo",
-    icon: CircleIcon,
   },
   {
     value: "in progress",
     label: "In Progress",
-    icon: StopwatchIcon,
   },
   {
     value: "done",
     label: "Done",
-    icon: CheckCircledIcon,
   },
   {
     value: "canceled",
     label: "Canceled",
-    icon: CrossCircledIcon,
   },
 ];
 
@@ -69,17 +64,14 @@ export const priorities = [
   {
     label: "Low",
     value: "low",
-    icon: ArrowDownIcon,
   },
   {
     label: "Medium",
     value: "medium",
-    icon: ArrowRightIcon,
   },
   {
     label: "High",
     value: "high",
-    icon: ArrowUpIcon,
   },
 ];
 
@@ -97,19 +89,19 @@ export function DataTableToolbar<TData>({
           onChange={(event) =>
             table.getColumn("cli")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm mr-2"
         />
-        {table.getColumn("status") && (
+        {table.getColumn("agence") && (
           <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
+            column={table.getColumn("agence")}
+            title="Agence"
             options={statuses}
           />
         )}
-        {table.getColumn("priority") && (
+        {table.getColumn("groupe") && (
           <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
+            column={table.getColumn("groupe")}
+            title="Groupe"
             options={priorities}
           />
         )}

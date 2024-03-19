@@ -10,10 +10,17 @@ export const getAllDroitAccess = async () => {
   return res.data;
 };
 
-export const getDroitAccessByCodeFonction = async (code: string) => {
+export const getDroitAccessByCodeFonction = async (
+  code: string,
+  currentpage: number,
+  perpage: number
+) => {
+  console.log(
+    `http://localhost:10000/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}`
+  );
   console.log(`${process.env.API_URL} `);
   const res = await axios.get(
-    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}`
+    `http://localhost:10000/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}`
   );
   return res.data;
 };
@@ -25,16 +32,16 @@ export const updateDroitAction = async (
   value: string,
   champ: string
 ) => {
-  console.log(`${process.env.API_URL}/droit/updateDroit`);
+  //console.log(`${process.env.API_URL}/droit/updateDroit`);
   const res = await axios.put(`${process.env.API_URL}/droit/updateDroit`, {
     id,
     codef,
     value,
     champ,
   });
-  console.log(res.data);
-  console.log(id);
-  console.log(res.data);
+  // console.log(res.data);
+  // console.log(id);
+  // console.log(res.data);
   return res.data;
 };
 
@@ -49,15 +56,15 @@ export const createDroit = async (
 ) => {
   console.log(`${process.env.API_URL}/droit/addDroit`);
   try {
-    console.log(
-      nom,
-      nom_module,
-      suppression,
-      modification,
-      creation,
-      acces,
-      code_fonction
-    );
+    // console.log(
+    //   nom,
+    //   nom_module,
+    //   suppression,
+    //   modification,
+    //   creation,
+    //   acces,
+    //   code_fonction
+    // );
 
     const res = await axios.post(`${process.env.API_URL}/droit/addDroit`, {
       nom,
@@ -68,8 +75,8 @@ export const createDroit = async (
       modification,
       suppression,
     });
-    console.log(nom, nom_module, suppression, modification, creation, acces);
-    console.log(res.data);
+    // console.log(nom, nom_module, suppression, modification, creation, acces);
+    // console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);

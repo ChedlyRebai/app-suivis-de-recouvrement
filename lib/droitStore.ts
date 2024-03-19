@@ -12,7 +12,11 @@ import create from "zustand";
 export type State = {
   droitAccess: droit_accees[];
   fetchAllDroitAccess: () => Promise<void>;
-  fetchDroitAccessByCodeFonction: (code: string) => Promise<void>;
+  fetchDroitAccessByCodeFonction: (
+    code: string,
+    currentpage: number,
+    perpage: number
+  ) => Promise<void>;
   updateDroit: (
     id: number,
     codef: number,
@@ -37,8 +41,12 @@ const useStore = create<State>((set) => ({
     const data = await getAllDroitAccess();
     set({ droitAccess: data });
   },
-  fetchDroitAccessByCodeFonction: async (code: string) => {
-    const data = await getDroitAccessByCodeFonction(code);
+  fetchDroitAccessByCodeFonction: async (
+    code: string,
+    currentpage: number,
+    perpage: number
+  ) => {
+    const data = await getDroitAccessByCodeFonction(code, currentpage, perpage);
     set({ droitAccess: data });
     return data;
   },

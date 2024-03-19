@@ -61,7 +61,7 @@ const Mainlayout = ({
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ];
-  console.log(navigation);
+  //console.log(navigation);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [defaultSize, setDefaultSize] = useState(20);

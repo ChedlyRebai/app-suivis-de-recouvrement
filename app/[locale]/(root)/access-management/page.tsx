@@ -5,8 +5,23 @@ import { AccessManagementDataTable } from "./_component/data-table";
 import { getSession } from "@/lib";
 import { getTranslations } from "next-intl/server";
 
-export default async function Page() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+    limit?: string;
+    perPage?: string;
+  };
+}) {
+  const search = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const perPage = Number(searchParams?.perPage) || 5;
+  const limit = Number(searchParams?.limit) || 20;
+  const offset = (currentPage - 1) * limit;
   console.log("se");
+  console.log("limi", limit, offset, " c ", currentPage);
   const se = await getSession();
 
   return (

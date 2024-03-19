@@ -54,6 +54,7 @@ import useStore, { State } from "@/lib/droitStore";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { Oval } from "react-loading-icons";
+import Pagination from "@/components/shared/pagination";
 
 interface DataTableProps<droit_accees, TValue> {
   //columns: ColumnDef<droit_accees, TValue>[];
@@ -64,6 +65,8 @@ export function AccessManagementDataTable<
   TValue
 >({}: DataTableProps<droit_accees, TValue>) {
   const [data, setData] = useState<droit_accees[]>([]);
+  const [TotalPages, setTotalPages] = useState(0);
+  const [TotalAccount, setTotalAccount] = useState(0);
 
   const columns: ColumnDef<droit_accees>[] = [
     {
@@ -273,6 +276,9 @@ export function AccessManagementDataTable<
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const perPage = Number(searchParams.get("perPage")) || 5;
+
   // const droitAccess = useStore((state: State) => state.droitAccess);
   // const fetchAllDroitAccess = useStore(
   //   (state: any) => state.fetchAllDroitAccess
@@ -283,9 +289,10 @@ export function AccessManagementDataTable<
   //   fetchAllDroitAccess();
   // }, [fetchAllDroitAccess]);
 
-  let [droitAccess, setDroiAccess] = useStore(
-    (state: State) => state.droitAccess
-  );
+  // const [droitAccess, setDroiAccess] = useStore(
+  //   (state: State) => state.droitAccess
+  // );
+  const [droitAccess, setDroiAccess] = useState<droit_accees[]>([]);
 
   const updateDroit = useStore((state: State) => state.updateDroit);
 
@@ -320,14 +327,17 @@ export function AccessManagementDataTable<
   };
 
   useEffect(() => {
+    console.log("data table params", currentPage, perPage);
     const Params = searchParams.get("code") || "";
     if (Params?.length > 0) {
       setIsLoading(true);
       toast.promise(
-        fetchDroitAccessByCodeFonction(Params)
+        fetchDroitAccessByCodeFonction(Params, currentPage, perPage)
           .then((d: any) => {
             //console.log(d);
-            setData(d as droit_accees[]);
+            setTotalPages(d.totalPages);
+            setTotalAccount(d.totalCount);
+            setData(d.permissions as droit_accees[]);
             // Move setIsLoading(false) inside the success callback
           })
           .then(() => setIsLoading(false)),
@@ -338,7 +348,7 @@ export function AccessManagementDataTable<
         }
       );
     }
-  }, [searchParams.get("code"), fetchDroitAccessByCodeFonction]);
+  }, [searchParams, fetchDroitAccessByCodeFonction]);
 
   // useEffect(() => {
   //   const Params = searchParams.get("code") || "";
@@ -517,7 +527,11 @@ export function AccessManagementDataTable<
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination
+        totalPages={TotalPages}
+        TotalAccount={TotalAccount}
+        table={table}
+      />
     </>
   );
 }
