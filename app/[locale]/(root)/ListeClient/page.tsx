@@ -6,6 +6,7 @@ import { columns } from "./_components/contactes/columns";
 import {
   getAgences,
   getClientContactes,
+  getClientNonContactes,
   getGroupes,
 } from "@/actions/client.action";
 
@@ -27,12 +28,12 @@ export default async function Home({
   const group = searchParams?.groupe || "";
   const agence = searchParams?.agence || "";
   const from = searchParams?.from || "";
-  const to = searchParams?.to || "40";
+  const to = searchParams?.to || "";
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const data = await getClientContactes(
+  const data = await getClientNonContactes(
     search,
     currentPage,
     perPage,
@@ -43,7 +44,7 @@ export default async function Home({
   );
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log(data);
+  console.log(agence);
   //const data = [];
   return (
     <div>

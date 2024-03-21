@@ -87,11 +87,7 @@ export function DataTableContactes<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-
-  groupes.map((item) => {
-    console.log(item.agence);
-  });
-  console.log(agences);
+  console.log(data);
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">

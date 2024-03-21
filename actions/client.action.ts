@@ -2,6 +2,7 @@
 import { ab_client } from "@/Models/ab_client.model";
 import { fonction } from "@/Models/fonction.model";
 import axios from "axios";
+import { group } from "console";
 import { cookies } from "next/headers";
 
 export interface Main {
@@ -29,26 +30,28 @@ export const getClientContactes = async (
 ) => {
   const cookieStore = cookies();
   const session = cookieStore.get("session");
-  axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+  axios.defaults.baseURL = `http://localhost:10000`;
   axios.defaults.headers.common["Authorization"] = ` ${
     session?.value as string
   }`;
   console.log(
-    `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}$to=${dayto}`
+    `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}$to=${dayto}`
   );
   const res = await axios.get<Main>(
-    `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search&from=30&to=40`
+    `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search&from=30&to=${dayfrom}`
   );
   //console.log(res.data);
   return res.data;
 };
 
 export const getClientNonContactes = async (
-  IdClient: number,
+  IdClient?: string,
   currentpage?: number,
   perpage?: number,
-  dayfrom?: number,
-  dayto?: number
+  groupe?: string,
+  agence?: string,
+  dayfrom?: string,
+  dayto?: string
 ) => {
   //console.log(`${process.env.API_URL}/fonction`);
   const cookieStore = cookies();
@@ -57,8 +60,11 @@ export const getClientNonContactes = async (
   axios.defaults.headers.common["Authorization"] = ` ${
     session?.value as string
   }`;
-  const res = await axios.get<Main[]>(
-    `http://localhost:10001/client/listclientnoncontactes??page=${currentpage}&perPage=${perpage}&idclient=${IdClient}&from=${dayfrom}$to=${dayto}`
+  console.log(
+    `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+  );
+  const res = await axios.get<Main>(
+    `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
   );
   // console.log(res.data);
   return res.data;
