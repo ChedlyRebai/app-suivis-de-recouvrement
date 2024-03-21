@@ -3,10 +3,48 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTableContactes } from "./_components/contactes/data-table-contactes";
 import { columns } from "./_components/contactes/columns";
-import { getClientContactes } from "@/actions/client.action";
+import {
+  getAgences,
+  getClientContactes,
+  getGroupes,
+} from "@/actions/client.action";
 
-export default async function page() {
-  const data = await getClientContactes();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+    limit?: string;
+    perPage?: string;
+    groupe?: string;
+    agence?: string;
+    to?: string;
+    from?: string;
+  };
+}) {
+  const search = searchParams?.query || "";
+  const group = searchParams?.groupe || "";
+  const agence = searchParams?.agence || "";
+  const from = searchParams?.from || "";
+  const to = searchParams?.to || "40";
+  const currentPage = Number(searchParams?.page) || 1;
+  const perPage = Number(searchParams?.perPage) || 5;
+  const limit = Number(searchParams?.limit) || 20;
+
+  const data = await getClientContactes(
+    search,
+    currentPage,
+    perPage,
+    group,
+    agence,
+    from,
+    to
+  );
+  const groupes = await getGroupes();
+  const agences = await getAgences();
+  console.log(data);
+  //const data = [];
   return (
     <div>
       <div className="py-6">
@@ -33,8 +71,13 @@ export default async function page() {
                 </div>
                 <div className=" mx-auto px-4 sm:px-6 md:px-8">
                   <DataTableContactes
+                    agences={groupes}
+                    groupes={agences}
+                    total={data.total}
+                    totalAccout={data.totalCount}
+                    totalPages={data.totalPages}
                     columns={columns}
-                    data={data}
+                    data={data.result}
                     type="noncontactes"
                   />
                 </div>
@@ -49,8 +92,13 @@ export default async function page() {
                 </div>
                 <div className=" mx-auto px-4 sm:px-6 md:px-8">
                   <DataTableContactes
+                    agences={agences}
+                    groupes={groupes}
+                    total={data.total}
+                    totalAccout={data.totalCount}
+                    totalPages={data.totalPages}
                     columns={columns}
-                    data={data}
+                    data={data.result}
                     type="noncontactes"
                   />
                 </div>

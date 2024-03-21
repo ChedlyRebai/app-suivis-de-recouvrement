@@ -23,13 +23,14 @@ import {
 import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Modal";
 import ModalProviders from "@/providers/ModalProviders";
 import { getSession } from "@/lib";
-import { IconMap } from "@/constants";
+
 import NavbarItem from "./NavbarItem";
 import ThemeButton from "@/components/shared/ThemeButton";
 import { useLocale, useTranslations } from "next-intl";
 import LocalSwitcher from "@/components/shared/Local-switcher";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/shared/Navbar";
+import { IconMap } from "@/constants";
 
 interface NavBarProps {
   children?: ReactNode;

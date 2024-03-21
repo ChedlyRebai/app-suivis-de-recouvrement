@@ -39,13 +39,23 @@ import { ab_client } from "@/Models/ab_client.model";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
+  total: any;
   data: TData[];
+  totalAccout?: number;
+  totalPages?: number;
+  groupes: any[];
+  agences: any[];
   type: "contactes" | "noncontactes";
 }
 
 export function DataTableContactes<TData, TValue>({
   columns,
   data,
+  totalAccout,
+  totalPages = 0,
+  total,
+  agences,
+  groupes,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -53,6 +63,7 @@ export function DataTableContactes<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
@@ -77,32 +88,10 @@ export function DataTableContactes<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const calculateTotal = (attribute: string) => {
-    let total = 0;
-    data.map((item: any) => {
-      console.log(+item[attribute]);
-      total += +item[attribute] || 0; // Ensure attribute value is a number
-    });
-
-    return total;
-  };
-
-  const TOT_IMP = calculateTotal("mnt_imp");
-  const TOT_DEP = calculateTotal("depassement");
-  const TOT_IRR = calculateTotal("tot_creance");
-  const TOT_ENG = calculateTotal("engagement");
-
-  // Add the totals as a new row at the beginning of the data array
-  const newData = [
-    {
-      TOT_IMP,
-      TOT_DEP,
-      TOT_IRR,
-      TOT_ENG,
-    },
-    ...data,
-  ];
-
+  groupes.map((item) => {
+    console.log(item.agence);
+  });
+  console.log(agences);
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -197,14 +186,26 @@ export function DataTableContactes<TData, TValue>({
             )}
           </TableBody>
           <TableRow>
-            <TableCell className="font-bold">TOT IMP: {TOT_IMP}</TableCell>
-            <TableCell className="font-bold">TOT DEP: {TOT_DEP}</TableCell>
-            <TableCell className="font-bold">TOT IRR: {TOT_IRR}</TableCell>
-            <TableCell className="font-bold">TOT ENG: {TOT_ENG}</TableCell>
+            <TableCell className="font-bold">
+              TOT IMP: {total.mnt_imp}{" "}
+            </TableCell>
+            <TableCell className="font-bold">
+              TOT DEP: {total.depassement}
+            </TableCell>
+            <TableCell className="font-bold">
+              TOT IRR: {total.tot_creance}
+            </TableCell>
+            <TableCell className="font-bold">
+              TOT ENG: {total.engagement}
+            </TableCell>
           </TableRow>
         </Table>
       </div>
-      <DataTablePagination totalPages={10} table={table} />
+      <DataTablePagination
+        TotalAccount={totalAccout}
+        totalPages={totalPages}
+        table={table}
+      />
     </>
   );
 }

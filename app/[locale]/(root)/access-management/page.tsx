@@ -19,6 +19,7 @@ export default async function Home({
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
+
   const offset = (currentPage - 1) * limit;
   console.log("se");
   console.log("limi", limit, offset, " c ", currentPage);

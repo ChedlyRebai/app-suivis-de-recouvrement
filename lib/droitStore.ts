@@ -14,8 +14,9 @@ export type State = {
   fetchAllDroitAccess: () => Promise<void>;
   fetchDroitAccessByCodeFonction: (
     code: string,
-    currentpage: number,
-    perpage: number
+    currentpage?: number,
+    perpage?: number,
+    search?: string
   ) => Promise<void>;
   updateDroit: (
     id: number,
@@ -43,10 +44,16 @@ const useStore = create<State>((set) => ({
   },
   fetchDroitAccessByCodeFonction: async (
     code: string,
-    currentpage: number,
-    perpage: number
+    currentpage?: number,
+    perpage?: number,
+    search?: string
   ) => {
-    const data = await getDroitAccessByCodeFonction(code, currentpage, perpage);
+    const data = await getDroitAccessByCodeFonction(
+      code,
+      currentpage,
+      perpage,
+      search
+    );
     set({ droitAccess: data });
     return data;
   },

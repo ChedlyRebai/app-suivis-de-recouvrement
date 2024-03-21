@@ -1,11 +1,6 @@
 "use client";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-  MixerHorizontalIcon,
-} from "@radix-ui/react-icons";
+import { MixerHorizontalIcon } from "@radix-ui/react-icons";
+import { useDebouncedCallback } from "use-debounce";
 import {
   ColumnDef,
   flexRender,
@@ -278,20 +273,8 @@ export function AccessManagementDataTable<
 
   const currentPage = Number(searchParams.get("page")) || 1;
   const perPage = Number(searchParams.get("perPage")) || 5;
+  const search = searchParams?.get("query") || "";
 
-  // const droitAccess = useStore((state: State) => state.droitAccess);
-  // const fetchAllDroitAccess = useStore(
-  //   (state: any) => state.fetchAllDroitAccess
-  // );
-  // console.log(droitAccess);
-
-  // useEffect(() => {
-  //   fetchAllDroitAccess();
-  // }, [fetchAllDroitAccess]);
-
-  // const [droitAccess, setDroiAccess] = useStore(
-  //   (state: State) => state.droitAccess
-  // );
   const [droitAccess, setDroiAccess] = useState<droit_accees[]>([]);
 
   const updateDroit = useStore((state: State) => state.updateDroit);
@@ -332,7 +315,7 @@ export function AccessManagementDataTable<
     if (Params?.length > 0) {
       setIsLoading(true);
       toast.promise(
-        fetchDroitAccessByCodeFonction(Params, currentPage, perPage)
+        fetchDroitAccessByCodeFonction(Params, currentPage, perPage, search)
           .then((d: any) => {
             //console.log(d);
             setTotalPages(d.totalPages);
@@ -350,29 +333,6 @@ export function AccessManagementDataTable<
     }
   }, [searchParams, fetchDroitAccessByCodeFonction]);
 
-  // useEffect(() => {
-  //   const Params = searchParams.get("code") || "";
-  //   if (Params?.length > 0) {
-  //     console.log(searchParams.get("code") || "");
-  //   }
-
-  //   const d = useStore((state: State) => state.droitAccess);
-  //   setData(d as droit_accees[]);
-  //   console.log(data);
-  // const fetchData = async () => {
-  //   setIsLoading(true);
-  //   const res = await getDroitAccessByCodeFonction(Params)
-  //     .then((data) => {
-  //       setData(data);
-  //       console.log("not");
-  //     })
-  //     .then(() => {
-  //       console.log("finish");
-  //       setIsLoading(false);
-  //     });
-  // };
-  // fetchData();
-  //}, [searchParams.get("code")]);
   const lang = useTranslations();
   const { isOpen, onOpen } = useAuthModal();
   const { isOpen: isOpenAddDroit, onOpen: onOpenAddDroit } = useAddDroitModal();
@@ -400,15 +360,27 @@ export function AccessManagementDataTable<
   });
 
   console.log(data);
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const handleSearch = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (query) {
+      params.set("query", query);
+      params.set("page", "1");
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
         <Input
           placeholder="Filter Module..."
-          value={(table.getColumn("nom")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("nom")?.setFilterValue(event.target.value)
-          }
+          defaultValue={searchParams.get("query")?.toString()}
+          onChange={(e) => {
+            handleSearch(e.target.value);
+          }}
           className="max-w-sm"
         />
         <Button

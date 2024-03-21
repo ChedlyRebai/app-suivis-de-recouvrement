@@ -12,15 +12,16 @@ export const getAllDroitAccess = async () => {
 
 export const getDroitAccessByCodeFonction = async (
   code: string,
-  currentpage: number,
-  perpage: number
+  currentpage?: number,
+  perpage?: number,
+  search?: string
 ) => {
   console.log(
-    `http://localhost:10000/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}`
+    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
   );
   console.log(`${process.env.API_URL} `);
   const res = await axios.get(
-    `http://localhost:10000/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}`
+    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
   );
   return res.data;
 };
