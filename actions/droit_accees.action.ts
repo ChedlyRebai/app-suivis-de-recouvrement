@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 export const getAllDroitAccess = async () => {
   console.log(`${process.env.API_URL}/droit`);
-  const res = await axios.get(`${process.env.API_URL}/droit`);
+  const res = await axios.get(`https://amenbankapi.vercel.app/droit`);
   return res.data;
 };
 

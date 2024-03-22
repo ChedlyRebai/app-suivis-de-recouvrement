@@ -5,6 +5,6 @@ import axios from "axios";
 export const getAllFunctions = async () => {
   console.log(`${process.env.API_URL}/fonction`);
   axios.defaults.baseURL = `${process.env.API_URL}`;
-  const res = await axios.get<fonction[]>(`/fonction`);
+  const res = await axios.get<fonction[]>(`https://amenbankapi.vercel.app/fonction`);
   return res.data;
 };

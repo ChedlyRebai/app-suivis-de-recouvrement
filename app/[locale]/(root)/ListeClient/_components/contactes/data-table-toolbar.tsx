@@ -24,58 +24,7 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>;
 }
 
-export const labels = [
-  {
-    value: "bug",
-    label: "Bug",
-  },
-  {
-    value: "feature",
-    label: "Feature",
-  },
-  {
-    value: "documentation",
-    label: "Documentation",
-  },
-];
 
-export const statuses = [
-  {
-    value: "backlog",
-    label: "Backlog",
-  },
-  {
-    value: "todo",
-    label: "Todo",
-  },
-  {
-    value: "in progress",
-    label: "In Progress",
-  },
-  {
-    value: "done",
-    label: "Done",
-  },
-  {
-    value: "canceled",
-    label: "Canceled",
-  },
-];
-
-export const priorities = [
-  {
-    label: "Low",
-    value: "low",
-  },
-  {
-    label: "Medium",
-    value: "medium",
-  },
-  {
-    label: "High",
-    value: "high",
-  },
-];
 
 export function DataTableToolbar<TData>({
   table,
@@ -98,6 +47,7 @@ export function DataTableToolbar<TData>({
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 100);
+  
   const handleGroup = (group: string) => {
     const params = new URLSearchParams(searchParams);
     if (group) {
@@ -105,6 +55,14 @@ export function DataTableToolbar<TData>({
     }
     replace(`${pathname}?${params.toString()}`);
   };
+
+  const handleAgence = (agence: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (agence) {
+      params.set("agence", agence);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }
   useEffect(() => {
     const fetchGroupes = async () => {
       try {
@@ -142,7 +100,12 @@ export function DataTableToolbar<TData>({
             options={statuses}
           />
         )} */}
-      <Select>
+      <Select
+       defaultValue={searchParams.get("groupe")?.toString()}
+       onValueChange={(value) => {
+         handleGroup(value);
+         console.log(value);
+       }}>
         <SelectTrigger className="w-fit">
           <SelectValue placeholder="Select a Group" />
         </SelectTrigger>
@@ -165,9 +128,9 @@ export function DataTableToolbar<TData>({
         )} */}
 
       <Select
-        defaultValue={searchParams.get("groupe")?.toString()}
+        defaultValue={searchParams.get("agence")?.toString()}
         onValueChange={(value) => {
-          handleGroup(value);
+          handleAgence(value);
           console.log(value);
         }}
       >

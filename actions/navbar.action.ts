@@ -9,7 +9,7 @@ export const getLinksByCodeFonction = async () => {
     console.log(user.code_function);
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get(
-      `/droit/getLinks?codeFunction=${user.code_function}`
+      `https://amenbankapi.vercel.app/droit/getLinks?codeFunction=${user.code_function}`
     );
     console.log(response.data);
     return response.data || [];

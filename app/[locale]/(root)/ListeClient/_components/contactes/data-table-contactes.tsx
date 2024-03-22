@@ -87,7 +87,7 @@ export function DataTableContactes<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  console.log(data);
+  console.log(total);
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -182,6 +182,9 @@ export function DataTableContactes<TData, TValue>({
             )}
           </TableBody>
           <TableRow>
+          <TableCell className="font-bold">
+              TOTAL Dossier: {totalAccout}
+            </TableCell>
             <TableCell className="font-bold">
               TOT IMP: {total.mnt_imp}{" "}
             </TableCell>

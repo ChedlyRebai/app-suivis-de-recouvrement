@@ -8,7 +8,7 @@ export const getUserBuMatricule = async (matricule: string) => {
 
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get(
-      `/users/getUsername?matricule=${matricule}`
+      `https://amenbankapi.vercel.app/users/getUsername?matricule=${matricule}`
     );
     // console.log("response.data.usr_nomprenom");
     // console.log(response.data.usr_nomprenom);
