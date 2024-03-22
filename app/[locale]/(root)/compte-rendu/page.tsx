@@ -13,8 +13,18 @@ import {
 
 const page = () => {
   return (
-    <div className="mx-4">
-      <div className="p-6 grid grid-flow-col grid-cols-4 grid-rows-5 gap-3 ">
+    
+    
+     <div>
+     <div className="py-6">
+       <div className=" mx-auto px-4 sm:px-6 md:px-8">
+         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+           Compte Rendu
+         </h1>
+       </div>
+       <div className=" mx-auto px-4 sm:px-6 md:px-8">
+       <div className="">
+      <div className=" grid grid-flow-col grid-cols-4 grid-rows-5 gap-3 ">
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label htmlFor="Client">Client</Label>
           <Input id="Client" type="text" />
@@ -111,7 +121,10 @@ const page = () => {
           </TableRow>
         </TableBody>
       </Table>
-    </div>
+      </div>
+       </div>
+     </div>
+   </div>
   );
 };
 
