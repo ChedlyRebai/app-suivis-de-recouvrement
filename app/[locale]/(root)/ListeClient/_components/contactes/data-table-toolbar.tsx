@@ -97,7 +97,14 @@ export function DataTableToolbar<TData>({
     }
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 100);
+  const handleGroup = (group: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (group) {
+      params.set("groupe", group);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
   useEffect(() => {
     const fetchGroupes = async () => {
       try {
@@ -157,7 +164,13 @@ export function DataTableToolbar<TData>({
           />
         )} */}
 
-      <Select>
+      <Select
+        defaultValue={searchParams.get("groupe")?.toString()}
+        onValueChange={(value) => {
+          handleGroup(value);
+          console.log(value);
+        }}
+      >
         <SelectTrigger className="ml-2 w-fit">
           <SelectValue placeholder="Select a Agebce" />
         </SelectTrigger>
