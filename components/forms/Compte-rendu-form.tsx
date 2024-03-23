@@ -2,6 +2,15 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import {
   Table,
@@ -13,20 +22,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "../ui/card";
 import VisiteForm from "./Compte-rendu-form/visiteForm";
 import NonreconnaissancedelaCreanceForm from "./Compte-rendu-form/Non-reconnaissance-de-la-créance";
@@ -34,6 +32,9 @@ import FaciliteDePaiementForm from "./Compte-rendu-form/FaciliteDePaiementForm";
 import PromiseDereglement from "./Compte-rendu-form/PromiseDereglement";
 import NouvelleCoordonneeForm from "./Compte-rendu-form/NouvelleCoordonnéeForm";
 import ClientINjoignable from "./Compte-rendu-form/ClientINjoignable";
+import { Checkbox } from "../ui/checkbox";
+import Link from "next/link";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 const CompteRenduForm = () => {
   return (
@@ -135,8 +136,105 @@ const CompteRenduForm = () => {
             </TableRow>
           </TableBody>
         </Table>
-        <div className=" p-4 shadow-md mt-1 bg-white dark:bg-inherit ">
-          <Tabs defaultValue="Promesse de règlement" >
+
+        <Card className="my-2">
+          <CardContent className="space-y-2 ">
+            <div className="grid grid-cols-3 gap-4 my-2">
+              <div className="flex flex-col mr-4">
+                <Label className="mb-1 text-sm font-medium" htmlFor="amount">
+                  Motif de l'impaye
+                </Label>
+                <Input
+                  className="border p-2"
+                  id="amount"
+                  placeholder={format(new Date(), "dd/MM/yyyy")}
+                />
+              </div>
+              <div className="flex flex-col">
+                <Label className="mb-1 text-sm font-medium " htmlFor="location">
+                  Contact le client avec
+                </Label>
+                <Select>
+                  <SelectTrigger className="">
+                    <SelectValue placeholder="Select a fruit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Fruits</SelectLabel>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                      <SelectItem value="grapes">Grapes</SelectItem>
+                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex flex-col">
+                <Label className="mb-1 text-sm font-medium " htmlFor="location">
+                  Info Motif
+                </Label>
+                <Select>
+                  <SelectTrigger className="">
+                    <SelectValue placeholder="Select a fruit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Fruits</SelectLabel>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                      <SelectItem value="grapes">Grapes</SelectItem>
+                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="my-2 flex items-center ">
+          <RadioGroup defaultValue="option-one">
+            <CardContent className="space-y-2 items-center flex w-full py-2">
+              <div className="max-w-7xl w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center gap-1">
+                  <div className="flex items-center">
+                    <Checkbox className="mr-2" id="checkbox-1" />
+                    <Label>Promesse de règlement</Label>
+                  </div>
+                  <div className="flex items-center">
+                    <Checkbox className="mr-2" id="checkbox-2" />
+                    <Label>Nouvelles coordonnées</Label>
+                  </div>
+                  <div className="flex items-center">
+                    <Checkbox className="mr-2" id="checkbox-3" />
+                    <Label>Facilité de paiement</Label>
+                  </div>
+                  <div className="flex items-center">
+                    <Checkbox className="mr-2" id="checkbox-4" />
+                    <Label>Non reconnaissance de la créance</Label>
+                  </div>
+                  <div className="flex items-center">
+                    <RadioGroupItem
+                      value="option-one"
+                      className="mr-2"
+                      id="checkbox-5"
+                    />
+                    <Label>Visite</Label>
+                  </div>
+                  <div className="flex items-center">
+                    <Checkbox className="mr-2" id="checkbox-6" />
+                    <Label>Client injoignable</Label>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </RadioGroup>
+        </Card>
+
+        <div className=" py-2 shadow-md mt-1 bg-white dark:bg-inherit ">
+          <Tabs defaultValue="Promesse de règlement">
             <TabsList>
               <TabsTrigger value="Promesse de règlement">
                 Promesse de règlement
@@ -155,7 +253,7 @@ const CompteRenduForm = () => {
                 Client injoignable
               </TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="Promesse de règlement">
               <Card className="my-2">
                 <CardContent className="space-y-2 ">
