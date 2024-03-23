@@ -8,7 +8,7 @@ const NouvelleCoordonneeForm = () => {
     <div className=" mx-auto my-2 p-2  rounded-lg shadow-md">
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="flex flex-col mr-4">
-          <Label className="mb-1 text-sm font-medium   " htmlFor="amount">
+          <Label className="mb-1 text-sm font-medium" htmlFor="amount">
             Tel
           </Label>
 
@@ -24,7 +24,7 @@ const NouvelleCoordonneeForm = () => {
       </div>
       <div className="flex flex-col">
         <Label className="mb-1 text-sm font-medium " htmlFor="location">
-          Lieu
+          Addresse
         </Label>
         <Textarea className="border p-2" id="location" placeholder="Lieu" />
       </div>

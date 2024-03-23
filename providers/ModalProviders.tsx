@@ -3,6 +3,7 @@ import EditDroitModal from "@/components/shared/Modals/Edit-Droit-Modal";
 import InvalidCredentialModal from "@/components/shared/Modals/Invalid-Credential-Modal";
 import IInvalidCredentialModal from "@/components/shared/Modals/Invalid-Credential-Modal";
 import SearchFonctionModal from "@/components/shared/Modals/Search-Fonction-Modal";
+import ListeAgenceModal from "@/components/shared/Modals/liste-agences-modal";
 import React from "react";
 
 const ModalProviders = () => {
@@ -10,6 +11,7 @@ const ModalProviders = () => {
     <>
       <EditDroitModal />
       <AddDroitModal />
+      <ListeAgenceModal />
       <SearchFonctionModal />
     </>
   );
