@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/table"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
+import useListeAgencestModal from "@/hooks/useListeAgences"
+import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -49,11 +51,13 @@ export function ListeAgenceDataTable<TData, TValue>({
       },
   })
  
+  const {onClose}=useListeAgencestModal()
   return (
     <>
      <div className="flex items-center py-">
      <div className="flex items-center ">
      <Input
+     type="number"
           placeholder="Filter codug..."
           value={(table.getColumn("codug")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
@@ -70,9 +74,6 @@ export function ListeAgenceDataTable<TData, TValue>({
           }
           className="max-w-sm ml-2"
         />
-         
-        
-     
       </div>
     <div className="rounded-md border max-h-60 overflow-auto">
       <Table>
@@ -118,6 +119,23 @@ export function ListeAgenceDataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
+    <div className="flex items-center justify-end space-x-2 ">
+        {/* <Button
+          onClick={() => {
+            onClose();
+            router.push(
+              pathname + "?" + createQueryString("code", `${selectedCode}`)
+            );
+          }}
+          variant="default"
+          size="sm"
+        >
+          OK
+        </Button> */}
+        <Button onClick={() => onClose()} variant="outline" size="sm">
+          OK
+        </Button>
+      </div>
     </>
   )
 }
