@@ -35,6 +35,13 @@ import ClientINjoignable from "./Compte-rendu-form/ClientINjoignable";
 import { Checkbox } from "../ui/checkbox";
 import Link from "next/link";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Textarea } from "../ui/textarea";
+import { APP_GEN } from "@/constants";
+
+
+
+
+
 
 const CompteRenduForm = () => {
   return (
@@ -43,23 +50,38 @@ const CompteRenduForm = () => {
         <div className="my-2 grid grid-flow-col grid-cols-4 grid-rows-5 gap-3 ">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Client">Client</Label>
-            <Input id="Client" type="text" />
+            <div className="flex ">
+              <Input id="Client" className="w-1/3 px-1 mr-1" type="number" />
+              <Input id="Client" className="w-2/3" type="text" />
+            </div>
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Groupe">Groupe</Label>
-            <Input id="Groupe" type="text" />
+            <div className="flex ">
+              <Input id="Client" className="w-1/3 px-2 mr-1" type="number" />
+              <Input id="Client" className="w-2/3" type="text" />
+            </div>
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Agence">Agence</Label>
-            <Input id="Agence" type="text" />
+            <div className="flex ">
+              <Input id="Client" className="w-1/3 px-2 mr-1" type="number" />
+              <Input id="Client" className="w-2/3" type="text" />
+            </div>
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Segement">Segement</Label>
-            <Input id="Segement" type="text" />
+            <div className="flex ">
+              <Input id="Client" className="w-1/3 px-2 mr-1" type="number" />
+              <Input id="Client" className="w-2/3" type="text" />
+            </div>
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Marche">Marche</Label>
-            <Input id="Marche" type="text" />
+            <div className="flex ">
+              <Input id="Client" className="w-1/3 px-2 mr-1" type="number" />
+              <Input id="Client" className="w-2/3" type="text" />
+            </div>
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Mnt_Imp">Mnt Imp</Label>
@@ -144,11 +166,28 @@ const CompteRenduForm = () => {
                 <Label className="mb-1 text-sm font-medium" htmlFor="amount">
                   Motif de l'impaye
                 </Label>
-                <Input
-                  className="border p-2"
-                  id="amount"
-                  placeholder={format(new Date(), "dd/MM/yyyy")}
-                />
+                <Select>
+                  <SelectTrigger className="">
+                    <SelectValue placeholder="Select a fruit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Fruits</SelectLabel>
+                      <SelectItem value="apple">Salaire suspendu</SelectItem>
+                      <SelectItem value="banana">Salaire dégradé</SelectItem>
+                      <SelectItem value="blueberry">
+                        Salaire suspendu puis repris
+                      </SelectItem>
+                      <SelectItem value="grapes">
+                        Baisse de mouvement
+                      </SelectItem>
+                      <SelectItem value="pineapple">
+                        Débit non autorisé
+                      </SelectItem>
+                      <SelectItem value="pineapple">autre</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="flex flex-col">
                 <Label className="mb-1 text-sm font-medium " htmlFor="location">
@@ -161,11 +200,14 @@ const CompteRenduForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Fruits</SelectLabel>
-                      <SelectItem value="apple">Apple</SelectItem>
-                      <SelectItem value="banana">Banana</SelectItem>
-                      <SelectItem value="blueberry">Blueberry</SelectItem>
-                      <SelectItem value="grapes">Grapes</SelectItem>
-                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                      <SelectItem value="apple">Appel télephonique</SelectItem>
+                      <SelectItem value="banana">Visite du client </SelectItem>
+                      <SelectItem value="blueberry">Lettre</SelectItem>
+                      <SelectItem value="grapes">Sommation</SelectItem>
+                      <SelectItem value="pineapple">
+                        Débit non autorisé
+                      </SelectItem>
+                      <SelectItem value="pineapple">autre</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -174,57 +216,66 @@ const CompteRenduForm = () => {
                 <Label className="mb-1 text-sm font-medium " htmlFor="location">
                   Info Motif
                 </Label>
-                <Select>
-                  <SelectTrigger className="">
-                    <SelectValue placeholder="Select a fruit" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Fruits</SelectLabel>
-                      <SelectItem value="apple">Apple</SelectItem>
-                      <SelectItem value="banana">Banana</SelectItem>
-                      <SelectItem value="blueberry">Blueberry</SelectItem>
-                      <SelectItem value="grapes">Grapes</SelectItem>
-                      <SelectItem value="pineapple">Pineapple</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <Input className="border p-2" id="amount" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card className="my-2 flex items-center ">
-          <RadioGroup onChange={(e:any)=>console.log(e)} defaultValue="option-one">
+          <RadioGroup
+            onChange={(e: any) => console.log(e)}
+            defaultValue="option-one"
+          >
             <CardContent className="space-y-2 items-center flex w-full py-2">
               <div className="max-w-7xl w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center gap-1">
                   <div className="flex items-center">
-                    <RadioGroupItem value="Promesse" className="mr-2"  id="checkbox-1" />
+                    <RadioGroupItem
+                      value="1"
+                      className="mr-2"
+                      id="checkbox-1"
+                    />
                     <Label>Promesse de règlement</Label>
                   </div>
                   <div className="flex items-center">
-                    <RadioGroupItem value="Nouvelles" className="mr-2" id="checkbox-2" />
+                    <RadioGroupItem
+                      value="3"
+                      className="mr-2"
+                      id="checkbox-2"
+                    />
                     <Label>Nouvelles coordonnées</Label>
                   </div>
                   <div className="flex items-center">
-                    <RadioGroupItem value="Facilité" className="mr-2" id="checkbox-3" />
+                    <RadioGroupItem
+                      value="4"
+                      className="mr-2"
+                      id="checkbox-3"
+                    />
                     <Label>Facilité de paiement</Label>
                   </div>
                   <div className="flex items-center">
-                    <RadioGroupItem value="NonReconnaissance" className="mr-2" id="checkbox-4" />
+                    <RadioGroupItem
+                      value="5"
+                      className="mr-2"
+                      id="checkbox-4"
+                    />
                     <Label>Non reconnaissance de la créance</Label>
                   </div>
                   <div className="flex items-center">
                     <RadioGroupItem
-                      value="Visite"
+                      value="6"
                       className="mr-2"
                       id="checkbox-5"
                     />
                     <Label>Visite</Label>
                   </div>
                   <div className="flex items-center">
-                    <RadioGroupItem value="ClientInjoinable" className="mr-2" id="checkbox-6" />
+                    <RadioGroupItem
+                      value="7"
+                      className="mr-2"
+                      id="checkbox-6"
+                    />
                     <Label>Client injoignable</Label>
                   </div>
                 </div>
@@ -298,6 +349,38 @@ const CompteRenduForm = () => {
             </TabsContent>
           </Tabs>
         </div>
+        <Card>
+          <CardContent className="space-y-2 ">
+            <div className="flex flex-col my-2">
+              <div className="flex w-[280px] flex-col mr-4">
+                <Label className="mb-1 text-sm font-medium " htmlFor="amount">
+                  Appreciation generale
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-[280px] ">
+                    <SelectValue placeholder="Appreciation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {/* <SelectLabel></SelectLabel> */}
+                      {APP_GEN.map((item) => (
+                        <SelectItem value={`${item.Code}`}>
+                          {item.libelle}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex flex-col">
+                <Label className="mb-1 text-sm font-medium " htmlFor="location">
+                  compte rendu
+                </Label>
+                <Textarea className="border p-2" id="location" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

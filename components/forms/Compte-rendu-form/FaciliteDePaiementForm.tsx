@@ -51,11 +51,12 @@ const FaciliteDePaiementForm = () => {
       </div>
       <div className="grid   items-center gap-1.5 col-span-2">
         <Label htmlFor="Lieu">Lieu</Label>
-        <Input id="Lieu" type="text" />
-        <Button onClick={onOpen}>
+        <div className="flex">
+        <Button className="px-2 mr-2" onClick={onOpen}>
           <ListIcon />
         </Button>
-        
+        <Input id="Lieu" type="text" />       
+        </div>     
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Date3éreEcheance">Date 3ére Echeance</Label>
