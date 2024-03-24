@@ -25,18 +25,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { format } from "date-fns";
 
-import { Card, CardContent } from "../ui/card";
-import VisiteForm from "./Compte-rendu-form/visiteForm";
-import NonreconnaissancedelaCreanceForm from "./Compte-rendu-form/Non-reconnaissance-de-la-créance";
-import FaciliteDePaiementForm from "./Compte-rendu-form/FaciliteDePaiementForm";
-import PromiseDereglement from "./Compte-rendu-form/PromiseDereglement";
-import NouvelleCoordonneeForm from "./Compte-rendu-form/NouvelleCoordonnéeForm";
-import ClientINjoignable from "./Compte-rendu-form/ClientINjoignable";
-import { Checkbox } from "../ui/checkbox";
-import Link from "next/link";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Textarea } from "../ui/textarea";
+
 import { APP_GEN } from "@/constants";
+import CompteRenduHistorique from "./CompteRenduHistorique";
+import { Card, CardContent } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import PromiseDereglement from "@/components/forms/Compte-rendu-form/PromiseDereglement";
+import NouvelleCoordonneeForm from "@/components/forms/Compte-rendu-form/NouvelleCoordonnéeForm";
+import ClientINjoignable from "@/components/forms/Compte-rendu-form/ClientINjoignable";
+import FaciliteDePaiementForm from "@/components/forms/Compte-rendu-form/FaciliteDePaiementForm";
+import NonreconnaissancedelaCreanceForm from "@/components/forms/Compte-rendu-form/Non-reconnaissance-de-la-créance";
+import VisiteForm from "@/components/forms/Compte-rendu-form/visiteForm";
+import { Textarea } from "@/components/ui/textarea";
 
 
 
@@ -381,6 +381,7 @@ const CompteRenduForm = () => {
             </div>
           </CardContent>
         </Card>
+        <CompteRenduHistorique/>
       </div>
     </div>
   );

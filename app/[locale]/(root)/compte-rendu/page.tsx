@@ -25,7 +25,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
-import CompteRenduForm from "@/components/forms/Compte-rendu-form";
+import CompteRenduForm from "./_component/Compte-rendu-form";
+
 
 const page = () => {
   const date = new Date();
