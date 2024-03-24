@@ -1,32 +1,26 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
-import useAuthModal from "@/hooks/use-fonction-search-modal";
 import { Button } from "../../ui/button";
-import { getAllDroitAccess } from "@/actions/droit_accees.action";
-import { DataTable } from "../Search-Fonction-DataTable";
-import { droit_accees } from "@/Models/droit_accees.model";
-import { fonction } from "@/Models/fonction.model";
-import { getAllFunctions } from "@/actions/fonction.action";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "../../ui/checkbox";
+
 import { useTranslations } from "next-intl";
 import { ArrowUpDown } from "lucide-react";
 import useListeAgencestModal from "@/hooks/useListeAgences";
+import { getAgences } from "@/actions/client.action";
+import { ListeAgenceDataTable } from "./liste-agences-datatable";
 
 const ListeAgenceModal = () => {
   const { isOpen, onOpen, onClose } = useListeAgencestModal();
-
-
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
     }
   };
   const lang = useTranslations();
-  const columns: ColumnDef<fonction>[] = [
+  const columns: ColumnDef<any>[] = [
     {
-      accessorKey: "code_fonction",
+      accessorKey: "codug",
       header: ({ column }) => {
         return (
           <Button
@@ -40,14 +34,14 @@ const ListeAgenceModal = () => {
         );
       },
       cell: ({ row }) => {
-        return <>{`${row.getValue("code_fonction")}`}</>;
+        return <>{`${row.getValue("codug")}`}</>;
       },
       accessorFn: (originalRow) => {
-        return originalRow.code_fonction.toString();
+        return originalRow.codug.toString();
       },
     },
     {
-      accessorKey: "lib_fonction",
+      accessorKey: "libelle",
       header: ({ column }) => {
         return (
           <Button
@@ -55,7 +49,7 @@ const ListeAgenceModal = () => {
             className="w-fit px-"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            {lang("funcModal.lib")}
+            Libelle
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
@@ -64,10 +58,9 @@ const ListeAgenceModal = () => {
   ];
 
   const [data, setData] = useState<any>([]);
-
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllFunctions();
+      const data = await getAgences();
       console.log(data);
       setData(data);
     };
@@ -81,7 +74,7 @@ const ListeAgenceModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      ss
+     <ListeAgenceDataTable columns={columns} data={data} />
     </Modal>
   );
 };

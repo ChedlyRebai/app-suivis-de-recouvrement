@@ -93,7 +93,7 @@ export function DataTable<TData, TValue>({
     );
   };
   const lang = useTranslations();
-
+  console.log(data)
   return (
     <>
       <div className="flex items-center py-">
@@ -110,8 +110,8 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
       </div>
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border max-h-60 overflow-auto">
+        <Table >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -130,7 +130,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="max-h-20">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow

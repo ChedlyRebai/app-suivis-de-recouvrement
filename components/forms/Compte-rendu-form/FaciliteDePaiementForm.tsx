@@ -1,9 +1,14 @@
+"use client"
 import { DatePickerDemo } from "@/components/ui/DatePicker";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import useListeAgencestModal from "@/hooks/useListeAgences";
+import { ListIcon } from "lucide-react";
 import React from "react";
 
 const FaciliteDePaiementForm = () => {
+  const {onOpen}=useListeAgencestModal()
   return (
     <div className="my-2 grid grid-flow-col grid-cols-4 grid-rows-4 gap-3 ">
       <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -47,6 +52,10 @@ const FaciliteDePaiementForm = () => {
       <div className="grid   items-center gap-1.5 col-span-2">
         <Label htmlFor="Lieu">Lieu</Label>
         <Input id="Lieu" type="text" />
+        <Button onClick={onOpen}>
+          <ListIcon />
+        </Button>
+        
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Date3éreEcheance">Date 3ére Echeance</Label>
