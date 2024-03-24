@@ -44,7 +44,8 @@ export default async function Home({
   );
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log(agence);
+  console.log(agences);
+
   //const data = [];
   return (
     <div>
@@ -72,8 +73,8 @@ export default async function Home({
                 </div>
                 <div className=" mx-auto px-4 sm:px-6 md:px-8">
                   <DataTableContactes
-                    agences={groupes}
-                    groupes={agences}
+                    agences={agences}
+                    groupes={groupes}
                     total={data.total}
                     totalAccout={data.totalCount}
                     totalPages={data.totalPages}

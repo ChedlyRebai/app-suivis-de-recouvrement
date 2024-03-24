@@ -75,6 +75,7 @@ export function DataTableToolbar<TData>({
     const fetchAgences = async () => {
       try {
         const agencesData = await getAgences();
+        console.log(agencesData);
         setAgences(agencesData);
       } catch (error) {
         console.error("Error fetching agences:", error);
@@ -141,7 +142,7 @@ export function DataTableToolbar<TData>({
           <SelectGroup>
             {agences.map((item: any) => {
               console.log(item);
-              return <SelectItem value={item.agence}>{item.agence}</SelectItem>;
+              return <SelectItem value={item.codug}>{item.libelle}</SelectItem>;
             })}
           </SelectGroup>
         </SelectContent>
