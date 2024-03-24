@@ -195,36 +195,36 @@ const CompteRenduForm = () => {
         </Card>
 
         <Card className="my-2 flex items-center ">
-          <RadioGroup defaultValue="option-one">
+          <RadioGroup onChange={(e:any)=>console.log(e)} defaultValue="option-one">
             <CardContent className="space-y-2 items-center flex w-full py-2">
               <div className="max-w-7xl w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center gap-1">
                   <div className="flex items-center">
-                    <Checkbox className="mr-2" id="checkbox-1" />
+                    <RadioGroupItem value="Promesse" className="mr-2"  id="checkbox-1" />
                     <Label>Promesse de règlement</Label>
                   </div>
                   <div className="flex items-center">
-                    <Checkbox className="mr-2" id="checkbox-2" />
+                    <RadioGroupItem value="Nouvelles" className="mr-2" id="checkbox-2" />
                     <Label>Nouvelles coordonnées</Label>
                   </div>
                   <div className="flex items-center">
-                    <Checkbox className="mr-2" id="checkbox-3" />
+                    <RadioGroupItem value="Facilité" className="mr-2" id="checkbox-3" />
                     <Label>Facilité de paiement</Label>
                   </div>
                   <div className="flex items-center">
-                    <Checkbox className="mr-2" id="checkbox-4" />
+                    <RadioGroupItem value="NonReconnaissance" className="mr-2" id="checkbox-4" />
                     <Label>Non reconnaissance de la créance</Label>
                   </div>
                   <div className="flex items-center">
                     <RadioGroupItem
-                      value="option-one"
+                      value="Visite"
                       className="mr-2"
                       id="checkbox-5"
                     />
                     <Label>Visite</Label>
                   </div>
                   <div className="flex items-center">
-                    <Checkbox className="mr-2" id="checkbox-6" />
+                    <RadioGroupItem value="ClientInjoinable" className="mr-2" id="checkbox-6" />
                     <Label>Client injoignable</Label>
                   </div>
                 </div>
