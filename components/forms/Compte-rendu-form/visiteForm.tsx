@@ -56,7 +56,7 @@ const VisiteForm = () => {
       <div className="grid w-[280px] items-center gap-1.5">
         <Label htmlFor="lieuvisite">Lieu visite</Label>
         <div className="flex ">
-            <Button className="w- px-2"  onClick={() => onOpen("lieu_visite")}>
+            <Button className="w- px-2"  onClick={() => onOpen("suiviAgenda","lieu_visite")}>
               <ListIcon />
             </Button>
             <Input className="border p-2 ml-2" value={suiviAgenda.lieu_visite} id="location" placeholder="Lieu" />
