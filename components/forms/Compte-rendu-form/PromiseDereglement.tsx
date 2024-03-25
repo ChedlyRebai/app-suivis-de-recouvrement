@@ -18,8 +18,8 @@ import useListeAgencestModal from "@/hooks/useListeAgences";
 import useClientSore from "@/hooks/useCompteRenduForm";
 const PromiseDereglement = () => {
   const [date, setdate] = useState(new Date());
-  const { onOpen } = useListeAgencestModal();
-  const {client,handleIputChangeSuiviAgenda,suiviAgenda}=useClientSore()
+  const { onOpen, setColumn } = useListeAgencestModal();
+  const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   return (
     <div className="">
       <div className="flex p-4">
@@ -28,26 +28,48 @@ const PromiseDereglement = () => {
             Montant
           </Label>
 
-          <Input className="border p-2" onChange={(e)=>handleIputChangeSuiviAgenda('mnt_reg',e.target.value)} value={suiviAgenda.mnt_reg} id="amount" placeholder="850 672.280" />
+          <Input
+            className="border p-2"
+            onChange={(e) =>
+              handleIputChangeSuiviAgenda("mnt_reg", e.target.value)
+            }
+            value={suiviAgenda.mnt_reg}
+            id="amount"
+            placeholder="850 672.280"
+          />
         </div>
         <div className="flex flex-col mr-4">
           <Label className="mb-1 text-sm font-medium   " htmlFor="amount">
             Date
           </Label>
-          <DatePickerDemo 
-          date={suiviAgenda.date_ver || ""}
-          champ={"date_ver"}
-          setDate={handleIputChangeSuiviAgenda}  />
+          <DatePickerDemo
+            date={suiviAgenda.date_ver || ""}
+            champ={"date_ver"}
+            setDate={handleIputChangeSuiviAgenda}
+          />
         </div>
         <div className="flex flex-col">
           <Label className="mb-1 text-sm font-medium " htmlFor="location">
             Lieu
           </Label>
           <div className="flex ">
-            <Button className="w- px-2"  onClick={onOpen}>
+            <Button
+              className="w- px-2"
+              onClick={() => {
+                onOpen();
+                console.log("bonjour");
+                setColumn("lieu_ver");
+              }}
+            >
               <ListIcon />
             </Button>
-            <Input className="border p-2 ml-2" id="location" placeholder="Lieu" />
+            <Input
+              className="border p-2 ml-2"
+              value={suiviAgenda.lieu_ver}
+              readOnly
+              id="location"
+              placeholder="Lieu"
+            />
           </div>
         </div>
       </div>
