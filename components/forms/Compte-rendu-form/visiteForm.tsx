@@ -1,3 +1,4 @@
+"use client"
 import { DatePickerDemo } from "@/components/ui/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -58,6 +59,7 @@ const VisiteForm = () => {
         <div className="flex ">
             <Button className="w- px-2"  onClick={() =>{
                 onOpen();
+                console.log("bonjour")
                 setColumn("lieu_visite")
                 console.log("cc:",column)
                }}>

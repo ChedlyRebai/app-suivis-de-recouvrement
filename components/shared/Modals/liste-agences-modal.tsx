@@ -74,7 +74,7 @@ const ListeAgenceModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-     <ListeAgenceDataTable column={column} columns={columns} data={data} />
+     <ListeAgenceDataTable  columns={columns} data={data} />
     </Modal>
   );
 };
