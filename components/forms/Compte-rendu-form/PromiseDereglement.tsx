@@ -15,9 +15,11 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import { DatePickerDemo } from "@/components/ui/DatePicker";
 import useListeAgencestModal from "@/hooks/useListeAgences";
+import useClientSore from "@/hooks/useCompteRenduForm";
 const PromiseDereglement = () => {
   const [date, setdate] = useState(new Date());
   const { onOpen } = useListeAgencestModal();
+  const {client,handleIputChangeSuiviAgenda,suiviAgenda}=useClientSore()
   return (
     <div className="">
       <div className="flex p-4">
@@ -26,13 +28,16 @@ const PromiseDereglement = () => {
             Montant
           </Label>
 
-          <Input className="border p-2" id="amount" placeholder="850 672.280" />
+          <Input className="border p-2" onChange={(e)=>handleIputChangeSuiviAgenda('mnt_reg',e.target.value)} value={suiviAgenda.mnt_reg} id="amount" placeholder="850 672.280" />
         </div>
         <div className="flex flex-col mr-4">
           <Label className="mb-1 text-sm font-medium   " htmlFor="amount">
             Date
           </Label>
-          <DatePickerDemo />
+          <DatePickerDemo 
+          date={suiviAgenda.date_ver || ""}
+          champ={"date_ver"}
+          setDate={handleIputChangeSuiviAgenda}  />
         </div>
         <div className="flex flex-col">
           <Label className="mb-1 text-sm font-medium " htmlFor="location">

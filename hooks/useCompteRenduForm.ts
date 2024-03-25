@@ -1,23 +1,28 @@
+import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
 import { create } from "zustand";
 
 interface useClientSoreInterface {
-    client: ab_client;
-    setClient: (client: ab_client) => void;
-    handleIputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    client: ClientRecouv ;
+    suiviAgenda:SuiviAgenda;
+    seTsuiAgenda:(suiviAgenda:SuiviAgenda)=>void;
+    setClient: (client: ClientRecouv) => void;
+    handleIputChangeSuiviAgenda: (champ:string,value:string) => void;
 }
 
 const useClientSore = create<useClientSoreInterface>((set) => ({
-    client: {} as ab_client,
+    client: {} as ClientRecouv,
+    suiviAgenda:{} as SuiviAgenda,
+    seTsuiAgenda:(suiviAgenda:SuiviAgenda)=>set({suiviAgenda}),
     setClient: (client) => set({ client }),
-    handleIputChange: (e) => {
-        const { name, value } = e.target;
+    handleIputChangeSuiviAgenda: (champ,value) => {
         set((state) => ({
-            client: {
-                ...state.client,
-                [name]: value,
+            suiviAgenda: {
+                ...state.suiviAgenda,
+                [champ]: value,
             },
         }));
+
     },
 }));
 
