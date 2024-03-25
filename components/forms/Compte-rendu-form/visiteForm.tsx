@@ -19,7 +19,7 @@ import React from "react";
 
 const VisiteForm = () => {
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
-  const {onOpen}=useListeAgencestModal()
+  const {onOpen,setColumn,column}=useListeAgencestModal()
   return (
     <div className="grid grid-cols-1 gap-y-3 py-3">
       <div className="grid w-full max-w-sm items-center gap-1.5 ">
@@ -56,7 +56,11 @@ const VisiteForm = () => {
       <div className="grid w-[280px] items-center gap-1.5">
         <Label htmlFor="lieuvisite">Lieu visite</Label>
         <div className="flex ">
-            <Button className="w- px-2"  onClick={() => onOpen("suiviAgenda","lieu_visite")}>
+            <Button className="w- px-2"  onClick={() =>{
+                onOpen();
+                setColumn("lieu_visite")
+                console.log("cc:",column)
+               }}>
               <ListIcon />
             </Button>
             <Input className="border p-2 ml-2" value={suiviAgenda.lieu_visite} id="location" placeholder="Lieu" />

@@ -11,7 +11,7 @@ import { getAgences } from "@/actions/client.action";
 import { ListeAgenceDataTable } from "./liste-agences-datatable";
 
 const ListeAgenceModal = () => {
-  const { isOpen, onOpen, onClose } = useListeAgencestModal();
+  const { isOpen, onOpen, onClose,column } = useListeAgencestModal();
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
@@ -34,7 +34,7 @@ const ListeAgenceModal = () => {
         );
       },
       cell: ({ row }) => {
-        return <>{`${row.getValue("codug")}`}</>;
+        return <span onClick={e=>console.log(e)}>{`${row.getValue("codug")}`}</span>;
       },
       accessorFn: (originalRow) => {
         return originalRow.codug.toString();
@@ -66,7 +66,7 @@ const ListeAgenceModal = () => {
     };
     fetchData();
   }, []);
-
+  console.log(column)
   return (
     <Modal
       title="Liste des agences"
@@ -74,7 +74,7 @@ const ListeAgenceModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-     <ListeAgenceDataTable columns={columns} data={data} />
+     <ListeAgenceDataTable column={column} columns={columns} data={data} />
     </Modal>
   );
 };

@@ -2,17 +2,23 @@ import { create } from "zustand";
 
 interface ListAgencesStore {
   isOpen: boolean;
-  column:string;
+  column: string;
   modelName: string;
-  onOpen: (modelname:string,column: string) => void; 
+  selectedValue: string;
+  onOpen: () => void;
+  setColumn: (column: string) => void;
   onClose: () => void;
 }
 
 const useListeAgencestModal = create<ListAgencesStore>((set) => ({
   isOpen: false,
-  column:"",
-  modelName:"",
-  onOpen: (modelName, column) => set({ isOpen: true, modelName, column }),  
+  column: "",
+  modelName: "",
+  selectedValue: "",
+  setColumn: (column) =>{ 
+    console.log(column)
+    set({ column: column })},
+  onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
