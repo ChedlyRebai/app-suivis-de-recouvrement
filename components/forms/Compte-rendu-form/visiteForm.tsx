@@ -1,4 +1,5 @@
 import { DatePickerDemo } from "@/components/ui/DatePicker";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -12,10 +13,13 @@ import {
 } from "@/components/ui/select";
 import { heureVisite } from "@/constants";
 import useClientSore from "@/hooks/useCompteRenduForm";
+import useListeAgencestModal from "@/hooks/useListeAgences";
+import { ListIcon } from "lucide-react";
 import React from "react";
 
 const VisiteForm = () => {
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
+  const {onOpen}=useListeAgencestModal()
   return (
     <div className="grid grid-cols-1 gap-y-3 py-3">
       <div className="grid w-full max-w-sm items-center gap-1.5 ">
@@ -36,7 +40,7 @@ const VisiteForm = () => {
             console.log(suiviAgenda);
           }}
         >
-          <SelectTrigger className="w-[280px] ">
+          <SelectTrigger className="w-[280px]">
             <SelectValue placeholder="Select heure" />
           </SelectTrigger>
           <SelectContent>
@@ -51,7 +55,12 @@ const VisiteForm = () => {
       </div>
       <div className="grid w-[280px] items-center gap-1.5">
         <Label htmlFor="lieuvisite">Lieu visite</Label>
-        <Input id="lieuvisite" type="text" />
+        <div className="flex ">
+            <Button className="w- px-2"  onClick={onOpen}>
+              <ListIcon />
+            </Button>
+            <Input className="border p-2 ml-2" value={suiviAgenda.lieu_visite} id="location" placeholder="Lieu" />
+          </div>
       </div>
     </div>
   );
