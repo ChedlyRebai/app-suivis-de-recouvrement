@@ -31,7 +31,7 @@ import CompteRenduForm from "./_component/Compte-rendu-form";
 const page = () => {
   const date = new Date();
   return (
-    <div className="bg-gray-50 dark:bg-inherit">
+    <div className="bg-hero-pattern  dark:bg-none ">
       <div className="py-6">
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">

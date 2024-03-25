@@ -159,7 +159,7 @@ const CompteRenduForm = () => {
           </TableBody>
         </Table>
 
-        <Card className="my-2">
+        <Card className="my-2 backdrop-blur-xl">
           <CardContent className="space-y-2 ">
             <div className="grid grid-cols-3 gap-4 my-2">
               <div className="flex flex-col mr-4">
@@ -280,7 +280,7 @@ const CompteRenduForm = () => {
           </RadioGroup>
         </Card>
 
-        <div className=" py-2 shadow-md mt-1 bg-white dark:bg-inherit ">
+        <div className=" py-2  mt-1  dark:bg-inherit ">
           <Tabs defaultValue="Promesse de règlement">
             <TabsList>
               <TabsTrigger value="Promesse de règlement">

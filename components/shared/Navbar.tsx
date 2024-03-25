@@ -11,7 +11,7 @@ type NavbarProps = {
 
 const Navbar = ({ onChange, session }: NavbarProps) => {
   return (
-    <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-lg shadow dark:border-b ">
+    <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button
         type="button"
         className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -20,7 +20,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
         <span className="sr-only">Open sidebar</span>
         <MenuIcon className="h-6 w-6" aria-hidden="true" />
       </button>
-      <div className="flex-1 backdrop-blur-md px-4 flex justify-between">
+      <div className="flex-1 backdrop-blur- px-4 flex justify-between">
         <div className="flex-1 flex">
           <form className="w-full flex md:ml-0" action="#" method="GET">
             <label htmlFor="search-field" className="sr-only">
