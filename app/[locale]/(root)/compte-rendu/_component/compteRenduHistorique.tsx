@@ -30,8 +30,8 @@ const CompteRenduHistorique = () => {
         <TableRow>
           <TableHead className="w-[100px]">Nom</TableHead>
           <TableHead>Date Compte Rendu</TableHead>
-          <TableHead colSpan={3}>Compte Rendu</TableHead>
-          <TableHead className="text-right">Utilisateur</TableHead>
+          <TableHead colSpan={6} className="text-Right">Compte Rendu</TableHead>
+          <TableHead className="">Utilisateur</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -39,8 +39,8 @@ const CompteRenduHistorique = () => {
           <TableRow key={invoice.Nom}>
             <TableCell className="font-medium">{invoice.Nom}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+            <TableCell colSpan={6}>{invoice.paymentMethod}</TableCell>
+            <TableCell className="">{invoice.totalAmount}</TableCell>
           </TableRow>
         ))}
       </TableBody>

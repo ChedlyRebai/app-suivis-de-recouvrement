@@ -25,4 +25,21 @@ export const APP_GEN=[
   {Code : 1, libelle :"Client coopérant"},
   {Code : 2, libelle :"Client agressif"},
   {Code : 3, libelle :"Client normal"},
+] 
+
+export const LISTE_CHOIX =[
+  {Code : 1, libelle :"Appel télephonique"},
+  {Code : 2, libelle :"Visite du client"},
+  {Code : 3, libelle :"Lettre"},
+  {Code : 4, libelle :"grapes"},
+  {Code : 5, libelle :"Sommation"},
+] 
+
+export const MOTIF_IM=[
+  {Code : 1, libelle :"Salaire suspendu"},
+  {Code : 2, libelle :"Salaire dégradé"},
+  {Code : 3, libelle :"Salaire suspendu puis repris"},
+  {Code : 4, libelle :"Baisse de mouvement"},
+  {Code : 5, libelle :"Débit non autorisé"},
+  {Code : 6, libelle :"autre"},
 ]

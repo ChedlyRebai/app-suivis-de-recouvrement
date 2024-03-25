@@ -26,7 +26,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { format } from "date-fns";
 
 
-import { APP_GEN } from "@/constants";
+import { APP_GEN, LISTE_CHOIX, MOTIF_IM } from "@/constants";
 import CompteRenduHistorique from "./CompteRenduHistorique";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -173,17 +173,13 @@ const CompteRenduForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Fruits</SelectLabel>
-                      <SelectItem value="apple">Salaire suspendu</SelectItem>
-                      <SelectItem value="banana">Salaire dégradé</SelectItem>
-                      <SelectItem value="blueberry">
-                        Salaire suspendu puis repris
-                      </SelectItem>
-                      <SelectItem value="grapes">
-                        Baisse de mouvement
-                      </SelectItem>
-                      <SelectItem value="pineapple">
-                        Débit non autorisé
-                      </SelectItem>
+                      {
+                        MOTIF_IM.map((item) => (
+                          <SelectItem value={`${item.Code}`}>
+                            {item.libelle}
+                          </SelectItem>
+                        ))
+                      }
                       <SelectItem value="pineapple">autre</SelectItem>
                     </SelectGroup>
                   </SelectContent>
@@ -200,14 +196,14 @@ const CompteRenduForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Fruits</SelectLabel>
-                      <SelectItem value="apple">Appel télephonique</SelectItem>
-                      <SelectItem value="banana">Visite du client </SelectItem>
-                      <SelectItem value="blueberry">Lettre</SelectItem>
-                      <SelectItem value="grapes">Sommation</SelectItem>
-                      <SelectItem value="pineapple">
-                        Débit non autorisé
-                      </SelectItem>
-                      <SelectItem value="pineapple">autre</SelectItem>
+                      {
+                        LISTE_CHOIX.map((item) => (
+                          <SelectItem value={`${item.Code}`}>
+                            {item.libelle}
+                          </SelectItem>
+                        ))
+                      }
+                     
                     </SelectGroup>
                   </SelectContent>
                 </Select>
