@@ -2,13 +2,17 @@ import { create } from "zustand";
 
 interface ListAgencesStore {
   isOpen: boolean;
-  onOpen: () => void;
+  column:string;
+  modelName: string;
+  onOpen: (modelname:string,column: string) => void; 
   onClose: () => void;
 }
 
 const useListeAgencestModal = create<ListAgencesStore>((set) => ({
   isOpen: false,
-  onOpen: () => set({ isOpen: true }),
+  column:"",
+  modelName:"",
+  onOpen: (modelName, column) => set({ isOpen: true, modelName, column }),  
   onClose: () => set({ isOpen: false }),
 }));
 
