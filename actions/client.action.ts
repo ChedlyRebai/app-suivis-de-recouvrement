@@ -1,4 +1,5 @@
 "use server";
+import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
 import { fonction } from "@/Models/fonction.model";
 import axios from "axios";
@@ -34,12 +35,15 @@ export const getClientContactes = async (
   axios.defaults.headers.common["Authorization"] = ` ${
     session?.value as string
   }`;
+
+
   console.log(
-    `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}$to=${dayto}`
+    `http://localhost:10001/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
   );
   const res = await axios.get<Main>(
-    `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search&from=30&to=${dayfrom}`
+    `http://localhost:10001/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
   );
+  console.log(res.data);
   //console.log(res.data);
   return res.data;
 };
@@ -89,4 +93,14 @@ export const getAgences = async () => {
   } catch (error) {
     return [];
   }
+};
+
+export const getCompterendu = async (IdClient?: string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const res = await axios.get<SuiviAgenda>(`http://localhost:10001/client/getcompterendu/${IdClient}`);
+    return res.data;
+  } catch (error) {
+    return {} as SuiviAgenda;
+  } 
 };

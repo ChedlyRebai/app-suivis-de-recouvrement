@@ -33,7 +33,7 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const data = await getClientNonContactes(
+  const data = await getClientContactes(
     search,
     currentPage,
     perPage,
@@ -42,17 +42,30 @@ export default async function Home({
     from,
     to
   );
+
+
+  const dataNon = await getClientNonContactes(
+    search,
+    currentPage,
+    perPage,
+    group,
+    agence,
+    from,
+    to
+  );
+
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log(agences);
 
-  //const data = [];
   return (
     <div>
+      
       <div className="py-6">
+
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white"></h1>
         </div>
+
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <Tabs defaultValue="noncontactes" className="">
             <TabsList className="grid w-fit grid-cols-2">
@@ -75,11 +88,11 @@ export default async function Home({
                   <DataTableContactes
                     agences={agences}
                     groupes={groupes}
-                    total={data.total}
-                    totalAccout={data.totalCount}
-                    totalPages={data.totalPages}
+                    total={dataNon.total}
+                    totalAccout={dataNon.totalCount}
+                    totalPages={dataNon.totalPages}
                     columns={columns}
-                    data={data.result}
+                    data={dataNon.result}
                     type="noncontactes"
                   />
                 </div>
@@ -93,6 +106,7 @@ export default async function Home({
                   </h1>
                 </div>
                 <div className=" mx-auto px-4 sm:px-6 md:px-8">
+
                   <DataTableContactes
                     agences={agences}
                     groupes={groupes}

@@ -75,7 +75,7 @@ export function DataTableToolbar<TData>({
     const fetchAgences = async () => {
       try {
         const agencesData = await getAgences();
-        console.log(agencesData);
+      
         setAgences(agencesData);
       } catch (error) {
         console.error("Error fetching agences:", error);

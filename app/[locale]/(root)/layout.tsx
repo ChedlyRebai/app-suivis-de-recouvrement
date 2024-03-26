@@ -1,19 +1,4 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 import {
   HomeIcon,
   UsersIcon,
@@ -26,7 +11,6 @@ import {
 import { getSession } from "@/lib";
 import { getLinksByCodeFonction } from "@/actions/navbar.action";
 import { getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
 import Mainlayout from "./access-management/_component/MainLayout";
 
 const navigation = [
@@ -37,6 +21,8 @@ const navigation = [
   { name: "Documents", href: "#", icon: InboxIcon, current: false },
   { name: "Reports", href: "#", icon: BarChart2Icon, current: false },
 ];
+
+
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },

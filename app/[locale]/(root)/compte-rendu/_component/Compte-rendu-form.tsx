@@ -25,7 +25,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { format } from "date-fns";
 
-import { APP_GEN, LISTE_CHOIX, MOTIF_IM } from "@/constants";
+import { APP_GEN, LISTE_CHOIX, MOTIF_IM, Sort } from "@/constants";
 import CompteRenduHistorique from "./CompteRenduHistorique";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -42,6 +42,23 @@ const CompteRenduForm = () => {
   const [selectedValue, setSelectedValue] = useState("1");
 
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
+
+  const [selectedRadio, setSelectedRadio] = useState("default"); // State to manage the selected radio value
+
+  const handleRadioChange = (e: any) => {
+    setSelectedRadio(e.target.value);
+  };
+
+  const getDefaultTab = () => {
+    if (selectedRadio === "2") {
+      return "Nouvelles coordonnées"; // Ensure consistent spelling with the TabsTrigger values
+    } else if (selectedRadio === "1") {
+      return "Promesse de règlement";
+    } else {
+      return "Facilité de paiement";
+    }
+  };
+
   return (
     <div className=" mx-auto px-4 sm:px-6 md:px-8">
       <div className="">
@@ -321,68 +338,29 @@ const CompteRenduForm = () => {
         </Card>
 
         <Card className="my-2 flex items-center ">
-          <RadioGroup name="value"  onChange={(e:any)=>console.log(e.target.value)}>
+          <RadioGroup
+            name="value"
+            onChange={(e: any) => {
+              handleRadioChange(e);
+              console.log("selected radio:", typeof selectedRadio);
+              console.log(e.target.value);
+              console.log("change");
+            }}
+          >
             <CardContent className="space-y-2 items-center flex w-full py-2">
               <div className="max-w-7x w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center gap-1">
-                  <div className="flex items-center">
-                    <Input type="radio"
-                      value="1"
-                      name="sort"
-                      className="h-4 mr-2"
-                      id="checkbox-1"
-                    />
-                    <Label>Promesse de règlement</Label>
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <Input type="radio"
-                      value="5"
-                      name="sort"
-                      className="h-4 mr-2"
-                      id="checkbox-5"
+                  {Sort.map((item) => (
+                    <div className="flex items-center">
+                      <Input
+                        type="radio"
+                        value={`${item.Code}`}
+                        name="sort"
+                        className="h-4 mr-"
                       />
-                      <Label>Nouvelles coordonnées</Label>
-            
-                  </div>
-                  <div className="flex items-center">
-                    <Input type="radio"
-                      value="5"
-                      name="sort"
-                      className="h-4 mr-2"
-                      id="checkbox-5"
-                      />
-                      <Label>Facilité de paiement</Label>
-                   
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <Input type="radio"
-                      value="5"
-                      name="sort"
-                      className="h-4 mr-2"
-                      id="checkbox-5"
-                    />
-                    <Label>Non reconnaissance de la créance</Label>
-                  </div>
-                  <div className="flex items-center">
-                    <Input type="radio"
-                      value="6"
-                      name="sort"
-                      className="h-4 mr-2"
-                      id="checkbox-5"
-                    />
-                    <Label>Visite</Label>
-                  </div>
-                  <div className="flex items-center">
-                    <Input type="radio"
-                      value="7"
-                      name="sort"
-                      className="h-4 mr-2"
-                      id="checkbox-6"
-                    />
-                    <Label>Client injoignable</Label>
-                  </div>
+                      <Label>{item.libelle}</Label>
+                    </div>
+                  ))}
                 </div>
               </div>
             </CardContent>
@@ -390,7 +368,7 @@ const CompteRenduForm = () => {
         </Card>
 
         <div className=" py-2  mt-1  dark:bg-inherit ">
-          <Tabs defaultValue="Promesse de règlement">
+          <Tabs defaultValue={getDefaultTab()}>
             <TabsList>
               <TabsTrigger value="Promesse de règlement">
                 Promesse de règlement

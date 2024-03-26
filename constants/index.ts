@@ -43,3 +43,12 @@ export const MOTIF_IM=[
   {Code : 5, libelle :"Débit non autorisé"},
   {Code : 6, libelle :"autre"},
 ]
+
+export const Sort=[
+ {Code : 1, libelle :"Promesse de règlement"},
+  {Code : 2, libelle :"Nouvelles coordonnées"},
+  {Code : 3, libelle :"Facilité de paiement"},
+  {Code : 4, libelle :"Non reconnaissance de la créance"},
+  {Code : 5, libelle :"Visite"},
+  {Code : 6, libelle :"Client injoignable"},
+]
