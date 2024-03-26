@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -37,12 +37,30 @@ import NonreconnaissancedelaCreanceForm from "@/components/forms/Compte-rendu-fo
 import VisiteForm from "@/components/forms/Compte-rendu-form/visiteForm";
 import { Textarea } from "@/components/ui/textarea";
 import useClientSore from "@/hooks/useCompteRenduForm";
+import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
+import { AbCompte } from "@/Models/AbCompte.model";
 
-const CompteRenduForm = () => {
+
+interface CompteRenduFormProps {
+  suiviAgenda: SuiviAgenda;
+  listcompte: AbCompte[];
+  historiqueCompteRendu: SuiviAgenda[];
+
+}
+
+const CompteRenduForm = (
+  { suiviAgenda:suiviagendaprops,listcompte ,historiqueCompteRendu}: CompteRenduFormProps,
+) => {
+
   const [selectedValue, setSelectedValue] = useState("1");
 
-  const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
-
+  const { client, handleIputChangeSuiviAgenda, suiviAgenda,setClient } = useClientSore();
+  useEffect(() => {
+    setClient(suiviagendaprops)
+    console.log(suiviAgenda)
+    console.log(listcompte)
+  }, [setClient,suiviagendaprops,listcompte])
+  
   const [selectedRadio, setSelectedRadio] = useState("default"); // State to manage the selected radio value
 
   const handleRadioChange = (e: any) => {
@@ -68,7 +86,7 @@ const CompteRenduForm = () => {
             <div className="flex ">
               <Input
                 readOnly
-                value={client.cli}
+                value={suiviAgenda.cli}
                 id="cli"
                 className="w-1/3 px-1 mr-1"
                 type="number"
@@ -243,17 +261,19 @@ const CompteRenduForm = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableHead className="w-[100px]">Agence</TableHead>
-              <TableCell>Ncp</TableCell>
-              <TableCell>Nom</TableCell>
-              <TableCell className="text-right">Montant Impaye</TableCell>
-              <TableCell className="text-right">Nbj Imp</TableCell>
-              <TableCell className="text-right">Solde debiteur</TableCell>
-              <TableCell className="text-right">Depassement</TableCell>
-              <TableCell className="text-right">Nbj.SDB</TableCell>
-              <TableCell className="text-right">Tot.Irregulier</TableCell>
-            </TableRow>
+            {listcompte && listcompte.map((item) => (
+              <TableRow key={item.ncp}>
+                <TableCell>{item.age}</TableCell>
+                <TableCell>{item.ncp}</TableCell>
+                <TableCell>{item.nom}</TableCell>
+                <TableCell className="text-right">{item.mnt_imp}</TableCell>
+                <TableCell className="text-right">{item.nombre_jours}</TableCell>
+                <TableCell className="text-right">{item.mnt_sdb}</TableCell>
+                <TableCell className="text-right">{item.depassement}</TableCell>
+                <TableCell className="text-right">{item.nombre_jours_sdb}</TableCell>
+                <TableCell className="text-right">{item.tot_creance}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
 
@@ -286,7 +306,7 @@ const CompteRenduForm = () => {
                     >
                       <SelectLabel>Fruits</SelectLabel>
                       {MOTIF_IM.map((item) => (
-                        <SelectItem value={`${item.Code}`}>
+                        <SelectItem key={item.Code} value={`${item.Code}`}>
                           {item.libelle}
                         </SelectItem>
                       ))}
@@ -313,7 +333,7 @@ const CompteRenduForm = () => {
                     <SelectGroup>
                       <SelectLabel>Fruits</SelectLabel>
                       {LISTE_CHOIX.map((item) => (
-                        <SelectItem value={`${item.Code}`}>
+                        <SelectItem key={item.Code} value={`${item.Code}`}>
                           {item.libelle}
                         </SelectItem>
                       ))}
@@ -351,8 +371,8 @@ const CompteRenduForm = () => {
               <div className="max-w-7x w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center gap-1">
                   {Sort.map((item) => (
-                    <div className="flex items-center">
-                      <Input
+                    <div className="flex items-center" key={item.Code}>
+                      <Input key={item.Code}
                         type="radio"
                         value={`${item.Code}`}
                         name="sort"
@@ -454,7 +474,7 @@ const CompteRenduForm = () => {
                     <SelectGroup>
                       {/* <SelectLabel></SelectLabel> */}
                       {APP_GEN.map((item) => (
-                        <SelectItem value={`${item.Code}`}>
+                        <SelectItem key={item.Code} value={`${item.Code}`}>
                           {item.libelle}
                         </SelectItem>
                       ))}
@@ -478,7 +498,7 @@ const CompteRenduForm = () => {
             </div>
           </CardContent>
         </Card>
-        <CompteRenduHistorique />
+        <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
       </div>
     </div>
   );

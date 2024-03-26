@@ -26,22 +26,31 @@ import {
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import CompteRenduForm from "./_component/Compte-rendu-form";
+import { getCompterendu, getListCompte, getListCompteRenduHistorique } from "@/actions/client.action";
 
 
-const page = () => {
-  const date = new Date();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    cli?: string; 
+  };
+}) {
+  const cli = searchParams?.cli || "";
+  const suiviAgenda =await getCompterendu(cli)
+  const listecompte=await getListCompte(cli)
+  const historiqueCompteRendu= await getListCompteRenduHistorique(cli)
+
   return (
-    <div className="bg-hero-pattern  dark:bg-none ">
+    <div className="bg-hero-patter  dark:bg-none ">
       <div className="py-6">
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
             Compte Rendu
           </h1>
         </div>
-        <CompteRenduForm/>
+        <CompteRenduForm suiviAgenda={suiviAgenda} listcompte={listecompte} historiqueCompteRendu={historiqueCompteRendu}/>
       </div>
     </div>
   );
 };
-
-export default page;

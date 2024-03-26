@@ -1,4 +1,5 @@
 "use server";
+import { AbCompte } from "@/Models/AbCompte.model";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
 import { fonction } from "@/Models/fonction.model";
@@ -98,9 +99,46 @@ export const getAgences = async () => {
 export const getCompterendu = async (IdClient?: string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<SuiviAgenda>(`http://localhost:10001/client/getcompterendu/${IdClient}`);
+    console.log(`http://localhost:10001/client/getcompterendu/${IdClient}`);
+    const res = await axios.get<SuiviAgenda>(`http://localhost:10001/client/compteRendu?cli=${IdClient}`);
     return res.data;
+
   } catch (error) {
     return {} as SuiviAgenda;
   } 
 };
+
+export const getListCompte = async (IdClient?: string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(`http://localhost:10001/client/listcompte?cli=049105812036`);
+    const res = await axios.get<AbCompte[]>(`http://localhost:10001/client/listcompte?cli=${IdClient}`);
+    return res.data;
+  } catch (error) {
+    return [] as AbCompte[];
+  } 
+}
+
+
+export const getListCompteRenduHistorique = async (IdClient?: string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(`http://localhost:10001/client/listhistorique?cli=${IdClient}`);
+    const res = await axios.get<SuiviAgenda[]>(`http://localhost:10001/client/listhistorique?cli=${IdClient}`);
+    return res.data;
+  } catch (error) {
+    return [] as SuiviAgenda[];
+  }
+}
+
+
+export const createCompteRendu = async (compteRendu: SuiviAgenda) => {
+  try {
+    // axios.defaults.baseURL = `${process.env.API_URL}`;
+    // const res = await axios.post(`http://localhost:10001/client/createcompterendu`, compteRendu);
+    // return res.data;
+    console.log(compteRendu)
+  } catch (error) {
+    return {} as SuiviAgenda;
+  }
+}
