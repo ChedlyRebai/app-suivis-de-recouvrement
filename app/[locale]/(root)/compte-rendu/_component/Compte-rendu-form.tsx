@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 
 import { APP_GEN, LISTE_CHOIX, MOTIF_IM, Sort } from "@/constants";
 import CompteRenduHistorique from "./CompteRenduHistorique";
@@ -39,6 +39,9 @@ import { Textarea } from "@/components/ui/textarea";
 import useClientSore from "@/hooks/useCompteRenduForm";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { AbCompte } from "@/Models/AbCompte.model";
+import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
 
 interface CompteRenduFormProps {
@@ -54,18 +57,65 @@ const CompteRenduForm = (
 
   const [selectedValue, setSelectedValue] = useState("1");
 
-  const { client, handleIputChangeSuiviAgenda, suiviAgenda,setClient } = useClientSore();
+  const { client, handleIputChangeSuiviAgenda,saveSuiviAgenda, suiviAgenda,setClient,seTsuiAgenda:setSuiviAgenda } = useClientSore();
   useEffect(() => {
     setClient(suiviagendaprops)
     console.log(suiviAgenda)
     console.log(listcompte)
   }, [setClient,suiviagendaprops,listcompte])
   
-  const [selectedRadio, setSelectedRadio] = useState("default"); // State to manage the selected radio value
+ 
+
+  const [selectedRadio, setSelectedRadio] = useState("0"); // State to manage the selected radio value
 
   const handleRadioChange = (e: any) => {
     setSelectedRadio(e.target.value);
+    let {compte_rendu,app_gen}=suiviAgenda
+    setSuiviAgenda({compte_rendu,app_gen} as SuiviAgenda);
+    console.log(selectedRadio)
   };
+  const searchParams = useSearchParams()
+    const cli=searchParams.get("cli")
+    console.log(cli)
+
+  const handleSubmit=()=>{
+    console.log(suiviAgenda);
+    console.log(selectedRadio)
+    
+    let compte_rendu="";
+    if(selectedRadio==="1"){
+      compte_rendu=`Promesse de paiement : Montant =  ${suiviAgenda.mnt_reg}  Date =  ${suiviAgenda.date_ver?.toLocaleDateString()} ${suiviAgenda.compte_rendu || ""}` ;
+      console.log(compte_rendu)
+    }else if(selectedRadio==="2"){
+
+      compte_rendu=`Nouvelle coordonnées : Nouveau tel1 = ${suiviAgenda.nouv_tel} Nouveau tel2 = ${suiviAgenda.nouv_te2} ${suiviAgenda.compte_rendu || ""}`;
+      console.log("Nouvelle coordonnee")
+    }else if(selectedRadio==="3"){
+   
+      compte_rendu=`Facilité de paiement : Montant global = ${client.mnt_imp} Nombre d'echeance = ${suiviAgenda.nb_ech} Mnt. 1ére ech. = ${suiviAgenda.mntech1} Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} Mnt. 2ème ech. = ${suiviAgenda.mntech2} Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} Mnt. 3ème ech. = ${suiviAgenda.mntech3} Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} Mnt. 4ème ech. = ${suiviAgenda.mntech4} Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} Mnt. 5ème ech. = ${suiviAgenda.mntech5} Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} ${suiviAgenda.compte_rendu || ""}`;
+      console.log("Facilite de paiement")
+    }else if(selectedRadio==="4"){
+      console.log("Non reconnaissance de la creance")
+      compte_rendu=`Non reconnaissance de la creance: Observation=${suiviAgenda.observation || ""} ${suiviAgenda.compte_rendu || ""}`;
+    }else if(selectedRadio==="5"){
+      compte_rendu=`Visite: Date visite:${suiviAgenda.date_visite} Heure Visite= ${suiviAgenda.h_rdv}  ${suiviAgenda.compte_rendu || ""}`;
+      
+    }else if(selectedRadio==="6"){
+      console.log("Client injoignable")
+      compte_rendu=`Client injoignable: ${suiviAgenda.compte_rendu || ""}`;
+    }
+
+    console.log("compte rendu:",compte_rendu)
+    console.log("suiviAgenda:",suiviAgenda)
+    
+    
+    saveSuiviAgenda(suiviAgenda,compte_rendu,cli!!)
+
+  }
+
+
+  
+  
 
   const getDefaultTab = () => {
     if (selectedRadio === "2") {
@@ -166,7 +216,7 @@ const CompteRenduForm = (
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Mnt_Imp">Mnt Imp</Label>
             <Input readOnly value={client.mnt_imp} id="Mnt_Imp" type="text" />
-          </div>
+          </div> 
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="Solde_debiteur">Solde debiteur</Label>
             <Input readOnly value={client.sd} id="Solde_debiteur" type="text" />
@@ -362,28 +412,27 @@ const CompteRenduForm = (
             name="value"
             onChange={(e: any) => {
               handleRadioChange(e);
-              console.log("selected radio:", typeof selectedRadio);
-              console.log(e.target.value);
-              console.log("change");
+              console.log(selectedRadio);
             }}
           >
-            <CardContent className="space-y-2 items-center flex w-full py-2">
-              <div className="max-w-7x w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center gap-1">
-                  {Sort.map((item) => (
-                    <div className="flex items-center" key={item.Code}>
-                      <Input key={item.Code}
-                        type="radio"
-                        value={`${item.Code}`}
-                        name="sort"
-                        className="h-4 mr-"
-                      />
-                      <Label>{item.libelle}</Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
+           <CardContent className="space-y-2 items-center flex w-full py-2">
+  <div className="max-w-7x w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center gap-1">
+      {Sort.map((item) => (
+        <div className="flex items-center" > {/* Assign key to outermost element */}
+          <Input
+            type="radio"
+            value={`${item.Code}`}
+            name="sort"
+            className="h-4 mr-"
+          />
+          <Label>{item.libelle}</Label>
+        </div>
+      ))}
+    </div>
+  </div>
+</CardContent>
+
           </RadioGroup>
         </Card>
 
@@ -499,6 +548,9 @@ const CompteRenduForm = (
           </CardContent>
         </Card>
         <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
+        <Button onClick={handleSubmit}>
+          Save
+        </Button>
       </div>
     </div>
   );

@@ -1,13 +1,16 @@
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
+import { createCompteRendu } from "@/actions/client.action";
 import { create } from "zustand";
 
 interface useClientSoreInterface {
     client: ClientRecouv ;
     suiviAgenda:SuiviAgenda;
+    compteRendu:any;
     seTsuiAgenda:(suiviAgenda:SuiviAgenda)=>void;
     setClient: (client: ClientRecouv) => void;
     handleIputChangeSuiviAgenda: (champ:string,value:string) => void;
+    saveSuiviAgenda: (suiviAgenda:SuiviAgenda,compteRendu:any,cli:string) =>Promise<void>;
 }
 
 const useClientSore = create<useClientSoreInterface>((set) => ({
@@ -15,6 +18,7 @@ const useClientSore = create<useClientSoreInterface>((set) => ({
     suiviAgenda:{} as SuiviAgenda,
     seTsuiAgenda:(suiviAgenda:SuiviAgenda)=>set({suiviAgenda}),
     setClient: (client) => set({ client }),
+    compteRendu:"dddd",
     handleIputChangeSuiviAgenda: (champ,value) => {
         set((state) => ({
             suiviAgenda: {
@@ -22,7 +26,12 @@ const useClientSore = create<useClientSoreInterface>((set) => ({
                 [champ]: value,
             },
         }));
+    },
 
+    saveSuiviAgenda: async (suiviAgenda,compteRendu,cli) => {
+        console.log("s:",suiviAgenda,"c:",compteRendu);
+        const savedSuiviAgenda=await createCompteRendu(suiviAgenda,compteRendu,cli);
+        return savedSuiviAgenda;    
     },
 }));
 

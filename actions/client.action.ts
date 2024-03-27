@@ -3,8 +3,10 @@ import { AbCompte } from "@/Models/AbCompte.model";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
 import { fonction } from "@/Models/fonction.model";
+import { getSession } from "@/lib";
 import axios from "axios";
 import { group } from "console";
+import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import { cookies } from "next/headers";
 
 export interface Main {
@@ -132,12 +134,17 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
 }
 
 
-export const createCompteRendu = async (compteRendu: SuiviAgenda) => {
+export const createCompteRendu = async (suiviAgenda: SuiviAgenda,compteRendu:any,cli:string) => {
   try {
-    // axios.defaults.baseURL = `${process.env.API_URL}`;
-    // const res = await axios.post(`http://localhost:10001/client/createcompterendu`, compteRendu);
-    // return res.data;
-    console.log(compteRendu)
+    console.log("suiviAgenda",suiviAgenda,"compterendu",compteRendu)
+    const user=await getSession()
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+  
+    
+    const res = await axios.post(`http://localhost:10001/compterendu/createcompterendu`, {suiviAgenda,compteRendu,user,cli});
+  
+    return res.data;
+
   } catch (error) {
     return {} as SuiviAgenda;
   }

@@ -15,7 +15,11 @@ const FaciliteDePaiementForm = () => {
     <div className="my-2 grid grid-flow-col grid-cols-4 grid-rows-4 gap-3 ">
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="MontantImpaye">Montant Impaye</Label>
-        <Input id="MontantImpaye" type="text" />
+        <Input onChange={(e) =>
+            handleIputChangeSuiviAgenda("nb_ech", e.target.value)
+          }
+          
+          id="MontantImpaye" type="text" />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Nombreech">Nombre echeance</Label>
