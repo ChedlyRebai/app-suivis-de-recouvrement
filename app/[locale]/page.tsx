@@ -8,7 +8,7 @@ import Mainlayout from "./(root)/access-management/_component/MainLayout";
 const Page = async ({
   children,
 }:{
-  children: React.ReactNode;
+  children: any;
 }) => {
   const links = await getLinksByCodeFonction();
   const t = await getTranslations("access-management");
