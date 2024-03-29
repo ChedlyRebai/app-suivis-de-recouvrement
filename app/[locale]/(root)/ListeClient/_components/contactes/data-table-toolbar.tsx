@@ -24,8 +24,6 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>;
 }
 
-
-
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
@@ -47,7 +45,7 @@ export function DataTableToolbar<TData>({
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 100);
-  
+
   const handleGroup = (group: string) => {
     const params = new URLSearchParams(searchParams);
     if (group) {
@@ -62,7 +60,7 @@ export function DataTableToolbar<TData>({
       params.set("agence", agence);
     }
     replace(`${pathname}?${params.toString()}`);
-  }
+  };
   useEffect(() => {
     const fetchGroupes = async () => {
       try {
@@ -75,7 +73,7 @@ export function DataTableToolbar<TData>({
     const fetchAgences = async () => {
       try {
         const agencesData = await getAgences();
-      
+
         setAgences(agencesData);
       } catch (error) {
         console.error("Error fetching agences:", error);
@@ -102,18 +100,18 @@ export function DataTableToolbar<TData>({
           />
         )} */}
       <Select
-       defaultValue={searchParams.get("groupe")?.toString()}
-       onValueChange={(value) => {
-         handleGroup(value);
-         console.log(value);
-       }}>
+        defaultValue={searchParams.get("groupe")?.toString()}
+        onValueChange={(value) => {
+          handleGroup(value);
+          console.log(value);
+        }}
+      >
         <SelectTrigger className="w-fit">
           <SelectValue placeholder="Select a Group" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             {groupes.map((item: any) => {
-              console.log(item);
               return <SelectItem value={item.groupe}>{item.groupe}</SelectItem>;
             })}
           </SelectGroup>
@@ -141,7 +139,7 @@ export function DataTableToolbar<TData>({
         <SelectContent>
           <SelectGroup>
             {agences.map((item: any) => {
-              console.log(item);
+       
               return <SelectItem value={item.codug}>{item.libelle}</SelectItem>;
             })}
           </SelectGroup>

@@ -1,114 +1,233 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/tdBkOVvkAXp
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+import Image from "next/image"
 import Link from "next/link"
+import {
+  File,
+  Home,
+  LineChart,
+  ListFilter,
+  MoreHorizontal,
+  Package,
+  Package2,
+  PanelLeft,
+  PlusCircle,
+  Search,
+  Settings,
+  ShoppingCart,
+  Users2,
+} from "lucide-react"
+
+import { Badge } from "@/components/ui/badge"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
-import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
 
 
-export default function Component() {
+export default function page() {
   return (
-    <div className="flex min-h-screen w-full">
-      <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
-        <div className="flex h-full flex-col gap-2">
-          <div className="flex h-[60px] items-center border-b px-6">
-            <Link className="flex items-center gap-2 font-semibold" href="#">
-              <Package2Icon className="h-6 w-6" />
-              <span className="">Acme Inc</span>
-            </Link>
-            <Button className="ml-auto h-8 w-8" size="icon" variant="outline">
-              <BellIcon className="h-4 w-4" />
-              <span className="sr-only">Toggle notifications</span>
-            </Button>
-          </div>
-          <div className="flex-1 overflow-auto py-2">
-            <nav className="grid items-start px-4 text-sm font-medium">
-              <Link
-                className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
-                href="#"
-              >
-                <HomeIcon className="h-4 w-4" />
-                Home
-              </Link>
-              <Link
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                href="#"
-              >
-                <CalendarIcon className="h-4 w-4" />
-                Events
-              </Link>
-              <Link
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                href="#"
-              >
-                <UsersIcon className="h-4 w-4" />
-                Attendees
-              </Link>
-              <Link
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                href="#"
-              >
-                <BarChartIcon className="h-4 w-4" />
-                Analytics
-              </Link>
-            </nav>
-          </div>
-          {/* <div className="mt-auto p-4">
-            <Card>
-              <CardHeader className="pb-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>Unlock all features and get unlimited access to our support team</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full" size="sm">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
-          </div> */}
-        </div>
-      </div>
-      <div className="flex flex-col">
-        {/* <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
-          <Link className="lg:hidden" href="#">
-            <Package2Icon className="h-6 w-6" />
-            <span className="sr-only">Home</span>
+    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+      <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+        <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+          <Link
+            href="#"
+            className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+          >
+            <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
+            <span className="sr-only">Acme Inc</span>
           </Link>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
-                <Input
-                  className="w-full bg-white shadow-none appearance-none pl-8 md:w-2/3 lg:w-1/3 dark:bg-gray-950"
-                  placeholder="Search events..."
-                  type="search"
-                />
-              </div>
-            </form>
+          
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <Home className="h-5 w-5" />
+                <span className="sr-only">Dashboard</span>
+              </Link>
+            
+          
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <span className="sr-only">Orders</span>
+              </Link>
+            
+          
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <Package className="h-5 w-5" />
+                <span className="sr-only">Products</span>
+              </Link>
+            
+          
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <Users2 className="h-5 w-5" />
+                <span className="sr-only">Customers</span>
+              </Link>
+            
+          
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <LineChart className="h-5 w-5" />
+                <span className="sr-only">Analytics</span>
+              </Link>
+           
+        </nav>
+        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+          
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <Settings className="h-5 w-5" />
+                <span className="sr-only">Settings</span>
+              </Link>
+            
+        </nav>
+      </aside>
+      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button size="icon" variant="outline" className="sm:hidden">
+                <PanelLeft className="h-5 w-5" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="sm:max-w-xs">
+              <nav className="grid gap-6 text-lg font-medium">
+                <Link
+                  href="#"
+                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                >
+                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
+                  <span className="sr-only">Acme Inc</span>
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <Home className="h-5 w-5" />
+                  Dashboard
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <ShoppingCart className="h-5 w-5" />
+                  Orders
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-4 px-2.5 text-foreground"
+                >
+                  <Package className="h-5 w-5" />
+                  Products
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <Users2 className="h-5 w-5" />
+                  Customers
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <LineChart className="h-5 w-5" />
+                  Settings
+                </Link>
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <Breadcrumb className="hidden md:flex">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="#">Dashboard</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="#">Products</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>All Products</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <div className="relative ml-auto flex-1 md:grow-0">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search..."
+              className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
+            />
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"
+                variant="outline"
                 size="icon"
-                variant="ghost"
+                className="overflow-hidden rounded-full"
               >
-                <img
+                <Image
+                  src="/placeholder-user.jpg"
+                  width={36}
+                  height={36}
                   alt="Avatar"
-                  className="rounded-full"
-                  height="32"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                  width="32"
+                  className="overflow-hidden"
                 />
-                <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -120,252 +239,371 @@ export default function Component() {
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </header> */}
-        {/* <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <div className="grid items-center gap-4 md:grid-cols-2">
-            <h1 className="font-semibold text-lg md:text-2xl">Events</h1>
-            <Button className="ml-auto md:justify-self-end" size="sm">
-              New Event
-            </Button>
-          </div>
-          <Card>
-            <CardContent className="p-0">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gray-100/40 rounded-t-lg dark:bg-gray-800/40" />
-                <div className="absolute inset-0 z-10 flex items-center justify-center gap-2">
-                  <ChevronLeftIcon className="h-4 w-4" />
-                  <span className="font-semibold">Previous</span>
-                  <span className="text-gray-500 dark:text-gray-400">March 2023</span>
-                  <span className="font-semibold">Next</span>
-                  <ChevronRightIcon className="h-4 w-4" />
-                </div>
-            
+        </header>
+        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+          <Tabs defaultValue="all">
+            <div className="flex items-center">
+              <TabsList>
+                <TabsTrigger value="all">All</TabsTrigger>
+                <TabsTrigger value="active">Active</TabsTrigger>
+                <TabsTrigger value="draft">Draft</TabsTrigger>
+                <TabsTrigger value="archived" className="hidden sm:flex">
+                  Archived
+                </TabsTrigger>
+              </TabsList>
+              <div className="ml-auto flex items-center gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="h-8 gap-1">
+                      <ListFilter className="h-3.5 w-3.5" />
+                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                        Filter
+                      </span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuCheckboxItem checked>
+                      Active
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem>
+                      Archived
+                    </DropdownMenuCheckboxItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <Button size="sm" variant="outline" className="h-8 gap-1">
+                  <File className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Export
+                  </span>
+                </Button>
+                <Button size="sm" className="h-8 gap-1">
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Add Product
+                  </span>
+                </Button>
               </div>
-            </CardContent>
-          </Card>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle>Total Attendees</CardTitle>
-                <CardDescription>Monthly Active Users</CardDescription>
-              </CardHeader>
-              <CardContent className="flex items-center justify-center py-4">
-                <CurvedlineChart className="w-full aspect-[2/1]" />
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle>Revenue</CardTitle>
-                <CardDescription>Monthly Active Users</CardDescription>
-              </CardHeader>
-              <CardContent className="flex items-center justify-center py-4">
-                <CurvedlineChart className="w-full aspect-[2/1]" />
-              </CardContent>
-            </Card>
-          </div>
-        </main> */}
+            </div>
+            
+            <TabsContent value="all">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Products</CardTitle>
+                  <CardDescription>
+                    Manage your products and view their sales performance.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="hidden w-[100px] sm:table-cell">
+                          <span className="sr-only">Image</span>
+                        </TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead className="hidden md:table-cell">
+                          Price
+                        </TableHead>
+                        <TableHead className="hidden md:table-cell">
+                          Total Sales
+                        </TableHead>
+                        <TableHead className="hidden md:table-cell">
+                          Created at
+                        </TableHead>
+                        <TableHead>
+                          <span className="sr-only">Actions</span>
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="hidden sm:table-cell">
+                          <Image
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src="/placeholder.svg"
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          Laser Lemonade Machine
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Draft</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          $499.99
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          25
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          2023-07-12 10:42 AM
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="hidden sm:table-cell">
+                          <Image
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src="/placeholder.svg"
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          Hypernova Headphones
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Active</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          $129.99
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          100
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          2023-10-18 03:21 PM
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="hidden sm:table-cell">
+                          <Image
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src="/placeholder.svg"
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          AeroGlow Desk Lamp
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Active</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          $39.99
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          50
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          2023-11-29 08:15 AM
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="hidden sm:table-cell">
+                          <Image
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src="/placeholder.svg"
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          TechTonic Energy Drink
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="secondary">Draft</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          $2.99
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          0
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          2023-12-25 11:59 PM
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="hidden sm:table-cell">
+                          <Image
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src="/placeholder.svg"
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          Gamer Gear Pro Controller
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Active</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          $59.99
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          75
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          2024-01-01 12:00 AM
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="hidden sm:table-cell">
+                          <Image
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src="/placeholder.svg"
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          Luminous VR Headset
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">Active</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          $199.99
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          30
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          2024-02-14 02:14 PM
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+                <CardFooter>
+                  <div className="text-xs text-muted-foreground">
+                    Showing <strong>1-10</strong> of <strong>32</strong>{" "}
+                    products
+                  </div>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </main>
       </div>
     </div>
-  )
-}
-
-function BarChartIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="12" x2="12" y1="20" y2="10" />
-      <line x1="18" x2="18" y1="20" y2="4" />
-      <line x1="6" x2="6" y1="20" y2="16" />
-    </svg>
-  )
-}
-
-
-function BellIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-    </svg>
-  )
-}
-
-
-function CalendarIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-      <line x1="16" x2="16" y1="2" y2="6" />
-      <line x1="8" x2="8" y1="2" y2="6" />
-      <line x1="3" x2="21" y1="10" y2="10" />
-    </svg>
-  )
-}
-
-
-function ChevronLeftIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m15 18-6-6 6-6" />
-    </svg>
-  )
-}
-
-
-function ChevronRightIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
-  )
-}
-
-
-function CurvedlineChart(props:any) {
-  return (
-    <div {...props}>
-      
-    </div>
-  )
-}
-
-
-function HomeIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>
-  )
-}
-
-
-function Package2Icon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
-      <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
-      <path d="M12 3v6" />
-    </svg>
-  )
-}
-
-
-function SearchIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  )
-}
-
-
-function UsersIcon(props:any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
   )
 }

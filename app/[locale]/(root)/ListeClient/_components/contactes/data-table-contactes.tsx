@@ -34,8 +34,9 @@ import {
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import { DataTableToolbar } from "./data-table-toolbar";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ab_client } from "@/Models/ab_client.model";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -87,7 +88,35 @@ export function DataTableContactes<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  console.log(total);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const [selectedCode, setSelectedCode] = useState("");
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams, selectedCode]
+  );
+  const [inputValue, setInputValue] = useState("");
+  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
+  useEffect(() => {
+    setSearch(`${searchParams.get("code")}`);
+    console.log(search);
+  }, [searchParams.get("code")]);
+
+  const addQuery = (row: any) => {
+    console.log();
+    router.push(
+      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
+    );
+  };
+
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -157,11 +186,33 @@ export function DataTableContactes<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                onClick={() => {
+                  console.log(
+                    (row.original as { cli: string }).cli
+                  );
+                  searchParams.delete()
+                  router.push(
+                    "compte-rendu" +
+                      "?" +
+                      createQueryString(
+                        "cli",
+                        `${
+                          (row.original as { cli: string })
+                            .cli
+                        }`
+                      )
+                  );
+                  
+                }}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className="cursor-pointer"
+                      onClick={(e)=>console.log(e)}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -182,7 +233,7 @@ export function DataTableContactes<TData, TValue>({
             )}
           </TableBody>
           <TableRow>
-          <TableCell className="font-bold">
+            <TableCell className="font-bold">
               TOTAL Dossier: {totalAccout}
             </TableCell>
             <TableCell className="font-bold">

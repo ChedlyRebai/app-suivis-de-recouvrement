@@ -169,7 +169,7 @@ const CompteRenduForm = ({
   };
 
   return (
-    <div className=" mx-auto px-4 sm:px-6 md:px-8">
+    <div className=" mx-auto px-4 sm:px-6 md:px- 8">
       <div className="">
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="item-1">

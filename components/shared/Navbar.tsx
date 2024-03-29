@@ -11,7 +11,7 @@ type NavbarProps = {
 
 const Navbar = ({ onChange, session }: NavbarProps) => {
   return (
-    <div className="sticky top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
+    <div className="fixed w-screen top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button
         type="button"
         className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -59,7 +59,8 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
             </div>
           </form>
         </div>
-
+        
+        
         <div className="ml-4 flex items-center md:ml-6">
           <button
             type="button"

@@ -13,21 +13,7 @@ import { getLinksByCodeFonction } from "@/actions/navbar.action";
 import { getTranslations } from "next-intl/server";
 import Mainlayout from "./access-management/_component/MainLayout";
 
-const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: InboxIcon, current: false },
-  { name: "Reports", href: "#", icon: BarChart2Icon, current: false },
-];
 
-
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
 
 function classNames(...classes: String[]) {
   return classes.filter(Boolean).join(" ");

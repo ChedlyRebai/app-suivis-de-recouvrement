@@ -9,6 +9,13 @@ import {
   getClientNonContactes,
   getGroupes,
 } from "@/actions/client.action";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default async function Home({
   searchParams,
@@ -43,7 +50,6 @@ export default async function Home({
     to
   );
 
-
   const dataNon = await getClientNonContactes(
     search,
     currentPage,
@@ -58,10 +64,8 @@ export default async function Home({
   const agences = await getAgences();
 
   return (
-    <div>
-      
-      <div className="py-6">
-
+    <div className="bg-muted/40">
+      <div className="py-6 mt-9">
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white"></h1>
         </div>
@@ -78,13 +82,14 @@ export default async function Home({
               </TabsTrigger>
             </TabsList>
             <TabsContent value="noncontactes">
-              <div className="py-6">
-                <div className=" mx-auto px-4 sm:px-6 md:px-8">
-                  <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                    Liste des clients non contactés{" "}
-                  </h1>
-                </div>
-                <div className=" mx-auto px-4 sm:px-6 md:px-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Liste des clients Non contactés</CardTitle>
+                  {/* <CardDescription>
+                    Manage your products and view their sales performance.
+                  </CardDescription> */}
+                </CardHeader>
+                <CardContent>
                   <DataTableContactes
                     agences={agences}
                     groupes={groupes}
@@ -95,18 +100,18 @@ export default async function Home({
                     data={dataNon.result}
                     type="noncontactes"
                   />
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </TabsContent>
             <TabsContent value="contactes">
-              <div className="py-6">
-                <div className=" mx-auto px-4 sm:px-6 md:px-8">
-                  <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                    Liste des clients contactés{" "}
-                  </h1>
-                </div>
-                <div className=" mx-auto px-4 sm:px-6 md:px-8">
-
+              <Card>
+                <CardHeader>
+                  <CardTitle>Liste des clients contactés</CardTitle>
+                  {/* <CardDescription>
+                    Manage your products and view their sales performance.
+                  </CardDescription> */}
+                </CardHeader>
+                <CardContent>
                   <DataTableContactes
                     agences={agences}
                     groupes={groupes}
@@ -117,8 +122,8 @@ export default async function Home({
                     data={data.result}
                     type="noncontactes"
                   />
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
