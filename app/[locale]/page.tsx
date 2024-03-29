@@ -7,9 +7,9 @@ import Mainlayout from "./(root)/access-management/_component/MainLayout";
 
 const Page = async ({
   children,
-}: Readonly<{
+}:{
   children: React.ReactNode;
-}>) => {
+}) => {
   const links = await getLinksByCodeFonction();
   const t = await getTranslations("access-management");
   const session = await getSession();
