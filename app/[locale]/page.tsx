@@ -5,7 +5,7 @@ import Image from "next/image";
 import Navbar from "./(root)/access-management/_component/MainLayout";
 import Mainlayout from "./(root)/access-management/_component/MainLayout";
 
-export async function Page ()  {
+export async function page ()  {
 
   return (
     <div></div>
