@@ -5,11 +5,11 @@ import Image from "next/image";
 import Navbar from "./(root)/access-management/_component/MainLayout";
 import Mainlayout from "./(root)/access-management/_component/MainLayout";
 
-const Page = async ({
+export async function Page ({
   children,
 }:{
   children: any;
-}) => {
+})  {
   const links = await getLinksByCodeFonction();
   const t = await getTranslations("access-management");
   const session = await getSession();
@@ -21,4 +21,3 @@ const Page = async ({
   );
 };
 
-export default Page;
