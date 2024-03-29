@@ -192,7 +192,7 @@ export function DataTableContactes<TData, TValue>({
                   console.log(
                     (row.original as { cli: string }).cli
                   );
-                  searchParams.delete()
+                  
                   router.push(
                     "compte-rendu" +
                       "?" +
