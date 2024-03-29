@@ -26,7 +26,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { format, set } from "date-fns";
 
 import { APP_GEN, LISTE_CHOIX, MOTIF_IM, Sort } from "@/constants";
-import CompteRenduHistorique from "./CompteRenduHistorique";
+
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import PromiseDereglement from "@/components/forms/Compte-rendu-form/PromiseDereglement";
@@ -670,8 +670,7 @@ const CompteRenduForm = ({
           <AccordionItem value="item-7">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
             <AccordionContent>
-              <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
-
+              
               <Button onClick={handleSubmit}>Save</Button>
             </AccordionContent>
           </AccordionItem>
