@@ -169,7 +169,9 @@ export function DataTableContactes<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id}
+                    className="px-2"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -185,7 +187,7 @@ export function DataTableContactes<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
+                <TableRow className="p-0"
                 onClick={() => {
                   console.log(
                     (row.original as { cli: string }).cli
@@ -210,7 +212,7 @@ export function DataTableContactes<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="cursor-pointer"
+                      className="p-2 cursor-pointer"
                       onClick={(e)=>console.log(e)}
                     >
                       {flexRender(

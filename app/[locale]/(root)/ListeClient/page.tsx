@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Suspense } from "react";
 
 export default async function Home({
   searchParams,
@@ -65,11 +66,11 @@ export default async function Home({
 
   return (
     <div className="bg-muted/40">
-      <div className="py-6 mt-9">
+      <div className="py-6 mt-16">
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white"></h1>
         </div>
-
+        <Suspense fallback={<div>Loading...</div>}>
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <Tabs defaultValue="noncontactes" className="">
             <TabsList className="grid w-fit grid-cols-2">
@@ -112,6 +113,7 @@ export default async function Home({
                   </CardDescription> */}
                 </CardHeader>
                 <CardContent>
+                 
                   <DataTableContactes
                     agences={agences}
                     groupes={groupes}
@@ -122,11 +124,13 @@ export default async function Home({
                     data={data.result}
                     type="noncontactes"
                   />
+                  
                 </CardContent>
               </Card>
             </TabsContent>
           </Tabs>
         </div>
+        </Suspense>
       </div>
     </div>
   );

@@ -18,9 +18,6 @@ const config = {
       },
     },
     extend: {
-      backgroundImage:{
-        'hero-pattern': 'url("/images/beams-home@95.jpg")',
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
