@@ -289,9 +289,9 @@ interface CompteRenduHistoriqueProps {
   listHistorique: SuiviAgenda[];
 }
 
-export default function CompteRenduHistorique({
+const CompteRenduHistorique = ({
   listHistorique: data,
-}: CompteRenduHistoriqueProps) {
+}: CompteRenduHistoriqueProps)=> {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -438,3 +438,6 @@ export default function CompteRenduHistorique({
     </div>
   );
 }
+
+
+export default CompteRenduHistorique;
