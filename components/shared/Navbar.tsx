@@ -20,7 +20,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
         <span className="sr-only">Open sidebar</span>
         <MenuIcon className="h-6 w-6" aria-hidden="true" />
       </button>
-      <div className="flex-1 backdrop-blur- mb px-4 flex justify-between">
+      <div className="flex-1 backdrop-blur- mb  px-4 flex justify-between">
         <div className="flex-1 flex">
           <form className="w-full flex md:ml-0" action="#" method="GET">
             <label htmlFor="search-field" className="sr-only">
@@ -54,16 +54,17 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
         
         
         <div className="ml-4 flex items-center md:ml-6">
-          <button
+          {/* <button
             type="button"
             className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <span className="sr-only">View notifications</span>
             <BellIcon className="h-6 w-6" aria-hidden="true" />
-          </button>
+          </button> */}
           <ThemeButton />
+          <div className="w-1"/>
           <LocalSwitcher />
-          <Menu as="div" className="ml-3 relative">
+          <Menu as="div" className="ml-3 relative pr-1">
             <div>
               <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <span className="sr-only">Open user menu</span>

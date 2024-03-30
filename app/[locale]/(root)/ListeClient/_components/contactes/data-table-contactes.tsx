@@ -57,6 +57,7 @@ export function DataTableContactes<TData, TValue>({
   total,
   agences,
   groupes,
+  type
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -120,7 +121,7 @@ export function DataTableContactes<TData, TValue>({
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <DataTableToolbar table={table} />
+        <DataTableToolbar type={type} table={table} />
         {/* <Input
           placeholder="ID client"
           value={(table.getColumn("cli")?.getFilterValue() as string) ?? ""}
@@ -188,7 +189,7 @@ export function DataTableContactes<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow className="p-0"
-                onClick={() => {
+                onDoubleClick={() => {
                   console.log(
                     (row.original as { cli: string }).cli
                   );

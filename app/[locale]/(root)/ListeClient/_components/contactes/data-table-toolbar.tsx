@@ -19,20 +19,42 @@ import { useEffect, useState } from "react";
 import { getAgences, getGroupes } from "@/actions/client.action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  type: "contactes" | "noncontactes";
 }
+
 
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
-  const [groupes, setGroupes] = useState([]);
-  const [agences, setAgences] = useState([]);
+  const [groupes, setGroupes] = useState<any>([]);
+  const [agences, setAgences] = useState<any>([]);
   const { replace } = useRouter();
   const pathname = usePathname();
 
+  const [agenceopen, setagenceOpen] = useState(false);
+  const [groupopen, setgroupOpen] = useState(false);
+  const [agenceValue, setAgenceValue] = useState("");
+  const [groupeValue, setgroupeValue] = useState("");
   const searchParams = useSearchParams();
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -61,24 +83,29 @@ export function DataTableToolbar<TData>({
     }
     replace(`${pathname}?${params.toString()}`);
   };
+
   useEffect(() => {
     const fetchGroupes = async () => {
       try {
         const groupesData = await getGroupes();
         setGroupes(groupesData);
+        console.log(groupesData);
       } catch (error) {
         console.error("Error fetching groupes:", error);
       }
     };
+
     const fetchAgences = async () => {
       try {
         const agencesData = await getAgences();
 
-        setAgences(agencesData);
+         setAgences(agencesData);
+        console.log(agencesData);
       } catch (error) {
         console.error("Error fetching agences:", error);
       }
     };
+
     fetchAgences();
     fetchGroupes();
   }, []);
@@ -92,6 +119,49 @@ export function DataTableToolbar<TData>({
         }}
         className="max-w-sm mr-2"
       />
+      {/* <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
+        >
+          {value
+            ? frameworks.find((framework) => framework.value === value)?.label
+            : "Select framework..."}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search framework..." />
+          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandGroup>
+            {groupes.map((item:any) => (
+              <CommandItem
+                key={item.groupe}
+                value={item.groupe}
+                onSelect={(currentValue) => {
+                  handleGroup(currentValue)
+                  setValue(currentValue === value ? "" : currentValue)
+                  setOpen(false)
+                }}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    value === item.groupe ? "opacity-100" : "opacity-0"
+                  )}
+                />
+                {item.groupe}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover> */}
+
       {/* {table.getColumn("agence") && (
           <DataTableFacetedFilter
             column={table.getColumn("agence")}
@@ -99,6 +169,109 @@ export function DataTableToolbar<TData>({
             options={statuses}
           />
         )} */}
+      <Popover open={agenceopen} onOpenChange={setagenceOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={agenceopen}
+            className="w-[200px] justify-between"
+          >
+            {searchParams.get("agence")
+              ? agences.find(
+                  (framework: any) =>
+                    framework.codug === searchParams.get("agence")
+                )?.libelle || "Sélectionner un agence"
+              : "Sélectionner un agence"}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+
+        <PopoverContent className="w-[200px] p-0">
+          <Command>
+            <CommandInput placeholder="Search agence" />
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {agences.map((item: any) => (
+                <CommandItem
+                  key={item.codug}
+                  value={item.libelle}
+                  onSelect={(currentValue) => {
+                    handleAgence(item.codug);
+                    setAgenceValue(
+                      item.codug === searchParams.get("agence")
+                        ? ""
+                        : item.codug
+                    );
+
+                    setagenceOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      agenceValue === item.codug ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {item.libelle}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      <div className="w-1"/>
+      <Popover  open={groupopen} onOpenChange={setgroupOpen}>
+      <PopoverTrigger asChild>
+  <Button
+    variant="outline"
+    role="combobox"
+    aria-expanded={groupopen}
+    className="w-[200px] justify-between"
+  >
+    {searchParams.get("groupe")
+    ? (groupes.find(
+        (groupe: any) => groupe.groupe == searchParams.get("groupe")
+      )?.groupe) || "Sélectionner un groupe"
+    : "Sélectionner un groupe"}
+  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+</Button>
+</PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0 ml-2">
+          <Command>
+            <CommandInput placeholder="Search group" />
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {groupes.map((item: any,i:number) => (
+                <CommandItem
+                  key={i}
+                  value={item.groupe}
+                  onSelect={(currentValue) => {
+                    handleGroup(item.groupe);
+                    console.log(currentValue);
+                    setgroupeValue(
+                      item.groupe == searchParams.get("groupe")
+                        ? ""
+                        : item.groupe
+                    );
+                    setgroupOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      groupeValue === item.groupe ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+
+                  {item.groupe}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
+{/* 
       <Select
         defaultValue={searchParams.get("groupe")?.toString()}
         onValueChange={(value) => {
@@ -112,11 +285,12 @@ export function DataTableToolbar<TData>({
         <SelectContent>
           <SelectGroup>
             {groupes.map((item: any) => {
+              console.log(item);
               return <SelectItem value={item.groupe}>{item.groupe}</SelectItem>;
             })}
           </SelectGroup>
         </SelectContent>
-      </Select>
+      </Select> */}
 
       {/* {table.getColumn("groupe") && (
           <DataTableFacetedFilter
@@ -126,7 +300,7 @@ export function DataTableToolbar<TData>({
           />
         )} */}
 
-      <Select
+      {/* <Select
         defaultValue={searchParams.get("agence")?.toString()}
         onValueChange={(value) => {
           handleAgence(value);
@@ -139,16 +313,15 @@ export function DataTableToolbar<TData>({
         <SelectContent>
           <SelectGroup>
             {agences.map((item: any) => {
-       
               return <SelectItem value={item.codug}>{item.libelle}</SelectItem>;
             })}
           </SelectGroup>
         </SelectContent>
-      </Select>
+      </Select> */}
 
       {isFiltered && (
         <Button
-          variant="ghost"
+          variant="default"
           onClick={() => table.resetColumnFilters()}
           className=""
         >
