@@ -37,6 +37,7 @@ import { DataTableToolbar } from "./data-table-toolbar";
 import React, { useCallback, useEffect, useState } from "react";
 import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,6 +59,12 @@ export function DataTableContactes<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -65,7 +72,25 @@ export function DataTableContactes<TData, TValue>({
     []
   );
 
+  const [inputValue, setInputValue] = useState("");
+  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  
+
+  console.log(data);
+  const { replace } = useRouter();
+
+  const handleSearch = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (query) {
+      params.set("query", query);
+      params.set("page", "1");
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
 
   const table = useReactTable({
     data,
@@ -89,11 +114,7 @@ export function DataTableContactes<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  const [selectedCode, setSelectedCode] = useState("");
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -103,8 +124,7 @@ export function DataTableContactes<TData, TValue>({
     },
     [searchParams, selectedCode]
   );
-  const [inputValue, setInputValue] = useState("");
-  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
+  
   useEffect(() => {
     setSearch(`${searchParams.get("code")}`);
     console.log(search);
