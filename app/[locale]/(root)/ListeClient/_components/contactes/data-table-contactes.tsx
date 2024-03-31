@@ -63,6 +63,7 @@ export function DataTableContactes<TData, TValue>({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { replace } = useRouter();
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = React.useState({});
@@ -76,11 +77,10 @@ export function DataTableContactes<TData, TValue>({
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  
+
 
   console.log(data);
-  const { replace } = useRouter();
-
+  
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
