@@ -52,6 +52,8 @@ export function ListeAgenceDataTable<TData, TValue>({
 
   const { onClose,column } = useListeAgencestModal();
   const { handleIputChangeSuiviAgenda,suiviAgenda } = useClientSore();
+  console.log(table)
+
   const handleChange=(e:any)=>{
     handleIputChangeSuiviAgenda(column,e.codug)
     console.log(column)
@@ -77,7 +79,7 @@ export function ListeAgenceDataTable<TData, TValue>({
           placeholder="Filter libelle..."
           value={(table.getColumn("libelle")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("libeele")?.setFilterValue(event.target.value)
+            table.getColumn("libelle")?.setFilterValue(event.target.value)
           }
           className="max-w-sm ml-2"
         />

@@ -92,8 +92,9 @@ export function DataTable<TData, TValue>({
       pathname + "?" + createQueryString("code", `${selectedCode as string}`)
     );
   };
+
   const lang = useTranslations();
-  console.log(data)
+
   return (
     <>
       <div className="flex items-center py-">

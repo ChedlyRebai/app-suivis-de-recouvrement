@@ -63,13 +63,18 @@ const PromiseDereglement = () => {
             >
               <ListIcon />
             </Button>
-            <Input
-              className="border p-2 ml-2"
-              value={suiviAgenda.lieu_ver}
-              readOnly
-              id="location"
-              placeholder="Lieu"
-            />
+
+
+            <div className="flex ">
+              <Input
+                readOnly
+                id="Client"
+                className="w-1/4 px-2 mr-1"
+                value={suiviAgenda.lieu_ver}
+                type="number"
+              />
+              <Input readOnly id="Client" className="w-2/3"  type="text" />
+            </div>
           </div>
         </div>
       </div>

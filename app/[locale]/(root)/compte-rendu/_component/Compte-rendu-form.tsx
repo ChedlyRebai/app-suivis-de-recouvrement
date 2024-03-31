@@ -48,6 +48,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import CompteRenduHistorique from "./CompteRenduHistorique";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
@@ -363,7 +364,7 @@ const CompteRenduForm = ({
           </AccordionItem>
 
           <AccordionItem value="item-2">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>List des Comptes?</AccordionTrigger>
             <AccordionContent>
               <Table className="my-3 border-3 border-collapse rounded-sm">
                 {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
@@ -433,7 +434,7 @@ const CompteRenduForm = ({
                         }}
                       >
                         <SelectTrigger className="">
-                          <SelectValue placeholder="Select a fruit" />
+                          <SelectValue placeholder="Choisis un motif" />
                         </SelectTrigger>
                         <SelectContent
                           onChange={(e) => {
@@ -445,7 +446,7 @@ const CompteRenduForm = ({
                               console.log(e);
                             }}
                           >
-                            <SelectLabel>Fruits</SelectLabel>
+                            <SelectLabel>Motifs</SelectLabel>
                             {MOTIF_IM.map((item) => (
                               <SelectItem
                                 key={item.Code}
@@ -454,7 +455,6 @@ const CompteRenduForm = ({
                                 {item.libelle}
                               </SelectItem>
                             ))}
-                            <SelectItem value="pineapple">autre</SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -474,11 +474,11 @@ const CompteRenduForm = ({
                         }}
                       >
                         <SelectTrigger className="">
-                          <SelectValue placeholder="Select a fruit" />
+                          <SelectValue placeholder="Choisis un contact" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectLabel>Fruits</SelectLabel>
+                            <SelectLabel>Contacts</SelectLabel>
                             {LISTE_CHOIX.map((item) => (
                               <SelectItem
                                 key={item.Code}
@@ -547,7 +547,7 @@ const CompteRenduForm = ({
                   </CardContent>
                 </RadioGroup>
               </Card>
-           
+
               <div className=" py-2  mt-1  dark:bg-inherit ">
                 <Tabs value={tab} onValueChange={onTabChange}>
                   <TabsList>
@@ -578,14 +578,14 @@ const CompteRenduForm = ({
                   <TabsContent value="3">
                     <Card className="my-2 w-full h-full flex justify-center items-center">
                       <CardContent className="space-y- ">
-                        Client injoignable
+                        <FaciliteDePaiementForm />
                       </CardContent>
                     </Card>
                   </TabsContent>
                   <TabsContent value="4">
                     <Card className="my-2">
                       <CardContent className="space-y-2 ">
-                        <FaciliteDePaiementForm />
+                        <NonreconnaissancedelaCreanceForm />
                       </CardContent>
                     </Card>
                   </TabsContent>
@@ -593,20 +593,22 @@ const CompteRenduForm = ({
                   <TabsContent value="5">
                     <Card className="my-2">
                       <CardContent className="space-y-2 ">
-                        <NonreconnaissancedelaCreanceForm />
+                        <VisiteForm />
                       </CardContent>
                     </Card>
                   </TabsContent>
                   <TabsContent value="6">
                     <Card className="my-2">
                       <CardContent className="space-y-2 ">
-                        <VisiteForm />
+                        <CardContent className="space-y- ">
+                          Client injoignable
+                        </CardContent>
                       </CardContent>
                     </Card>
                   </TabsContent>
                 </Tabs>
               </div>
-           
+
               <Card>
                 <CardContent className="space-y-2 ">
                   <div className="flex flex-col my-2">
@@ -668,9 +670,9 @@ const CompteRenduForm = ({
           </AccordionItem>
 
           <AccordionItem value="item-7">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>List de Compte Rendu</AccordionTrigger>
             <AccordionContent>
-              
+              <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
               <Button onClick={handleSubmit}>Save</Button>
             </AccordionContent>
           </AccordionItem>
