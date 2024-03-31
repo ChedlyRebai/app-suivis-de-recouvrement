@@ -15,6 +15,35 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { Cross2Icon } from "@radix-ui/react-icons";
+import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { DataTableViewOptions } from "./data-table-view-options";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { getAgences, getGroupes } from "@/actions/client.action";
+
+import { Check, ChevronsUpDown } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import {
   Table,
   TableBody,
@@ -58,6 +87,7 @@ export function DataTableContactes<TData, TValue>({
   total,
   agences,
   groupes,
+  type
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
   const pathname = usePathname();
@@ -72,8 +102,14 @@ export function DataTableContactes<TData, TValue>({
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
+  
+  // const [groupes, setGroupes] = useState<any>([]);
+  // const [agences, setAgences] = useState<any>([]);
 
-  console.log(data);
+  const [agenceopen, setagenceOpen] = useState(false);
+  const [groupopen, setgroupOpen] = useState(false);
+  const [agenceValue, setAgenceValue] = useState("");
+  const [groupeValue, setgroupeValue] = useState("");
 
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -83,8 +119,42 @@ export function DataTableContactes<TData, TValue>({
     } else {
       params.delete("query");
     }
+    console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 100);
+  
+  
+  const handleGroup = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (query) {
+      params.set("groupe", query);
+      params.set("page", "1");
+    } 
+    console.log(params.get("groupe")?.toString());
+    replace(`${pathname}?${params.toString()}`);
+  }, 0);
+  
+  
+  const handleAgence = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (query) {
+      params.set("agence", query);
+      params.set("page", "1");
+    } 
+    console.log(params.get("groupe")?.toString());
+    replace(`${pathname}?${params.toString()}`);
+  }, 0);
+
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("agence");
+    params.delete("groupe");
+    replace(`${pathname}?${params.toString()}`);
+  }, [type])
+  
+  
+
 
   const table = useReactTable({
     data,
@@ -133,47 +203,119 @@ export function DataTableContactes<TData, TValue>({
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <DataTableToolbar type="contactes" table={table} />
-        {/* <Input
-          placeholder="ID client"
-          value={(table.getColumn("cli")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("cli")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <Button variant="outline" className="mr-auto w-auto ml-1 ">
-          searchf
-        </Button>
+      <>
+      <Input
+        placeholder="Client ID"
+        defaultValue={searchParams.get("query")?.toString()}
+        onChange={(e) => {
+          handleSearch(e.target.value);
+        }}
+        className="max-w-sm mr-2"
+      />
+      <Popover open={agenceopen} onOpenChange={setagenceOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={agenceopen}
+            className="w-[200px] justify-between"
+          >
+            {searchParams.get("agence")
+              ? agences.find(
+                  (framework: any) =>
+                    framework.codug === searchParams.get("agence")
+                )?.libelle || "Sélectionner un agence"
+              : "Sélectionner un agence"}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto mr-1">
-              <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-              View
-            </Button>
-          </DropdownMenuTrigger>
+        <PopoverContent className="w-[200px] p-0">
+          <Command>
+            <CommandInput placeholder="Search agence" />
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {agences.map((item: any) => (
+                <CommandItem
+                  key={item.codug}
+                  value={item.libelle}
+                  onSelect={(currentValue) => {
+                    handleAgence(item.codug);
+                    setAgenceValue(
+                      item.codug === searchParams.get("agence")
+                        ? ""
+                        : item.codug
+                    );
 
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(checked: boolean) =>
-                      column.toggleVisibility(checked)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu> */}
+                    setagenceOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      agenceValue === item.codug ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {item.libelle}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      <div className="w-1" />
+      <Popover open={groupopen} onOpenChange={setgroupOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={groupopen}
+            className="w-[200px] justify-between"
+          >
+            {searchParams.get("groupe")
+              ? groupes.find(
+                  (groupe: any) => groupe.groupe == searchParams.get("groupe")
+                )?.groupe || "Sélectionner un groupe"
+              : "Sélectionner un groupe"}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0 ml-2">
+          <Command>
+            <CommandInput placeholder="Search group" />
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {groupes.map((item: any, i: number) => (
+                <CommandItem
+                  key={i}
+                  value={item.groupe}
+                  onSelect={(currentValue) => {
+                    handleGroup(item.groupe);
+                    setgroupeValue(
+                      item.groupe == searchParams.get("groupe")
+                        ? ""
+                        : item.groupe
+                    );
+                    setgroupOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      groupeValue === item.groupe ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+
+                  {item.groupe}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      <DataTableViewOptions table={table} />
+    </>
+        
       </div>
       <div className="rounded-md border">
         <Table>

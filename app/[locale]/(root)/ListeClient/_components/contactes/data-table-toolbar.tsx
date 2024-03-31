@@ -41,7 +41,6 @@ interface DataTableToolbarProps<TData> {
   type: "contactes" | "noncontactes";
 }
 
-
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
@@ -58,6 +57,7 @@ export function DataTableToolbar<TData>({
   const searchParams = useSearchParams();
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
+    
     if (query) {
       params.set("query", query);
       params.set("page", "1");
@@ -99,7 +99,7 @@ export function DataTableToolbar<TData>({
       try {
         const agencesData = await getAgences();
 
-         setAgences(agencesData);
+        setAgences(agencesData);
         console.log(agencesData);
       } catch (error) {
         console.error("Error fetching agences:", error);
@@ -119,56 +119,6 @@ export function DataTableToolbar<TData>({
         }}
         className="max-w-sm mr-2"
       />
-      {/* <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
-        >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandEmpty>No framework found.</CommandEmpty>
-          <CommandGroup>
-            {groupes.map((item:any) => (
-              <CommandItem
-                key={item.groupe}
-                value={item.groupe}
-                onSelect={(currentValue) => {
-                  handleGroup(currentValue)
-                  setValue(currentValue === value ? "" : currentValue)
-                  setOpen(false)
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    value === item.groupe ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {item.groupe}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    </Popover> */}
-
-      {/* {table.getColumn("agence") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("agence")}
-            title="Agence"
-            options={statuses}
-          />
-        )} */}
       <Popover open={agenceopen} onOpenChange={setagenceOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -220,35 +170,34 @@ export function DataTableToolbar<TData>({
           </Command>
         </PopoverContent>
       </Popover>
-      <div className="w-1"/>
-      <Popover  open={groupopen} onOpenChange={setgroupOpen}>
-      <PopoverTrigger asChild>
-  <Button
-    variant="outline"
-    role="combobox"
-    aria-expanded={groupopen}
-    className="w-[200px] justify-between"
-  >
-    {searchParams.get("groupe")
-    ? (groupes.find(
-        (groupe: any) => groupe.groupe == searchParams.get("groupe")
-      )?.groupe) || "Sélectionner un groupe"
-    : "Sélectionner un groupe"}
-  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-</Button>
-</PopoverTrigger>
+      <div className="w-1" />
+      <Popover open={groupopen} onOpenChange={setgroupOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={groupopen}
+            className="w-[200px] justify-between"
+          >
+            {searchParams.get("groupe")
+              ? groupes.find(
+                  (groupe: any) => groupe.groupe == searchParams.get("groupe")
+                )?.groupe || "Sélectionner un groupe"
+              : "Sélectionner un groupe"}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0 ml-2">
           <Command>
             <CommandInput placeholder="Search group" />
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
-              {groupes.map((item: any,i:number) => (
+              {groupes.map((item: any, i: number) => (
                 <CommandItem
                   key={i}
                   value={item.groupe}
                   onSelect={(currentValue) => {
                     handleGroup(item.groupe);
-                    console.log(currentValue);
                     setgroupeValue(
                       item.groupe == searchParams.get("groupe")
                         ? ""
@@ -271,54 +220,6 @@ export function DataTableToolbar<TData>({
           </Command>
         </PopoverContent>
       </Popover>
-{/* 
-      <Select
-        defaultValue={searchParams.get("groupe")?.toString()}
-        onValueChange={(value) => {
-          handleGroup(value);
-          console.log(value);
-        }}
-      >
-        <SelectTrigger className="w-fit">
-          <SelectValue placeholder="Select a Group" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {groupes.map((item: any) => {
-              console.log(item);
-              return <SelectItem value={item.groupe}>{item.groupe}</SelectItem>;
-            })}
-          </SelectGroup>
-        </SelectContent>
-      </Select> */}
-
-      {/* {table.getColumn("groupe") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("groupe")}
-            title="Groupe"
-            options={priorities}
-          />
-        )} */}
-
-      {/* <Select
-        defaultValue={searchParams.get("agence")?.toString()}
-        onValueChange={(value) => {
-          handleAgence(value);
-          console.log(value);
-        }}
-      >
-        <SelectTrigger className="ml-2 w-fit">
-          <SelectValue placeholder="Select a Agebce" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {agences.map((item: any) => {
-              return <SelectItem value={item.codug}>{item.libelle}</SelectItem>;
-            })}
-          </SelectGroup>
-        </SelectContent>
-      </Select> */}
-
       {isFiltered && (
         <Button
           variant="default"
