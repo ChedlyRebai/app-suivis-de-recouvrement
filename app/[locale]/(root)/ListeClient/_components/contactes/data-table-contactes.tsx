@@ -59,28 +59,22 @@ export function DataTableContactes<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
   const [selectedCode, setSelectedCode] = useState("");
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [rowSelection, setRowSelection] = useState({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-
-
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   console.log(data);
-  
+
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -114,7 +108,6 @@ export function DataTableContactes<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -124,7 +117,7 @@ export function DataTableContactes<TData, TValue>({
     },
     [searchParams, selectedCode]
   );
-  
+
   useEffect(() => {
     setSearch(`${searchParams.get("code")}`);
     console.log(search);
@@ -189,9 +182,7 @@ export function DataTableContactes<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}
-                    className="px-2"
-                    >
+                    <TableHead key={header.id} className="px-2">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -207,25 +198,20 @@ export function DataTableContactes<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow className="p-0"
-                onDoubleClick={() => {
-                  console.log(
-                    (row.original as { cli: string }).cli
-                  );
-                  
-                  router.push(
-                    "compte-rendu" +
-                      "?" +
-                      createQueryString(
-                        "cli",
-                        `${
-                          (row.original as { cli: string })
-                            .cli
-                        }`
-                      )
-                  );
-                  
-                }}
+                <TableRow
+                  className="p-0"
+                  onDoubleClick={() => {
+                    console.log((row.original as { cli: string }).cli);
+
+                    router.push(
+                      "compte-rendu" +
+                        "?" +
+                        createQueryString(
+                          "cli",
+                          `${(row.original as { cli: string }).cli}`
+                        )
+                    );
+                  }}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -233,7 +219,7 @@ export function DataTableContactes<TData, TValue>({
                     <TableCell
                       key={cell.id}
                       className="p-2 cursor-pointer"
-                      onClick={(e)=>console.log(e)}
+                      onClick={(e) => console.log(e)}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
