@@ -117,9 +117,19 @@ const FaciliteDePaiementForm = () => {
           >
             <ListIcon />
           </Button>
-          <Input readOnly value={suiviAgenda.lieu_rec} id="Lieu" type="text" />
-        </div>
+          <div className="flex w-full">
+              <Input
+                readOnly
+                id="Client"
+                className="w-1/4 px-2 mr-1"
+                value={suiviAgenda.lieu_rec}
+                type="number"
+              />
+              <Input readOnly id="Client" className=""  type="text" />
+            </div>
       </div>
+        </div>
+        
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Date3éreEcheance">Date 3ére Echeance</Label>
         <DatePickerDemo

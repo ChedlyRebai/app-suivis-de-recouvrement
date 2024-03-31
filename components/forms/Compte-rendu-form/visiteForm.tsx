@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { DatePickerDemo } from "@/components/ui/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,7 @@ import React from "react";
 
 const VisiteForm = () => {
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
-  const {onOpen,setColumn,column}=useListeAgencestModal()
+  const { onOpen, setColumn, column } = useListeAgencestModal();
   return (
     <div className="grid grid-cols-1 gap-y-3 py-3">
       <div className="grid w-full max-w-sm items-center gap-1.5 ">
@@ -57,16 +57,24 @@ const VisiteForm = () => {
       <div className="grid w-[280px] items-center gap-1.5">
         <Label htmlFor="lieuvisite">Lieu visite</Label>
         <div className="flex ">
-            <Button className="w- px-2"  onClick={() =>{
+          {/* <Button className="w- px-2"  onClick={() =>{
                 onOpen();
                 console.log("bonjour")
                 setColumn("lieu_visite")
                 console.log("cc:",column)
                }}>
               <ListIcon />
-            </Button>
-            <Input className="border p-2 ml-2" value={suiviAgenda.lieu_visite} id="location" placeholder="Lieu" />
-          </div>
+            </Button>lieu_visite */}
+          <Input
+            className="border p-2 ml-2"
+            onChange={(e) => {
+              handleIputChangeSuiviAgenda("lieu_visite", e.target.value);
+            }}
+            value={suiviAgenda.lieu_visite}
+            id="location"
+            placeholder="Lieu"
+          />
+        </div>
       </div>
     </div>
   );

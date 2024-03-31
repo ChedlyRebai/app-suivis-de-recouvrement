@@ -549,16 +549,16 @@ const CompteRenduForm = ({
               </Card>
 
               <div className=" py-2  mt-1  dark:bg-inherit ">
-                <Tabs value={tab} onValueChange={onTabChange}>
-                  <TabsList>
-                    <TabsTrigger value="1">Promesse de règlement</TabsTrigger>
-                    <TabsTrigger value="2">Nouvelles coordonnées</TabsTrigger>
-                    <TabsTrigger value="3">Facilité de paiement</TabsTrigger>
-                    <TabsTrigger value="4">
+                <Tabs value={tab}  onValueChange={onTabChange}>
+                  <TabsList >
+                    <TabsTrigger disabled value="1">Promesse de règlement</TabsTrigger>
+                    <TabsTrigger disabled value="2">Nouvelles coordonnées</TabsTrigger>
+                    <TabsTrigger disabled value="3">Facilité de paiement</TabsTrigger>
+                    <TabsTrigger disabled value="4">
                       Non reconnaissance de la créance
                     </TabsTrigger>
-                    <TabsTrigger value="5">Visite</TabsTrigger>
-                    <TabsTrigger value="6">Client injoignable</TabsTrigger>
+                    <TabsTrigger disabled value="5">Visite</TabsTrigger>
+                    <TabsTrigger disabled value="6">Client injoignable</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="1">
