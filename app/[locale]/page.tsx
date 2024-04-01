@@ -14,6 +14,7 @@ const Page = async ({
   const t = await getTranslations("access-management");
   const session = await getSession();
 
+  
   return (
     <Mainlayout showSidebar links={links} title={t("title")} session={session}>
       {children}

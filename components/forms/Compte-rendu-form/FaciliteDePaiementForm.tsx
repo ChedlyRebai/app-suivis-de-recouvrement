@@ -3,23 +3,28 @@ import { DatePickerDemo } from "@/components/ui/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import useListAgences from "@/hooks/use-agences-list";
 import useClientSore from "@/hooks/useCompteRenduForm";
 import useListeAgencestModal from "@/hooks/useListeAgences";
 import { ListIcon } from "lucide-react";
 import React from "react";
 
 const FaciliteDePaiementForm = () => {
-  const { onOpen,setColumn } = useListeAgencestModal();
-  const { client, handleIputChangeSuiviAgenda, suiviAgenda, } = useClientSore();
+  const { onOpen, setColumn } = useListeAgencestModal();
+  const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
+  const getAgence = useListAgences((state) => state.getAgence);
+
   return (
     <div className="my-2 grid grid-flow-col grid-cols-4 grid-rows-4 gap-3 ">
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="MontantImpaye">Montant Impaye</Label>
-        <Input onChange={(e) =>
+        <Input
+          onChange={(e) =>
             handleIputChangeSuiviAgenda("nb_ech", e.target.value)
           }
-          
-          id="MontantImpaye" type="text" />
+          id="MontantImpaye"
+          type="text"
+        />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Nombreech">Nombre echeance</Label>
@@ -111,12 +116,15 @@ const FaciliteDePaiementForm = () => {
           <Button
             className="w- px-2"
             onClick={() => {
-              onOpen();         
+              onOpen();
               setColumn("lieu_rec");
             }}
           >
             <ListIcon />
           </Button>
+
+         
+
           <div className="flex w-full">
               <Input
                 readOnly
@@ -124,12 +132,17 @@ const FaciliteDePaiementForm = () => {
                 className="w-1/4 px-2 mr-1"
                 value={suiviAgenda.lieu_rec}
                 type="number"
+                defaultValue={0}
               />
-              <Input readOnly id="Client" className=""  type="text" />
+              <Input readOnly id="Client" className=""  
+              value={
+                getAgence(suiviAgenda.lieu_rec)
+              }
+              type="text" />
             </div>
-      </div>
         </div>
-        
+      </div>
+
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Date3éreEcheance">Date 3ére Echeance</Label>
         <DatePickerDemo

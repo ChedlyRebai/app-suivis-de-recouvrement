@@ -67,6 +67,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import useListAgences from "@/hooks/use-agences-list";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -93,7 +94,9 @@ export function DataTableContactes<TData, TValue>({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-
+  const setAgences=useListAgences((state)=>state.setAgences)
+  setAgences(agences)
+  
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

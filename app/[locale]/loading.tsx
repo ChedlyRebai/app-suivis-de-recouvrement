@@ -9,4 +9,5 @@ const laoding = () => {
   );
 };
 
+
 export default laoding;

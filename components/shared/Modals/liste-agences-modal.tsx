@@ -9,6 +9,7 @@ import { ArrowUpDown } from "lucide-react";
 import useListeAgencestModal from "@/hooks/useListeAgences";
 import { getAgences } from "@/actions/client.action";
 import { ListeAgenceDataTable } from "./liste-agences-datatable";
+import useListAgences from "@/hooks/use-agences-list";
 
 const ListeAgenceModal = () => {
   const { isOpen, onOpen, onClose,column } = useListeAgencestModal();
@@ -57,12 +58,17 @@ const ListeAgenceModal = () => {
     },
   ];
 
+  const listAgences=useListAgences((state)=>state.listAgences)
+  const setAgences=useListAgences((state)=>state.setAgences)
+  
   const [data, setData] = useState<any>([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAgences();
       console.log(data);
       setData(data);
+      setAgences(data)
+      console.log(listAgences)
     };
     fetchData();
   }, []);

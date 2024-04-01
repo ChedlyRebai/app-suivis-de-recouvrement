@@ -78,19 +78,16 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                           : "text-gray-900 bg-gray-100 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50",
                         "flex items-center gap-3 rounded-lg px-3 py-2  "
                       )}
-                      
-              
                     >
                       {/* <Icon
                         className="mr-3 flex-shrink-0 h-5 w-5 text-white group-hover:text-gray-300"
                         aria-hidden="true"
                       /> */}
                       {/* <span className="flex-1 capitalize">{item.name}</span> */}
-                      
-                      
-                <Icon className="h-4 w-4" />
-                {item.name}
-              <svg
+
+                      <Icon className="h-4 w-4" />
+                      {item.name}
+                      <svg
                         className={classNames(
                           open ? "text-white rotate-90" : "text-gray-300",
                           "ml-3 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
@@ -100,7 +97,6 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                       >
                         <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
                       </svg>
-                      
                     </Disclosure.Button>
                     <Disclosure.Panel className="space-y-1">
                       {item.children &&

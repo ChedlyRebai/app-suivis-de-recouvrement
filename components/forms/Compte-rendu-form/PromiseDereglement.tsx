@@ -16,9 +16,13 @@ import { format } from "date-fns";
 import { DatePickerDemo } from "@/components/ui/DatePicker";
 import useListeAgencestModal from "@/hooks/useListeAgences";
 import useClientSore from "@/hooks/useCompteRenduForm";
+import useListAgences from "@/hooks/use-agences-list";
 const PromiseDereglement = () => {
   const [date, setdate] = useState(new Date());
   const { onOpen, setColumn } = useListeAgencestModal();
+  const getAgence=useListAgences((state)=>state.getAgence)
+  const AGENCES=useListAgences((state)=>state.listAgences)
+  console.log(AGENCES)
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   return (
     <div className="">
@@ -72,8 +76,13 @@ const PromiseDereglement = () => {
                 className="w-1/4 px-2 mr-1"
                 value={suiviAgenda.lieu_ver}
                 type="number"
+                defaultValue={0}
               />
-              <Input readOnly id="Client" className="w-2/3"  type="text" />
+              <Input readOnly id="Client" className="w-2/3"  
+              value={
+                getAgence(suiviAgenda.lieu_ver)
+              }
+              type="text" />
             </div>
           </div>
         </div>
