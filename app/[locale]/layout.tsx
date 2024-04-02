@@ -7,6 +7,8 @@ import ModalProviders from "@/providers/ModalProviders";
 import ThemesProviders from "@/providers/ThemesProviders";
 import ThemeButton from "@/components/shared/ThemeButton";
 import NextIntlProvider from "@/providers/NextIntlProvider";
+import { getSession } from "@/lib";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Amen Bank",
@@ -26,6 +28,8 @@ export default async function RootLayout({
   } catch (error) {
     console.error("Failed to load messages:", error);
   }
+
+  const session = await getSession();
 
   return (
     <html lang={locale}>

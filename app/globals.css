@@ -81,3 +81,7 @@
     @apply px-4;
   }
 }
+
+.nextjs-toast-errors-parent {
+  display: hidden;
+}

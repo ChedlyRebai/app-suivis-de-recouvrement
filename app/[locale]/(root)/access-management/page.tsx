@@ -4,6 +4,7 @@ import { columns } from "./_component/columns";
 import { AccessManagementDataTable } from "./_component/data-table";
 import { getSession } from "@/lib";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -16,10 +17,15 @@ export default async function Home({
   };
 }) {
   
+  const session=await getSession();
+  
+  if(!session){
+    return redirect("login");
+  }
 
   return (
     <div>
-      <div className="py-6">
+      <div className="py-6 mt-16">
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
             Access Management

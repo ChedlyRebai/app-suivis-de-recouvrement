@@ -1,8 +1,18 @@
 import { Transition, Menu } from "@headlessui/react";
-import { MenuIcon, HomeIcon, UsersIcon, BellIcon } from "lucide-react";
+import {
+  MenuIcon,
+  HomeIcon,
+  UsersIcon,
+  BellIcon,
+  ArrowBigLeft,
+  ArrowLeft,
+} from "lucide-react";
 import React, { Fragment } from "react";
 import LocalSwitcher from "./Local-switcher";
 import ThemeButton from "./ThemeButton";
+import { usePathname, useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { logout } from "@/lib";
 
 type NavbarProps = {
   onChange: (value: boolean) => void;
@@ -10,16 +20,28 @@ type NavbarProps = {
 };
 
 const Navbar = ({ onChange, session }: NavbarProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <div className="fixed w-screen top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button
         type="button"
         className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
-        onClick={() => onChange(true)}
       >
         <span className="sr-only">Open sidebar</span>
         <MenuIcon className="h-6 w-6" aria-hidden="true" />
       </button>
+      {pathname === "/" && (
+        <button
+          type="button"
+          className="px-4 border-r border-gray-200 dark:text-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 "
+          onClick={() => router.push("/")}
+        >
+          <span className="sr-only">Open sidebar</span>
+          <ArrowLeft className="h-6 w-6" aria-hidden="true" />
+        </button>
+      )}
+
       <div className="flex-1 backdrop-blur- mb  px-4 flex justify-between">
         <div className="flex-1 flex">
           <form className="w-full flex md:ml-0" action="#" method="GET">
@@ -51,8 +73,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
             </div>
           </form>
         </div>
-        
-        
+
         <div className="ml-4 flex items-center md:ml-6">
           {/* <button
             type="button"
@@ -62,7 +83,8 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
             <BellIcon className="h-6 w-6" aria-hidden="true" />
           </button> */}
           <ThemeButton />
-          <div className="w-1"/>
+          <Button onClick={logout}>Deconnexion</Button>
+          <div className="w-1" />
           <LocalSwitcher />
           <Menu as="div" className="ml-3 relative pr-1">
             <div>

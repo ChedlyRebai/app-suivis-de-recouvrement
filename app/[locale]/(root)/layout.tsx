@@ -12,6 +12,7 @@ import { getSession } from "@/lib";
 import { getLinksByCodeFonction } from "@/actions/navbar.action";
 import { getTranslations } from "next-intl/server";
 import Mainlayout from "./access-management/_component/MainLayout";
+import { redirect } from "next/navigation";
 
 
 
@@ -27,7 +28,9 @@ export default async function RootLayout({
   const links = await getLinksByCodeFonction();
   const t = await getTranslations("access-management");
   const session = await getSession();
-
+  if (!session) {
+    return redirect("login");
+  }
   return (
     <Mainlayout
       showSidebar={false}
