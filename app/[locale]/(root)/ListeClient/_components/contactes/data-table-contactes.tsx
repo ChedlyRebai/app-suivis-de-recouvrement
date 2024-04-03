@@ -255,6 +255,7 @@ export function DataTableContactes<TData, TValue>({
     );
   };
 
+  
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -379,7 +380,9 @@ export function DataTableContactes<TData, TValue>({
           <Button variant="outline" className="font-black mx-1" onClick={resetGroup}>
             <ReloadIcon className="font-black" />
           </Button>
-          <Card className="h-10">
+          {
+            type !== "contactes" && (
+              <Card className="h-10">
             <CardContent className="flex items-center justify-center my-1">
               <p>
               Nombre de jour :</p> 
@@ -399,6 +402,9 @@ export function DataTableContactes<TData, TValue>({
 
             </CardContent>
           </Card>
+            )
+          }
+          
           <DataTableViewOptions table={table} />
         </>
       </div>

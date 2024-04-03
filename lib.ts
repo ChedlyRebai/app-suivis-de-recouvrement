@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { SignJWT, jwtVerify } from "jose";
 import { Login } from "./actions/auth.action";
+import { redirect } from "next/navigation";
 
 const secretKey = "secret";
 const key = new TextEncoder().encode(secretKey);
@@ -38,7 +39,9 @@ export async function login(matricule: string, password: string) {
 }
 
 export async function logout() {
-  cookies().set("session", "", { expires: new Date(0) });
+  
+  cookies().set("session", "");
+  redirect("login");
 }
 
 export async function getSession() {

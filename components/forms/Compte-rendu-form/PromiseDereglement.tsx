@@ -22,7 +22,7 @@ const PromiseDereglement = () => {
   const { onOpen, setColumn } = useListeAgencestModal();
   const getAgence=useListAgences((state)=>state.getAgence)
   const AGENCES=useListAgences((state)=>state.listAgences)
-  console.log(AGENCES)
+  
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   return (
     <div className="">

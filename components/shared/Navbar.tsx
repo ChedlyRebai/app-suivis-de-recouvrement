@@ -10,16 +10,24 @@ import {
 import React, { Fragment } from "react";
 import LocalSwitcher from "./Local-switcher";
 import ThemeButton from "./ThemeButton";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { logout } from "@/lib";
+import Cookies from "js-cookie";
 
 type NavbarProps = {
   onChange: (value: boolean) => void;
   session: any;
 };
 
+
+
+
 const Navbar = ({ onChange, session }: NavbarProps) => {
+  const logout= async()=>{
+    const router = useRouter();
+    Cookies.remove("session");
+    router.push("/login");
+  }
   const router = useRouter();
   const pathname = usePathname();
   return (
@@ -31,7 +39,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
         <span className="sr-only">Open sidebar</span>
         <MenuIcon className="h-6 w-6" aria-hidden="true" />
       </button>
-      {pathname === "/" && (
+      {pathname !== "/" && (
         <button
           type="button"
           className="px-4 border-r border-gray-200 dark:text-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 "
@@ -83,7 +91,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
             <BellIcon className="h-6 w-6" aria-hidden="true" />
           </button> */}
           <ThemeButton />
-          <Button onClick={logout}>Deconnexion</Button>
+          
           <div className="w-1" />
           <LocalSwitcher />
           <Menu as="div" className="ml-3 relative pr-1">

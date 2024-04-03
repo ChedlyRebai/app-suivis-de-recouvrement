@@ -56,7 +56,7 @@ interface CompteRenduFormProps {
   historiqueCompteRendu: SuiviAgenda[];
 }
 
-const CompteRenduForm = ({
+const   CompteRenduForm = ({
   suiviAgenda: suiviagendaprops,
   listcompte,
   historiqueCompteRendu,
@@ -86,6 +86,7 @@ const CompteRenduForm = ({
     console.log(selectedRadio);
     setTab(e.target.value);
   };
+  
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
   console.log(cli);
@@ -174,7 +175,7 @@ const CompteRenduForm = ({
       <div className="">
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>Donnée de client</AccordionTrigger>
             <AccordionContent>
               <div className="my-2 grid  grid-flow-col grid-cols-4 grid-rows-5 gap-3 ">
                 <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -234,31 +235,7 @@ const CompteRenduForm = ({
                     />
                   </div>
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
-                  <Label htmlFor="Segement">Segement</Label>
-                  <div className="flex ">
-                    <Input
-                      readOnly
-                      value={client.seg}
-                      id="Client"
-                      className="w-1/3 px-2 mr-1"
-                      type="number"
-                    />
-                    <Input readOnly id="Client" className="w-2/3" type="text" />
-                  </div>
-                </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
-                  <Label htmlFor="Marche">Marche</Label>
-                  <div className="flex ">
-                    <Input
-                      readOnly
-                      id="Client"
-                      className="w-1/3 px-2 mr-1"
-                      type="number"
-                    />
-                    <Input readOnly id="Client" className="w-2/3" type="text" />
-                  </div>
-                </div>
+                
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                   <Label htmlFor="Mnt_Imp">Mnt Imp</Label>
                   <Input
@@ -364,7 +341,7 @@ const CompteRenduForm = ({
           </AccordionItem>
 
           <AccordionItem value="item-2">
-            <AccordionTrigger>List des Comptes?</AccordionTrigger>
+            <AccordionTrigger>List des Comptes</AccordionTrigger>
             <AccordionContent>
               <Table className="my-3 border-3 border-collapse rounded-sm">
                 {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
@@ -414,7 +391,7 @@ const CompteRenduForm = ({
           </AccordionItem>
 
           <AccordionItem value="item-3">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>Motif</AccordionTrigger>
             <AccordionContent>
               <Card className="my-2 backdrop-blur-xl">
                 <CardContent className="space-y-2 ">
@@ -516,7 +493,7 @@ const CompteRenduForm = ({
           </AccordionItem>
 
           <AccordionItem value="item-4">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>Compte Rendu</AccordionTrigger>
             <AccordionContent>
               <Card className="my-2 flex items-center ">
                 <RadioGroup

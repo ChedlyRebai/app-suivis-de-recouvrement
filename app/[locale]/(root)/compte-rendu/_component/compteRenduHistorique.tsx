@@ -182,12 +182,23 @@ import {
 } from "@/components/ui/table";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { Pencil1Icon } from "@radix-ui/react-icons";
+import { Span } from "next/dist/trace";
 
 export const columns: ColumnDef<SuiviAgenda>[] = [
 
   {
     accessorKey: "num",
-    header: "Num",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Num
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => <div className="capitalize">{row.getValue("num")}</div>,
   },
   {
@@ -212,13 +223,10 @@ export const columns: ColumnDef<SuiviAgenda>[] = [
     accessorKey: "compte_rendu",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date Compte Rendu
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <span >
+          Compte Rendu
+          
+        </span>
       );
     },
 
@@ -231,13 +239,9 @@ export const columns: ColumnDef<SuiviAgenda>[] = [
     accessorKey: "usr_nom",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+        <span>
           Utilisateur
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        </span>
       );
     },
     cell: ({ row }) => (
@@ -323,14 +327,14 @@ const CompteRenduHistorique = ({
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        <Input
+        {/* <Input
           placeholder="Filter emails..."
           value={(table.getColumn("num")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("num")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

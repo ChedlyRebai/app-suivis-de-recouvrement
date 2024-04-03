@@ -139,6 +139,7 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
 
 export const createCompteRendu = async (suiviAgenda: SuiviAgenda,compteRendu:any,cli:string) => {
   try {
+    
     console.log("suiviAgenda",suiviAgenda,"compterendu",compteRendu)
     const user=await getSession()
     axios.defaults.baseURL = `${process.env.API_URL}`;

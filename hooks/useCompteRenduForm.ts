@@ -18,7 +18,7 @@ const useClientSore = create<useClientSoreInterface>((set) => ({
     suiviAgenda:{} as SuiviAgenda,
     seTsuiAgenda:(suiviAgenda:SuiviAgenda)=>set({suiviAgenda}),
     setClient: (client) => set({ client }),
-    compteRendu:"dddd",
+    compteRendu:"",
     handleIputChangeSuiviAgenda: (champ,value) => {
         set((state) => ({
             suiviAgenda: {
@@ -29,7 +29,6 @@ const useClientSore = create<useClientSoreInterface>((set) => ({
     },
 
     saveSuiviAgenda: async (suiviAgenda,compteRendu,cli) => {
-        console.log("s:",suiviAgenda,"c:",compteRendu);
         const savedSuiviAgenda=await createCompteRendu(suiviAgenda,compteRendu,cli);
         return savedSuiviAgenda;    
     },
