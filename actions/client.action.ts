@@ -39,8 +39,6 @@ export const getClientContactes = async (
   axios.defaults.headers.common["Authorization"] = ` ${
     session?.value as string
   }`;
-
-
   console.log(
     `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
   );

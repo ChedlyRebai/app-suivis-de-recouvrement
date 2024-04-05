@@ -13,6 +13,7 @@ import ThemeButton from "./ThemeButton";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Cookies from "js-cookie";
+import { useLocale } from "next-intl";
 
 type NavbarProps = {
   onChange: (value: boolean) => void;
@@ -30,6 +31,8 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
   }
   const router = useRouter();
   const pathname = usePathname();
+  const local=useLocale()
+  console.log("pathname", pathname)
   return (
     <div className="fixed w-screen top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button
@@ -39,7 +42,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
         <span className="sr-only">Open sidebar</span>
         <MenuIcon className="h-6 w-6" aria-hidden="true" />
       </button>
-      {pathname !== "/" && (
+      {pathname !== `/${local}` && (
         <button
           type="button"
           className="px-4 border-r border-gray-200 dark:text-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 "
@@ -81,7 +84,6 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
             </div>
           </form>
         </div>
-
         <div className="ml-4 flex items-center md:ml-6">
           {/* <button
             type="button"

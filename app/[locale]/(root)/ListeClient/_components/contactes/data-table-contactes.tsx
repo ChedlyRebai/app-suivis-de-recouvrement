@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/select";
 import { getAgences, getGroupes } from "@/actions/client.action";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, Eraser } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -136,7 +136,7 @@ export function DataTableContactes<TData, TValue>({
     console.log(params.get("groupe")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 0);
-  
+
   const handleFrom = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -149,22 +149,31 @@ export function DataTableContactes<TData, TValue>({
 
   const handleTo = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
-    if (query === "" || query === null || query === undefined || query === "0") {
-        console.log(query);
-        params.delete("to");
-        params.set("page", "1");
+    if (
+      query === "" ||
+      query === null ||
+      query === undefined ||
+      query === "0"
+    ) {
+      console.log(query);
+      params.delete("to");
+      params.set("page", "1");
     } else {
-        params.set("to", query);
-        params.set("page", "1");
+      params.set("to", query);
+      params.set("page", "1");
     }
     console.log(params.get("to")?.toString());
     replace(`${pathname}?${params.toString()}`);
-}, 0);
-
+  }, 0);
 
   const handleAgence = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
-    if (query === "" || query === null || query === undefined || query === "0") {
+    if (
+      query === "" ||
+      query === null ||
+      query === undefined ||
+      query === "0"
+    ) {
       console.log(query);
       params.delete("from");
       params.set("page", "1");
@@ -255,7 +264,6 @@ export function DataTableContactes<TData, TValue>({
     );
   };
 
-  
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -271,7 +279,7 @@ export function DataTableContactes<TData, TValue>({
           <Popover open={agenceopen} onOpenChange={setagenceOpen}>
             <PopoverTrigger asChild>
               <Button
-                variant="outline"
+                variant="default"
                 role="combobox"
                 aria-expanded={agenceopen}
                 className="w-[200px] justify-between"
@@ -321,14 +329,18 @@ export function DataTableContactes<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
-          <Button variant="outline" className="font-black mx-1" onClick={resetAgence}>
-            <ReloadIcon className="font-black" />
+          <Button
+            variant="default"
+            className="font-black mx-1"
+            onClick={resetAgence}
+          >
+            <Eraser className="font-black" />
           </Button>
           <div className="w-1" />
           <Popover open={groupopen} onOpenChange={setgroupOpen}>
             <PopoverTrigger asChild>
               <Button
-                variant="outline"
+                variant="default"
                 role="combobox"
                 aria-expanded={groupopen}
                 className="w-[200px] justify-between"
@@ -377,34 +389,34 @@ export function DataTableContactes<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
-          <Button variant="outline" className="font-black mx-1" onClick={resetGroup}>
-            <ReloadIcon className="font-black" />
+          <Button
+            variant="default"
+            className="font-black mx-1"
+            onClick={resetGroup}
+          >
+            <Eraser className="font-black" />
           </Button>
-          {
-            type !== "contactes" && (
-              <Card className="h-10">
-            <CardContent className="flex items-center justify-center my-1">
-              <p>
-              Nombre de jour :</p> 
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleFrom(e.target.value)}
-                placeholder="De"
-              />
-              <p className="mx-1">à</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleTo(e.target.value)}
-                placeholder="à"
-              />
+          {type !== "contactes" && (
+            <Card  className="h-10" >
+              <CardContent className="flex items-center justify-center my-1" >
+                <p>Nombre de jour :</p>
+                <Input
+                  type="number"
+                  className="w-16 h-8"
+                  onChange={(e) => handleFrom(e.target.value)}
+                  placeholder="De"
+                />
+                <p className="mx-1">à</p>
+                <Input
+                  type="number"
+                  className="w-16 h-8"
+                  onChange={(e) => handleTo(e.target.value)}
+                  placeholder="à"
+                />
+              </CardContent>
+            </Card>
+          )}
 
-            </CardContent>
-          </Card>
-            )
-          }
-          
           <DataTableViewOptions table={table} />
         </>
       </div>

@@ -525,17 +525,23 @@ const   CompteRenduForm = ({
                 </RadioGroup>
               </Card>
 
-              <div className=" py-2  mt-1  dark:bg-inherit ">
-                <Tabs value={tab}  onValueChange={onTabChange}>
-                  <TabsList >
-                    <TabsTrigger disabled value="1">Promesse de règlement</TabsTrigger>
-                    <TabsTrigger disabled value="2">Nouvelles coordonnées</TabsTrigger>
-                    <TabsTrigger disabled value="3">Facilité de paiement</TabsTrigger>
-                    <TabsTrigger disabled value="4">
+              <div className=" py-2  mt-1  dark:bg-inherit " >
+                <Tabs value={tab} className="relative mr-auto w-full" onValueChange={onTabChange}>
+                  <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0" >
+                    <TabsTrigger  className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+          disabled value="1">Promesse de règlement</TabsTrigger>
+                    <TabsTrigger  className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+          disabled value="2">Nouvelles coordonnées</TabsTrigger>
+                    <TabsTrigger  className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+          disabled value="3">Facilité de paiement</TabsTrigger>
+                    <TabsTrigger  className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+          disabled value="4">
                       Non reconnaissance de la créance
                     </TabsTrigger>
-                    <TabsTrigger disabled value="5">Visite</TabsTrigger>
-                    <TabsTrigger disabled value="6">Client injoignable</TabsTrigger>
+                    <TabsTrigger  className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+          disabled value="5">Visite</TabsTrigger>
+                    <TabsTrigger  className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+          disabled value="6">Client injoignable</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="1">

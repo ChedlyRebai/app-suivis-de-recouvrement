@@ -278,6 +278,7 @@ const Mainlayout = ({
                 </div>
                 <div className="mt-5 flex-1 flex flex-col h-screen">
                   <nav className="flex-1 px-2 pb-4 space-y-1 ">
+                    
                     {navigation &&
                       Array.isArray(navigation) &&
                       navigation.map((item: any, i) => (
@@ -286,6 +287,7 @@ const Mainlayout = ({
                           children={item.children}
                           name={item.name}
                           icon={item.Icon}
+                          href={item.href}
                         />
                       ))}
                   </nav>
