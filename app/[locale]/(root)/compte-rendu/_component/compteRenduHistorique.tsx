@@ -185,120 +185,96 @@ import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Span } from "next/dist/trace";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 
-const {isOpen,onClose,onOpen}=useCompteRenduModal();
-
-export const columns: ColumnDef<SuiviAgenda>[] = [
-
-  {
-    accessorKey: "num",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Num
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="capitalize">{row.getValue("num")}</div>,
-  },
-  {
-    accessorKey: "date_ag",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date Compte Rendu
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => (
-      <div className="lowercase">{new Date(row.getValue("date_ag")).toLocaleDateString()}</div>
-    ),
-  },
-
-  {
-    accessorKey: "compte_rendu",
-    header: ({ column }) => {
-      return (
-        <span >
-          Compte Rendu
-          
-        </span>
-      );
-    },
-
-    cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("compte_rendu")}</div>
-    ),
-  },
-
-  {
-    accessorKey: "usr_nom",
-    header: ({ column }) => {
-      return (
-        <span>
-          Utilisateur
-        </span>
-      );
-    },
-    cell: ({ row }) => (
-      <div className="uppercase">{row.getValue("usr_nom")}</div>
-    ),
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    header: ({ column }) => {
-      return <div>Action</div>;
-    },
-    cell: ({ row }) => {
-      const payment = row.original;
-
-      return (
-        // <DropdownMenu>
-        //   <DropdownMenuTrigger asChild>
-        //     <Button variant="ghost" className="h-8 w-8 p-0">
-        //       <span className="sr-only">Open menu</span>
-        //       <MoreHorizontal className="h-4 w-4" />
-        //     </Button>
-        //   </DropdownMenuTrigger>
-        //   <DropdownMenuContent align="end">
-        //     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        //     <DropdownMenuItem>Copy payment ID</DropdownMenuItem>
-        //     <DropdownMenuSeparator />
-        //     <DropdownMenuItem>View customer</DropdownMenuItem>
-        //     <DropdownMenuItem>View payment details</DropdownMenuItem>
-        //   </DropdownMenuContent>
-        // </DropdownMenu>
-
-
-        <Button
-        className="flex items-end h-full  justify-"
-          variant="default"
-          onClick={onOpen}
-        >
-          <Pencil1Icon className="mr-1"/>
-          Edit
-          
-        </Button>
-      );
-    },
-  },
-];
-
 interface CompteRenduHistoriqueProps {
   listHistorique: SuiviAgenda[];
 }
 
 const CompteRenduHistorique = ({
   listHistorique: data,
-}: CompteRenduHistoriqueProps)=> {
+}: CompteRenduHistoriqueProps) => {
+  const { isOpen, onClose, onOpen } = useCompteRenduModal();
+
+  const columns: ColumnDef<SuiviAgenda>[] = [
+    {
+      accessorKey: "num",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Num
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("num")}</div>
+      ),
+    },
+    {
+      accessorKey: "date_ag",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Date Compte Rendu
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="lowercase">
+          {new Date(row.getValue("date_ag")).toLocaleDateString()}
+        </div>
+      ),
+    },
+
+    {
+      accessorKey: "compte_rendu",
+      header: ({ column }) => {
+        return <span>Compte Rendu</span>;
+      },
+
+      cell: ({ row }) => (
+        <div className="lowercase">{row.getValue("compte_rendu")}</div>
+      ),
+    },
+
+    {
+      accessorKey: "usr_nom",
+      header: ({ column }) => {
+        return <span>Utilisateur</span>;
+      },
+      cell: ({ row }) => (
+        <div className="uppercase">{row.getValue("usr_nom")}</div>
+      ),
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      header: ({ column }) => {
+        return <div>Action</div>;
+      },
+      cell: ({ row }) => {
+        const payment = row.original;
+
+        return (
+          <Button
+            className="flex items-end h-full  justify-"
+            variant="default"
+            onClick={onOpen}
+          >
+            <Pencil1Icon className="mr-1" />
+            Edit
+          </Button>
+        );
+      },
+    },
+  ];
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -372,9 +348,7 @@ const CompteRenduHistorique = ({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}
-                    className="-2"
-                    >
+                    <TableHead key={header.id} className="-2">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -391,7 +365,7 @@ const CompteRenduHistorique = ({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                className="py-2 pl-2"
+                  className="py-2 pl-2"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -444,7 +418,6 @@ const CompteRenduHistorique = ({
       </div>
     </div>
   );
-}
-
+};
 
 export default CompteRenduHistorique;
