@@ -184,6 +184,7 @@ import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Span } from "next/dist/trace";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
+import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: SuiviAgenda[];
@@ -416,6 +417,7 @@ const CompteRenduHistorique = ({
           </Button>
         </div>
       </div>
+      <CompteRenduModal />
     </div>
   );
 };
