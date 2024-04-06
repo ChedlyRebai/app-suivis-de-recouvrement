@@ -183,6 +183,9 @@ import {
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Span } from "next/dist/trace";
+import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
+
+const {isOpen,onClose,onOpen}=useCompteRenduModal();
 
 export const columns: ColumnDef<SuiviAgenda>[] = [
 
@@ -278,7 +281,7 @@ export const columns: ColumnDef<SuiviAgenda>[] = [
         <Button
         className="flex items-end h-full  justify-"
           variant="default"
-          onClick={()=>{}}
+          onClick={onOpen}
         >
           <Pencil1Icon className="mr-1"/>
           Edit
