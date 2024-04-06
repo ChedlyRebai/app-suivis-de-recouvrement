@@ -4,14 +4,14 @@ import { create } from "zustand";
 interface CompteRenduModalStore {
   suiviAgenda:SuiviAgenda;
   isOpen: boolean;
-  onOpen: () => void;
+  onOpen: (suiviAgenda:SuiviAgenda) => void;
   onClose: () => void;
 }
 
 const useCompteRenduModal = create<CompteRenduModalStore>((set) => ({
   suiviAgenda: {} as SuiviAgenda,
   isOpen: false,
-  onOpen: () => set({ isOpen: true }),
+  onOpen: (suiviAgenda:SuiviAgenda) => set({ isOpen: true, suiviAgenda: suiviAgenda}),
   onClose: () => set({ isOpen: false }),
 }));
 
