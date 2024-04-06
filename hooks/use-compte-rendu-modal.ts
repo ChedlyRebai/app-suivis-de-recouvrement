@@ -2,16 +2,16 @@ import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { create } from "zustand";
 
 interface CompteRenduModalStore {
-  suiviAgenda:SuiviAgenda;
+  id:number;
   isOpen: boolean;
-  onOpen: (suiviAgenda:SuiviAgenda) => void;
+  onOpen: (id:number) => void;
   onClose: () => void;
 }
 
 const useCompteRenduModal = create<CompteRenduModalStore>((set) => ({
-  suiviAgenda: {} as SuiviAgenda,
+  id:0,
   isOpen: false,
-  onOpen: (suiviAgenda:SuiviAgenda) => set({ isOpen: true, suiviAgenda: suiviAgenda}),
+  onOpen: (id:number) => set({ isOpen: true, id: id}),
   onClose: () => set({ isOpen: false }),
 }));
 

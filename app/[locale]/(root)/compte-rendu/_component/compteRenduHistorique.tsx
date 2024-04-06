@@ -213,23 +213,7 @@ const CompteRenduHistorique = ({
         <div className="capitalize">{row.getValue("num")}</div>
       ),
     },
-    {
-      accessorKey: "id",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Id
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("id")}</div>
-      ),
-    },
+    
     {
       accessorKey: "date_ag",
       header: ({ column }) => {
@@ -283,7 +267,7 @@ const CompteRenduHistorique = ({
           <Button
             className="flex items-end h-full  justify-"
             variant="default"
-            onClick={()=>onOpen({} as SuiviAgenda)}
+            onClick={()=>onOpen(row.getValue("id"))}
           >
             <Pencil1Icon className="mr-1" />
             Edit
