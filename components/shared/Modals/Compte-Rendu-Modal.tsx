@@ -22,6 +22,7 @@ const CompteRenduModal = () => {
     isOpen={isOpen}
     onChange={onClose}
   >
+    
      {isPending && (
       <div className='w-full flex justify-center items-center'>
       <Oval className="w-6 h-6 text-primary" />
