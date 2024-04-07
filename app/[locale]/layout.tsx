@@ -31,13 +31,13 @@ export default async function RootLayout({
   }
 
   const session = await getSession();
-  
+
   return (
     <html lang={locale}>
       <body className="min-h-screen">
         <NextIntlProvider locale={locale} messages={messages}>
           <ThemesProviders>
-            {children}
+            <ReactQueryProvider>{children}</ReactQueryProvider>
             <ToastProviders />
             <ModalProviders />
           </ThemesProviders>
