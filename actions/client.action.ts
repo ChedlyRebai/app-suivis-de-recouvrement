@@ -148,3 +148,14 @@ export const createCompteRendu = async (suiviAgenda: SuiviAgenda,compteRendu:any
     return {} as SuiviAgenda;
   }
 }
+
+export const getCompteRenduById = async (IdClient?: string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const res = await axios.get<SuiviAgenda>(`https://sprint2-two.vercel.app/compterendu/getbyid/${IdClient}`);
+    return res.data;
+
+  } catch (error) {
+    return {} as SuiviAgenda;
+  } 
+}

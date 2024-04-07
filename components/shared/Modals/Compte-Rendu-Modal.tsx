@@ -3,7 +3,8 @@ import React from 'react'
 import Modal from './Modal';
 
 const CompteRenduModal = () => {
-  const {isOpen, onOpen, onClose } = useCompteRenduModal();
+  const {id,isOpen, onOpen, onClose } = useCompteRenduModal();
+  
   return (
     <Modal
     title="Actualisez vos droits d'accès"
@@ -11,7 +12,7 @@ const CompteRenduModal = () => {
     isOpen={isOpen}
     onChange={onClose}
   >
-    edit
+    {id}
   </Modal>
   )
 }
