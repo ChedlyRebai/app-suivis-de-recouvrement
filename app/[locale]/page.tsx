@@ -17,6 +17,7 @@ const Page = async ({
   if(!session){
     return redirect("login");
   }
+  
 
   return (
     <Mainlayout showSidebar links={links} title={t("title")} session={session}>
