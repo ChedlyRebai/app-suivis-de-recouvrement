@@ -9,6 +9,7 @@ import ThemeButton from "@/components/shared/ThemeButton";
 import NextIntlProvider from "@/providers/NextIntlProvider";
 import { getSession } from "@/lib";
 import { redirect } from "next/navigation";
+import ReactQueryProvider from "@/providers/QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Amen Bank",
@@ -34,6 +35,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className="min-h-screen">
+        <ReactQueryProvider>
         <NextIntlProvider locale={locale} messages={messages}>
           <ThemesProviders>
             {children}
@@ -41,6 +43,7 @@ export default async function RootLayout({
             <ModalProviders />
           </ThemesProviders>
         </NextIntlProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
