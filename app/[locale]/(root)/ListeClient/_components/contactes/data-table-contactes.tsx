@@ -1,5 +1,4 @@
 "use client";
-
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,19 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-import { Cross2Icon, ReloadIcon, ResetIcon } from "@radix-ui/react-icons";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { DataTableViewOptions } from "./data-table-view-options";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { getAgences, getGroupes } from "@/actions/client.action";
 
 import { Check, ChevronsUpDown, Eraser } from "lucide-react";
 
@@ -54,15 +41,7 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
-import { DataTableToolbar } from "./data-table-toolbar";
 import React, { useCallback, useEffect, useState } from "react";
 import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -269,7 +248,7 @@ export function DataTableContactes<TData, TValue>({
       <div className="flex  items-center py-4 flex-wrap">
         <>
           <Input
-            placeholder="Client ID"
+            placeholder="Cli"
             defaultValue={searchParams.get("query")?.toString()}
             onChange={(e) => {
               handleSearch(e.target.value);
@@ -422,12 +401,12 @@ export function DataTableContactes<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader >
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow  key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="px-2">
+                    <TableHead  key={header.id} >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

@@ -10,7 +10,7 @@ export const columns: ColumnDef<ab_client>[] = [
     header: ({ column }) => {
       return (
         <Button variant="ghost">
-          ID Client
+          Cli
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

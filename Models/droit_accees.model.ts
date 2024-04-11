@@ -19,4 +19,5 @@ export type droit_accees = {
   flag_acces_dos?: String;
   req?: String;
   req2?: String;
+  href?: String;
 };
