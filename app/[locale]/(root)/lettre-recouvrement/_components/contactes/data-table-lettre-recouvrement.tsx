@@ -424,7 +424,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="p-0"
+                  className="p-"
                   onDoubleClick={() => {
                     console.log((row.original as { cli: string }).cli);
 
@@ -443,7 +443,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="p-2 cursor-pointer"
+                      className="p- cursor-pointer"
                       onClick={(e) => console.log(e)}
                     >
                       {flexRender(

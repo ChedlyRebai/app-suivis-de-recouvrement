@@ -18,13 +18,28 @@ export const columns: ColumnDef<ab_client>[] = [
         aria-label="Select all"
       />
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
+    cell: ({ row }) => {
+      // Access the cli value
+      const cli = row.original.cli;
+
+      // Render the checkbox based on the cli value
+      if (cli) {
+        return (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => {
+              row.toggleSelected(!!value);
+             
+              console.log(row.getIsSelected());
+            }}
+            aria-label="Select row"
+          />
+        );
+      }
+
+      // Render nothing if cli is not truthy
+      return null;
+    },
     enableSorting: false,
     enableHiding: false,
   },
