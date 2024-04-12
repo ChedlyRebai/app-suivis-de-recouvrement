@@ -194,6 +194,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       rowSelection,
       columnFilters,
     },
+
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
@@ -376,8 +377,8 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             <Eraser className="font-black" />
           </Button>
           {type !== "contactes" && (
-            <Card  className="h-10" >
-              <CardContent className="flex items-center justify-center my-1" >
+            <Card className="h-10">
+              <CardContent className="flex items-center justify-center my-1">
                 <p>Nombre de jour :</p>
                 <Input
                   type="number"
@@ -401,12 +402,12 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader >
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow  key={headerGroup.id}>
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead  key={header.id} >
+                    <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -466,28 +467,52 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
           </TableBody>
           <TableRow>
             <TableCell className="font-bold">
-              TOTAL Dossier: {totalAccout}
+              TOTAL Dossier: 
             </TableCell>
             <TableCell className="font-bold">
-              TOT IMP: {total.mnt_imp}{" "}
+            {totalAccout}
             </TableCell>
             <TableCell className="font-bold">
-              TOT DEP: {total.depassement}
+              TOT IMP: 
             </TableCell>
             <TableCell className="font-bold">
-              TOT IRR: {total.tot_creance}
+            {total.mnt_imp}{" "}
             </TableCell>
             <TableCell className="font-bold">
-              TOT ENG: {total.engagement}
+              TOT DEP: 
+            </TableCell>
+            <TableCell className="font-bold">
+               {total.depassement}
+            </TableCell>
+            <TableCell className="font-bold">
+              TOT IRR: 
+            </TableCell>
+            <TableCell className="font-bold">
+               {total.tot_creance}
+            </TableCell>
+            <TableCell className="font-bold">
+              TOT ENG: 
+            </TableCell>
+            <TableCell className="font-bold">
+              {total.engagement}
             </TableCell>
           </TableRow>
         </Table>
       </div>
+      <div className="mt-2 flex items-center justify-between px-2">
+        <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
+          <div className="flex items-center space-x-2">
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} row(s) selected.
+          </div>
+        </div>
+      
       <DataTablePagination
         TotalAccount={totalAccout}
         totalPages={totalPages}
         table={table}
       />
+      </div>
     </>
   );
 }
