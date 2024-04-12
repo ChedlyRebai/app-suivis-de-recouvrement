@@ -1,7 +1,6 @@
 "use server";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DataTableContactes } from "./_components/contactes/data-table-lettre-recouvrement";
 import { columns } from "./_components/contactes/columns";
 import {
   getAgences,
@@ -17,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
+import { DataTableLettreDeRecouvrement } from "./_components/contactes/data-table-lettre-recouvrement";
 
 export default async function Home({
   searchParams,
@@ -83,7 +83,7 @@ export default async function Home({
                     </CardDescription> */}
                   </CardHeader>
                   <CardContent>
-                    <DataTableContactes
+                    <DataTableLettreDeRecouvrement
                       agences={agences}
                       groupes={groupes}
                       total={dataNon.total}

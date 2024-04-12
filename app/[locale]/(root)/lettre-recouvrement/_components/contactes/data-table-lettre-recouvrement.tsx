@@ -13,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { DataTableViewOptions } from "./data-table-view-options";
 
 import { Check, ChevronsUpDown, Eraser } from "lucide-react";
 
@@ -48,6 +47,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
+import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -60,7 +60,7 @@ interface DataTableProps<TData, TValue> {
   type: "contactes" | "noncontactes";
 }
 
-export function DataTableContactes<TData, TValue>({
+export function DataTableLettreDeRecouvrement<TData, TValue>({
   columns,
   data,
   totalAccout,
