@@ -60,6 +60,9 @@ export const getClientNonContactes = async (
   dayfrom?: string,
   dayto?: string
 ) => {
+  try {
+    
+  
   //console.log(`${process.env.API_URL}/fonction`);
   const cookieStore = cookies();
   const session = cookieStore.get("session");
@@ -73,9 +76,12 @@ export const getClientNonContactes = async (
   const res = await axios.get<Main>(
     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
   );
-  // console.log(res.data);
+  
   console.log("revalidate")
    return res.data;
+  } catch (error) {
+    return {} as Main;
+  }
 };
 
 export const getGroupes = async () => {

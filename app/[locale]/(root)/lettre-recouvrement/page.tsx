@@ -75,9 +75,9 @@ export default async function Home({
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
             
               
-                <Card>
+                <Card>    
                   <CardHeader>
-                    <CardTitle>Liste des clients Non contactés</CardTitle>
+                    <CardTitle>Lettre de recouvrement</CardTitle>
                     {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}
