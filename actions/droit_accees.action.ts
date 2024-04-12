@@ -21,7 +21,7 @@ export const getDroitAccessByCodeFonction = async (
   );
   console.log(`${process.env.API_URL} `);
   const res = await axios.get(
-    `${process.env.API_URL}/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
+    `https://amenbankapi.vercel.app/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
   );
   return res.data;
 };
