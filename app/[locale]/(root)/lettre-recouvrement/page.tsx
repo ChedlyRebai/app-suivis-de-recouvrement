@@ -95,8 +95,6 @@ export default async function Home({
                     />
                   </CardContent>
                 </Card>
-              
-                
           </div>
         </Suspense>
       </div>
