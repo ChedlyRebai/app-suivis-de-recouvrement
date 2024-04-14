@@ -60,11 +60,11 @@ export const columns: ColumnDef<ab_client>[] = [
   },
 
   {
-    accessorKey: "groupe",
-    header: "Groupe",
+    accessorKey: "ncp",
+    header: "N°compte",
   },
   {
-    accessorKey: "agence",
+    accessorKey: "age",
     header: "Agence",
   },
   {
@@ -80,7 +80,7 @@ export const columns: ColumnDef<ab_client>[] = [
     header: "Nbj.Imp",
   },
   {
-    accessorKey: "sd",
+    accessorKey: "mnt_sd",
     header: "Solde Debiteur",
   },
   {
@@ -104,15 +104,11 @@ export const columns: ColumnDef<ab_client>[] = [
     header: "Engagement",
   },
   {
-    accessorKey: "classe",
+    accessorKey: "tot_eng",
     header: "Classe",
   },
   {
-    accessorKey: "tel1",
+    accessorKey: "etat_lettre",
     header: "Telephone 1",
-  },
-  {
-    accessorKey: "tel2",
-    header: "Telephone 2",
   },
 ];

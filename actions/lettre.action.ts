@@ -26,7 +26,7 @@ export const getLettre = async (
     //console.log(`${process.env.API_URL}/fonction`);
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `${process.env.API_URL}`;
+    axios.defaults.baseURL = `http://localhost:10001`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
@@ -38,7 +38,7 @@ export const getLettre = async (
     );
     
     console.log("revalidate")
-     return res.data;
+     return res.data as Main;
     } catch (error) {
       return {} as Main;
     }

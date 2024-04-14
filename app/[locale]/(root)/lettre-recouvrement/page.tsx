@@ -52,8 +52,8 @@ export default async function Home({
     from,
     to
   );
-
-
+  console.log("data")
+  console.log(data);
 
   const groupes = await getGroupes();
   const agences = await getAgences();
@@ -79,11 +79,11 @@ export default async function Home({
                     <DataTableLettreDeRecouvrement
                       agences={agences}
                       groupes={groupes}
-                      total={data.total}
-                      totalAccout={data.totalCount}
-                      totalPages={data.totalPages}
+                      total={3}
+                      totalAccout={3}
+                      totalPages={3}
                       columns={columns}
-                      data={data.result}
+                      data={[]}
                      
                     />
                   </CardContent>
