@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 
 import { Check } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import Dropzone from './_components/dropzone'
+
 
 export default function Home() {
   const [result, setResult] = useState(null)
@@ -14,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     if (!worker.current) {
       worker.current = new Worker(
-        new URL('../lib/worker.ts', import.meta.url),
+        new URL('../../../lib/worker.ts', import.meta.url),
         {
           type: 'module'
         }

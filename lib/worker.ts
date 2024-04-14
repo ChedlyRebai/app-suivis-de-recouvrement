@@ -1,25 +1,40 @@
-import { pipeline, env, PipelineType } from '@xenova/transformers'
 
-env.allowLocalModels = false
 
-class Pipeline {
-  static task: PipelineType = 'object-detection'
-  static model = 'Xenova/detr-resnet-50'
-  static instance: any = null
+import { pipeline, env, PipelineType } from "@xenova/transformers";
 
-  static async getInstance(progress_callback: Function | undefined) {
-    if (this.instance === null) {
-      this.instance = pipeline(this.task, this.model, { progress_callback })
+// Skip local model check
+env.allowLocalModels = false;
+
+// Use the Singleton pattern to enable lazy construction of the pipeline.
+class PipelineSingleton {
+    static task:PipelineType = 'text-classification';
+    static model = 'Xenova/distilbert-base-uncased-finetuned-sst-2-english';
+    static instance:any = null;
+
+    static async getInstance(progress_callback: Function | undefined) {
+        if (this.instance === null) {
+            this.instance = pipeline(this.task, this.model, { progress_callback });
+        }
+        return this.instance;
     }
-    return this.instance
-  }
 }
 
-self.addEventListener('message', async event => {
-  let detector = await Pipeline.getInstance((x: any) => {
-    self.postMessage(x)
-  })
+// Listen for messages from the main thread
+self.addEventListener('message', async (event) => {
+    // Retrieve the classification pipeline. When called for the first time,
+    // this will load the pipeline and save it for future use.
+    let classifier = await PipelineSingleton.getInstance((x:any) => {
+        // We also add a progress callback to the pipeline so that we can
+        // track model loading.
+        self.postMessage(x);
+    });
 
-  let result = await detector(event.data.image, { percentage: true })
-  self.postMessage({ status: 'complete', result })
-})
+    // Actually perform the classification
+    let output = await classifier(event.data.text);
+
+    // Send the output back to the main thread
+    self.postMessage({
+        status: 'complete',
+        output: output,
+    });
+});
