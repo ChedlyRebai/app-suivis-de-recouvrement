@@ -34,7 +34,7 @@ export const getLettre = async (
     console.log(`http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`);
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/lettre/getlettre?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
+      `https://sprint2-two.vercel.app/lettre/getlettre?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
     
     console.log("revalidate")

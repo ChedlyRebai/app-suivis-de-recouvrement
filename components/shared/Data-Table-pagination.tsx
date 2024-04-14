@@ -75,7 +75,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {currentPage} {lang("pagination.of")} {totalPages - 1}
+          Page {currentPage} {lang("pagination.of")} {totalPages }
         </div>
         <div className="flex items-center space-x-2">
           {" "}
