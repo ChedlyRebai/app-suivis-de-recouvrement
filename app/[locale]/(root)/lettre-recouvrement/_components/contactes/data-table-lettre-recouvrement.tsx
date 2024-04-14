@@ -375,7 +375,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
           >
             <Eraser className="font-black" />
           </Button>
-          {type !== "contactes" && (
+          
             <Card className="h-10">
               <CardContent className="flex items-center justify-center my-1">
                 <p>Nombre de jour :</p>
@@ -394,7 +394,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                 />
               </CardContent>
             </Card>
-          )}
+          
 
           <DataTableViewOptions table={table} />
         </>
