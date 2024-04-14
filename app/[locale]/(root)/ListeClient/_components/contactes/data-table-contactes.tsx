@@ -243,6 +243,16 @@ export function DataTableContactes<TData, TValue>({
     );
   };
 
+  const [loader, setLoader] = useState(true);
+  // effect
+  useEffect(() => {
+    setLoader(false);
+  }, []);
+
+  // render
+  if (loader) {
+    return <div>Loading</div>;
+  }
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
