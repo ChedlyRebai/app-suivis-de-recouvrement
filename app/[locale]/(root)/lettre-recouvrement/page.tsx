@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import { Suspense } from "react";
 import { DataTableLettreDeRecouvrement } from "./_components/contactes/data-table-lettre-recouvrement";
+import { getLettre } from "@/actions/lettre.action";
 
 export default async function Home({
   searchParams,
@@ -42,7 +43,7 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const data = await getClientContactes(
+  const data = await getLettre(
     search,
     currentPage,
     perPage,
