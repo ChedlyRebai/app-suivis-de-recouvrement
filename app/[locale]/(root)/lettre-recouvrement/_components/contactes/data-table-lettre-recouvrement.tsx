@@ -69,6 +69,8 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   groupes,
 
 }: DataTableProps<TData, TValue>) {
+
+  
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -92,7 +94,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   const [groupopen, setgroupOpen] = useState(false);
   const [agenceValue, setAgenceValue] = useState("");
   const [groupeValue, setgroupeValue] = useState("");
-
+  
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -184,6 +186,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     return <div>Loading...</div>;
   }
 
+  
   const table = useReactTable({
     data,
     columns,
@@ -242,6 +245,16 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       pathname + "?" + createQueryString("code", `${selectedCode as string}`)
     );
   };
+  const [loader, setLoader] = useState(true);
+  // effect
+  useEffect(() => {
+    setLoader(false);
+  }, []);
+
+  // render
+  if (loader) {
+    return <div>Loading</div>;
+  }
 
   return (
     <>

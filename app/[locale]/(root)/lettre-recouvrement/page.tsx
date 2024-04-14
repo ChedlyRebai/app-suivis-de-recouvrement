@@ -33,7 +33,6 @@ export default async function Home({
     from?: string;
   };
 }) {
-
   const search = searchParams?.query || "";
   const group = searchParams?.groupe || "";
   const agence = searchParams?.agence || "";
@@ -52,12 +51,12 @@ export default async function Home({
     from,
     to
   );
-  console.log("data")
+  console.log("data");
   console.log(data);
 
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log("render page")
+  console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -66,27 +65,25 @@ export default async function Home({
         </div>
         <Suspense fallback={<div>Loading...</div>}>
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
-            
-              
-                <Card>    
-                  <CardHeader>
-                    <CardTitle>Lettre de recouvrement</CardTitle>
-                    {/* <CardDescription>
+            <Card>
+              <CardHeader>
+                <CardTitle>Lettre de recouvrement</CardTitle>
+                {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}
-                  </CardHeader>
-                  <CardContent>
-                    <DataTableLettreDeRecouvrement
-                      agences={agences}
-                      groupes={groupes}
-                      total={data.total}
-                      totalAccout={data.totalCount}
-                      totalPages={data.totalPages}
-                      columns={columns}
-                      data={data.result}
-                    />
-                  </CardContent>
-                </Card>
+              </CardHeader>
+              <CardContent>
+                <DataTableLettreDeRecouvrement
+                  agences={agences}
+                  groupes={groupes}
+                  total={data.total}
+                  totalAccout={data.totalCount}
+                  totalPages={data.totalPages}
+                  columns={columns}
+                  data={data.result}
+                />
+              </CardContent>
+            </Card>
           </div>
         </Suspense>
       </div>
