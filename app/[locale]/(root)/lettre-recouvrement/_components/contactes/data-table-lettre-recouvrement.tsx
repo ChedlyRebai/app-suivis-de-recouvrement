@@ -165,20 +165,20 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   }, 0);
 
   const [loadingTable, setLoadingTable] = useState(false);
-  useEffect(() => {
-    setInputValue(searchParams.get("query") || "");
-    setLoadingTable(true);
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    params.delete("groupe");
-    params.delete("query");
-    params.delete("page");
-    params.delete("perPage");
-    params.delete("from");
-    params.delete("to");
-    replace(`${pathname}?${params.toString()}`);
-    setLoadingTable(false);
-  }, [type]);
+  // useEffect(() => {
+  //   setInputValue(searchParams.get("query") || "");
+  //   setLoadingTable(true);
+  //   const params = new URLSearchParams(searchParams);
+  //   params.delete("agence");
+  //   params.delete("groupe");
+  //   params.delete("query");
+  //   params.delete("page");
+  //   params.delete("perPage");
+  //   params.delete("from");
+  //   params.delete("to");
+  //   replace(`${pathname}?${params.toString()}`);
+  //   setLoadingTable(false);
+  // }, [type]);
 
   if (loadingTable) {
     return <div>Loading...</div>;
