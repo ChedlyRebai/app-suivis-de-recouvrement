@@ -106,6 +106,6 @@ export const columns: ColumnDef<ab_client>[] = [
 
   {
     accessorKey: "etat_lettre",
-    header: "Telephone 1",
+    header: "Etat Lettre",
   },
 ];
