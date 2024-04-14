@@ -79,12 +79,11 @@ export default async function Home({
                     <DataTableLettreDeRecouvrement
                       agences={agences}
                       groupes={groupes}
-                      total={3}
-                      totalAccout={3}
-                      totalPages={3}
+                      total={data.total}
+                      totalAccout={data.totalCount}
+                      totalPages={data.totalPages}
                       columns={columns}
-                      data={[]}
-                     
+                      data={data.result}
                     />
                   </CardContent>
                 </Card>

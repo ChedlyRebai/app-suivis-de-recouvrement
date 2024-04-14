@@ -80,7 +80,7 @@ export const columns: ColumnDef<ab_client>[] = [
     header: "Nbj.Imp",
   },
   {
-    accessorKey: "mnt_sd",
+    accessorKey: "mnt_sdb",
     header: "Solde Debiteur",
   },
   {
@@ -100,13 +100,10 @@ export const columns: ColumnDef<ab_client>[] = [
     header: "Max NBJ",
   },
   {
-    accessorKey: "engagement",
+    accessorKey: "tot_eng",
     header: "Engagement",
   },
-  {
-    accessorKey: "tot_eng",
-    header: "Classe",
-  },
+
   {
     accessorKey: "etat_lettre",
     header: "Telephone 1",
