@@ -53,15 +53,7 @@ export default async function Home({
     to
   );
 
-  const dataNon = await getClientNonContactes(
-    search,
-    currentPage,
-    perPage,
-    group,
-    agence,
-    from,
-    to
-  );
+
 
   const groupes = await getGroupes();
   const agences = await getAgences();
@@ -87,12 +79,12 @@ export default async function Home({
                     <DataTableLettreDeRecouvrement
                       agences={agences}
                       groupes={groupes}
-                      total={dataNon.total}
-                      totalAccout={dataNon.totalCount}
-                      totalPages={dataNon.totalPages}
+                      total={data.total}
+                      totalAccout={data.totalCount}
+                      totalPages={data.totalPages}
                       columns={columns}
-                      data={dataNon.result}
-                      type="contactes"
+                      data={data.result}
+                     
                     />
                   </CardContent>
                 </Card>

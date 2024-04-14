@@ -57,7 +57,6 @@ interface DataTableProps<TData, TValue> {
   totalPages?: number;
   groupes: any[];
   agences: any[];
-  type: "contactes" | "noncontactes";
 }
 
 export function DataTableLettreDeRecouvrement<TData, TValue>({
@@ -68,7 +67,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   total,
   agences,
   groupes,
-  type,
+
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
   const pathname = usePathname();
