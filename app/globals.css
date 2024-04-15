@@ -85,3 +85,7 @@
 .nextjs-toast-errors-parent {
   display: hidden;
 }
+
+.idColumn {
+ display: none;
+}

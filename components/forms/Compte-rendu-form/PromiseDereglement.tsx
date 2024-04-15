@@ -38,8 +38,9 @@ const PromiseDereglement = () => {
               handleIputChangeSuiviAgenda("mnt_reg", e.target.value)
             }
             value={suiviAgenda.mnt_reg}
+            
             id="amount"
-            placeholder="850 672.280"
+            placeholder={client.tot_creance}
           />
         </div>
         <div className="flex flex-col mr-4">

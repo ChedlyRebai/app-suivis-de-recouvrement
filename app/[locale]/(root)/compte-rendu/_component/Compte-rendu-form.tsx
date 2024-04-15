@@ -80,6 +80,7 @@ const CompteRenduForm = ({
   const [selectedRadio, setSelectedRadio] = useState("0"); // State to manage the selected radio value
 
   const handleRadioChange = (e: any) => {
+    e.preventDefault();
     setSelectedRadio(e.target.value);
     let { compte_rendu, app_gen } = suiviAgenda;
     setSuiviAgenda({ compte_rendu, app_gen } as SuiviAgenda);
@@ -89,11 +90,12 @@ const CompteRenduForm = ({
 
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
-  console.log(cli);
+  console.log("rendering compte rendu form");
 
   const [tab, setTab] = useState("tab1");
 
-  const onTabChange = (value: string) => {
+  const onTabChange = (value: string,e:any) => {
+    e.preventDefault();
     setTab(value);
     console.log(tab);
   };
@@ -148,44 +150,45 @@ const CompteRenduForm = ({
       compte_rendu = `Client injoignable: ${suiviAgenda.compte_rendu || ""}`;
     }
 
-    console.log("compte rendu:", compte_rendu);
-    console.log("suiviAgenda:", suiviAgenda);
+    
 
     saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!)
       .then(() => {
         toast.success("Compte rendu enregistré avec succès");
+
       })
       .catch(() => {
         toast.error("Erreur lors de l'enregistrement du compte rendu");
       });
   };
 
-  const getDefaultTab = () => {
-    if (selectedRadio === "2") {
-      return "Nouvelles coordonnées"; // Ensure consistent spelling with the TabsTrigger values
-    } else if (selectedRadio === "1") {
-      return "Promesse de règlement";
-    } else {
-      return "Facilité de paiement";
-    }
-  };
-
+  // const getDefaultTab = () => {
+  //   if (selectedRadio === "2") {
+  //     return "Nouvelles coordonnées"; // Ensure consistent spelling with the TabsTrigger values
+  //   } else if (selectedRadio === "1") {
+  //     return "Promesse de règlement";
+  //   } else {
+  //     return "Facilité de paiement";
+  //   }
+  // };
+ 
+  
   return (
     <div className=" mx-auto px-4 sm:px-6 md:px- 8">
       <div className="">
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>Donnée de client</AccordionTrigger>
-            <AccordionContent>
-              <div className="my-2 grid  grid-flow-col grid-cols-4 grid-rows-5 gap-3 ">
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+            <AccordionContent className="p-1">
+              <div className="my-2 grid  grid-flow-col grid-cols-3 grid-rows-5 gap-2 ">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Client">Client</Label>
                   <div className="flex ">
                     <Input
                       readOnly
-                      value={suiviAgenda.cli}
+                      value={client.cli}
                       id="cli"
-                      className="w-1/3 px-1 mr-1"
+                      className="w-1/3 text-[14px] px-0 mr-1"
                       type="number"
                     />
                     <Input
@@ -197,7 +200,7 @@ const CompteRenduForm = ({
                     />
                   </div>
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max- items-center gap-1.5">
                   <Label htmlFor="groupe">Groupe</Label>
                   <div className="flex ">
                     <Input
@@ -216,7 +219,7 @@ const CompteRenduForm = ({
                     />
                   </div>
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-2">
                   <Label htmlFor="Agence">Agence</Label>
                   <div className="flex ">
                     <Input
@@ -236,7 +239,7 @@ const CompteRenduForm = ({
                   </div>
                 </div>
 
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Mnt_Imp">Mnt Imp</Label>
                   <Input
                     readOnly
@@ -245,7 +248,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Solde_debiteur">Solde debiteur</Label>
                   <Input
                     readOnly
@@ -254,7 +257,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Tot_irregulier">Tot_irregulier</Label>
                   <Input
                     readOnly
@@ -263,7 +266,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Engagement">Engagement</Label>
                   <Input
                     readOnly
@@ -281,7 +284,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Nbj.IMP">Nbj.IMP</Label>
                   <Input
                     readOnly
@@ -290,7 +293,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="Depassement">Depassement</Label>
                   <Input
                     readOnly
@@ -299,7 +302,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="MaxNbj">MaxNbj</Label>
                   <Input
                     readOnly
@@ -308,7 +311,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="ClasseRisque">Classe Risque</Label>
                   <Input
                     readOnly
@@ -317,7 +320,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className="grid w-full max items-center gap-1.5">
                   <Label htmlFor="NombreImpaye">Nombre Impaye</Label>
                   <Input
                     readOnly
@@ -326,7 +329,7 @@ const CompteRenduForm = ({
                     type="text"
                   />
                 </div>
-                <div className="grid  max-w-sm items-center gap-1.5">
+                <div className="grid w-full  items-center gap-1.5">
                   <Label htmlFor="Nbj.SDB">Nbj.SDB</Label>
                   <Input
                     readOnly
@@ -495,7 +498,7 @@ const CompteRenduForm = ({
           <AccordionItem value="item-4">
             <AccordionTrigger>Compte Rendu</AccordionTrigger>
             <AccordionContent>
-              <Card className="my-2 flex items-center ">
+              {/* <Card className="my-2 flex items-center ">
                 <RadioGroup
                   name="value"
                   onChange={(e: any) => {
@@ -509,7 +512,6 @@ const CompteRenduForm = ({
                         {Sort.map((item) => (
                           <div className="flex items-center">
                             {" "}
-                            {/* Assign key to outermost element */}
                             <Input
                               type="radio"
                               value={`${item.Code}`}
@@ -523,53 +525,53 @@ const CompteRenduForm = ({
                     </div>
                   </CardContent>
                 </RadioGroup>
-              </Card>
+              </Card> */}
 
               <div className=" py-2  mt-1  dark:bg-inherit ">
                 <Tabs
-                  value={tab}
+                  // value={tab}
                   className="relative mr-auto w-full"
-                  onValueChange={onTabChange}
+                  // onValueChange={(e:any)=>onTabChange(tab,e)}
                 >
                   <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      disabled
+                      // disabled
                       value="1"
                     >
                       Promesse de règlement
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      disabled
+                      // disabled
                       value="2"
                     >
                       Nouvelles coordonnées
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      disabled
+                      // disabled
                       value="3"
                     >
                       Facilité de paiement
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      disabled
+                      // disabled
                       value="4"
                     >
                       Non reconnaissance de la créance
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      disabled
+                      // disabled
                       value="5"
                     >
                       Visite
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      disabled
+                      // disabled
                       value="6"
                     >
                       Client injoignable
@@ -678,7 +680,8 @@ const CompteRenduForm = ({
                         id="location"
                       />
                     </div>
-                  </div>
+                    
+                  </div><Button  onClick={handleSubmit}>Save</Button>
                 </CardContent>
               </Card>
             </AccordionContent>
@@ -688,7 +691,7 @@ const CompteRenduForm = ({
             <AccordionTrigger>List de Compte Rendu</AccordionTrigger>
             <AccordionContent>
               <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
-              <Button onClick={handleSubmit}>Save</Button>
+              
             </AccordionContent>
           </AccordionItem>
         </Accordion>

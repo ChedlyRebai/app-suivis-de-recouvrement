@@ -158,7 +158,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown, MoreHorizontal, SearchIcon, ZoomInIcon, ZoomOut } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -197,6 +197,7 @@ const CompteRenduHistorique = ({
 
   const columns: ColumnDef<SuiviAgenda>[] = [
     {
+      
       accessorKey: "num",
       header: ({ column }) => {
         return (
@@ -217,17 +218,11 @@ const CompteRenduHistorique = ({
       accessorKey: "id",
       header: ({ column }) => {
         return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Id
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
+          <div className="hidden"/>
         );
       },
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("id")}</div>
+        <div className="hidden"/>
       ),
     },
     
@@ -282,12 +277,12 @@ const CompteRenduHistorique = ({
 
         return (
           <Button
-            className="flex items-end h-full  justify-"
+            className="flex items-center h-full  justify-center"
             variant="default"
             onClick={()=>onOpen(row.getValue("id"))}
           >
-            <Pencil1Icon className="mr-1" />
-            Edit
+            <SearchIcon  className="mr-1" />
+            Detaille
           </Button>
         );
       },
@@ -314,6 +309,7 @@ const CompteRenduHistorique = ({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    
     state: {
       sorting,
       columnFilters,
