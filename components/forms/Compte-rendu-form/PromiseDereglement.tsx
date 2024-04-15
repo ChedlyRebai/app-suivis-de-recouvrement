@@ -40,7 +40,7 @@ const PromiseDereglement = () => {
             value={suiviAgenda.mnt_reg}
             
             id="amount"
-            placeholder={client.tot_creance}
+            placeholder={`${client.tot_creance}`}
           />
         </div>
         <div className="flex flex-col mr-4">
