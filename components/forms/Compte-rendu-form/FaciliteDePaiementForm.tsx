@@ -23,7 +23,7 @@ const FaciliteDePaiementForm = () => {
             handleIputChangeSuiviAgenda("nb_ech", e.target.value)
           }
           id="MontantImpaye"
-          type="text"
+          type="number"
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -46,7 +46,7 @@ const FaciliteDePaiementForm = () => {
           }
           value={suiviAgenda.mntech1}
           id="Montant1ere"
-          type="text"
+          type="number"
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -57,7 +57,7 @@ const FaciliteDePaiementForm = () => {
           }
           value={suiviAgenda.mntech2}
           id="Montant2ere"
-          type="text"
+          type="number"
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5"></div>
@@ -86,7 +86,7 @@ const FaciliteDePaiementForm = () => {
           }
           value={suiviAgenda.mntech3}
           id="Montant3ere"
-          type="text"
+          type="number"
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -97,7 +97,7 @@ const FaciliteDePaiementForm = () => {
           }
           value={suiviAgenda.mntech4}
           id="Montant4ere"
-          type="text"
+          type="number"
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -108,7 +108,7 @@ const FaciliteDePaiementForm = () => {
           }
           value={suiviAgenda.mntech5}
           id="Montant5ere"
-          type="text"
+          type="number"
         />
       </div>
       <div className="grid   items-center gap-1.5 col-span-2">
@@ -139,7 +139,7 @@ const FaciliteDePaiementForm = () => {
               value={
                 getAgence(suiviAgenda.lieu_rec)
               }
-              type="text" />
+               />
             </div>
         </div>
       </div>

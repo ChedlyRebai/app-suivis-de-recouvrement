@@ -94,8 +94,7 @@ const CompteRenduForm = ({
 
   const [tab, setTab] = useState("tab1");
 
-  const onTabChange = (value: string,e:any) => {
-    e.preventDefault();
+  const onTabChange = (value: string) => {
     setTab(value);
     console.log(tab);
   };
@@ -531,10 +530,11 @@ const CompteRenduForm = ({
                 <Tabs
                   // value={tab}
                   className="relative mr-auto w-full"
-                   onValueChange={(e:any)=>onTabChange(tab,e)}
+                   onValueChange={onTabChange}
                 >
-                  <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
+                  <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0" >
                     <TabsTrigger
+                    onClick={() => setSelectedRadio("1")}
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
                       value="1"
@@ -542,6 +542,7 @@ const CompteRenduForm = ({
                       Promesse de règlement
                     </TabsTrigger>
                     <TabsTrigger
+                    onClick={() => setSelectedRadio("2")}
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
                       value="2"
@@ -550,6 +551,7 @@ const CompteRenduForm = ({
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+                      onClick={() => setSelectedRadio("3")}
                       // disabled
                       value="3"
                     >
@@ -558,6 +560,7 @@ const CompteRenduForm = ({
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
+                      onClick={() => setSelectedRadio("4")}
                       value="4"
                     >
                       Non reconnaissance de la créance
@@ -566,11 +569,13 @@ const CompteRenduForm = ({
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
                       value="5"
+                      onClick={() => setSelectedRadio("5")}
                     >
                       Visite
                     </TabsTrigger>
                     <TabsTrigger
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+                      onClick={() => setSelectedRadio("6")}
                       // disabled
                       value="6"
                     >
