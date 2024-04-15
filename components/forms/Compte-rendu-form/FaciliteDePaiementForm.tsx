@@ -29,9 +29,10 @@ const FaciliteDePaiementForm = () => {
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Nombreech">Nombre echeance</Label>
         <Input
-          onChange={(e) =>
+          onChange={(e) =>{
+            console.log(suiviAgenda)
             handleIputChangeSuiviAgenda("nb_ech", e.target.value)
-          }
+          }}
           id="Nombreech"
           value={suiviAgenda.nb_ech}
           type="number"

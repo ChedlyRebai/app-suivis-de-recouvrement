@@ -531,7 +531,7 @@ const CompteRenduForm = ({
                 <Tabs
                   // value={tab}
                   className="relative mr-auto w-full"
-                  // onValueChange={(e:any)=>onTabChange(tab,e)}
+                   onValueChange={(e:any)=>onTabChange(tab,e)}
                 >
                   <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
                     <TabsTrigger
