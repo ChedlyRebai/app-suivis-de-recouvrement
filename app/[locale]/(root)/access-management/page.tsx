@@ -1,4 +1,5 @@
 "use server";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AccessManagementDataTable } from "./_component/data-table";
 import { getSession } from "@/lib";
 import { redirect } from "next/navigation";
@@ -13,29 +14,24 @@ export default async function Home({
     perPage?: string;
   };
 }) {
-  
-  const session=await getSession();
-  
-  if(!session){
+  const session = await getSession();
+
+  if (!session) {
     return redirect("login");
   }
 
   return (
-    <div>
-      <div className="py-6 mt-16">
-        <div className=" mx-auto px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            Access Management
-          </h1>
-        </div>
-        <div className=" mx-auto px-4 sm:px-6 md:px-8">
-          {/* Replace with your content 
-                <div className="py-4">
-                  <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
-                </div>
-                {/* /End replace */}
-          <AccessManagementDataTable />
-        </div>
+    <div className="bg-hero-patter px-3 bg-slate-100 min-h-screen py-6 mt-16  dark:bg-muted/40 ">
+      <div className="py-6 min-h-60">
+        <Card className="min-h-56">
+          {" "}
+          <CardHeader>
+            <CardTitle>Access Management</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <AccessManagementDataTable />
+          </CardContent>
+        </Card>{" "}
       </div>
     </div>
   );
