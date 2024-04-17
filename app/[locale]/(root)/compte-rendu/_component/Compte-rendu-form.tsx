@@ -127,21 +127,34 @@ const CompteRenduForm = ({
       }`;
       console.log("Nouvelle coordonnee");
     } else if (selectedRadio === "3") {
-      compte_rendu = `Facilité de paiement : Montant global = ${
-        client.mnt_imp
-      } Nombre d'echeance = ${suiviAgenda.nb_ech} Mnt. 1ére ech. = ${
-        suiviAgenda.mntech1
-      } Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} Mnt. 2ème ech. = ${
-        suiviAgenda.mntech2
-      } Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} Mnt. 3ème ech. = ${
-        suiviAgenda.mntech3
-      } Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} Mnt. 4ème ech. = ${
-        suiviAgenda.mntech4
-      } Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} Mnt. 5ème ech. = ${
-        suiviAgenda.mntech5
-      } Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} ${
-        suiviAgenda.compte_rendu || ""
-      }`;
+      // compte_rendu = `Facilité de paiement : Montant global = ${
+      //   client.mnt_imp
+      // } Nombre d'echeance = ${suiviAgenda.nb_ech} Mnt. 1ére ech. = ${
+      //   suiviAgenda.mntech1
+      // } Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} Mnt. 2ème ech. = ${
+      //   suiviAgenda.mntech2
+      // } Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} Mnt. 3ème ech. = ${
+      //   suiviAgenda.mntech3
+      // } Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} Mnt. 4ème ech. = ${
+      //   suiviAgenda.mntech4
+      // } Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} Mnt. 5ème ech. = ${
+      //   suiviAgenda.mntech5
+      // } Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} ${
+      //   suiviAgenda.compte_rendu || ""
+      // }`;
+      // console.log("Facilite de paiement");
+      compte_rendu = `Facilité de paiement : Montant global = ${client.mnt_imp} Nombre d'echeance = ${suiviAgenda.nb_ech} ${
+        suiviAgenda.mntech1 ? `Mnt. 1ére ech. = ${suiviAgenda.mntech1} Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} ` : ""
+      }${
+        suiviAgenda.mntech2 ? `Mnt. 2ème ech. = ${suiviAgenda.mntech2} Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} ` : ""
+      }${
+        suiviAgenda.mntech3 ? `Mnt. 3ème ech. = ${suiviAgenda.mntech3} Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} ` : ""
+      }${
+        suiviAgenda.mntech4 ? `Mnt. 4ème ech. = ${suiviAgenda.mntech4} Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} ` : ""
+      }${
+        suiviAgenda.mntech5 ? `Mnt. 5ème ech. = ${suiviAgenda.mntech5} Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} ` : ""
+      }${suiviAgenda.compte_rendu || ""}`;
+      
       console.log("Facilite de paiement");
     } else if (selectedRadio === "4") {
       console.log("Non reconnaissance de la creance");
@@ -160,7 +173,7 @@ const CompteRenduForm = ({
     
 
     saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!)
-      .then(() => {
+      .then((res) => {
         toast.success("Compte rendu enregistré avec succès");
 
       })
