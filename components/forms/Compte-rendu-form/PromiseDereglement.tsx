@@ -37,8 +37,8 @@ const PromiseDereglement = () => {
             onChange={(e) =>
               handleIputChangeSuiviAgenda("mnt_reg", e.target.value)
             }
-            value={suiviAgenda.mnt_reg}
             
+            defaultValue={client.tot_creance}
             id="amount"
             placeholder={`${client.tot_creance}`}
           />

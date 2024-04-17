@@ -36,8 +36,8 @@ const FaciliteDePaiementForm = () => {
           }}
           id="Nombreech"
           max={5}
-          min={1}
-          value={suiviAgenda.nb_ech || 1}
+          
+          value={suiviAgenda.nb_ech || ''}
           type="number"
         />
       </div>
