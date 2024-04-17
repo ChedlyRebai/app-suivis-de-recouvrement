@@ -143,8 +143,13 @@ export function AccessManagementDataTable<
             </SelectTrigger>
             <SelectContent>
               <SelectGroup id="acces">
-                <SelectItem value="O">Oui</SelectItem>
-                <SelectItem value="N">Non</SelectItem>
+                {" "}
+                <SelectItem className="text-green-500" value="O">
+                  Oui
+                </SelectItem>
+                <SelectItem className="text-red-500" value="N">
+                  Non
+                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -187,8 +192,13 @@ export function AccessManagementDataTable<
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="O">Oui</SelectItem>
-                <SelectItem value="N">Non</SelectItem>
+                {" "}
+                <SelectItem className="text-green-500" value="O">
+                  Oui
+                </SelectItem>
+                <SelectItem className="text-red-500" value="N">
+                  Non
+                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -218,8 +228,13 @@ export function AccessManagementDataTable<
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="O">Oui</SelectItem>
-                <SelectItem value="N">Non</SelectItem>
+                {" "}
+                <SelectItem className="text-green-500" value="O">
+                  Oui
+                </SelectItem>
+                <SelectItem className="text-red-500" value="N">
+                  Non
+                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -258,8 +273,12 @@ export function AccessManagementDataTable<
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="O">Oui</SelectItem>
-                <SelectItem value="N">Non</SelectItem>
+                <SelectItem className="text-green-500" value="O">
+                  Oui
+                </SelectItem>
+                <SelectItem className="text-red-500" value="N">
+                  Non
+                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
