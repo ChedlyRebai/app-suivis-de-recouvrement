@@ -18,21 +18,24 @@ interface datePickerProps {
   date:Date | string | any;
   setDate: (champ: string, value: string | any) => void;
   champ: string ;
+  disabled?:boolean;
 }
 export function DatePickerDemo({
   date,
   setDate,
   champ,
+  disabled:disable
 }: datePickerProps) {
   
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
+        disabled={disable}
           variant={"outline"}
           className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground"
+            "w-[280px] justify-start  text-left font-normal",
+            !date && `text-muted-foreground cursor-not-allowe ${disable && "cursor-not-allowed"} `, 
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4 w" />

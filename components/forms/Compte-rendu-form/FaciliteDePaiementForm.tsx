@@ -19,6 +19,7 @@ const FaciliteDePaiementForm = () => {
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="MontantImpaye">Montant Impaye</Label>
         <Input
+
           onChange={(e) =>
             handleIputChangeSuiviAgenda("nb_ech", e.target.value)
           }
@@ -34,13 +35,15 @@ const FaciliteDePaiementForm = () => {
             handleIputChangeSuiviAgenda("nb_ech", e.target.value)
           }}
           id="Nombreech"
-          value={suiviAgenda.nb_ech}
+          max={5}
+          min={1}
+          value={suiviAgenda.nb_ech || 1}
           type="number"
         />
       </div>
       
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="Montant1ere">Montant 1ére éch</Label>
+          <Label htmlFor="Montant1ere" className={`${suiviAgenda.nb_ech!! < 1 && "text-muted-foreground"}`}>Montant 1ére éch</Label>
           <Input
             onChange={(e) =>
               handleIputChangeSuiviAgenda("mntech1", e.target.value)
@@ -48,12 +51,13 @@ const FaciliteDePaiementForm = () => {
             value={suiviAgenda.mntech1}
             id="Montant1ere"
             type="number"
+            disabled={suiviAgenda.nb_ech!! < 1}
           />
         </div>
           
       
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Montant2ere">Montant 2ére éch</Label>
+      <Label htmlFor="Montant2ere" className={`${suiviAgenda.nb_ech!! < 2 && "text-muted-foreground"}`}>Montant 2ére éch</Label>
         <Input
           onChange={(e) =>
             handleIputChangeSuiviAgenda("mntech2", e.target.value)
@@ -61,28 +65,31 @@ const FaciliteDePaiementForm = () => {
           value={suiviAgenda.mntech2}
           id="Montant2ere"
           type="number"
+          disabled={suiviAgenda.nb_ech!! < 2}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5"></div>
       <div className="grid w-full max-w-sm items-center gap-1.5"></div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Date1éreEcheance">Date 1ére Echeance</Label>
+      <Label htmlFor="Montant1ere" className={`${suiviAgenda.nb_ech!! < 1 && "text-muted-foreground"}`}>Date 1ére éch</Label>
         <DatePickerDemo
           date={suiviAgenda.date_prem_ver || ""}
           champ={"date_prem_ver"}
           setDate={handleIputChangeSuiviAgenda}
+          disabled={suiviAgenda.nb_ech!! < 1}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Date2éreEcheance">Date 2ére Echeance</Label>
+      <Label htmlFor="Date2éreEcheance" className={`${suiviAgenda.nb_ech!! < 2 && "text-muted-foreground"}`}>Date 2ére Echeance</Label>
         <DatePickerDemo
           date={suiviAgenda.date_deuxi_ech || ""}
           champ={"date_deuxi_ech"}
           setDate={handleIputChangeSuiviAgenda}
+          disabled={suiviAgenda.nb_ech!! < 2}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Montant3ere">Montant 3ére éch</Label>
+      <Label htmlFor="Montant3ere" className={`${suiviAgenda.nb_ech!! < 3 && "text-muted-foreground"}`}>Montant 3ére éch</Label>
         <Input
           onChange={(e) =>
             handleIputChangeSuiviAgenda("mntech3", e.target.value)
@@ -90,10 +97,11 @@ const FaciliteDePaiementForm = () => {
           value={suiviAgenda.mntech3}
           id="Montant3ere"
           type="number"
+          disabled={suiviAgenda.nb_ech!! < 3}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Montant4ere">Montant 4ére éch</Label>
+      <Label htmlFor="Montant4ere" className={`${suiviAgenda.nb_ech!! < 4 && "text-muted-foreground"}`}>Montant 4ére éch</Label>
         <Input
           onChange={(e) =>
             handleIputChangeSuiviAgenda("mntech4", e.target.value)
@@ -101,10 +109,11 @@ const FaciliteDePaiementForm = () => {
           value={suiviAgenda.mntech4}
           id="Montant4ere"
           type="number"
+          disabled={suiviAgenda.nb_ech!! < 4}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Montant5ere">Montant 5ére éch</Label>
+      <Label htmlFor="Montant5ere" className={`${suiviAgenda.nb_ech!! < 5 && "text-muted-foreground"}`}>Montant 5ére éch</Label>
         <Input
           onChange={(e) =>
             handleIputChangeSuiviAgenda("mntech5", e.target.value)
@@ -112,6 +121,7 @@ const FaciliteDePaiementForm = () => {
           value={suiviAgenda.mntech5}
           id="Montant5ere"
           type="number"
+          disabled={suiviAgenda.nb_ech!! < 5}
         />
       </div>
       <div className="grid   items-center gap-1.5 col-span-2">
@@ -145,27 +155,32 @@ const FaciliteDePaiementForm = () => {
       </div>
 
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Date3éreEcheance">Date 3ére Echeance</Label>
+      <Label htmlFor="Date3éreEcheance" className={`${suiviAgenda.nb_ech!! < 3 && "text-muted-foreground"}`}>Date 3ére Echeance</Label>
         <DatePickerDemo
           date={suiviAgenda.date_trois_ech || ""}
           champ={"date_trois_ech"}
           setDate={handleIputChangeSuiviAgenda}
+          disabled={suiviAgenda.nb_ech!! < 3}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Date4éreEcheance">Date 4ére Echeance</Label>
+        <Label  htmlFor="Date4éreEcheance" 
+        className={`${suiviAgenda.nb_ech!! < 4 && "text-muted-foreground"}`}
+        >Date 4ére Echeance</Label>
         <DatePickerDemo
           date={suiviAgenda.date_quat_ech || ""}
           champ={"date_quat_ech"}
           setDate={handleIputChangeSuiviAgenda}
+          disabled={suiviAgenda.nb_ech!! < 4}
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Date5éreEcheance">Date 5ére Echeance</Label>
+      <Label htmlFor="Date5éreEcheance" className={`${suiviAgenda.nb_ech!! < 5 && "text-muted-foreground"}`}>Date 5ére Echeance</Label>
         <DatePickerDemo
           date={suiviAgenda.date_cinq_ech || ""}
           champ={"date_cinq_ech"}
           setDate={handleIputChangeSuiviAgenda}
+          disabled={suiviAgenda.nb_ech!! < 5}
         />
       </div>
     </div>
