@@ -128,6 +128,7 @@ export function AccessManagementDataTable<
           //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
           // </span>
           <Select
+          
             onValueChange={(newValue) =>
               update(
                 row.getValue("code_fonction"),
@@ -138,8 +139,8 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("acces")}
           >
-            <SelectTrigger className="w-fit">
-              <SelectValue placeholder="Select a fruit" />
+            <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+              <SelectValue className="" placeholder="Select a fruit" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup id="acces">
