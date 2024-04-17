@@ -61,9 +61,6 @@ export const getClientNonContactes = async (
   dayto?: string
 ) => {
   try {
-    
-  
-  //console.log(`${process.env.API_URL}/fonction`);
   const cookieStore = cookies();
   const session = cookieStore.get("session");
   axios.defaults.baseURL = `${process.env.API_URL}`;
@@ -159,6 +156,7 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<SuiviAgenda>(`https://sprint2-two.vercel.app/compterendu/getbyid/${IdClient}`);
+    console.log(res.data)
     return res.data;
 
   } catch (error) {

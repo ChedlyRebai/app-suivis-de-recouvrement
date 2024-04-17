@@ -44,7 +44,7 @@ export default async function Home({
   const suiviAgenda = await getCompterendu(cli);
   const listecompte = await getListCompte(cli);
   const historiqueCompteRendu = await getListCompteRenduHistorique(cli);
-
+  console.log(historiqueCompteRendu)
   return (
     <div className="bg-hero-patter px-3 bg-slate-100 min-h-screen py-6 mt-16  dark:bg-muted/40 ">
       <div className="py-6 min-h-60">

@@ -62,7 +62,7 @@ const CompteRenduForm = ({
   historiqueCompteRendu,
 }: CompteRenduFormProps) => {
   const [selectedValue, setSelectedValue] = useState("1");
-
+  console.log(historiqueCompteRendu)
   const {
     client,
     handleIputChangeSuiviAgenda,
