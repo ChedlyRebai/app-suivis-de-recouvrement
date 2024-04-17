@@ -1,9 +1,6 @@
 "use server";
-import { getAllFunctions } from "@/actions/fonction.action";
-import { columns } from "./_component/columns";
 import { AccessManagementDataTable } from "./_component/data-table";
 import { getSession } from "@/lib";
-import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 
 export default async function Home({
