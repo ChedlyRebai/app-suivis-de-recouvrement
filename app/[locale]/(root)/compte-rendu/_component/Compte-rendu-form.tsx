@@ -29,12 +29,12 @@ import { APP_GEN, LISTE_CHOIX, MOTIF_IM, Sort } from "@/constants";
 
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import PromiseDereglement from "@/components/forms/Compte-rendu-form/PromiseDereglement";
-import NouvelleCoordonneeForm from "@/components/forms/Compte-rendu-form/NouvelleCoordonnéeForm";
-import ClientINjoignable from "@/components/forms/Compte-rendu-form/ClientINjoignable";
-import FaciliteDePaiementForm from "@/components/forms/Compte-rendu-form/FaciliteDePaiementForm";
-import NonreconnaissancedelaCreanceForm from "@/components/forms/Compte-rendu-form/Non-reconnaissance-de-la-créance";
-import VisiteForm from "@/components/forms/Compte-rendu-form/visiteForm";
+import PromiseDereglement from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/PromiseDereglement";
+import NouvelleCoordonneeForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/NouvelleCoordonnéeForm";
+import ClientINjoignable from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/ClientINjoignable";
+import FaciliteDePaiementForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/FaciliteDePaiementForm";
+import NonreconnaissancedelaCreanceForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/Non-reconnaissance-de-la-créance";
+import VisiteForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/visiteForm";
 import { Textarea } from "@/components/ui/textarea";
 import useClientSore from "@/hooks/useCompteRenduForm";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
