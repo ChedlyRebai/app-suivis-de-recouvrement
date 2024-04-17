@@ -47,8 +47,8 @@ const VisiteForm = () => {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Heures</SelectLabel>
-              {heureVisite.map((item) => (
-                <SelectItem value={`${item.Code}`}>{item.libelle}H</SelectItem>
+              {heureVisite.map((item,i) => (
+                <SelectItem key={i} value={`${item.Code}`}>{item.libelle}H</SelectItem>
               ))}
             </SelectGroup>
           </SelectContent>

@@ -38,17 +38,20 @@ const FaciliteDePaiementForm = () => {
           type="number"
         />
       </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="Montant1ere">Montant 1ére éch</Label>
-        <Input
-          onChange={(e) =>
-            handleIputChangeSuiviAgenda("mntech1", e.target.value)
-          }
-          value={suiviAgenda.mntech1}
-          id="Montant1ere"
-          type="number"
-        />
-      </div>
+      
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="Montant1ere">Montant 1ére éch</Label>
+          <Input
+            onChange={(e) =>
+              handleIputChangeSuiviAgenda("mntech1", e.target.value)
+            }
+            value={suiviAgenda.mntech1}
+            id="Montant1ere"
+            type="number"
+          />
+        </div>
+          
+      
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="Montant2ere">Montant 2ére éch</Label>
         <Input
@@ -123,9 +126,6 @@ const FaciliteDePaiementForm = () => {
           >
             <ListIcon />
           </Button>
-
-         
-
           <div className="flex w-full">
               <Input
                 readOnly
