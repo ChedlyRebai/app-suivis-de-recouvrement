@@ -630,8 +630,10 @@ const CompteRenduForm = ({
                   <TabsContent value="6">
                     <Card className="my-2">
                       <CardContent className="space-y-2 ">
-                        <CardContent className="space-y- ">
-                          Client injoignable
+                        <CardContent className="flex  justify-center items-center py-6">
+                          <CardTitle className="text-center text-base">
+                          Pas de formulaire 
+                          </CardTitle>
                         </CardContent>
                       </CardContent>
                     </Card>
@@ -644,12 +646,14 @@ const CompteRenduForm = ({
                   <div className="flex flex-col my-2">
                     <div className="flex w-[280px] flex-col mr-4">
                       <Label
-                        className="mb-1 text-sm font-medium "
+                        className={`mb-1 text-sm font-medium ${selectedRadio === "6" && "text-muted-foreground"}`}
                         htmlFor="amount"
+                        
                       >
                         Appreciation generale
                       </Label>
                       <Select
+                      disabled={selectedRadio === "6"}
                         defaultValue={suiviAgenda.app_gen}
                         onValueChange={(e: string) => {
                           handleIputChangeSuiviAgenda("app_gen", e);
