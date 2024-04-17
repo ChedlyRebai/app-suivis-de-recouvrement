@@ -57,16 +57,6 @@ export const createDroit = async (
 ) => {
   console.log(`${process.env.API_URL}/droit/addDroit`);
   try {
-    // console.log(
-    //   nom,
-    //   nom_module,
-    //   suppression,
-    //   modification,
-    //   creation,
-    //   acces,
-    //   code_fonction
-    // );
-
     const res = await axios.post(`${process.env.API_URL}/droit/addDroit`, {
       nom,
       nom_module,
@@ -76,8 +66,6 @@ export const createDroit = async (
       modification,
       suppression,
     });
-    // console.log(nom, nom_module, suppression, modification, creation, acces);
-    // console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);
