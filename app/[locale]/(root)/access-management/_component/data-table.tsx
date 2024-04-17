@@ -188,7 +188,7 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("creation")}
           >
-            <SelectTrigger className="w-fit">
+             <SelectTrigger className={` w-fit ${row.getValue("creation")=='O'?'border-green-500' :'border-red-500'}`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -224,7 +224,8 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("modification")}
           >
-            <SelectTrigger className="w-fit">
+              <SelectTrigger className={` w-fit ${row.getValue("modification")=='O'?'border-green-500' :'border-red-500'}`}>
+           
               <SelectValue placeholder="Select a fruit" />
             </SelectTrigger>
             <SelectContent>
@@ -269,7 +270,8 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("suppression")}
           >
-            <SelectTrigger className="w-fit">
+              <SelectTrigger className={` w-fit ${row.getValue("suppression")=='O'?'border-green-500' :'border-red-500'}`}>
+           
               <SelectValue placeholder="Select a fruit" />
             </SelectTrigger>
             <SelectContent>
