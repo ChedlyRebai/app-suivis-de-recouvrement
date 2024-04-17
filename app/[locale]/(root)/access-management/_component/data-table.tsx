@@ -145,10 +145,10 @@ export function AccessManagementDataTable<
             <SelectContent>
               <SelectGroup id="acces">
                 {" "}
-                <SelectItem className="text-green-500" value="O">
+                <SelectItem  value="O">
                   Oui
                 </SelectItem>
-                <SelectItem className="text-red-500" value="N">
+                <SelectItem  value="N">
                   Non
                 </SelectItem>
               </SelectGroup>
@@ -194,10 +194,10 @@ export function AccessManagementDataTable<
             <SelectContent>
               <SelectGroup>
                 {" "}
-                <SelectItem className="text-green-500" value="O">
+                <SelectItem  value="O">
                   Oui
                 </SelectItem>
-                <SelectItem className="text-red-500" value="N">
+                <SelectItem  value="N">
                   Non
                 </SelectItem>
               </SelectGroup>
@@ -231,10 +231,10 @@ export function AccessManagementDataTable<
             <SelectContent>
               <SelectGroup>
                 {" "}
-                <SelectItem className="text-green-500" value="O">
+                <SelectItem  value="O">
                   Oui
                 </SelectItem>
-                <SelectItem className="text-red-500" value="N">
+                <SelectItem  value="N">
                   Non
                 </SelectItem>
               </SelectGroup>
@@ -276,10 +276,10 @@ export function AccessManagementDataTable<
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem className="text-green-500" value="O">
+                <SelectItem  value="O">
                   Oui
                 </SelectItem>
-                <SelectItem className="text-red-500" value="N">
+                <SelectItem  value="N">
                   Non
                 </SelectItem>
               </SelectGroup>
