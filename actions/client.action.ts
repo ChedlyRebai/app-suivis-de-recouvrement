@@ -2,12 +2,9 @@
 import { AbCompte } from "@/Models/AbCompte.model";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
-import { fonction } from "@/Models/fonction.model";
 import { getSession } from "@/lib";
 import axios from "axios";
-import { group } from "console";
-import { revalidatePath, revalidateTag } from "next/cache";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
+
 import { cookies } from "next/headers";
 
 export interface Main {
