@@ -63,7 +63,7 @@ export function UserAuthForm({
       console.log(res);
       if (res?.status === 200) {
         toast.success(res.data);
-        router.push("access-management");
+        router.push("/");
       } else {
         setTextError(res?.data as string);
         onOpen();
