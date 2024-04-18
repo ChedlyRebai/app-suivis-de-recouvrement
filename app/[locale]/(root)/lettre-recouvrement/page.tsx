@@ -74,13 +74,13 @@ export default async function Home({
               </CardHeader>
               <CardContent>
                 <DataTableLettreDeRecouvrement
-                  agences={agences}
-                  groupes={groupes}
-                  total={data.total}
-                  totalAccout={data.totalCount}
-                  totalPages={data.totalPages}
+                  agences={agences || []}
+                  groupes={groupes || []}
+                  total={data.total || 0}
+                  totalAccout={data.totalCount || 0}
+                  totalPages={data.totalPages || 1}
                   columns={columns}
-                  data={data.result}
+                  data={data.result || []}
                 />
               </CardContent>
             </Card>
