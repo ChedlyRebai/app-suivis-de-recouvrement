@@ -15,6 +15,7 @@ import { getAgences, getGroupes } from "@/actions/client.action";
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
+import { demandeTransferColumns } from "./_component/demandeTransferColumns";
 
 export default async function Home({
   searchParams,
@@ -97,7 +98,7 @@ export default async function Home({
                       total={data.total || 0}
                       totalAccout={data.totalCount || 0}
                       totalPages={data.totalPages || 1}
-                      columns={HistoriqueCommentaireColumns}
+                      columns={demandeTransferColumns}
                       data={data.result || []}
                     />
                   </CardContent>
@@ -113,7 +114,11 @@ export default async function Home({
                   </CardHeader>
                   <CardContent>
                     <HistoriqueCommentaireDataTable
+                      total={data.total || 0}
+                      totalAccout={data.totalCount || 0}
+                      totalPages={data.totalPages || 1}
                       columns={HistoriqueCommentaireColumns}
+                      data={data.result || []}
                     />
                   </CardContent>
                 </Card>

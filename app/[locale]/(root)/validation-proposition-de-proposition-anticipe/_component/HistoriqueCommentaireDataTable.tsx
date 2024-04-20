@@ -1,18 +1,36 @@
 "use client";
-import { MixerHorizontalIcon } from "@radix-ui/react-icons";
-import { useDebouncedCallback } from "use-debounce";
 import {
   ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-  getSortedRowModel,
+  ColumnFiltersState,
   SortingState,
   VisibilityState,
-  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
+
+
+import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import {
   Table,
   TableBody,
@@ -21,132 +39,58 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ArrowUpDown, ListPlusIcon, SearchIcon } from "lucide-react";
-import useAuthModal from "@/hooks/use-fonction-search-modal";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
-import useAddDroitModal from "@/hooks/useAddDroitModal";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import React, { useCallback, useEffect, useState } from "react";
+import { ab_client } from "@/Models/ab_client.model";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
+import useListAgences from "@/hooks/use-agences-list";
+import { Card, CardContent } from "@/components/ui/card";
+import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
-import useStore, { State } from "@/lib/droitStore";
-import toast from "react-hot-toast";
-import { useTranslations } from "next-intl";
-import { Oval } from "react-loading-icons";
-import Pagination from "@/components/shared/pagination";
-
-interface DataTableProps<droit_accees, TValue> {
-  columns: ColumnDef<droit_accees, TValue>[];
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  total: any;
+  data: TData[];
+  totalAccout?: number;
+  totalPages?: number;
 }
 
-export function HistoriqueCommentaireDataTable<
-  droit_accees,
-  TValue
->({columns}: DataTableProps<droit_accees, TValue>) {
-  const [data, setData] = useState<droit_accees[]>([]);
-  const [TotalPages, setTotalPages] = useState(0);
-  const [TotalAccount, setTotalAccount] = useState(0);
-  const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const currentPage = Number(searchParams.get("page")) || 1;
-  const perPage = Number(searchParams.get("perPage")) || 5;
-  const search = searchParams?.get("query") || "";
-
-  const [droitAccess, setDroiAccess] = useState<droit_accees[]>([]);
-
-  const updateDroit = useStore((state: State) => state.updateDroit);
-
-  const fetchAllDroitAccess = useStore(
-    (state: State) => state.fetchAllDroitAccess
-  );
-  const fetchDroitAccessByCodeFonction = useStore(
-    (state: State) => state.fetchDroitAccessByCodeFonction
-  );
-
-  const update = async (
-    codef: number,
-    id: number,
-    value: string,
-    champ: string
-  ) => {
-    console.log(codef, id, value, champ);
-    const response = await updateDroit(id, codef, value, champ);
-    console.log(response);
-    // Find the index of the updated row in the data array
-    const rowIndex = data.findIndex((row: any) => row.id === id);
-    console.log(rowIndex);
-    if (rowIndex !== -1) {
-      // Create a copy of the data array
-      const newData = [...data];
-      // Update the specific row
-      newData[rowIndex] = { ...newData[rowIndex], [champ]: value };
-      // Set the updated data
-      console.log(newData);
-      setData(newData);
-    }
-  };
-
-  useEffect(() => {
-    console.log("data table params", currentPage, perPage);
-    const Params = searchParams.get("code") || "";
-    if (Params?.length > 0) {
-      setIsLoading(true);
-      toast.promise(
-        fetchDroitAccessByCodeFonction(Params, currentPage, perPage, search)
-          .then((d: any) => {
-            //console.log(d);
-            setTotalPages(d.totalPages);
-            setTotalAccount(d.totalCount);
-            setData(d.permissions as droit_accees[]);
-            // Move setIsLoading(false) inside the success callback
-          })
-          .then(() => setIsLoading(false)),
-        {
-          loading: "Loading...",
-          success: "Success",
-          error: <b>Could not save.</b>,
-        }
-      );
-    }
-  }, [searchParams, fetchDroitAccessByCodeFonction]);
-
-  const lang = useTranslations();
-  const { isOpen, onOpen } = useAuthModal();
-  const { isOpen: isOpenAddDroit, onOpen: onOpenAddDroit } = useAddDroitModal();
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = useState({});
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  });
-
-  console.log(data);
-  const { replace } = useRouter();
+export function HistoriqueCommentaireDataTable<TData, TValue>({
+  columns,
+  data,
+  totalAccout,
+  totalPages = 0,
+  total,
+  
+}: DataTableProps<TData, TValue>) {
+  const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  
+
+  const [selectedCode, setSelectedCode] = useState("");
+  const [rowSelection, setRowSelection] = useState({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+  const [inputValue, setInputValue] = useState("");
+  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  // const [groupes, setGroupes] = useState<any>([]);
+  // const [agences, setAgences] = useState<any>([]);
+
+  const [agenceopen, setagenceOpen] = useState(false);
+  const [groupopen, setgroupOpen] = useState(false);
+  const [agenceValue, setAgenceValue] = useState("");
+  const [groupeValue, setgroupeValue] = useState("");
+
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -155,63 +99,103 @@ export function HistoriqueCommentaireDataTable<
     } else {
       params.delete("query");
     }
+    console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 100);
+
+
+  const [loadingTable, setLoadingTable] = useState(false);
+
+  if (loadingTable) {
+    return <div>Loading...</div>;
+  }
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
+      columnFilters,
+    },
+
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+  });
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams, selectedCode]
+  );
+
+  const resetAgence = () => {
+    setAgenceValue("");
+    const params = new URLSearchParams(searchParams);
+    params.delete("agence");
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const resetGroup = () => {
+    setgroupeValue("");
+    const params = new URLSearchParams(searchParams);
+    params.delete("groupe");
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  useEffect(() => {
+    setSearch(`${searchParams.get("code")}`);
+    console.log(search);
+  }, [searchParams.get("code")]);
+
+  const addQuery = (row: any) => {
+    console.log();
+    router.push(
+      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
+    );
+  };
+  const [loader, setLoader] = useState(true);
+  // effect
+  useEffect(() => {
+    setLoader(false);
+  }, []);
+
+  // render
+  if (loader) {
+    return <div>Loading</div>;
+  }
+
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <Input
-          placeholder="Filter Module..."
-          defaultValue={searchParams.get("query")?.toString()}
-          onChange={(e) => {
-            handleSearch(e.target.value);
-          }}
-          className="max-w-sm"
-        />
-        <Button
-          variant="outline"
-          onClick={() => onOpen()}
-          className="mr-auto w-auto ml-1 "
-        >
-          {lang("access-management.searchf")}
-        </Button>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto mr-1">
-              <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-              {lang("access-management.View")}
-            </Button>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(checked: boolean) =>
-                      column.toggleVisibility(checked)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        <Button onClick={() => onOpenAddDroit()} variant="default" className="">
-          <ListPlusIcon className="mr-2 h-4 w-4" />
-          {lang("access-management.Add")}
-        </Button>
+        <>
+          <Input
+            placeholder="Cli"
+            defaultValue={searchParams.get("query")?.toString()}
+            onChange={(e) => {
+              handleSearch(e.target.value);
+            }}
+            className="max-w-sm mr-2"
+          />
+         
+          <DataTableViewOptions table={table} />
+        </>
       </div>
-      
-      <div className={`rounded-md border ${isLoading && "animate-pulse"}`}>
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -231,65 +215,63 @@ export function HistoriqueCommentaireDataTable<
               </TableRow>
             ))}
           </TableHeader>
-
           <TableBody>
-            {/* {isLoading ? (
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  className="p-"
+                  onDoubleClick={() => {
+                    console.log((row.original as { cli: string }).cli);
+
+                    router.push(
+                      "compte-rendu" +
+                        "?" +
+                        createQueryString(
+                          "cli",
+                          `${(row.original as { cli: string }).cli}`
+                        )
+                    );
+                  }}
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      className="p- cursor-pointer"
+                      onClick={(e) => console.log(e)}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Loading...
+                  No results.
                 </TableCell>
               </TableRow>
-            ) :*/}
-
-            {/* {isLoading ? (
-              // Replace <div>Loading...</div> with your custom loading component
-              <TableRow className="text-center">
-                <TableCell>
-                  <Oval />
-                </TableCell>
-              </TableRow>
-            ) : ( */}
-            <>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                // Replace <TableCell>No results.</TableCell> with your custom no results component
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
-                  </TableCell>
-                </TableRow>
-              )}
-            </>
-            {/* )} */}
+            )}
           </TableBody>
+          
         </Table>
       </div>
-      <DataTablePagination
-        totalPages={TotalPages}
-        TotalAccount={TotalAccount}
-        table={table}
-      />
+      <div className="mt-2 flex items-center justify-between px-2">
+        
+
+        <DataTablePagination
+          TotalAccount={totalAccout}
+          totalPages={totalPages}
+          table={table}
+        />
+      </div>
     </>
   );
 }
