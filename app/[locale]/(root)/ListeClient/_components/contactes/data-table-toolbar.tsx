@@ -6,7 +6,7 @@ import { Table } from "@tanstack/react-table";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { DataTableViewOptions } from "./data-table-view-options";
+
 import {
   Select,
   SelectContent,
@@ -35,6 +35,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;

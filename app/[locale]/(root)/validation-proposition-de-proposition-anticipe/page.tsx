@@ -10,10 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
-import {
-  getAgences,
-  getGroupes,
-} from "@/actions/client.action";
+import { getAgences, getGroupes } from "@/actions/client.action";
 
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
@@ -95,13 +92,13 @@ export default async function Home({
                   </CardHeader>
                   <CardContent>
                     <DataTableDemandeDeTransfer
-                      agences={agences}
-                      groupes={groupes}
-                      total={data.total}
-                      totalAccout={data.totalCount}
-                      totalPages={data.totalPages}
+                      agences={agences || []}
+                      groupes={groupes || []}
+                      total={data.total || 0}
+                      totalAccout={data.totalCount || 0}
+                      totalPages={data.totalPages || 1}
                       columns={HistoriqueCommentaireColumns}
-                      data={data.result}
+                      data={data.result || []}
                     />
                   </CardContent>
                 </Card>
