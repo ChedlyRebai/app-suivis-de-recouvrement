@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, SearchIcon } from "lucide-react";
 
-export const demandeTransferColumns: ColumnDef<ab_client>[] = [
-  
+export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "cli",
     header: "cli",
@@ -61,14 +60,14 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     accessorKey: "tot_eng",
     header: "Engagement",
   },
-
   {
-    accessorKey: "etat_lettre",
-    header: "Etat Lettre",
+    accessorKey: "classe",
+    header: "Classe",
   },
+   
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
+    accessorKey: "mott_prol_c",
+    header: "Motif de Prolongation",
     cell: ({ row }) => {
       return (
         // <span
@@ -90,13 +89,13 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
           //     "acces"
           //   )
           // }
-          defaultValue={row.getValue("MOTT")}
+          defaultValue={row.getValue("mott_prol_c")}
         >
           <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup id="MOTT">
+            <SelectGroup id="mott_prol_c">
               {" "}
               <SelectItem  value="O">
                 Oui
@@ -109,6 +108,10 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
         </Select>
       );
     },
+  },
+  {
+    accessorKey:"obs1",
+    header:"Commentaire",
   },
   {
     accessorKey:"OBS1",
@@ -139,20 +142,18 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
+    accessorKey:"prol_c",
+    header:"Motif de Prolongation",
     cell: ({ row }) => {
       return (
-      
         <Select
-
-          defaultValue={row.getValue("MOTT")}
+          defaultValue={row.getValue("prol_c")}
         >
           <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup id="acces">
+            <SelectGroup id="prol_c">
               {" "}
               <SelectItem  value="O">
                 Oui
@@ -166,33 +167,26 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
       );
     },
   },
+
   {
-    accessorKey:"TRAF_A",
-    header:"Transferer à",
+    accessorKey:"Action",
+    header:"Action",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("TRAF_A")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="TRAF_A">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <div className="flex justify-center">
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => {
+              // setModalData(row.original);
+              // setModalOpen(true);
+            }}
+          >
+            Detaille
+            <SearchIcon size={16} />
+          </Button>
+        </div>
       );
     },
-  },
-
+  }
 ];
