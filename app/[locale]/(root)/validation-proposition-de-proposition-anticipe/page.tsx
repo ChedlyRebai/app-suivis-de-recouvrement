@@ -113,7 +113,6 @@ export default async function Home({
                   </CardHeader>
                   <CardContent>
                     <HistoriqueCommentaireDataTable
-                      total={data.total || 0}
                       totalAccout={data.totalCount || 0}
                       totalPages={data.totalPages || 1}
                       columns={HistoriqueCommentaireColumns}
