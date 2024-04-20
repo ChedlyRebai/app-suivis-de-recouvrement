@@ -33,15 +33,6 @@ import {
 import { ArrowUpDown, ListPlusIcon, SearchIcon } from "lucide-react";
 import useAuthModal from "@/hooks/use-fonction-search-modal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getDroitAccessByCodeFonction } from "@/actions/droit_accees.action";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import useAddDroitModal from "@/hooks/useAddDroitModal";
 
@@ -62,8 +53,6 @@ export function HistoriqueCommentaireDataTable<
   const [data, setData] = useState<droit_accees[]>([]);
   const [TotalPages, setTotalPages] = useState(0);
   const [TotalAccount, setTotalAccount] = useState(0);
-
- 
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -221,6 +210,7 @@ export function HistoriqueCommentaireDataTable<
           {lang("access-management.Add")}
         </Button>
       </div>
+      
       <div className={`rounded-md border ${isLoading && "animate-pulse"}`}>
         <Table>
           <TableHeader>
