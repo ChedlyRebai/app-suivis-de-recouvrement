@@ -71,12 +71,6 @@ export function DataTableValidationDeTransfer<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
-  console.log(agences);
-  console.log(groupes);
-  console.log(data);
-  console.log(totalAccout);
-  console.log(total);
-  console.log(totalPages);
 
   const router = useRouter();
   const pathname = usePathname();

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, SearchIcon } from "lucide-react";
 
 export const validationTransferColumns: ColumnDef<ab_client>[] = [
   
@@ -61,10 +61,43 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     accessorKey: "tot_eng",
     header: "Engagement",
   },
-
+   
   
   {
-    accessorKey:"MOTT",
+    accessorKey: "classe",
+    header: "Classe",
+  },
+  {
+    accessorKey:"traf_a",
+    header:"Transferer à",
+    cell: ({ row }) => {
+      return (
+      
+        <Select
+
+          defaultValue={row.getValue("traf_a")}
+        >
+          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+            <SelectValue className="" placeholder="Select a fruit" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup id="traf_a">
+              {" "}
+              <SelectItem  value="O">
+                Oui
+              </SelectItem>
+              <SelectItem  value="N">
+                Non
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      );
+    },
+  },
+  
+  {
+    accessorKey:"mott",
     header:"Motif de transfer",
     cell: ({ row }) => {
       return (
@@ -87,7 +120,7 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
           //     "acces"
           //   )
           // }
-          defaultValue={row.getValue("MOTT")}
+          defaultValue={row.getValue("mott")}
         >
           <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
             <SelectValue className="" placeholder="Select a fruit" />
@@ -110,62 +143,12 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey:"OBS1",
     header:"Commentaire",
-    cell: ({ row }) => {
-      return (
-      
-        <Select
-
-          defaultValue={row.getValue("OBS1")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="OBS1">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
+    
   },
+  
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
-    cell: ({ row }) => {
-      return (
-      
-        <Select
-
-          defaultValue={row.getValue("MOTT")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="acces">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-  {
-    accessorKey:"TRAF_A",
-    header:"Transferer à",
+    accessorKey:"TRF_PROPOSE_V",
+    header:"TRF_PROPOSE_V",
     cell: ({ row }) => {
       return (
       
@@ -191,5 +174,28 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
       );
     },
   },
+  {
+    accessorKey:"Action",
+    header:"Action",
+    cell: ({ row }) => {
+      return (
+        <div className="flex justify-center">
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => {
+              // setModalData(row.original);
+              // setModalOpen(true);
+            }}
+          >
+            Detaille
+            <SearchIcon size={16} />
+          </Button>
+        </div>
+      );
+    },
+  }
+
+  // TRF_PROPOSE_V
 
 ];
