@@ -2,12 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import {
-  getAgences,
-  getClientContactes,
-  getClientNonContactes,
-  getGroupes,
-} from "@/actions/client.action";
+ 
 import {
   Card,
   CardContent,
@@ -16,10 +11,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
-
-import { getLettre } from "@/actions/lettre.action";
-import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
+import { getAgences, getClientContactes, getClientNonContactes, getGroupes } from "@/actions/client.action";
 import { demandeTransferColumns } from "./_component/demandeTransferColumns";
+import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
+import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 
 export default async function Home({
   searchParams,
@@ -35,6 +30,7 @@ export default async function Home({
     from?: string;
   };
 }) {
+
   const search = searchParams?.query || "";
   const group = searchParams?.groupe || "";
   const agence = searchParams?.agence || "";
@@ -44,21 +40,31 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const data = await getLettre(
-    search,
-    currentPage,
-    perPage,
-    group,
-    agence,
-    from,
-    to
-  );
-  console.log("data");
-  console.log(data);
+//   const data = await getClientContactes(
+//     search,
+//     currentPage,
+//     perPage,
+//     group,
+//     agence,
+//     from,
+//     to
+//   );
+
+//   const dataNon = await getClientNonContactes(
+//     search,
+//     currentPage,
+//     perPage,
+//     group,
+//     agence,
+//     from,
+//     to
+//   );
+
+const data:any =[]
 
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log("render page");
+  console.log("render page")
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -67,25 +73,61 @@ export default async function Home({
         </div>
         <Suspense fallback={<div>Loading...</div>}>
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Demande de transfer anticipé</CardTitle>
-                {/* <CardDescription>
+            <Tabs defaultValue="noncontactes" className="">
+              <TabsList className="grid w-fit grid-cols-2">
+                <TabsTrigger value="noncontactes">
+                  Liste des clients non contactés{" "}
+                </TabsTrigger>
+
+                <TabsTrigger value="contactes">
+                  Liste des clients contactés{" "}
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="noncontactes">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Liste des clients Non contactés</CardTitle>
+                    {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}
-              </CardHeader>
-              <CardContent>
-                <DataTableDemandeDeTransfer
-                  agences={agences || []}
-                  groupes={groupes || []}
-                  total={data.total || 0}
-                  totalAccout={data.totalCount || 0}
-                  totalPages={data.totalPages || 1}
-                  columns={demandeTransferColumns}
-                  data={data.result || []}
-                />
-              </CardContent>
-            </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <DataTableDemandeDeTransfer
+                      agences={agences}
+                      groupes={groupes}
+                      total={data.total}
+                      totalAccout={data.totalCount}
+                      totalPages={data.totalPages}
+                      columns={HistoriqueCommentaireColumns}
+                      data={data.result}
+                     
+                    />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="contactes">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Liste des clients contactés</CardTitle>
+                    {/* <CardDescription>
+                    Manage your products and view their sales performance.
+                  </CardDescription> */}
+                  </CardHeader>
+                  <CardContent>
+                    {/* <DataTableContactes
+                      agences={agences}
+                      groupes={groupes}
+                      total={data.total}
+                      totalAccout={data.totalCount}
+                      totalPages={data.totalPages}
+                      columns={columns}
+                      data={data.result}
+                      type="noncontactes"
+                    /> */}
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
           </div>
         </Suspense>
       </div>
