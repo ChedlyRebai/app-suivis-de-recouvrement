@@ -32,7 +32,7 @@ import { DataTableViewOptions } from "@/components/shared/data-table-view-option
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  total: any;
+
   data: TData[];
   totalAccout?: number;
   totalPages?: number;
@@ -43,7 +43,6 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
   data,
   totalAccout,
   totalPages = 0,
-  total,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
   const pathname = usePathname();
