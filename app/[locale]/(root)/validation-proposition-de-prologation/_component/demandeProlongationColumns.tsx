@@ -114,34 +114,6 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
     header:"Commentaire",
   },
   {
-    accessorKey:"OBS1",
-    header:"Commentaire",
-    cell: ({ row }) => {
-      return (
-      
-        <Select
-
-          defaultValue={row.getValue("OBS1")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="OBS1">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-  {
     accessorKey:"prol_c",
     header:"Motif de Prolongation",
     cell: ({ row }) => {

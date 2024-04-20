@@ -62,7 +62,7 @@ interface DataTableProps<TData, TValue> {
   agences: any[];
 }
 
-export function DataTableDemandeDeTransfer<TData, TValue>({
+export function DataTableValidationDeTransfer<TData, TValue>({
   columns,
   data,
   totalAccout,

@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const demandeTransferColumns: ColumnDef<ab_client>[] = [
+export const validationTransferColumns: ColumnDef<ab_client>[] = [
   
   {
     accessorKey: "cli",
@@ -62,10 +62,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     header: "Engagement",
   },
 
-  {
-    accessorKey: "etat_lettre",
-    header: "Etat Lettre",
-  },
+  
   {
     accessorKey:"MOTT",
     header:"Motif de transfer",

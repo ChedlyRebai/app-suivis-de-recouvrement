@@ -12,10 +12,10 @@ import {
 import { Suspense } from "react";
 import { getAgences, getGroupes } from "@/actions/client.action";
 
-import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
-import { demandeTransferColumns } from "./_component/demandeTransferColumns";
+import { DataTableValidationDeTransfer } from "./_component/validation-transfer-data-table";
+import { validationTransferColumns } from "./_component/validationTransferColumns";
 
 export default async function Home({
   searchParams,
@@ -91,13 +91,13 @@ export default async function Home({
                     </CardDescription> */}
                   </CardHeader>
                   <CardContent>
-                    <DataTableDemandeDeTransfer
+                    <DataTableValidationDeTransfer
                       agences={agences || []}
                       groupes={groupes || []}
                       total={data.total || 0}
                       totalAccout={data.totalCount || 0}
                       totalPages={data.totalPages || 1}
-                      columns={demandeTransferColumns}
+                      columns={validationTransferColumns}
                       data={data.result || []}
                     />
                   </CardContent>
