@@ -14,22 +14,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-
 import {
   Table,
   TableBody,
@@ -40,14 +24,10 @@ import {
 } from "@/components/ui/table";
 
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useCallback, useEffect, useState } from "react";
-import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import useListAgences from "@/hooks/use-agences-list";
-import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 interface DataTableProps<TData, TValue> {
@@ -257,10 +237,8 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-
       <div className="mt-2 flex items-center justify-between px-2">
         <div className="flex items-center space-x-6 lg:space-x-8 mt-2"></div>
-
         <DataTablePagination
           TotalAccount={totalAccout}
           totalPages={totalPages}
