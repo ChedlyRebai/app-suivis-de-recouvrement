@@ -1,12 +1,12 @@
+
 "use client";
-import { ab_client } from "@/Models/ab_client.model";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const demandeTransferColumns: ColumnDef<ab_client>[] = [
+export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
   
   {
     accessorKey: "cli",

@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
 import { Button } from "@/components/ui/button";
@@ -9,18 +6,11 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
+export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   
   {
     accessorKey: "cli",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost">
-          Cli
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "cli",
   },
   {
     accessorKey: "nom",

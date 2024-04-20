@@ -12,11 +12,9 @@ import {
 import { Suspense } from "react";
 import {
   getAgences,
-  getClientContactes,
-  getClientNonContactes,
   getGroupes,
 } from "@/actions/client.action";
-import { demandeTransferColumns } from "./_component/demandeTransferColumns";
+
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
