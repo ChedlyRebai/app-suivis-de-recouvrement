@@ -2,7 +2,6 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
- 
 import {
   Card,
   CardContent,
@@ -11,10 +10,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
-import { getAgences, getClientContactes, getClientNonContactes, getGroupes } from "@/actions/client.action";
+import {
+  getAgences,
+  getClientContactes,
+  getClientNonContactes,
+  getGroupes,
+} from "@/actions/client.action";
 import { demandeTransferColumns } from "./_component/demandeTransferColumns";
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
+import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
 
 export default async function Home({
   searchParams,
@@ -30,7 +35,6 @@ export default async function Home({
     from?: string;
   };
 }) {
-
   const search = searchParams?.query || "";
   const group = searchParams?.groupe || "";
   const agence = searchParams?.agence || "";
@@ -40,31 +44,31 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-//   const data = await getClientContactes(
-//     search,
-//     currentPage,
-//     perPage,
-//     group,
-//     agence,
-//     from,
-//     to
-//   );
+  //   const data = await getClientContactes(
+  //     search,
+  //     currentPage,
+  //     perPage,
+  //     group,
+  //     agence,
+  //     from,
+  //     to
+  //   );
 
-//   const dataNon = await getClientNonContactes(
-//     search,
-//     currentPage,
-//     perPage,
-//     group,
-//     agence,
-//     from,
-//     to
-//   );
+  //   const dataNon = await getClientNonContactes(
+  //     search,
+  //     currentPage,
+  //     perPage,
+  //     group,
+  //     agence,
+  //     from,
+  //     to
+  //   );
 
-const data:any =[]
+  const data: any = [];
 
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log("render page")
+  console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -100,7 +104,6 @@ const data:any =[]
                       totalPages={data.totalPages}
                       columns={HistoriqueCommentaireColumns}
                       data={data.result}
-                     
                     />
                   </CardContent>
                 </Card>
@@ -114,16 +117,9 @@ const data:any =[]
                   </CardDescription> */}
                   </CardHeader>
                   <CardContent>
-                    {/* <DataTableContactes
-                      agences={agences}
-                      groupes={groupes}
-                      total={data.total}
-                      totalAccout={data.totalCount}
-                      totalPages={data.totalPages}
-                      columns={columns}
-                      data={data.result}
-                      type="noncontactes"
-                    /> */}
+                    <HistoriqueCommentaireDataTable
+                      columns={HistoriqueCommentaireColumns}
+                    />
                   </CardContent>
                 </Card>
               </TabsContent>
