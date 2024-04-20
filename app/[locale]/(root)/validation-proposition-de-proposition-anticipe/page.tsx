@@ -78,7 +78,6 @@ export default async function Home({
                 <TabsTrigger value="Critéred'integration">
                   Critére d'integration{" "}
                 </TabsTrigger>
-
                 <TabsTrigger value="HistoriqueCommentaire">
                   Historique Commentaire{" "}
                 </TabsTrigger>
