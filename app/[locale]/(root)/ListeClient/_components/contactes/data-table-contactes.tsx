@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Check, ChevronsUpDown, Eraser } from "lucide-react";
+import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -311,7 +311,7 @@ export function DataTableContactes<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      {item.libelle}
+                     {item.codug}: {item.libelle}
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -323,7 +323,7 @@ export function DataTableContactes<TData, TValue>({
             className="font-black mx-1"
             onClick={resetAgence}
           >
-            <Eraser className="font-black" />
+            <RefreshCcwIcon className="font-b" />
           </Button>
           <div className="w-1" />
           <Popover open={groupopen} onOpenChange={setgroupOpen}>
@@ -334,12 +334,13 @@ export function DataTableContactes<TData, TValue>({
                 aria-expanded={groupopen}
                 className="w-[200px] justify-between"
               >
-                {searchParams.get("groupe")
-                  ? groupes.find(
-                      (groupe: any) =>
-                        groupe.groupe == searchParams.get("groupe")
-                    )?.groupe || "Sélectionner un groupe"
-                  : "Sélectionner un groupe"}
+                
+                {searchParams.get("agence")
+                  ? agences.find(
+                      (framework: any) =>
+                        framework.codug === searchParams.get("agence")
+                    )?.libelle || "Sélectionner un agence"
+                  : "Sélectionner un agence"}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -347,17 +348,18 @@ export function DataTableContactes<TData, TValue>({
               <Command>
                 <CommandInput placeholder="Search group" />
                 <CommandEmpty>No framework found.</CommandEmpty>
+                
                 <CommandGroup>
                   {groupes.map((item: any, i: number) => (
                     <CommandItem
-                      key={i}
-                      value={item.groupe}
+                    key={item.codug}
+                    value={item.libelle}
                       onSelect={(currentValue) => {
-                        handleGroup(item.groupe);
+                        handleGroup(item.codug);
                         setgroupeValue(
-                          item.groupe == searchParams.get("groupe")
+                          item.codug === searchParams.get("groupe")
                             ? ""
-                            : item.groupe
+                            : item.codug
                         );
                         setgroupOpen(false);
                       }}
@@ -365,13 +367,13 @@ export function DataTableContactes<TData, TValue>({
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          groupeValue === item.groupe
+                          groupeValue === item.codug
                             ? "opacity-100"
                             : "opacity-0"
                         )}
                       />
 
-                      {item.groupe}
+                      {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -383,7 +385,7 @@ export function DataTableContactes<TData, TValue>({
             className="font-black mx-1"
             onClick={resetGroup}
           >
-            <Eraser className="font-black" />
+            <RefreshCcwIcon className="font-b" />
           </Button>
           {type !== "contactes" && (
             <Card  className="h-10" >

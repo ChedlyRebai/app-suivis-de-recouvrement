@@ -52,7 +52,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
           <ArrowLeft className="h-6 w-6" aria-hidden="true" />
         </button>
       )}
-
+      
       <div className="flex-1 backdrop-blur- mb  px-4 flex justify-between">
         <div className="flex-1 flex">
           <form className="w-full flex md:ml-0" action="#" method="GET">

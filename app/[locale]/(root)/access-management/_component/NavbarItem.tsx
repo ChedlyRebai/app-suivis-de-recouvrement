@@ -58,7 +58,7 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                     aria-hidden="true"
                   />
 
-                  <Link href={`/${href}`}  className="hover:underline capitalize dark:text-inherit text-black text-sm text-nowrap">{name}</Link>
+                  <Link href={`/`}  className="hover:underline capitalize dark:text-inherit text-black text-sm text-nowrap">{name}</Link>
 
                   {children.length !== 0 && (
                     <svg

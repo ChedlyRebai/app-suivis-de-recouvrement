@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Check, ChevronsUpDown, Eraser } from "lucide-react";
+import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -67,17 +67,14 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   total,
   agences,
   groupes,
-
 }: DataTableProps<TData, TValue>) {
   console.log(agences);
-  console.log(groupes)
-  console.log(data)
-  console.log(totalAccout)
-  console.log(total)
-  console.log(totalPages)
-  
+  console.log(groupes);
+  console.log(data);
+  console.log(totalAccout);
+  console.log(total);
+  console.log(totalPages);
 
-  
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -101,7 +98,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   const [groupopen, setgroupOpen] = useState(false);
   const [agenceValue, setAgenceValue] = useState("");
   const [groupeValue, setgroupeValue] = useState("");
-  
+
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -174,26 +171,11 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   }, 0);
 
   const [loadingTable, setLoadingTable] = useState(false);
-  // useEffect(() => {
-  //   setInputValue(searchParams.get("query") || "");
-  //   setLoadingTable(true);
-  //   const params = new URLSearchParams(searchParams);
-  //   params.delete("agence");
-  //   params.delete("groupe");
-  //   params.delete("query");
-  //   params.delete("page");
-  //   params.delete("perPage");
-  //   params.delete("from");
-  //   params.delete("to");
-  //   replace(`${pathname}?${params.toString()}`);
-  //   setLoadingTable(false);
-  // }, [type]);
 
   if (loadingTable) {
     return <div>Loading...</div>;
   }
 
-  
   const table = useReactTable({
     data,
     columns,
@@ -321,7 +303,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      {item.libelle}
+                      {item.codug}: {item.libelle}
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -333,7 +315,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             className="font-black mx-1"
             onClick={resetAgence}
           >
-            <Eraser className="font-black" />
+            <RefreshCcwIcon className="font-b" />
           </Button>
           <div className="w-1" />
           <Popover open={groupopen} onOpenChange={setgroupOpen}>
@@ -345,10 +327,10 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                 className="w-[200px] justify-between"
               >
                 {searchParams.get("groupe")
-                  ? groupes.find(
-                      (groupe: any) =>
-                        groupe.groupe == searchParams.get("groupe")
-                    )?.groupe || "Sélectionner un groupe"
+                  ? agences.find(
+                      (framework: any) =>
+                        framework.codug === searchParams.get("groupe")
+                    )?.libelle || "Sélectionner un groupe"
                   : "Sélectionner un groupe"}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
@@ -357,17 +339,18 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
               <Command>
                 <CommandInput placeholder="Search group" />
                 <CommandEmpty>No framework found.</CommandEmpty>
+
                 <CommandGroup>
                   {groupes.map((item: any, i: number) => (
                     <CommandItem
-                      key={i}
-                      value={item.groupe}
+                      key={item.codug}
+                      value={item.libelle}
                       onSelect={(currentValue) => {
-                        handleGroup(item.groupe);
+                        handleGroup(item.codug);
                         setgroupeValue(
-                          item.groupe == searchParams.get("groupe")
+                          item.codug === searchParams.get("groupe")
                             ? ""
-                            : item.groupe
+                            : item.codug
                         );
                         setgroupOpen(false);
                       }}
@@ -375,13 +358,13 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          groupeValue === item.groupe
+                          groupeValue === item.codug
                             ? "opacity-100"
                             : "opacity-0"
                         )}
                       />
-
-                      {item.groupe}
+                      
+                      {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -393,28 +376,27 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             className="font-black mx-1"
             onClick={resetGroup}
           >
-            <Eraser className="font-black" />
+            <RefreshCcwIcon className="font-b" />
           </Button>
-          
-            <Card className="h-10">
-              <CardContent className="flex items-center justify-center my-1">
-                <p>Nombre de jour :</p>
-                <Input
-                  type="number"
-                  className="w-16 h-8"
-                  onChange={(e) => handleFrom(e.target.value)}
-                  placeholder="De"
-                />
-                <p className="mx-1">à</p>
-                <Input
-                  type="number"
-                  className="w-16 h-8"
-                  onChange={(e) => handleTo(e.target.value)}
-                  placeholder="à"
-                />
-              </CardContent>
-            </Card>
-          
+
+          <Card className="h-10">
+            <CardContent className="flex items-center justify-center my-1">
+              <p>Nombre de jour :</p>
+              <Input
+                type="number"
+                className="w-16 h-8"
+                onChange={(e) => handleFrom(e.target.value)}
+                placeholder="De"
+              />
+              <p className="mx-1">à</p>
+              <Input
+                type="number"
+                className="w-16 h-8"
+                onChange={(e) => handleTo(e.target.value)}
+                placeholder="à"
+              />
+            </CardContent>
+          </Card>
 
           <DataTableViewOptions table={table} />
         </>
@@ -485,36 +467,20 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             )}
           </TableBody>
           <TableRow>
+            <TableCell className="font-bold">TOTAL Dossier:</TableCell>
+            <TableCell className="font-bold">{totalAccout}</TableCell>
+            <TableCell className="font-bold">TOT IMP:</TableCell>
+            <TableCell className="font-bold">{total.mnt_imp || 0} </TableCell>
+            <TableCell className="font-bold">TOT DEP:</TableCell>
             <TableCell className="font-bold">
-              TOTAL Dossier: 
+              {total.depassement || 0}
             </TableCell>
+            <TableCell className="font-bold">TOT IRR:</TableCell>
             <TableCell className="font-bold">
-            {totalAccout}
+              {total.tot_creance || 0}
             </TableCell>
-            <TableCell className="font-bold">
-              TOT IMP: 
-            </TableCell>
-            <TableCell className="font-bold">
-            {total.mnt_imp}{" "}
-            </TableCell>
-            <TableCell className="font-bold">
-              TOT DEP: 
-            </TableCell>
-            <TableCell className="font-bold">
-               {total.depassement}
-            </TableCell>
-            <TableCell className="font-bold">
-              TOT IRR: 
-            </TableCell>
-            <TableCell className="font-bold">
-               {total.tot_creance}
-            </TableCell>
-            <TableCell className="font-bold">
-              TOT ENG: 
-            </TableCell>
-            <TableCell className="font-bold">
-              {total.engagement}
-            </TableCell>
+            <TableCell className="font-bold">TOT ENG:</TableCell>
+            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
           </TableRow>
         </Table>
       </div>
@@ -525,12 +491,12 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
         </div>
-      
-      <DataTablePagination
-        TotalAccount={totalAccout}
-        totalPages={totalPages}
-        table={table}
-      />
+
+        <DataTablePagination
+          TotalAccount={totalAccout}
+          totalPages={totalPages}
+          table={table}
+        />
       </div>
     </>
   );

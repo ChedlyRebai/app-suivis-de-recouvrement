@@ -96,21 +96,21 @@ export function AccessManagementDataTable<
       },
     },
 
-    {
-      accessorKey: "code_fonction",
-      header: ({ column }) => {
-        return <span>{lang("access-management.Codef")}</span>;
-      },
-      cell: ({ row }) => {
-        return (
-          <span
-            className={`inline-flex bg-gray-100 text-gray-800 items-center px-2.5 py-0.5 rounded-md text-lg font-medium `}
-          >
-            {row.getValue("code_fonction")}
-          </span>
-        );
-      },
-    },
+    // {
+    //   accessorKey: "code_fonction",
+    //   header: ({ column }) => {
+    //     return <span>{lang("access-management.Codef")}</span>;
+    //   },
+    //   cell: ({ row }) => {
+    //     return (
+    //       <span
+    //         className={`inline-flex bg-gray-100 text-gray-800 items-center px-2.5 py-0.5 rounded-md text-lg font-medium `}
+    //       >
+    //         {row.getValue("code_fonction")}
+    //       </span>
+    //     );
+    //   },
+    // },
     {
       accessorKey: "acces",
       header: ({ column }) => {

@@ -85,6 +85,7 @@ export const getGroupes = async () => {
     const res = await axios.get<[]>(
       `https://sprint2-two.vercel.app/client/getgroupes`
     );
+    console.log(res.data)
     return res.data;
   } catch (error) {
     return [];

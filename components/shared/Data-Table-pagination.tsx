@@ -35,14 +35,14 @@ export function DataTablePagination<TData>({
   const currentPage = Number(searchParams.get("page")) || 1;
   const perPage = Number(searchParams.get("perPage")) || 5;
   const params = new URLSearchParams(searchParams);
+  
   const createPageURL = (pageNumber: number | string) => {
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
 
-  const createAccountURL = (perPage: number | string) => {
+  const createPerPage = (perPage: number | string) => {
     params.set("perPage", perPage.toString());
-    console.log("perPage", perPage);
     return `${pathname}?${params.toString()}`;
   };
 
@@ -56,7 +56,7 @@ export function DataTablePagination<TData>({
           <Select
             value={`${perPage}`}
             onValueChange={(value) => {
-              const newUrl = createAccountURL(value);
+              const newUrl = createPerPage(value);
               window.location.href = newUrl;
             }}
           >
