@@ -14,7 +14,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-
 import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -39,7 +38,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import { Button } from "@/components/ui/button";
@@ -66,13 +64,11 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
   totalAccout,
   totalPages = 0,
   total,
-  
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-  
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
@@ -102,7 +98,6 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 100);
-
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -191,7 +186,7 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
             }}
             className="max-w-sm mr-2"
           />
-         
+
           <DataTableViewOptions table={table} />
         </>
       </div>
@@ -260,11 +255,11 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
               </TableRow>
             )}
           </TableBody>
-          
         </Table>
       </div>
+
       <div className="mt-2 flex items-center justify-between px-2">
-        
+        <div className="flex items-center space-x-6 lg:space-x-8 mt-2"></div>
 
         <DataTablePagination
           TotalAccount={totalAccout}
