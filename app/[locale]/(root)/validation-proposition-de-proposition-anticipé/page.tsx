@@ -77,20 +77,20 @@ export default async function Home({
         </div>
         <Suspense fallback={<div>Loading...</div>}>
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
-            <Tabs defaultValue="noncontactes" className="">
+            <Tabs defaultValue="Critéred'integration" className="">
               <TabsList className="grid w-fit grid-cols-2">
-                <TabsTrigger value="noncontactes">
-                  Liste des clients non contactés{" "}
+                <TabsTrigger value="Critéred'integration">
+                  Critére d'integration{" "}
                 </TabsTrigger>
 
-                <TabsTrigger value="contactes">
-                  Liste des clients contactés{" "}
+                <TabsTrigger value="HistoriqueCommentaire">
+                  Historique Commentaire{" "}
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="noncontactes">
+              <TabsContent value="Critéred'integration">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Liste des clients Non contactés</CardTitle>
+                    <CardTitle>Critére d'integration</CardTitle>
                     {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}
@@ -108,10 +108,10 @@ export default async function Home({
                   </CardContent>
                 </Card>
               </TabsContent>
-              <TabsContent value="contactes">
+              <TabsContent value="HistoriqueCommentaire">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Liste des clients contactés</CardTitle>
+                    <CardTitle>Historique Commentaire</CardTitle>
                     {/* <CardDescription>
                     Manage your products and view their sales performance.
                   </CardDescription> */}
