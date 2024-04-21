@@ -8,7 +8,6 @@ export const getLinksByCodeFonction = async () => {
     const response = await axios.get(
       `https://amenbankapi.vercel.app/droit/getLinks?codeFunction=${user.code_function}`
     );
-    console.log(response.data);
     return response.data || [];
   } catch (error) {
     console.log(error);
