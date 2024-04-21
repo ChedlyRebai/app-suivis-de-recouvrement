@@ -30,22 +30,25 @@ export const getClientContactes = async (
   dayfrom?: string,
   dayto?: string
 ) => {
-  const cookieStore = cookies();
-  const session = cookieStore.get("session");
-  axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
-  axios.defaults.headers.common["Authorization"] = ` ${
-    session?.value as string
-  }`;
-  console.log(
-    `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
-  );
-  const res = await axios.get<Main>(
-    `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
-  );
-  console.log(res.data);
-  console.log("revalidate");
-  //console.log(res.data);
-  return res.data;
+  try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+    console.log(
+      `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+    const res = await axios.get<Main>(
+      `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+   
+    //console.log(res.data);
+    return res.data || {} as ab_client;
+  } catch (error) {
+    return {} as ab_client;
+  }
 };
 
 export const getClientNonContactes = async (
@@ -85,7 +88,7 @@ export const getGroupes = async () => {
     const res = await axios.get<[]>(
       `https://sprint2-two.vercel.app/client/getgroupes`
     );
-    console.log(res.data)
+   
     return res.data;
   } catch (error) {
     return [];
@@ -110,12 +113,13 @@ export const getCompterendu = async (IdClient?: string) => {
     console.log(
       `https://sprint2-two.vercel.app/client/getcompterendu/${IdClient}`
     );
-    const res = await axios.get<SuiviAgenda>(
+    const res = await axios.get<any>(
       `https://sprint2-two.vercel.app/client/compteRendu?cli=${IdClient}`
     );
-    return res.data;
+    console.log(res.data);
+    return res.data || {} as any;
   } catch (error) {
-    return {} as SuiviAgenda;
+    return {} as any;
   }
 };
 

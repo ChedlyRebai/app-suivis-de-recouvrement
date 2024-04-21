@@ -115,7 +115,7 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
   },
   {
     accessorKey:"prol_c",
-    header:"Motif de Prolongation",
+    header:"prol_c",
     cell: ({ row }) => {
       return (
         <Select
