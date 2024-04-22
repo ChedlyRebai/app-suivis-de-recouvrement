@@ -166,6 +166,7 @@ export const createCompteRendu = async (
       `https://sprint2-two.vercel.app/compterendu/createcompterendu`,
       { suiviAgenda, compteRendu, user, cli }
     );
+    console.log(res.data)
     return res.data;
   } catch (error) {
     return {} as SuiviAgenda;
