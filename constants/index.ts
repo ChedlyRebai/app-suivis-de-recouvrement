@@ -52,3 +52,17 @@ export const Sort=[
   {Code : 5, libelle :"Visite"},
   {Code : 6, libelle :"Client injoignable"},
 ]
+
+
+export const libelleMotif = [
+  {libelle_motif: "Client qui exprime un refus de payer ou une dénégation de sa créance", code_motif: 1},
+  {libelle_motif: "D-Epuisement de toutes les tentatives de recouvrement"	, code_motif: 2},
+  {libelle_motif: "D-Client ayant besoin d’un arrangement (consolidation ou rééchelonnement)", code_motif: 3},
+  {libelle_motif: "C-Décès du client", code_motif: 4},
+  {libelle_motif: "C-Faillite du client ou entrée en phase de redressement judiciaire", code_motif: 5},
+  {libelle_motif: "C-Information sur la fuite/disparition du client", code_motif: 6},
+  {libelle_motif: "Autres", code_motif: 7},
+]
+
+
+

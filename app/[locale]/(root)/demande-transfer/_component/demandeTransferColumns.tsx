@@ -2,12 +2,19 @@
 import { ab_client } from "@/Models/ab_client.model";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { libelleMotif } from "@/constants";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
 export const demandeTransferColumns: ColumnDef<ab_client>[] = [
-  
   {
     accessorKey: "cli",
     header: ({ column }) => {
@@ -68,14 +75,15 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     accessorKey: "tot_eng",
     header: "Engagement",
   },
-
   {
-    accessorKey: "etat_lettre",
-    header: "Etat Lettre",
+    accessorKey: "classe",
+    header: "Classe",
   },
+  
+  
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
+    accessorKey: "MOTT",
+    header: "Motif de transfer",
     cell: ({ row }) => {
       return (
         // <span
@@ -88,7 +96,6 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
         //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
         // </span>
         <Select
-        
           // onValueChange={(newValue) =>
           //   update(
           //     row.getValue("code_fonction"),
@@ -99,18 +106,20 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
           // }
           defaultValue={row.getValue("MOTT")}
         >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="MOTT">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Oui</SelectItem>
+              <SelectItem value="N">Non</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -118,27 +127,25 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"OBS1",
-    header:"Commentaire",
+    accessorKey: "OBS1",
+    header: "Commentaire",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("OBS1")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+        <Select defaultValue={row.getValue("OBS1")}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="OBS1">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Oui</SelectItem>
+              <SelectItem value="N">Non</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -146,27 +153,27 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
+    accessorKey: "MOTT",
+    header: "Motif de transfer",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("MOTT")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+        <Select defaultValue={row.getValue("MOTT")}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="acces">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              {libelleMotif.map((item: any) => (
+                <SelectItem key={item.code_motif} value={`${item.code_motif}`}>
+                  {item.libelle_motif}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -174,32 +181,29 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"TRAF_A",
-    header:"Transferer à",
+    accessorKey: "TRAF_A",
+    header: "Transferer à",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("TRAF_A")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+        <Select defaultValue={row.getValue("TRAF_A")}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="TRAF_A">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Oui</SelectItem>
+              <SelectItem value="N">Non</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       );
     },
   },
-
 ];
