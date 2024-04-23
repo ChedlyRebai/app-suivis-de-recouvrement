@@ -1,5 +1,8 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { ab_cxrepenv } from "@/Models/ab_cxrepenv.model";
+import { getMotif } from "@/actions/motif.action";
+import { getTypeTransfer } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -79,8 +82,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     accessorKey: "classe",
     header: "Classe",
   },
-  
-  
+
   {
     accessorKey: "MOTT",
     header: "Motif de transfer",
@@ -155,7 +157,8 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "MOTT",
     header: "Motif de transfer",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const motifs = await getMotif();
       return (
         <Select defaultValue={row.getValue("MOTT")}>
           <SelectTrigger
@@ -169,9 +172,9 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="acces">
-              {libelleMotif.map((item: any) => (
-                <SelectItem key={item.code_motif} value={`${item.code_motif}`}>
-                  {item.libelle_motif}
+              {motifs.map((item: any) => (
+                <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                  {item.libelle}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -183,7 +186,8 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "TRAF_A",
     header: "Transferer à",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const typeTransfer = await getTypeTransfer();
       return (
         <Select defaultValue={row.getValue("TRAF_A")}>
           <SelectTrigger
@@ -198,8 +202,11 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
           <SelectContent>
             <SelectGroup id="TRAF_A">
               {" "}
-              <SelectItem value="O">Oui</SelectItem>
-              <SelectItem value="N">Non</SelectItem>
+              {typeTransfer.map((item: any) => (
+                <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                  {item.libelle}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
