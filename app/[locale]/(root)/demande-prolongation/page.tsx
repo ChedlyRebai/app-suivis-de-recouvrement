@@ -18,8 +18,9 @@ import {
 import { Suspense } from "react";
 
 import { getLettre } from "@/actions/lettre.action";
-import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
-import { demandeTransferColumns } from "./_component/demandeTransferColumns";
+import { DataTableDemandeDeProlongationCommercial } from "./_component/demande-prolongation-data-table";
+import { demandedeprolongation } from "./_component/demandeProlongationColumns";
+
 
 export default async function Home({
   searchParams,
@@ -75,13 +76,13 @@ export default async function Home({
                     </CardDescription> */}
               </CardHeader>
               <CardContent>
-                <DataTableDemandeDeTransfer
+                <DataTableDemandeDeProlongationCommercial
                   agences={agences || []}
                   groupes={groupes || []}
                   total={data.total || 0}
                   totalAccout={data.totalCount || 0}
                   totalPages={data.totalPages || 1}
-                  columns={demandeTransferColumns}
+                  columns={demandedeprolongation}
                   data={data.result || []}
                 />
               </CardContent>

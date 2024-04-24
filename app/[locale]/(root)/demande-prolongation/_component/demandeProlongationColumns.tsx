@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const demandeTransferColumns: ColumnDef<ab_client>[] = [
+export const demandedeprolongation: ColumnDef<ab_client>[] = [
   
   {
     accessorKey: "cli",

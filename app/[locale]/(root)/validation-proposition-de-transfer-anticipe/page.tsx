@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
-import { getAgences, getGroupes } from "@/actions/client.action";
+import { getAgences, getGroupes, getValidationProposeDeTransferAnticipe } from "@/actions/client.action";
 
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
@@ -40,15 +40,15 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  //   const data = await getClientContactes(
-  //     search,
-  //     currentPage,
-  //     perPage,
-  //     group,
-  //     agence,
-  //     from,
-  //     to
-  //   );
+    const data = await getValidationProposeDeTransferAnticipe(
+      search,
+      currentPage,
+      perPage,
+      group,
+      agence,
+      from,
+      to
+    );
 
   //   const dataNon = await getClientNonContactes(
   //     search,
@@ -60,7 +60,7 @@ export default async function Home({
   //     to
   //   );
 
-  const data: any = [];
+  //const data: any = [];
 
   const groupes = await getGroupes();
   const agences = await getAgences();
@@ -86,9 +86,9 @@ export default async function Home({
                 <Card>
                   <CardHeader>
                     <CardTitle>Critére d'integration</CardTitle>
-                    {/* <CardDescription>
+                 {/*<CardDescription>
                       Manage your products and view their sales performance.
-                    </CardDescription> */}
+                    </CardDescription>*/}
                   </CardHeader>
                   <CardContent>
                     <DataTableValidationDeTransfer
