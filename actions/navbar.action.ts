@@ -6,7 +6,7 @@ export const getLinksByCodeFonction = async () => {
     const user = await getSession();
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get(
-      `https://amenbankapi.vercel.app/droit/getLinks?codeFunction=${user.code_function}`
+      `https://app-suivis-de-recouvrement-ser-git-69cf99-chedlyrebais-projects.vercel.app/droit/getLinks?codeFunction=${user.code_function}`
     );
     return response.data || [];
   } catch (error) {

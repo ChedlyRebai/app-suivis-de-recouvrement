@@ -1,10 +1,9 @@
 "use client";
+
 import { ab_client } from "@/Models/ab_client.model";
-import { ab_cxrepenv } from "@/Models/ab_cxrepenv.model";
 import { getMotif } from "@/actions/motif.action";
 import { getTypeTransfer } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -13,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { libelleMotif } from "@/constants";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
@@ -154,6 +152,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
       );
     },
   },
+
   {
     accessorKey: "MOTT",
     header: "Motif de transfer",
@@ -183,6 +182,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
       );
     },
   },
+  
   {
     accessorKey: "TRAF_A",
     header: "Transferer à",
