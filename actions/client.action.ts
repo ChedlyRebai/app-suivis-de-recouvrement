@@ -185,3 +185,20 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
     return {} as SuiviAgenda;
   }
 };
+
+
+export const demandeDeTransferAnticipe = async ()=>{
+  try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+    const res = await axios.get(`http://localhost:10001/client/demandetransferanticipe`)
+    console.log(res.data)
+    return res.data || {} as ab_client;
+  } catch (error) {
+    return {} as ab_client;
+  }
+}
