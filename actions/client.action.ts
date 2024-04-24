@@ -203,7 +203,7 @@ export const demandeDeTransferAnticipe =  async (
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-    const res = await axios.get(`http://localhost:10001/client/demandedetransferanticipe?page=1&groupe&agence&perPage=2&search&from&to`)
+    const res = await axios.get(` `)
     console.log(res.data);
     return res.data || {} as ab_client;
   } catch (error) {
