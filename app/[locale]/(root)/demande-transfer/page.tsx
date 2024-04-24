@@ -70,9 +70,6 @@ export default async function Home({
             <Card>
               <CardHeader>
                 <CardTitle>Demande de transfer anticipé</CardTitle>
-                {/* <CardDescription>
-                      Manage your products and view their sales performance.
-                    </CardDescription> */}
               </CardHeader>
               <CardContent>
                 <DataTableDemandeDeTransfer

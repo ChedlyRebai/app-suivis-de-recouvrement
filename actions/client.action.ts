@@ -187,7 +187,15 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
 };
 
 
-export const demandeDeTransferAnticipe = async ()=>{
+export const demandeDeTransferAnticipe =  async (
+  IdClient?: string,
+  currentpage?: number,
+  perpage?: number,
+  groupe?: string,
+  agence?: string,
+  dayfrom?: string,
+  dayto?: string
+) =>{
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
@@ -195,8 +203,8 @@ export const demandeDeTransferAnticipe = async ()=>{
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-    const res = await axios.get(`http://localhost:10001/client/demandetransferanticipe`)
-    console.log(res.data)
+    const res = await axios.get(`http://localhost:10001/client/demandetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`)
+    console.log(res.data);
     return res.data || {} as ab_client;
   } catch (error) {
     return {} as ab_client;
