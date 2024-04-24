@@ -3,6 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
+  demandeDeTransferAnticipe,
   getAgences,
   getClientContactes,
   getClientNonContactes,
@@ -43,8 +44,8 @@ export default async function Home({
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
-
-  const data = await getLettre(
+  
+  const data = await demandeDeTransferAnticipe(
     search,
     currentPage,
     perPage,

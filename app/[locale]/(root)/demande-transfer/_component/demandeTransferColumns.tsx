@@ -32,12 +32,12 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     header: "Non",
   },
 
+  // {
+  //   accessorKey: "ncp",
+  //   header: "N°compte",
+  // },
   {
-    accessorKey: "ncp",
-    header: "N°compte",
-  },
-  {
-    accessorKey: "age",
+    accessorKey: "agence",
     header: "Agence",
   },
   {
@@ -53,7 +53,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     header: "Nbj.Imp",
   },
   {
-    accessorKey: "mnt_sdb",
+    accessorKey: "sd",
     header: "Solde Debiteur",
   },
   {
@@ -107,11 +107,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
           defaultValue={row.getValue("MOTT")}
         >
           <SelectTrigger
-            className={` w-fit ${
-              row.getValue("acces") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
+            className={` w-fit`}
           >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
@@ -133,11 +129,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
       return (
         <Select defaultValue={row.getValue("OBS1")}>
           <SelectTrigger
-            className={` w-fit ${
-              row.getValue("acces") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
+            className={` w-fit`}
           >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
@@ -161,11 +153,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
       return (
         <Select defaultValue={row.getValue("MOTT")}>
           <SelectTrigger
-            className={` w-fit ${
-              row.getValue("acces") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
+            className={` w-fit`}
           >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
@@ -191,11 +179,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
       return (
         <Select defaultValue={row.getValue("TRAF_A")}>
           <SelectTrigger
-            className={` w-fit ${
-              row.getValue("acces") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
+            className={` w-fit `}
           >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
