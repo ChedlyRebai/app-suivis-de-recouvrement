@@ -1,13 +1,20 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { getTypeTransfer } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, SearchIcon } from "lucide-react";
 
 export const validationTransferColumns: ColumnDef<ab_client>[] = [
-  
   {
     accessorKey: "cli",
     header: "cli",
@@ -61,44 +68,39 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     accessorKey: "tot_eng",
     header: "Engagement",
   },
-   
-  
+
   {
     accessorKey: "classe",
     header: "Classe",
   },
   {
-    accessorKey:"traf_a",
-    header:"Transferer à",
-    cell: ({ row }) => {
+    accessorKey: "TRAF_A",
+    header: "Transferer à",
+    cell: async ({ row }) => {
+      const typeTransfer = await getTypeTransfer();
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("traf_a")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+        <Select defaultValue={row.getValue("TRAF_A")}>
+          <SelectTrigger className={` w-fit `}>
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup id="traf_a">
+            <SelectGroup id="TRAF_A">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              {typeTransfer.map((item: any) => (
+                <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                  {item.libelle}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
       );
     },
   },
-  
+
   {
-    accessorKey:"mott",
-    header:"Motif de transfer",
+    accessorKey: "mott",
+    header: "Motif de transfer",
     cell: ({ row }) => {
       return (
         // <span
@@ -111,7 +113,6 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
         //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
         // </span>
         <Select
-        
           // onValueChange={(newValue) =>
           //   update(
           //     row.getValue("code_fonction"),
@@ -122,18 +123,20 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
           // }
           defaultValue={row.getValue("mott")}
         >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="MOTT">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Oui</SelectItem>
+              <SelectItem value="N">Non</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -141,33 +144,30 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"OBS1",
-    header:"Commentaire",
-    
+    accessorKey: "OBS1",
+    header: "Commentaire",
   },
-  
+
   {
-    accessorKey:"TRF_PROPOSE_V",
-    header:"TRF_PROPOSE_V",
+    accessorKey: "TRF_PROPOSE_V",
+    header: "validations",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("TRAF_A")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+        <Select defaultValue={row.getValue("TRAF_A")}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="TRAF_A">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Validé</SelectItem>
+              <SelectItem value="N">Non Validé</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -175,8 +175,8 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"Action",
-    header:"Action",
+    accessorKey: "Action",
+    header: "Action",
     cell: ({ row }) => {
       return (
         <div className="flex justify-center">
@@ -194,8 +194,7 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
         </div>
       );
     },
-  }
+  },
 
   // TRF_PROPOSE_V
-
 ];
