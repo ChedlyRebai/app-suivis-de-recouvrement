@@ -73,7 +73,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     header: "Max NBJ",
   },
   {
-    accessorKey: "tot_eng",
+    accessorKey: "engagement",
     header: "Engagement",
   },
   {
@@ -125,51 +125,51 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "OBS1",
     header: "Commentaire",
-    cell: ({ row }) => {
-      return (
-        <Select defaultValue={row.getValue("OBS1")}>
-          <SelectTrigger
-            className={` w-fit`}
-          >
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="OBS1">
-              {" "}
-              <SelectItem value="O">Oui</SelectItem>
-              <SelectItem value="N">Non</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
+    // cell: ({ row }) => {
+    //   return (
+    //     <Select defaultValue={row.getValue("OBS1")}>
+    //       <SelectTrigger
+    //         className={` w-fit`}
+    //       >
+    //         <SelectValue className="" placeholder="Select a fruit" />
+    //       </SelectTrigger>
+    //       <SelectContent>
+    //         <SelectGroup id="OBS1">
+    //           {" "}
+    //           <SelectItem value="O">Oui</SelectItem>
+    //           <SelectItem value="N">Non</SelectItem>
+    //         </SelectGroup>
+    //       </SelectContent>
+    //     </Select>
+    //   );
+    // },
   },
 
-  {
-    accessorKey: "MOTT",
-    header: "Motif de transfer",
-    cell: async ({ row }) => {
-      const motifs = await getMotif();
-      return (
-        <Select defaultValue={row.getValue("MOTT")}>
-          <SelectTrigger
-            className={` w-fit`}
-          >
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="MOTT">
-              {motifs.map((item: any) => (
-                <SelectItem key={item.codenv} value={`${item.codenv}`}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "MOTT",
+  //   header: "Motif de transfer",
+  //   cell: async ({ row }) => {
+  //     const motifs = await getMotif();
+  //     return (
+  //       <Select defaultValue={row.getValue("MOTT")}>
+  //         <SelectTrigger
+  //           className={` w-fit`}
+  //         >
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="MOTT">
+  //             {motifs.map((item: any) => (
+  //               <SelectItem key={item.codenv} value={`${item.codenv}`}>
+  //                 {item.libelle}
+  //               </SelectItem>
+  //             ))}
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
   
   {
     accessorKey: "TRAF_A",
