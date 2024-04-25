@@ -81,7 +81,7 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
   agence?: string,
   dayfrom?: string,
   dayto?: string
-):Promise<Main> => {
+): Promise<Main> => {
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
@@ -109,7 +109,6 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
   cli,
   motif,
   flag_trf,
- 
 }: {
   matricule: string;
   obs: string;
@@ -117,14 +116,13 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
   cli: string;
   motif: string;
   flag_trf: string;
-
-}):Promise<Main> => {
+}): Promise<Main> => {
   try {
     const res = await axios.put(
       `http://localhost:10001/transfer/createhistoriquevalidationpropsedetransfertanticipe`,
       { matricule, obs, numobs, cli, motif, flag_trf }
     );
-    return res.data || {} as Main;
+    return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
   }
