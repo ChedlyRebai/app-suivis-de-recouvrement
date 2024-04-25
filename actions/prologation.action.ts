@@ -15,7 +15,7 @@ export interface Total {
   tot_creance: string;
   engagement: string;
 }
-export const getHistoriqueDemandDeTransferAnticipe = async (
+export const getHistoriqueDemandDeProlongation = async (
   IdClient?: string,
   currentpage?: number,
   perpage?: number,
@@ -32,11 +32,11 @@ export const getHistoriqueDemandDeTransferAnticipe = async (
       session?.value as string
     }`;
     console.log(
-      `http://localhost:10001/transfer/gethistoriquetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/prolongation/historiquedemandeprolongation?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/gethistoriquetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/prolongation/historiquedemandeprolongation?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     return res.data || ({} as any);
   } catch (error) {
@@ -44,7 +44,7 @@ export const getHistoriqueDemandDeTransferAnticipe = async (
   }
 };
 
-export const getvalidationpropsedetransfertanticipe = async (
+export const getvalidationprpositiondeprolongation = async (
   IdClient?: string,
   currentpage?: number,
   perpage?: number,
@@ -67,7 +67,7 @@ export const getvalidationpropsedetransfertanticipe = async (
     const res = await axios.get<Main>(
       `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
-    return res.data || ({} as any);
+    return res.data || ({} as Main);
   } catch (error) {
     return [];
   }
@@ -81,11 +81,11 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
   agence?: string,
   dayfrom?: string,
   dayto?: string
-) => {
+):Promise<Main> => {
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.baseURL = `http://localhost:10001`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
@@ -96,9 +96,9 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
     const res = await axios.get<Main>(
       `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
-    return res.data || ({} as any);
+    return res.data || ({} as Main);
   } catch (error) {
-    return [];
+    return {} as Main;
   }
 };
 
@@ -118,14 +118,14 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
   motif: string;
   flag_trf: string;
 
-}) => {
+}):Promise<Main> => {
   try {
     const res = await axios.put(
       `http://localhost:10001/transfer/createhistoriquevalidationpropsedetransfertanticipe`,
       { matricule, obs, numobs, cli, motif, flag_trf }
     );
-    return res.data;
+    return res.data || {} as Main;
   } catch (error) {
-    return {};
+    return {} as Main;
   }
 };
