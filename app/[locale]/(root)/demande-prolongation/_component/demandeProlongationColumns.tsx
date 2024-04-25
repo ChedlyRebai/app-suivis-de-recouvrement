@@ -1,5 +1,6 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { getMotifCommercial } from "@/actions/motif.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -76,7 +77,8 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
   {
     accessorKey:"motif_prol_c",
     header:"Motif de prolongation",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const motifCommercial=await getMotifCommercial()
       return (
         // <span
         //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
@@ -97,20 +99,19 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
           //     "acces"
           //   )
           // }
-          defaultValue={row.getValue("MOTT")}
+          defaultValue={row.getValue("motif_prol_c")}
         >
           <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup id="MOTT">
+            <SelectGroup id="motif_prol_c">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              {motifCommercial.map((item) => (
+                <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                  {item.libelle}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>

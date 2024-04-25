@@ -1,5 +1,6 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { getMotifCommercial } from "@/actions/motif.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -68,7 +69,8 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "mott_prol_c",
     header: "Motif de Prolongation",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const motifCommercial=await getMotifCommercial()
       return (
         // <span
         //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${

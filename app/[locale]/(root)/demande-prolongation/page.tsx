@@ -70,7 +70,7 @@ export default async function Home({
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
             <Card>
               <CardHeader>
-                <CardTitle>Demande de transfer anticipé</CardTitle>
+                <CardTitle>Demande de Proposition de prolongation</CardTitle>
                 {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}

@@ -12,7 +12,6 @@ import {
 import { Suspense } from "react";
 import { getAgences, getGroupes } from "@/actions/client.action";
 
-
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
 import { demandeProlongationColumns } from "./_component/demandeProlongationColumns";
