@@ -101,3 +101,29 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
     return [];
   }
 };
+
+export const createhistoriquevalidationpropsedetransfertanticipe = async ({
+  matricule,
+  obs,
+  numobs,
+  cli,
+  motif,
+  flag_trf,
+}: {
+  matricule: string;
+  obs: string;
+  numobs: string;
+  cli: string;
+  motif: string;
+  flag_trf: string;
+}) => {
+  try {
+    const res = await axios.put(
+      `http://localhost:10001/transfer/createhistoriquevalidationpropsedetransfertanticipe`,
+      { matricule, obs, numobs, cli, motif, flag_trf }
+    );
+    return res.data;
+  } catch (error) {
+    return {};
+  }
+};
