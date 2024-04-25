@@ -31,13 +31,70 @@ export const getHistoriqueDemandDeTransferAnticipe = async (
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-    
     console.log(
       `http://localhost:10001/transfer/gethistoriquetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     const res = await axios.get<Main>(
       `http://localhost:10001/transfer/gethistoriquetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+    return res.data || ({} as any);
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getvalidationpropsedetransfertanticipe = async (
+  IdClient?: string,
+  currentpage?: number,
+  perpage?: number,
+  groupe?: string,
+  agence?: string,
+  dayfrom?: string,
+  dayto?: string
+) => {
+  try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+    console.log(
+      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+
+    const res = await axios.get<Main>(
+      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+    return res.data || ({} as any);
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
+  IdClient?: string,
+  currentpage?: number,
+  perpage?: number,
+  groupe?: string,
+  agence?: string,
+  dayfrom?: string,
+  dayto?: string
+) => {
+  try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+    console.log(
+      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+
+    const res = await axios.get<Main>(
+      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     return res.data || ({} as any);
   } catch (error) {
