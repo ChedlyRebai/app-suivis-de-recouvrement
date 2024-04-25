@@ -65,17 +65,17 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
     header: "Max NBJ",
   },
   {
-    accessorKey: "tot_eng",
+    accessorKey: "engagement",
     header: "Engagement",
   },
-
   {
-    accessorKey: "etat_lettre",
-    header: "Etat Lettre",
+    accessorKey: "classe",
+    header: "Classe",
   },
+  
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
+    accessorKey:"motif_prol_c",
+    header:"Motif de prolongation",
     cell: ({ row }) => {
       return (
         // <span
@@ -120,86 +120,106 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
   {
     accessorKey:"OBS1",
     header:"Commentaire",
+    // cell: ({ row }) => {
+    //   return (
+      
+    //     <Select
+
+    //       defaultValue={row.getValue("OBS1")}
+    //     >
+    //       <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+    //         <SelectValue className="" placeholder="Select a fruit" />
+    //       </SelectTrigger>
+    //       <SelectContent>
+    //         <SelectGroup id="OBS1">
+    //           {" "}
+    //           <SelectItem  value="O">
+    //             Oui
+    //           </SelectItem>
+    //           <SelectItem  value="N">
+    //             Non
+    //           </SelectItem>
+    //         </SelectGroup>
+    //       </SelectContent>
+    //     </Select>
+    //   );
+    // },
+  },
+  // {
+  //   accessorKey:"MOTT",
+  //   header:"Motif de transfer",
+  //   cell: ({ row }) => {
+  //     return (
+      
+  //       <Select
+
+  //         defaultValue={row.getValue("MOTT")}
+  //       >
+  //         <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="acces">
+  //             {" "}
+  //             <SelectItem  value="O">
+  //               Oui
+  //             </SelectItem>
+  //             <SelectItem  value="N">
+  //               Non
+  //             </SelectItem>
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey:"TRAF_A",
+  //   header:"Transferer à",
+  //   cell: ({ row }) => {
+  //     return (
+      
+  //       <Select
+
+  //         defaultValue={row.getValue("TRAF_A")}
+  //       >
+  //         <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="TRAF_A">
+  //             {" "}
+  //             <SelectItem  value="O">
+  //               Oui
+  //             </SelectItem>
+  //             <SelectItem  value="N">
+  //               Non
+  //             </SelectItem>
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
+  // PROL_PROPOSE_C
+  {
+    accessorKey:"prol_propose_c",
+    header:"checkbox",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("OBS1")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="OBS1">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Checkbox id="terms" defaultChecked={row.getValue('prol_propose_c') =='O' ? true :false} />
       );
     },
   },
   {
-    accessorKey:"MOTT",
-    header:"Motif de transfer",
+    accessorKey:"",
+    header:"Action",
     cell: ({ row }) => {
       return (
-      
-        <Select
-
-          defaultValue={row.getValue("MOTT")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="acces">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Button id="terms" >
+          DETAILS
+        </Button>
       );
     },
   },
-  {
-    accessorKey:"TRAF_A",
-    header:"Transferer à",
-    cell: ({ row }) => {
-      return (
-      
-        <Select
-
-          defaultValue={row.getValue("TRAF_A")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="TRAF_A">
-              {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-
 ];
