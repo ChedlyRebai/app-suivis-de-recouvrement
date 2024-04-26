@@ -49,6 +49,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import CompteRenduHistorique from "./CompteRenduHistorique";
+import { QueryClient } from "@tanstack/react-query";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
@@ -62,7 +63,7 @@ const CompteRenduForm = ({
   historiqueCompteRendu,
 }: CompteRenduFormProps) => {
   const [selectedValue, setSelectedValue] = useState("1");
-  console.log(historiqueCompteRendu)
+  console.log(historiqueCompteRendu);
   const {
     client,
     handleIputChangeSuiviAgenda,
@@ -82,16 +83,29 @@ const CompteRenduForm = ({
   const handleRadioChange = (e: any) => {
     e.preventDefault();
     setSelectedRadio(e.target.value);
-    let { compte_rendu, app_gen,motif_imp,info_motif,liste_choix } = suiviAgenda;
-    setSuiviAgenda({ compte_rendu, app_gen,motif_imp,info_motif,liste_choix } as SuiviAgenda);
+    let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix } =
+      suiviAgenda;
+    setSuiviAgenda({
+      compte_rendu,
+      app_gen,
+      motif_imp,
+      info_motif,
+      liste_choix,
+    } as SuiviAgenda);
     console.log(selectedRadio);
     setTab(e.target.value);
   };
   const handleTabChange = (num: string) => {
-   
     setSelectedRadio(num);
-    let { compte_rendu, app_gen,motif_imp,info_motif,liste_choix } = suiviAgenda;
-    setSuiviAgenda({ compte_rendu, app_gen,motif_imp,info_motif,liste_choix } as SuiviAgenda);
+    let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix } =
+      suiviAgenda;
+    setSuiviAgenda({
+      compte_rendu,
+      app_gen,
+      motif_imp,
+      info_motif,
+      liste_choix,
+    } as SuiviAgenda);
     console.log(selectedRadio);
     setTab(num);
   };
@@ -107,10 +121,12 @@ const CompteRenduForm = ({
     console.log(tab);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(suiviAgenda);
     console.log(selectedRadio);
-
+    await queryClient.refetchQueries()
+    queryClient.invalidateQueries({ queryKey: ['getCompteRenduHistorique',cli] })
+    await queryClient.prefetchQuery({ queryKey: ['getCompteRenduHistorique',cli] })
     let compte_rendu = "";
     if (selectedRadio === "1") {
       compte_rendu = `Promesse de paiement : Montant =  ${
@@ -143,18 +159,40 @@ const CompteRenduForm = ({
       //   suiviAgenda.compte_rendu || ""
       // }`;
       // console.log("Facilite de paiement");
-      compte_rendu = `Facilité de paiement : Montant global = ${client.mnt_imp} Nombre d'echeance = ${suiviAgenda.nb_ech} ${
-        suiviAgenda.mntech1 ? `Mnt. 1ére ech. = ${suiviAgenda.mntech1} Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} ` : ""
+      compte_rendu = `Facilité de paiement : Montant global = ${
+        client.mnt_imp
+      } Nombre d'echeance = ${suiviAgenda.nb_ech} ${
+        suiviAgenda.mntech1
+          ? `Mnt. 1ére ech. = ${
+              suiviAgenda.mntech1
+            } Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} `
+          : ""
       }${
-        suiviAgenda.mntech2 ? `Mnt. 2ème ech. = ${suiviAgenda.mntech2} Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} ` : ""
+        suiviAgenda.mntech2
+          ? `Mnt. 2ème ech. = ${
+              suiviAgenda.mntech2
+            } Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} `
+          : ""
       }${
-        suiviAgenda.mntech3 ? `Mnt. 3ème ech. = ${suiviAgenda.mntech3} Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} ` : ""
+        suiviAgenda.mntech3
+          ? `Mnt. 3ème ech. = ${
+              suiviAgenda.mntech3
+            } Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} `
+          : ""
       }${
-        suiviAgenda.mntech4 ? `Mnt. 4ème ech. = ${suiviAgenda.mntech4} Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} ` : ""
+        suiviAgenda.mntech4
+          ? `Mnt. 4ème ech. = ${
+              suiviAgenda.mntech4
+            } Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} `
+          : ""
       }${
-        suiviAgenda.mntech5 ? `Mnt. 5ème ech. = ${suiviAgenda.mntech5} Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} ` : ""
+        suiviAgenda.mntech5
+          ? `Mnt. 5ème ech. = ${
+              suiviAgenda.mntech5
+            } Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} `
+          : ""
       }${suiviAgenda.compte_rendu || ""}`;
-      
+
       console.log("Facilite de paiement");
     } else if (selectedRadio === "4") {
       console.log("Non reconnaissance de la creance");
@@ -170,12 +208,9 @@ const CompteRenduForm = ({
       compte_rendu = `Client injoignable: ${suiviAgenda.compte_rendu || ""}`;
     }
 
-    
-
     saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!)
       .then((res) => {
         toast.success("Compte rendu enregistré avec succès");
-
       })
       .catch(() => {
         toast.error("Erreur lors de l'enregistrement du compte rendu");
@@ -192,8 +227,7 @@ const CompteRenduForm = ({
   //   }
   // };
 
-  
-  
+  const queryClient = new QueryClient();
   return (
     <div className=" mx-auto px-4 sm:px-6 md:px- 8">
       <div className="">
@@ -552,11 +586,11 @@ const CompteRenduForm = ({
                 <Tabs
                   // value={tab}
                   className="relative mr-auto w-full"
-                   onValueChange={onTabChange}
+                  onValueChange={onTabChange}
                 >
-                  <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0" >
+                  <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
                     <TabsTrigger
-                    onClick={() => handleTabChange("1")}
+                      onClick={() => handleTabChange("1")}
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
                       value="1"
@@ -564,7 +598,7 @@ const CompteRenduForm = ({
                       Promesse de règlement
                     </TabsTrigger>
                     <TabsTrigger
-                    onClick={() => handleTabChange("2")}
+                      onClick={() => handleTabChange("2")}
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
                       value="2"
@@ -646,7 +680,7 @@ const CompteRenduForm = ({
                       <CardContent className="space-y-2 ">
                         <CardContent className="flex  justify-center items-center py-6">
                           <CardTitle className="text-center text-base">
-                          Pas de formulaire 
+                            Pas de formulaire
                           </CardTitle>
                         </CardContent>
                       </CardContent>
@@ -660,14 +694,15 @@ const CompteRenduForm = ({
                   <div className="flex flex-col my-2">
                     <div className="flex w-[280px] flex-col mr-4">
                       <Label
-                        className={`mb-1 text-sm font-medium ${selectedRadio === "6" && "text-muted-foreground"}`}
+                        className={`mb-1 text-sm font-medium ${
+                          selectedRadio === "6" && "text-muted-foreground"
+                        }`}
                         htmlFor="amount"
-                        
                       >
                         Appreciation generale
                       </Label>
                       <Select
-                      disabled={selectedRadio === "6"}
+                        disabled={selectedRadio === "6"}
                         defaultValue={suiviAgenda.app_gen}
                         onValueChange={(e: string) => {
                           handleIputChangeSuiviAgenda("app_gen", e);
@@ -711,8 +746,16 @@ const CompteRenduForm = ({
                         id="location"
                       />
                     </div>
-                    
-                  </div><Button  onClick={handleSubmit}>Save</Button>
+                  </div>
+                  <Button
+                    onClick={ async() => {
+                      handleSubmit();
+                      //queryClient.invalidateQueries(['getCompteRenduHistorique']);
+                      await queryClient.refetchQueries()
+                    }}
+                  >
+                    Save
+                  </Button>
                 </CardContent>
               </Card>
             </AccordionContent>
@@ -722,7 +765,6 @@ const CompteRenduForm = ({
             <AccordionTrigger>List de Compte Rendu</AccordionTrigger>
             <AccordionContent>
               <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
-              
             </AccordionContent>
           </AccordionItem>
         </Accordion>

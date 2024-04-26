@@ -138,7 +138,7 @@ export const getListCompte = async (IdClient?: string) => {
   }
 };
 
-export const getListCompteRenduHistorique = async (IdClient?: string) => {
+export const getListCompteRenduHistorique = async (IdClient?: string):Promise<SuiviAgenda[]> => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
@@ -147,7 +147,7 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
     const res = await axios.get<SuiviAgenda[]>(
       `https://sprint2-two.vercel.app/client/listhistorique?cli=${IdClient}`
     );
-    return res.data;
+    return res.data || [] as SuiviAgenda[];
   } catch (error) {
     return [] as SuiviAgenda[];
   }

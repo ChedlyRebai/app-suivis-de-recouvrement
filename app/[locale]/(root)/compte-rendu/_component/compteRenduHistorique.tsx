@@ -34,16 +34,28 @@ import {
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
+import { useQuery } from "@tanstack/react-query";
+import { getListCompteRenduHistorique } from "@/actions/client.action";
+import { useSearchParams } from "next/navigation";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: SuiviAgenda[];
 }
 
 const CompteRenduHistorique = ({
-  listHistorique: data,
+  listHistorique: datza,
 }: CompteRenduHistoriqueProps) => {
   const { isOpen, onClose, onOpen } = useCompteRenduModal();
-
+const searchParams = useSearchParams();
+const cli = searchParams.get('cli');
+  const { isPending, error, data } = useQuery<SuiviAgenda[]>({
+    queryKey: ['getCompteRenduHistorique'],
+    queryFn:async ()=>await getListCompteRenduHistorique(cli as string),
+    refetchOnMount: true,
+    
+  
+  })
+  
   const columns: ColumnDef<SuiviAgenda>[] = [
     {
       
@@ -147,6 +159,7 @@ const CompteRenduHistorique = ({
   const [rowSelection, setRowSelection] = React.useState({});
 
   console.log(data);
+  
   const table = useReactTable({
     data,
     columns,
@@ -166,6 +179,9 @@ const CompteRenduHistorique = ({
       rowSelection,
     },
   });
+  if(!data){
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="w-full">
