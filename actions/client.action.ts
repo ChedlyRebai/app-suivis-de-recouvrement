@@ -116,7 +116,7 @@ export const getCompterendu = async (IdClient?: string) => {
     const res = await axios.get<any>(
       `https://sprint2-two.vercel.app/client/compteRendu?cli=${IdClient}`
     );
-    console.log(res.data);
+    
     return res.data || ({} as any);
   } catch (error) {
     return {} as any;
@@ -166,7 +166,7 @@ export const createCompteRendu = async (
       `https://sprint2-two.vercel.app/compterendu/createcompterendu`,
       { suiviAgenda, compteRendu, user, cli }
     );
-    console.log(res.data);
+    
     return res.data;
   } catch (error) {
     return {} as SuiviAgenda;
@@ -205,7 +205,7 @@ export const demandeDeTransferAnticipe = async (
     const res = await axios.get(
       `http://localhost:10001/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
-    console.log(res.data);
+    
     return res.data || ({} as ab_client);
   } catch (error) {
     return {} as ab_client;
