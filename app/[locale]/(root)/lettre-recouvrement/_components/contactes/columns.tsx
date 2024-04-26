@@ -106,7 +106,13 @@ export const columns: ColumnDef<ab_client>[] = [
 
   {
     accessorKey: "etat_lettre",
-    header: "Etat Lettre",
+    header:({ column }) => (
+      <Checkbox
+        onCheckedChange={(value) => {
+          console.log(value);
+        }}
+      />
+    ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getValue("etat_lettre") === "O"}
