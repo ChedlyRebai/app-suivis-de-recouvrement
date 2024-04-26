@@ -23,7 +23,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -33,8 +32,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
-import { Pencil1Icon } from "@radix-ui/react-icons";
-import { Span } from "next/dist/trace";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 
