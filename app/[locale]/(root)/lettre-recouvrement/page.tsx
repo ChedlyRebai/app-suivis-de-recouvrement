@@ -51,7 +51,7 @@ export default async function Home({
     from,
     to
   );
-  console.log("data");
+  console.log("LETTRES RECUPEREES");
   console.log(data);
 
   const groupes = await getGroupes();

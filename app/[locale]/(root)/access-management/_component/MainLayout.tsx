@@ -69,7 +69,7 @@ const Mainlayout = ({
 
   const pathname = usePathname();
   const local = useLocale();
-  console.log(pathname);
+
   useEffect(() => {
     if (pathname !== `/${local}`) {
       console.log(pathname !== `/${local}`);
@@ -78,8 +78,6 @@ const Mainlayout = ({
     }
     setDefaultSize(0);
   }, []);
-
-  console.log(local);
 
   function classNames(...classes: String[]) {
     return classes.filter(Boolean).join(" ");
@@ -278,7 +276,6 @@ const Mainlayout = ({
                 </div>
                 <div className="mt-5 flex-1 flex flex-col h-screen">
                   <nav className="flex-1 px-2 pb-4 space-y-1 ">
-                    
                     {navigation &&
                       Array.isArray(navigation) &&
                       navigation.map((item: any, i) => (

@@ -58,7 +58,7 @@ export function DataTableToolbar<TData>({
   const searchParams = useSearchParams();
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
-    
+
     if (query) {
       params.set("query", query);
       params.set("page", "1");
@@ -90,7 +90,6 @@ export function DataTableToolbar<TData>({
       try {
         const groupesData = await getGroupes();
         setGroupes(groupesData);
-        console.log(groupesData);
       } catch (error) {
         console.error("Error fetching groupes:", error);
       }
@@ -99,9 +98,7 @@ export function DataTableToolbar<TData>({
     const fetchAgences = async () => {
       try {
         const agencesData = await getAgences();
-
         setAgences(agencesData);
-        console.log(agencesData);
       } catch (error) {
         console.error("Error fetching agences:", error);
       }

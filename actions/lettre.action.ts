@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Console } from "console";
 import { cookies } from "next/headers";
 export interface Main {
     result: any[];
@@ -37,7 +38,8 @@ export const getLettre = async (
       `https://sprint2-two.vercel.app/lettre/getlettre?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
     
-    console.log("revalidate")
+    console.log("data")
+      console.log(res.data)
      return res.data as Main;
     } catch (error) {
       return {} as Main;
