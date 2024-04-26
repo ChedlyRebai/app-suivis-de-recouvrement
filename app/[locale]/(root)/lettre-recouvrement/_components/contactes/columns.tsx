@@ -113,14 +113,16 @@ export const columns: ColumnDef<ab_client>[] = [
         }}
       />
     ),
-    cell: ({ row }) => (
+    cell: ({ row }) =>{
+      
+      return(
       <Checkbox
         checked={row.getValue("etat_lettre") === "O"}
         onCheckedChange={(value) => {
           console.log(value);
         }}
       />
-    ),
+    )},
   },
   
 ];
