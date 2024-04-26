@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Suspense } from "react";
 
-import { getLettre } from "@/actions/lettre.action";
+
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { demandeTransferColumns } from "./_component/demandeTransferColumns";
 

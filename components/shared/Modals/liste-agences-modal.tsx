@@ -65,14 +65,14 @@ const ListeAgenceModal = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAgences();
-      console.log(data);
+    
       setData(data);
       setAgences(data)
-      console.log(listAgences)
+    
     };
     fetchData();
   }, []);
-  console.log(column)
+
   return (
     <Modal
       title="Liste des agences"

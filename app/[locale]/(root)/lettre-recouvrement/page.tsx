@@ -7,6 +7,7 @@ import {
   getClientContactes,
   getClientNonContactes,
   getGroupes,
+  getLettre,
 } from "@/actions/client.action";
 import {
   Card,
@@ -17,7 +18,6 @@ import {
 } from "@/components/ui/card";
 import { Suspense } from "react";
 import { DataTableLettreDeRecouvrement } from "./_components/contactes/data-table-lettre-recouvrement";
-import { getLettre } from "@/actions/lettre.action";
 
 export default async function Home({
   searchParams,
