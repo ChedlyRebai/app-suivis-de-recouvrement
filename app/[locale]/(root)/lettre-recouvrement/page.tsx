@@ -68,9 +68,11 @@ export default async function Home({
             <Card>
               <CardHeader>
                 <CardTitle>Lettre de recouvrement</CardTitle>
-                {/* <CardDescription>
-                      Manage your products and view their sales performance.
-                    </CardDescription> */}
+                {/*
+                <CardDescription>
+                Manage your products and view their sales performance.
+                </CardDescription>
+                */}
               </CardHeader>
               <CardContent>
                 <DataTableLettreDeRecouvrement

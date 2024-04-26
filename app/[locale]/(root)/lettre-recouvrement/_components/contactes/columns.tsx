@@ -6,43 +6,43 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
 export const columns: ColumnDef<ab_client>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => {
-      // Access the cli value
-      const cli = row.original.cli;
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => {
+  //     // Access the cli value
+  //     const cli = row.original.cli;
 
-      // Render the checkbox based on the cli value
-      if (cli) {
-        return (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => {
-              row.toggleSelected(!!value);
+  //     // Render the checkbox based on the cli value
+  //     if (cli) {
+  //       return (
+  //         <Checkbox
+  //           checked={row.getIsSelected()}
+  //           onCheckedChange={(value) => {
+  //             row.toggleSelected(!!value);
              
-              console.log(row.getIsSelected());
-            }}
-            aria-label="Select row"
-          />
-        );
-      }
+  //             console.log(row.getIsSelected());
+  //           }}
+  //           aria-label="Select row"
+  //         />
+  //       );
+  //     }
 
-      // Render nothing if cli is not truthy
-      return null;
-    },
-    enableSorting: false,
-    enableHiding: false,
-  },
+  //     // Render nothing if cli is not truthy
+  //     return null;
+  //   },
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "cli",
     header: ({ column }) => {
@@ -107,5 +107,14 @@ export const columns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "etat_lettre",
     header: "Etat Lettre",
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getValue("etat_lettre") === "O"}
+        onCheckedChange={(value) => {
+          console.log(value);
+        }}
+      />
+    ),
   },
+  
 ];
