@@ -159,9 +159,10 @@ const cli = searchParams.get('cli');
   const [rowSelection, setRowSelection] = React.useState({});
 
   console.log(data);
+ 
   
   const table = useReactTable({
-    data,
+    data: data || [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
