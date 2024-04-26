@@ -232,7 +232,7 @@ export const getValidationProposeDeTransferAnticipe = async (
     const res = await axios.get(
       `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
-    console.log(res.data);
+
     return res.data || ({} as ab_client);
   } catch (error) {
     return {} as ab_client;

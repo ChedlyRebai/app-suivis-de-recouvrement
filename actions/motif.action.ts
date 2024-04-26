@@ -23,6 +23,7 @@ export const getMotifCommercial = async () => {
     const response = await axios.get<ab_cxrepenv[]>(
       `http://localhost:10001/client/motifcommercial`
     );
+    
     return response.data || [] as ab_cxrepenv[];
   } catch (error) {
     console.log(error);
