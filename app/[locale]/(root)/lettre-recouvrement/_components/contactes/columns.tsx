@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const columns: ColumnDef<ab_client>[] = [
+export const columns: ColumnDef<any>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
@@ -119,7 +119,8 @@ export const columns: ColumnDef<ab_client>[] = [
       <Checkbox
         checked={row.getValue("etat_lettre") === "O"}
         onCheckedChange={(value) => {
-          console.log(value);
+          
+          console.log(row.original.etat_lettre);
         }}
       />
     )},

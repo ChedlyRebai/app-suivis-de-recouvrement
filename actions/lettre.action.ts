@@ -38,11 +38,22 @@ export const getLettre = async (
     );
 
     const res = await axios.get<any>(
-       `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data as any;
   } catch (error) {
     return {} as Main;
+  }
+};
+
+export const updateEtatLetttre = async (ncp: string, etat_lettre?: string) => {
+  try {
+    const res =axios.put(`http://localhost:10001/lettre/updatelettre?ncp=${ncp}`);
+    console.log(res)
+    return res;
+  } catch (error) {
+    console.log(error);
+    return {} as any;
   }
 };

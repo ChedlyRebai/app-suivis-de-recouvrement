@@ -68,7 +68,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
-  
+  console.log(data);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -419,7 +419,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="p-"
+                  className="p-0"
                   onDoubleClick={() => {
                     console.log((row.original as { cli: string }).cli);
 
@@ -438,7 +438,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="p- cursor-pointer"
+                      className=" px-2 py-1 cursor-pointer"
                       onClick={(e) => console.log(e)}
                     >
                       {flexRender(
@@ -481,7 +481,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       <div className="mt-2 flex items-center justify-between px-2">
         <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
           <div className="flex items-center space-x-2">
-
           </div>
         </div>
 
@@ -490,6 +489,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
           totalPages={totalPages}
           table={table}
         />
+
       </div>
     </>
   );
