@@ -480,7 +480,7 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
               {total.tot_creance || 0}
             </TableCell>
             <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
+            <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
           </TableRow>
         </Table>
       </div>

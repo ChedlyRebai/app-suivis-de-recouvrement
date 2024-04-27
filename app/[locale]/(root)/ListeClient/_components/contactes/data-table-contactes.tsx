@@ -490,7 +490,7 @@ export function DataTableContactes<TData, TValue>({
               TOT IRR: {total.tot_creance}
             </TableCell>
             <TableCell className="font-bold">
-              TOT ENG: {total.engagement}
+              TOT ENG: {total.tot_eng}
             </TableCell>
           </TableRow>
         </Table>
