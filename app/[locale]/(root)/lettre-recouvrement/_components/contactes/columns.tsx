@@ -1,5 +1,6 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { updateEtatLetttre } from "@/actions/lettre.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
@@ -113,13 +114,14 @@ export const columns: ColumnDef<any>[] = [
         }}
       />
     ),
+    
     cell: ({ row }) =>{
       
       return(
       <Checkbox
         checked={row.getValue("etat_lettre") === "O"}
-        onCheckedChange={(value) => {
-          
+        onCheckedChange={async (value) => {
+         await updateEtatLetttre(row.original.ncp, value ? "O" : "N");
           console.log(row.original.etat_lettre);
         }}
       />

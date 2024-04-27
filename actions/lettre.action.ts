@@ -47,11 +47,11 @@ export const getLettre = async (
   }
 };
 
-export const updateEtatLetttre = async (ncp: string, etat_lettre?: string) => {
+export const updateEtatLetttre = async (ncp: string, etat_lettre?: string):Promise<any> => {
   try {
-    const res =axios.put(`http://localhost:10001/lettre/updatelettre?ncp=${ncp}`);
+    const res =await axios.put(`http://localhost:10001/lettre/updatelettre?ncp=${ncp}`);
     console.log(res)
-    return res;
+    return res.data as any;
   } catch (error) {
     console.log(error);
     return {} as any;

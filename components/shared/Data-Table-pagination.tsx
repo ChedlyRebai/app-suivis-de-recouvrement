@@ -65,7 +65,7 @@ export function DataTablePagination<TData>({
             </SelectTrigger>
             <SelectContent side="top">
               {[5, 8, 10, 20, 30, 40, 50, 80]
-                .filter((pageSize) => pageSize <= TotalAccount!!)
+                
                 .map((pageSize) => (
                   <SelectItem key={pageSize} value={`${pageSize}`}>
                     {pageSize}
