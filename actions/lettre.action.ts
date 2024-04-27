@@ -38,7 +38,7 @@ export const getLettre = async (
     );
 
     const res = await axios.get<any>(
-      `http://localhost:10001/lettre/getlettre?page&perPage&search&groupe&agence&from&to`
+       `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data as any;

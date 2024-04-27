@@ -481,8 +481,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       <div className="mt-2 flex items-center justify-between px-2">
         <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
           <div className="flex items-center space-x-2">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
+
           </div>
         </div>
 
