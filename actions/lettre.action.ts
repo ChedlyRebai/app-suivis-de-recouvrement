@@ -14,3 +14,35 @@ export interface Total {
   tot_creance: string;
   engagement: string;
 }
+
+export const getLettre = async (
+  IdClient?: string,
+  currentpage?: number,
+  perpage?: number,
+  groupe?: string,
+  agence?: string,
+  dayfrom?: string,
+  dayto?: string
+) => {
+  try {
+    //console.log(`${process.env.API_URL}/fonction`);
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `http://localhost:10001`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+
+    console.log(
+      `https://sprint2-two.vercel.app/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    );
+
+    const res = await axios.get<any>(
+      `http://localhost:10001/lettre/getlettre?page&perPage&search&groupe&agence&from&to`
+    );
+
+    return res.data as any;
+  } catch (error) {
+    return {} as Main;
+  }
+};
