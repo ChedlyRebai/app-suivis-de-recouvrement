@@ -30,7 +30,7 @@ export const columns: ColumnDef<any>[] = [
   //           checked={row.getIsSelected()}
   //           onCheckedChange={(value) => {
   //             row.toggleSelected(!!value);
-             
+
   //             console.log(row.getIsSelected());
   //           }}
   //           aria-label="Select row"
@@ -107,25 +107,23 @@ export const columns: ColumnDef<any>[] = [
 
   {
     accessorKey: "etat_lettre",
-    header:({ column }) => (
+    header: ({ column }) => (
       <Checkbox
         onCheckedChange={(value) => {
           console.log(value);
         }}
       />
     ),
-    
-    cell: ({ row }) =>{
-      
-      return(
-      <Checkbox
-      defaultChecked={row.original.etat_lettre === "O"}   
-        onCheckedChange={async (value) => {
-         await updateEtatLetttre(row.original.ncp, value ? "O" : "N");
-          console.log(row.original.etat_lettre);
-        }}
-      />
-    )},
+    cell: ({ row }) => {
+      return (
+        <Checkbox
+          defaultChecked={row.original.etat_lettre === "O"}
+          onCheckedChange={async (value) => {
+            await updateEtatLetttre(row.original.ncp, value ? "O" : "N");
+            console.log(row.original.etat_lettre);
+          }}
+        />
+      );
+    },
   },
-  
 ];
