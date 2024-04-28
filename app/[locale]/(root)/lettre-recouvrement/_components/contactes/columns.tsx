@@ -119,8 +119,7 @@ export const columns: ColumnDef<any>[] = [
       
       return(
       <Checkbox
-      defaultChecked={row.original.etat_lettre === "O"}
-       
+      defaultChecked={row.original.etat_lettre === "O"}   
         onCheckedChange={async (value) => {
          await updateEtatLetttre(row.original.ncp, value ? "O" : "N");
           console.log(row.original.etat_lettre);
