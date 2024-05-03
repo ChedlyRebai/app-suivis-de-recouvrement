@@ -20,14 +20,14 @@ import useListAgences from "@/hooks/use-agences-list";
 const PromiseDereglement = () => {
   const [date, setdate] = useState(new Date());
   const { onOpen, setColumn } = useListeAgencestModal();
-  const getAgence=useListAgences((state)=>state.getAgence)
-  const AGENCES=useListAgences((state)=>state.listAgences)
-  
+  const getAgence = useListAgences((state) => state.getAgence);
+  const AGENCES = useListAgences((state) => state.listAgences);
+
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   return (
     <div className="">
-      <div className="flex p-4">
-        <div className="flex flex-col mr-4">
+      <div className="flex p-4 flex-col">
+        <div className="flex w-[280px] flex-col my-1 mr-4">
           <Label className="mb-1 text-sm font-medium   " htmlFor="amount">
             Montant
           </Label>
@@ -37,13 +37,12 @@ const PromiseDereglement = () => {
             onChange={(e) =>
               handleIputChangeSuiviAgenda("mnt_reg", e.target.value)
             }
-            
             defaultValue={client.tot_creance}
             id="amount"
             placeholder={`${client.tot_creance}`}
           />
         </div>
-        <div className="flex flex-col mr-4">
+        <div className="flex w-[280px] flex-col my-1 mr-4">
           <Label className="mb-1 text-sm font-medium   " htmlFor="amount">
             Date
           </Label>
@@ -53,7 +52,7 @@ const PromiseDereglement = () => {
             setDate={handleIputChangeSuiviAgenda}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex w-[280px] flex-col my-1 mr-">
           <Label className="mb-1 text-sm font-medium " htmlFor="location">
             Lieu
           </Label>
@@ -69,7 +68,6 @@ const PromiseDereglement = () => {
               <ListIcon />
             </Button>
 
-
             <div className="flex ">
               <Input
                 readOnly
@@ -79,11 +77,13 @@ const PromiseDereglement = () => {
                 type="number"
                 defaultValue={0}
               />
-              <Input readOnly id="Client" className="w-2/3"  
-              value={
-                getAgence(suiviAgenda.lieu_ver)
-              }
-              type="text" />
+              <Input
+                readOnly
+                id="Client"
+                className=""
+                value={getAgence(suiviAgenda.lieu_ver)}
+                type="text"
+              />
             </div>
           </div>
         </div>

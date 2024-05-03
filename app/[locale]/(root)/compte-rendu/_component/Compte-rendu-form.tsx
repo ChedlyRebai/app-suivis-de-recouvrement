@@ -453,8 +453,9 @@ const CompteRenduForm = ({
             <AccordionContent>
               <Card className="my-2 backdrop-blur-xl">
                 <CardContent className="space-y-2 ">
-                  <div className="grid grid-cols-3 gap-4 my-2">
-                    <div className="flex flex-col mr-4">
+                  <div className="flex flex-col grid-cols-3 gap-4 my-2">
+                  <div className="flex w-[280px] flex-col mr-4">
+                    
                       <Label
                         className="mb-1 text-sm font-medium"
                         htmlFor="amount"
@@ -494,7 +495,8 @@ const CompteRenduForm = ({
                         </SelectContent>
                       </Select>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex w-[280px] flex-col mr-4">
+                    
                       <Label
                         className="mb-1 text-sm font-medium "
                         htmlFor="location"
@@ -526,14 +528,15 @@ const CompteRenduForm = ({
                         </SelectContent>
                       </Select>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex w-[280px] flex-col mr-4">
+                    
                       <Label
                         className="mb-1 text-sm font-medium "
                         htmlFor="location"
                       >
                         Info Motif
                       </Label>
-                      <Input
+                      <Textarea
                         className="border p-2"
                         onChange={(e) =>
                           handleIputChangeSuiviAgenda(
