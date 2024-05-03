@@ -75,7 +75,7 @@ export const getClientNonContactes = async (
     );
 
     console.log("revalidate");
-    return res.data;
+    return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
   }
