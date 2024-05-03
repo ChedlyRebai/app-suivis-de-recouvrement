@@ -2,6 +2,8 @@
 import { AbCompte } from "@/Models/AbCompte.model";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
+import { Agence } from "@/Models/agence.model";
+import { Zone } from "@/Models/zone.model";
 import { getSession } from "@/lib";
 import axios from "axios";
 
@@ -41,10 +43,10 @@ export const getClientContactes = async (
       `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     const res = await axios.get<Main>(
-      `http://localhost:10001/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/listclientcontactes?page=0&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
-    //console.log(res.data);
+    console.log(res.data);
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -74,7 +76,6 @@ export const getClientNonContactes = async (
       `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
 
-    console.log("revalidate");
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -85,7 +86,7 @@ export const getGroupes = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
 
-    const res = await axios.get<[]>(
+    const res = await axios.get<Zone[]>(
       `http://localhost:10001/client/getgroupes`
     );
 
@@ -98,7 +99,7 @@ export const getGroupes = async () => {
 export const getAgences = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<[]>(
+    const res = await axios.get<Agence[]>(
       `http://localhost:10001/client/getagences`
     );
     return res.data || [];
