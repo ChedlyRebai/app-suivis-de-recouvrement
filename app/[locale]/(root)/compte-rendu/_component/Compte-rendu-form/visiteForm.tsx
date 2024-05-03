@@ -13,12 +13,15 @@ import {
   SelectLabel,
 } from "@/components/ui/select";
 import { heureVisite } from "@/constants";
+import useListAgences from "@/hooks/use-agences-list";
 import useClientSore from "@/hooks/useCompteRenduForm";
 import useListeAgencestModal from "@/hooks/useListeAgences";
 import { ListIcon } from "lucide-react";
 import React from "react";
 
 const VisiteForm = () => {
+  const getAgence = useListAgences((state) => state.getAgence);
+
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   const { onOpen, setColumn, column } = useListeAgencestModal();
   return (
@@ -54,17 +57,10 @@ const VisiteForm = () => {
           </SelectContent>
         </Select>
       </div>
-      <div className="grid w-[280px] items-center gap-1.5">
+      {/* <div className="grid w-[280px] items-center gap-1.5">
         <Label htmlFor="lieuvisite">Lieu visite</Label>
         <div className="flex ">
-          {/* <Button className="w- px-2"  onClick={() =>{
-                onOpen();
-                console.log("bonjour")
-                setColumn("lieu_visite")
-                console.log("cc:",column)
-               }}>
-              <ListIcon />
-            </Button>lieu_visite */}
+          
           <Input
             className="border p-2 ml-2"
             onChange={(e) => {
@@ -74,6 +70,36 @@ const VisiteForm = () => {
             id="location"
             placeholder="Lieu"
           />
+        </div>
+      </div> */}
+
+      <div className="grid w-[280px] items-center gap-1.5">
+        <Label htmlFor="Lieu">Lieu</Label>
+        <div className="flex">
+          <Button
+            className="w- px-2"
+            onClick={() => {
+              onOpen();
+              setColumn("lieu_visite");
+            }}
+          >
+            <ListIcon />
+          </Button>
+          <div className="flex w-full">
+              <Input
+                readOnly
+                id="Client"
+                className="w-1/4 px-2 mr-1"
+                value={suiviAgenda.lieu_visite}
+                type="number"
+                defaultValue={0}
+              />
+              <Input readOnly id="Client" className=""  
+              value={
+                getAgence(suiviAgenda.lieu_visite)
+              }
+               />
+            </div>
         </div>
       </div>
     </div>
