@@ -17,6 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
+import { Total } from "@/actions/lettre.action";
 
 export default async function Home({
   searchParams,
@@ -93,13 +94,13 @@ export default async function Home({
                   </CardHeader>
                   <CardContent>
                     <DataTableContactes
-                      agences={agences}
-                      groupes={groupes}
-                      total={dataNon.total}
-                      totalAccout={dataNon.totalCount}
-                      totalPages={dataNon.totalPages}
-                      columns={columns}
-                      data={dataNon.result}
+                      agences={agences || [] }
+                      groupes={groupes || []}
+                      total={dataNon.total ||{} as Total}
+                      totalAccout={dataNon.totalCount || 0}
+                      totalPages={dataNon.totalPages  || 0}
+                      columns={columns || []}
+                      data={dataNon.result || []}
                       type="contactes"
                     />
                   </CardContent>
@@ -115,13 +116,13 @@ export default async function Home({
                   </CardHeader>
                   <CardContent>
                     <DataTableContactes
-                      agences={agences}
-                      groupes={groupes}
-                      total={data.total}
-                      totalAccout={data.totalCount}
-                      totalPages={data.totalPages}
-                      columns={columns}
-                      data={data.result}
+                      agences={agences || []}
+                      groupes={groupes || []}
+                      total={data.total || {} as Total}
+                      totalAccout={data.totalCount || 0}
+                      totalPages={data.totalPages || 0}
+                      columns={columns || []}
+                      data={data.result || []}
                       type="noncontactes"
                     />
                   </CardContent>

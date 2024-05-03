@@ -33,7 +33,7 @@ export const getClientContactes = async (
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.baseURL = `http://localhost:10001`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
@@ -41,13 +41,13 @@ export const getClientContactes = async (
       `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     const res = await axios.get<Main>(
-      `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     //console.log(res.data);
-    return res.data || ({} as ab_client);
+    return res.data || ({} as Main);
   } catch (error) {
-    return {} as ab_client;
+    return {} as Main;
   }
 };
 
@@ -71,7 +71,7 @@ export const getClientNonContactes = async (
       `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     const res = await axios.get<Main>(
-      `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
 
     console.log("revalidate");
@@ -86,7 +86,7 @@ export const getGroupes = async () => {
     axios.defaults.baseURL = `${process.env.API_URL}`;
 
     const res = await axios.get<[]>(
-      `https://sprint2-two.vercel.app/client/getgroupes`
+      `http://localhost:10001/client/getgroupes`
     );
 
     return res.data || [];
@@ -99,7 +99,7 @@ export const getAgences = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<[]>(
-      `https://sprint2-two.vercel.app/client/getagences`
+      `http://localhost:10001/client/getagences`
     );
     return res.data || [];
   } catch (error) {
@@ -111,10 +111,10 @@ export const getCompterendu = async (IdClient?: string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `https://sprint2-two.vercel.app/client/getcompterendu/${IdClient}`
+      `http://localhost:10001/client/getcompterendu/${IdClient}`
     );
     const res = await axios.get<any>(
-      `https://sprint2-two.vercel.app/client/compteRendu?cli=${IdClient}`
+      `http://localhost:10001/client/compteRendu?cli=${IdClient}`
     );
     
     return res.data || ({} as any);
@@ -127,10 +127,10 @@ export const getListCompte = async (IdClient?: string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `https://sprint2-two.vercel.app/client/listcompte?cli=049105812036`
+      `http://localhost:10001/client/listcompte?cli=049105812036`
     );
     const res = await axios.get<AbCompte[]>(
-      `https://sprint2-two.vercel.app/client/listcompte?cli=${IdClient}`
+      `http://localhost:10001/client/listcompte?cli=${IdClient}`
     );
     return res.data;
   } catch (error) {
@@ -142,10 +142,10 @@ export const getListCompteRenduHistorique = async (IdClient?: string):Promise<Su
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `https://sprint2-two.vercel.app/client/listhistorique?cli=${IdClient}`
+      `http://localhost:10001/client/listhistorique?cli=${IdClient}`
     );
     const res = await axios.get<SuiviAgenda[]>(
-      `https://sprint2-two.vercel.app/client/listhistorique?cli=${IdClient}`
+      `http://localhost:10001/client/listhistorique?cli=${IdClient}`
     );
     return res.data || [] as SuiviAgenda[];
   } catch (error) {
@@ -163,7 +163,7 @@ export const createCompteRendu = async (
     const user = await getSession();
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.post(
-      `https://sprint2-two.vercel.app/compterendu/createcompterendu`,
+      `http://localhost:10001/compterendu/createcompterendu`,
       { suiviAgenda, compteRendu, user, cli }
     );
     
@@ -177,7 +177,7 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<SuiviAgenda>(
-      `https://sprint2-two.vercel.app/compterendu/getbyid/${IdClient}`
+      `http://localhost:10001/compterendu/getbyid/${IdClient}`
     );
 
     return res.data;
