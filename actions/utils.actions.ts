@@ -23,11 +23,11 @@ export const getMotif = async () => {
   }
 };
 
-export const getlisteChoix = async () => {
+export const getcontact = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<Main[]>(
-      `http://localhost:10001/client/listechoix`
+      `http://localhost:10001/client/contact`
     );
     return response.data || ([] as Main[]);
   } catch (error) {

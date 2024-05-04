@@ -9,9 +9,9 @@ const NouvelleCoordonneeForm = () => {
   return (
     <div className=" mx-auto my-2 p-2  rounded-lg shadow-md">
       <div className="flex flex-col grid-cols-2 gap-4 mb-4">
-        <div className="flex w-[280px] flex-col my-1 mr-4">
+        <div className="flex w-[280px] flex-col  mr-4">
           <Label className="mb-1 text-sm font-medium" htmlFor="amount">
-            Tel
+            Telephone 1
           </Label>
 
           <Input
@@ -25,9 +25,9 @@ const NouvelleCoordonneeForm = () => {
           />
         </div>
 
-        <div className="flex w-[280px] flex-col my-1 mr-4">
+        <div className="flex w-[280px] flex-col  mr-4">
           <Label className="mb-1 text-sm font-medium " htmlFor="location">
-            Tel2
+            Telephone 2
           </Label>
           <Input
             onChange={(e) =>
@@ -40,7 +40,7 @@ const NouvelleCoordonneeForm = () => {
           />
         </div>
       </div>
-      <div className="flex w-[280px] flex-col my-1 mr-4">
+      <div className="flex w-[280px] flex-col mr-4">
         <Label className="mb-1 text-sm font-medium " htmlFor="location">
           Addresse
         </Label>

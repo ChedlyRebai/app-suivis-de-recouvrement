@@ -49,7 +49,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import CompteRenduHistorique from "./CompteRenduHistorique";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
+import { getMotif } from "@/actions/motif.action";
+import { getappreciation, getcontact } from "@/actions/utils.actions";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
@@ -110,6 +112,22 @@ const CompteRenduForm = ({
     setTab(num);
   };
 
+
+  const { isPending:MotifPending, data:Motifdata } = useQuery({
+    queryKey: ['getMotif'],
+    queryFn:async ()=>await getMotif(),
+  })
+
+  const { isPending:contactpending, data:contactdata } = useQuery({
+    queryKey: ['getcontact'],
+    queryFn:async ()=>await getcontact(),
+  })
+  console.log(contactdata)
+  const { isPending:appreciationpending, data:appreciationdata } = useQuery({
+    queryKey: ['appreciation'],
+    queryFn:async ()=>await getappreciation(),
+  })
+
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
   console.log("rendering compte rendu form");
@@ -120,6 +138,7 @@ const CompteRenduForm = ({
     setTab(value);
     console.log(tab);
   };
+
 
   const handleSubmit = async () => {
     console.log(suiviAgenda);
@@ -483,10 +502,10 @@ const CompteRenduForm = ({
                             }}
                           >
                             <SelectLabel>Motifs</SelectLabel>
-                            {MOTIF_IM.map((item) => (
+                            {Motifdata?.map((item:any) => (
                               <SelectItem
-                                key={item.Code}
-                                value={`${item.Code}`}
+                                key={item.code}
+                                value={`${item.code}`}
                               >
                                 {item.libelle}
                               </SelectItem>
@@ -516,10 +535,10 @@ const CompteRenduForm = ({
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Contacts</SelectLabel>
-                            {LISTE_CHOIX.map((item) => (
+                            {contactdata?.map((item:any) => (
                               <SelectItem
-                                key={item.Code}
-                                value={`${item.Code}`}
+                                key={item.code}
+                                value={`${item.code}`}
                               >
                                 {item.libelle}
                               </SelectItem>
@@ -572,7 +591,7 @@ const CompteRenduForm = ({
                             {" "}
                             <Input
                               type="radio"
-                              value={`${item.Code}`}
+                              value={`${item.code}`}
                               name="sort"
                               className="h-4 mr-"
                             />
@@ -718,10 +737,10 @@ const CompteRenduForm = ({
                         <SelectContent>
                           <SelectGroup>
                             {/* <SelectLabel></SelectLabel> */}
-                            {APP_GEN.map((item) => (
+                            {appreciationdata?.map((item:any) => (
                               <SelectItem
-                                key={item.Code}
-                                value={`${item.Code}`}
+                                key={item.code}
+                                value={`${item.code}`}
                               >
                                 {item.libelle}
                               </SelectItem>
