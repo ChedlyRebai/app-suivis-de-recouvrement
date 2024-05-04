@@ -25,7 +25,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { format, set } from "date-fns";
 
-import { APP_GEN, LISTE_CHOIX, MOTIF_IM, Sort } from "@/constants";
+import { APP_GEN, LISTE_CHOIX, MOTIF_IM } from "@/constants";
 
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -51,7 +51,7 @@ import {
 import CompteRenduHistorique from "./CompteRenduHistorique";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { getMotif } from "@/actions/motif.action";
-import { getappreciation, getcontact } from "@/actions/utils.actions";
+import { getappreciation, getcomptrendutypes, getcontact } from "@/actions/utils.actions";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
@@ -121,6 +121,10 @@ const CompteRenduForm = ({
   const { isPending:contactpending, data:contactdata } = useQuery({
     queryKey: ['getcontact'],
     queryFn:async ()=>await getcontact(),
+  })
+  const { isPending:comptrendutypespending, data:comptrendutypesdata } = useQuery({
+    queryKey: ['getconptrendutypes'],
+    queryFn:async ()=>await getcomptrendutypes(),
   })
   console.log(contactdata)
   const { isPending:appreciationpending, data:appreciationdata } = useQuery({
@@ -611,7 +615,7 @@ const CompteRenduForm = ({
                   onValueChange={onTabChange}
                 >
                   <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                    <TabsTrigger
+                    {/* <TabsTrigger
                       onClick={() => handleTabChange("1")}
                       className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
                       // disabled
@@ -658,7 +662,20 @@ const CompteRenduForm = ({
                       value="6"
                     >
                       Client injoignable
-                    </TabsTrigger>
+                    </TabsTrigger> */}
+
+                    {
+                      comptrendutypesdata?.map((item:any) => (
+                        <TabsTrigger
+                          className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+                          onClick={() => handleTabChange(`${item.code}`)}
+                          // disabled
+                          value={`${item.code}`}
+                        >
+                          {item.libelle}
+                        </TabsTrigger>
+                      ))
+                    }
                   </TabsList>
 
                   <TabsContent value="1">
