@@ -8,7 +8,7 @@ export const getMotif = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<ab_cxrepenv[]>(
-      `http://localhost:10001/client/motifs`
+      `https://release2.vercel.app/client/motifs`
     );
     return response.data || [] as ab_cxrepenv[];
   } catch (error) {

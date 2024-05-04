@@ -230,14 +230,14 @@ const CompteRenduForm = ({
       console.log("Client injoignable");
       compte_rendu = `Client injoignable: ${suiviAgenda.compte_rendu || ""}`;
     }
-
-    saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!)
-      .then((res) => {
-        toast.success("Compte rendu enregistré avec succès");
-      })
-      .catch(() => {
-        toast.error("Erreur lors de l'enregistrement du compte rendu");
-      });
+    console.log(compte_rendu,suiviAgenda,cli,selectedRadio);
+    // saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!)
+    //   .then((res) => {
+    //     toast.success("Compte rendu enregistré avec succès");
+    //   })
+    //   .catch(() => {
+    //     toast.error("Erreur lors de l'enregistrement du compte rendu");
+    //   });
   };
 
   // const getDefaultTab = () => {
