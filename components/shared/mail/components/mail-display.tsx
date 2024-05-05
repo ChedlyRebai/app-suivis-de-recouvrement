@@ -53,7 +53,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
   const today = new Date()
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-fit flex-col">
       <div className="flex items-center p-2">
         <div className="flex items-center gap-2">
           <Tooltip>
@@ -226,33 +226,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
             {mail.text}
           </div>
-          <Separator className="mt-auto" />
-          <div className="p-4">
-            <form>
-              <div className="grid gap-4">
-                <Textarea
-                  className="p-4"
-                  placeholder={`Reply ${mail.name}...`}
-                />
-                <div className="flex items-center">
-                  <Label
-                    htmlFor="mute"
-                    className="flex items-center gap-2 text-xs font-normal"
-                  >
-                    <Switch id="mute" aria-label="Mute thread" /> Mute this
-                    thread
-                  </Label>
-                  <Button
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                    className="ml-auto"
-                  >
-                    Send
-                  </Button>
-                </div>
-              </div>
-            </form>
-          </div>
+          
         </div>
       ) : (
         <div className="p-8 text-center text-muted-foreground">
