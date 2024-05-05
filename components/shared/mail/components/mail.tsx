@@ -64,6 +64,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useDebouncedCallback } from "use-debounce"
 import { CompteRenduList } from "@/constants/types"
 import { formatDistanceToNowStrict } from "date-fns"
+import useInbox from "@/hooks/use-inbox-hook"
 
 
 export function Mail({
@@ -192,7 +193,7 @@ export function MailList({ items,initialData, search, limit }: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
   const [mail, setMail] = useMail()
-
+  const {Comptrendu,setComptrendu,setId}=useInbox()
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
@@ -209,6 +210,12 @@ export function MailList({ items,initialData, search, limit }: IProps) {
             //     selected: item.id,
             //   })
             // }
+
+            onClick={() =>{
+              console.log("item",item)
+              setComptrendu(item)
+              setId(item.id)}
+            }
             className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"
           >
             <div className="flex w-full flex-col gap-1">

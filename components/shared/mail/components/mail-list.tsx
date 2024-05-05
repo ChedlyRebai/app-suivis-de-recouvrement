@@ -11,6 +11,7 @@ import { useEffect, useState } from "react"
 
 import { Loader2 } from "lucide-react"
 import { useInView } from "react-intersection-observer"
+import useInbox from "@/hooks/use-inbox-hook"
 
 
 
@@ -52,7 +53,7 @@ export function MailList({ items,initialData, search, limit }: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
   const [mail, setMail] = useMail()
-
+  const{Comptrendu,setComptrendu,setId}=useInbox()
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
@@ -63,17 +64,15 @@ export function MailList({ items,initialData, search, limit }: IProps) {
               "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
               mail.selected === item.id && "bg-muted"
             )}
-            onClick={() =>
-              setMail({
-                ...mail,
-                selected: item.id,
-              })
+            onClick={() =>{
+              console.log("item",item)
+              }
             }
           >
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
-                  <div className="font-semibold">{item.name}</div>
+                  <div className="font-semibold" >{item.name}</div>
                   {!item.read && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
                   )}

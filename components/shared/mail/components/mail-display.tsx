@@ -44,6 +44,9 @@ import {
 } from "@/components/ui/tooltip"
 import { Mail } from "../data"
 import { formatDate } from "date-fns"
+import useInbox from "@/hooks/use-inbox-hook"
+import { useQuery } from "@tanstack/react-query"
+import { getCompteRenduById } from "@/actions/client.action"
 
 interface MailDisplayProps {
   mail: Mail | null
@@ -51,7 +54,14 @@ interface MailDisplayProps {
 
 export function MailDisplay({ mail }: MailDisplayProps) {
   const today = new Date()
+  const {Comptrendu,id}=useInbox()
+  console.log("Comptrendu",Comptrendu)
 
+  const { isPending, error, data={} as any } = useQuery({
+    queryKey: ["getCompteRendu", id],
+    queryFn: async () => await getCompteRenduById(id),
+  });
+  console.log("data",data)
   return (
     <div className="flex h-fit flex-col">
       <div className="flex items-center p-2">
