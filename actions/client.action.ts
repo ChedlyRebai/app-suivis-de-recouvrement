@@ -47,7 +47,7 @@ export const getClientContactes = async (
       `https://release2.vercel.app/client/listclientcontactes?page=0&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
-    console.log(res.data);
+  
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -195,13 +195,15 @@ export const createCompteRendu = async (
 export const getCompteRenduById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<SuiviAgenda>(
-      `https://release2.vercel.app/compterendu/getbyid/${IdClient}`
+    const res = await axios.get<CompteRenduList>(
+      `http://localhost:10001/compterendu/getbyid/${IdClient}`
     );
-
-    return res.data;
+    console.log("66666666666666666666666666666666666666666666666666666666666666");
+    console.log(res.data);
+    console.log("66666666666666666666666666666666666666666666666666666666666666");
+    return res.data || {} as CompteRenduList;
   } catch (error) {
-    return {} as SuiviAgenda;
+    return {} as CompteRenduList;
   }
 };
 

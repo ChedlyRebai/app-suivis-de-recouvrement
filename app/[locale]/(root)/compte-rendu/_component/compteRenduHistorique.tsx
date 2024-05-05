@@ -47,6 +47,7 @@ const CompteRenduHistorique = ({
   listHistorique: data,
 }: CompteRenduHistoriqueProps) => {
   const { isOpen, onClose, onOpen } = useCompteRenduModal();
+  
 const searchParams = useSearchParams();
 const cli = searchParams.get('cli');
   // const { isPending, error, data} = useQuery<CompteRenduList[]>({
@@ -76,13 +77,15 @@ const cli = searchParams.get('cli');
     },
     {
       accessorKey: "id",
-      header: ({ column }) => {
-        return (
-          <div className="hidden"/>
-        );
-      },
+      // header: ({ column }) => {
+      //   return (
+      //     <div className="hidden"/>
+      //   );
+      // },
       cell: ({ row }) => (
-        <div className="hidden"/>
+        <div className="hidden">
+          {row.getValue("id")}
+          </div>
       ),
     },
     
