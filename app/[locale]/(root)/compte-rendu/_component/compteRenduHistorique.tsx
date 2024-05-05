@@ -63,7 +63,7 @@ const cli = searchParams.get('cli');
         return (
           <Button
             variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            onClick={() => column.toggleSorting(column.getSortIndex() === 0)}
           >
             Num
             <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -71,7 +71,7 @@ const cli = searchParams.get('cli');
         );
       },
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("num")}</div>
+        <div className="capitalize">{row.index + 1}</div>
       ),
     },
     {
@@ -87,7 +87,7 @@ const cli = searchParams.get('cli');
     },
     
     {
-      accessorKey: "date_ag",
+      accessorKey: "created_at",
       header: ({ column }) => {
         return (
           <Button
@@ -101,7 +101,7 @@ const cli = searchParams.get('cli');
       },
       cell: ({ row }) => (
         <div className="lowercase">
-          {new Date(row.getValue("date_ag")).toLocaleDateString()}
+          {new Date(row.getValue("created_at")).toLocaleDateString()}
         </div>
       ),
     },
@@ -143,8 +143,8 @@ const cli = searchParams.get('cli');
             variant="default"
             onClick={()=>onOpen(row.getValue("id"))}
           >
-            <SearchIcon  className="mr-1" />
-            Detaille
+            <SearchIcon  className="mr-" />
+           
           </Button>
         );
       },

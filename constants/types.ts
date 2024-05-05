@@ -5,6 +5,7 @@ export interface CompteRenduList {
     compterendutype_suivi_agenda_comptretypeidTocompterendutype: CompterendutypeSuiviAgendaComptretypeidTocompterendutype | null;
     compterendutype_compterendutype_compterenduidTosuivi_agenda: CompterendutypeCompterendutypeCompterenduidTosuiviAgendum[];
     usr_nom :                                                   string;
+    created_at:                                                  Date;
 
 }
 
