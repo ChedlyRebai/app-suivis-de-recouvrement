@@ -115,7 +115,12 @@ export function Mail({
               <form>
                 <div className="relative">
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search" className="pl-8" />
+                  <Input placeholder="Search"
+                  onChange={(e) => {
+                    handleSearch(e.target.value)
+                  }}
+                  defaultValue={searchParams.get("query")?.toString()}
+                  className="pl-8" />
                 </div>
               </form>
             </div>
