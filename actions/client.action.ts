@@ -4,6 +4,7 @@ import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { ab_client } from "@/Models/ab_client.model";
 import { Agence } from "@/Models/agence.model";
 import { Zone } from "@/Models/zone.model";
+import { CompteRenduList } from "@/constants/types";
 import { getSession } from "@/lib";
 import axios from "axios";
 
@@ -35,7 +36,7 @@ export const getClientContactes = async (
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `http://localhost:10001`;
+    axios.defaults.baseURL = `https://release2.vercel.app`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
@@ -43,7 +44,7 @@ export const getClientContactes = async (
       `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     const res = await axios.get<Main>(
-      `http://localhost:10001/client/listclientcontactes?page=0&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release2.vercel.app/client/listclientcontactes?page=0&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     console.log(res.data);
@@ -73,7 +74,7 @@ export const getClientNonContactes = async (
       `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     const res = await axios.get<Main>(
-      `http://localhost:10001/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
+      `https://release2.vercel.app/client/listclientnoncontactes?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&search=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data || ({} as Main);
@@ -87,7 +88,7 @@ export const getGroupes = async () => {
     axios.defaults.baseURL = `${process.env.API_URL}`;
 
     const res = await axios.get<Zone[]>(
-      `http://localhost:10001/client/getgroupes`
+      `https://release2.vercel.app/client/getgroupes`
     );
 
     return res.data || [];
@@ -100,7 +101,7 @@ export const getAgences = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<Agence[]>(
-      `http://localhost:10001/client/getagences`
+      `https://release2.vercel.app/client/getagences`
     );
     return res.data || [];
   } catch (error) {
@@ -112,10 +113,10 @@ export const getCompterendu = async (IdClient?: string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `http://localhost:10001/client/getcompterendu/${IdClient}`
+      `https://release2.vercel.app/client/getcompterendu/${IdClient}`
     );
     const res = await axios.get<any>(
-      `http://localhost:10001/client/compteRendu?cli=${IdClient}`
+      `https://release2.vercel.app/client/compteRendu?cli=${IdClient}`
     );
     
     return res.data || ({} as any);
@@ -128,10 +129,10 @@ export const getListCompte = async (IdClient?: string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `http://localhost:10001/client/listcompte?cli=049105812036`
+      `https://release2.vercel.app/client/listcompte?cli=049105812036`
     );
     const res = await axios.get<AbCompte[]>(
-      `http://localhost:10001/client/listcompte?cli=${IdClient}`
+      `https://release2.vercel.app/client/listcompte?cli=${IdClient}`
     );
     return res.data;
   } catch (error) {
@@ -139,14 +140,14 @@ export const getListCompte = async (IdClient?: string) => {
   }
 };
 
-export const getListCompteRenduHistorique = async (IdClient?: string):Promise<SuiviAgenda[]> => {
+export const getListCompteRenduHistoriqu= async (IdClient?: string):Promise<SuiviAgenda[]> => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `http://localhost:10001/client/listhistorique?cli=${IdClient}`
+      `https://release2.vercel.app/client/listhistorique?cli=${IdClient}`
     );
     const res = await axios.get<SuiviAgenda[]>(
-      `http://localhost:10001/client/listhistorique?cli=${IdClient}`
+      `https://release2.vercel.app/client/listhistorique?cli=${IdClient}`
     );
     return res.data || [] as SuiviAgenda[];
   } catch (error) {
@@ -154,10 +155,27 @@ export const getListCompteRenduHistorique = async (IdClient?: string):Promise<Su
   }
 };
 
+export const getListCompteRenduHistorique = async (IdClient?: string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(
+      `https://release2.vercel.app/client/getcompterendu/${IdClient}`
+    );
+    const res = await axios.get<CompteRenduList[]>(
+      `http://localhost:10001/compterendu/getcompterendu?cli=${IdClient}`
+    );
+    console.log(res.data)
+    return res.data || ([] as CompteRenduList[]);
+  } catch (error) {
+    return [] as CompteRenduList[];
+  }
+};
+
 export const createCompteRendu = async (
   suiviAgenda: SuiviAgenda,
   compteRendu: any,
-  cli: string
+  cli: string,
+  type: string
 ) => {
   try {
     console.log("suiviAgenda", suiviAgenda, "compterendu", compteRendu);
@@ -165,7 +183,7 @@ export const createCompteRendu = async (
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.post(
       `http://localhost:10001/compterendu/createcompterendu`,
-      { suiviAgenda, compteRendu, user, cli }
+      { suiviAgenda, compteRendu, user, cli, type:Number(type) }
     );
     
     return res.data;
@@ -178,7 +196,7 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<SuiviAgenda>(
-      `http://localhost:10001/compterendu/getbyid/${IdClient}`
+      `https://release2.vercel.app/compterendu/getbyid/${IdClient}`
     );
 
     return res.data;
@@ -204,7 +222,7 @@ export const demandeDeTransferAnticipe = async (
       session?.value as string
     }`;
     const res = await axios.get(
-      `http://localhost:10001/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release2.vercel.app/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     
     return res.data || ({} as ab_client);
@@ -213,7 +231,7 @@ export const demandeDeTransferAnticipe = async (
   }
 };
 
-// http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=1&groupe&agence&perPage=2&search&from&to
+// https://release2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=1&groupe&agence&perPage=2&search&from&to
 export const getValidationProposeDeTransferAnticipe = async (
   IdClient?: string,
   currentpage?: number,
@@ -231,7 +249,7 @@ export const getValidationProposeDeTransferAnticipe = async (
       session?.value as string
     }`;
     const res = await axios.get(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data || ({} as ab_client);

@@ -37,26 +37,25 @@ import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import { useQuery } from "@tanstack/react-query";
 import { getListCompteRenduHistorique } from "@/actions/client.action";
 import { useSearchParams } from "next/navigation";
+import { CompteRenduList } from "@/constants/types";
 
 interface CompteRenduHistoriqueProps {
-  listHistorique: SuiviAgenda[];
+  listHistorique: CompteRenduList[];
 }
 
 const CompteRenduHistorique = ({
-  listHistorique: datza,
+  listHistorique: data,
 }: CompteRenduHistoriqueProps) => {
   const { isOpen, onClose, onOpen } = useCompteRenduModal();
 const searchParams = useSearchParams();
 const cli = searchParams.get('cli');
-  const { isPending, error, data } = useQuery<SuiviAgenda[]>({
-    queryKey: ['getCompteRenduHistorique'],
-    queryFn:async ()=>await getListCompteRenduHistorique(cli as string),
-    refetchOnMount: true,
-    
-  
-  })
-  
-  const columns: ColumnDef<SuiviAgenda>[] = [
+  // const { isPending, error, data} = useQuery<CompteRenduList[]>({
+  //   queryKey: ['getCompteRenduHistorique'],
+  //   queryFn:async ()=>await getListCompteRenduHistorique(cli as string),
+  //   refetchOnMount: true,
+  // })
+  console.log(data)
+  const columns: ColumnDef<CompteRenduList>[] = [
     {
       
       accessorKey: "num",
@@ -109,7 +108,9 @@ const cli = searchParams.get('cli');
 
     {
       accessorKey: "compte_rendu",
-      header: ({ column }) => {
+      header: ({ column }) =>
+        {
+         // console.log(data[14].compterendutype_compterendutype_compterenduidTosuivi_agenda[0].types)
         return <span>Compte Rendu</span>;
       },
 
@@ -162,7 +163,7 @@ const cli = searchParams.get('cli');
  
   
   const table = useReactTable({
-    data: data || [],
+    data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

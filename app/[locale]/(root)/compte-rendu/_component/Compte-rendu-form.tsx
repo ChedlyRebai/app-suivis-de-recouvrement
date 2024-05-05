@@ -52,11 +52,12 @@ import CompteRenduHistorique from "./CompteRenduHistorique";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { getMotif } from "@/actions/motif.action";
 import { getappreciation, getcomptrendutypes, getcontact } from "@/actions/utils.actions";
+import { CompteRenduList } from "@/constants/types";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
   listcompte: AbCompte[];
-  historiqueCompteRendu: SuiviAgenda[];
+  historiqueCompteRendu: CompteRenduList[];
 }
 
 const CompteRenduForm = ({
@@ -230,8 +231,9 @@ const CompteRenduForm = ({
       console.log("Client injoignable");
       compte_rendu = `Client injoignable: ${suiviAgenda.compte_rendu || ""}`;
     }
-    console.log(compte_rendu,suiviAgenda,cli,selectedRadio);
-    // saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!)
+
+    console.log(suiviAgenda,cli,selectedRadio);
+     saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!,selectedRadio)
     //   .then((res) => {
     //     toast.success("Compte rendu enregistré avec succès");
     //   })
@@ -693,8 +695,8 @@ const CompteRenduForm = ({
                     </Card>
                   </TabsContent>
                   <TabsContent value="3">
-                    <Card className="my-2 w-full h-full flex justify-center items-center">
-                      <CardContent className="space-y- ">
+                    <Card className="my-2">
+                      <CardContent className="space-y-2 ">
                         <FaciliteDePaiementForm />
                       </CardContent>
                     </Card>

@@ -10,7 +10,7 @@ interface useClientSoreInterface {
     seTsuiAgenda:(suiviAgenda:SuiviAgenda)=>void;
     setClient: (client: ClientRecouv) => void;
     handleIputChangeSuiviAgenda: (champ:string,value:string) => void;
-    saveSuiviAgenda: (suiviAgenda:SuiviAgenda,compteRendu:any,cli:string) =>Promise<void>;
+    saveSuiviAgenda: (suiviAgenda:SuiviAgenda,compteRendu:any,cli:string,type:string) =>Promise<void>;
 }
 
 const useClientSore = create<useClientSoreInterface>((set) => ({
@@ -28,8 +28,8 @@ const useClientSore = create<useClientSoreInterface>((set) => ({
         }));
     },
 
-    saveSuiviAgenda: async (suiviAgenda,compteRendu,cli) => {
-        const savedSuiviAgenda=await createCompteRendu(suiviAgenda,compteRendu,cli);
+    saveSuiviAgenda: async (suiviAgenda,compteRendu,cli,type) => {
+        const savedSuiviAgenda=await createCompteRendu(suiviAgenda,compteRendu,cli,type);
         return savedSuiviAgenda;    
     },
 }));
