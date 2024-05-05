@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Mail } from "@/components/shared/mail/components/mail";
 import { accounts, mails } from "@/components/shared/mail/data";
 import LoadingIcons, { Oval } from "react-loading-icons";
+import { getAllCompteRendu } from "@/actions/comptrendu.action";
 
 export default async function Page({
   searchParams,
@@ -22,7 +23,8 @@ export default async function Page({
 
   const search = searchParams?.query || "";
   const limit = 20;
-
+  const initialdata=await getAllCompteRendu(1,limit,search);
+  console.log("initialData",initialdata);
   return (
     <>
       <div className="" />
@@ -46,7 +48,7 @@ export default async function Page({
         <div className="hidden flex-col md:flex">
           <Suspense key={search} fallback={<Oval />}>
             <Mail
-              initialData={[]}
+              initialData={initialdata.CompteRendu}
               limit={5}
               search={search}
               accounts={accounts}

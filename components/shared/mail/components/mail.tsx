@@ -1,8 +1,6 @@
 "use client"
 import { ComponentProps } from "react"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
-
-
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
@@ -64,6 +62,8 @@ interface MailProps {
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import { useDebouncedCallback } from "use-debounce"
+import { CompteRenduList } from "@/constants/types"
+import { formatDistanceToNowStrict } from "date-fns"
 
 
 export function Mail({
@@ -80,7 +80,9 @@ export function Mail({
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
+  console.log("initialData",initialData)
 
+  
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams)
     if (query) {
@@ -140,6 +142,7 @@ export function Mail({
             <TabsContent value="all" className="m-0">
               <MailList  search={search} initialData={initialData} limit={limit} items={mails} />
             </TabsContent>
+
             <TabsContent value="unread" className="m-0">
               <MailList  search={search} initialData={initialData} limit={limit} items={mails.filter((item) => !item.read)} />
             </TabsContent>
@@ -149,7 +152,7 @@ export function Mail({
         <ResizablePanel defaultSize={defaultLayout[2]}>
           
           <MailDisplay
-            mail={mails.find((item) => item.id === mail.selected) || null}
+            mail={initialData.find((item) => item.id === mail.selected) || null}
           />
         </ResizablePanel>
       </ResizablePanelGroup>
@@ -193,55 +196,58 @@ export function MailList({ items,initialData, search, limit }: IProps) {
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
-        {items.map((item) => (
+        {initialData.map((item:CompteRenduList) => (
           <button
             key={item.id}
-            className={cn(
-              "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
-              mail.selected === item.id && "bg-muted"
-            )}
-            onClick={() =>
-              setMail({
-                ...mail,
-                selected: item.id,
-              })
-            }
+            // className={cn(
+            //   "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
+            //   mail.selected === item.id && "bg-muted"
+            // )}
+            // onClick={() =>
+            //   setMail({
+            //     ...mail,
+            //     selected: item.id,
+            //   })
+            // }
+            className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"
           >
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
-                  <div className="font-semibold">{item.name}</div>
-                  {!item.read && (
+                  <div className="font-semibold">{item.compterendutype_compterendutype_compterenduidTosuivi_agenda[0].types.libelle }</div>
+                  {!item.compterendutype_compterendutype_compterenduidTosuivi_agenda[0].types.libelle && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
                   )}
                 </div>
                 <div
-                  className={cn(
-                    "ml-auto text-xs",
-                    mail.selected === item.id
-                      ? "text-foreground"
-                      : "text-muted-foreground"
-                  )}
+                  // className={cn(
+                  //   "ml-auto text-xs",
+                  //   mail.selected === item.id
+                  //     ? "text-foreground"
+                  //     : "text-muted-foreground"
+                  // )}
+                  className="ml-auto text-xs text-muted-foreground"
                 >
-                  {/* {formatDistanceToNow(new Date(item.date), {
+                  {/* {formatDistanceToNowStrict(new Date(item.created_at), {
                     addSuffix: true,
-                  })} */}
+                  })}  */}
+                  {item.created_at.toString().substring(0, 10)}
                 </div>
               </div>
-              <div className="text-xs font-medium">{item.subject}</div>
+              <div className="text-xs font-medium">{item.compte_rendu}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {item.text.substring(0, 300)}
+              {item.compte_rendu.substring(0, 300)}
             </div>
-            {item.labels.length ? (
+            {/* {item.labels.length ? (
               <div className="flex items-center gap-2">
-                {item.labels.map((label) => (
+                {item.labels.map((label:any) => (
                   <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
                     {label}
                   </Badge>
                 ))}
               </div>
-            ) : null}
+            ) : null} */}
           </button>
         ))}
         {!isDisable ? (

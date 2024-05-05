@@ -1,17 +1,22 @@
 import { CompteRenduList } from "@/constants/types";
 import axios from "axios";
-
-export const getAllCompteRendu = async (page:any,perpage:any,search:string) => {
+export interface Main {
+    CompteRendu: CompteRenduList[];
+    totalCount:  number;
+    totalPages:  number;
+}
+export const getAllCompteRendu = async (page:any=1,perpage:any=4,search:string) => {
     try {
-        axios.defaults.baseURL = `${process.env.API_URL}`;
-        const res = await axios.get<CompteRenduList>(
-          `http://localhost:10001/compterendu/all?page=${page}&perpage=${perpage}&search=${search}`
+        // axios.defaults.baseURL = `${process.env.API_URL}`;
+        const res = await axios.get<Main>(
+          `http://localhost:10001/compterendu/all?page=1&perpage=1`
         );
+
         console.log("66666666666666666666666666666666666666666666666666666666666666");
         console.log(res.data);
         console.log("66666666666666666666666666666666666666666666666666666666666666");
-        return res.data || {} as CompteRenduList;
+        return res.data || {} as Main ;
       } catch (error) {
-        return {} as CompteRenduList;
+        return {} as Main ;
       }
 }
