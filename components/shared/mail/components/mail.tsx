@@ -50,6 +50,11 @@ interface MailProps {
   navCollapsedSize: number
 }
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+
+import { useDebouncedCallback } from "use-debounce"
+
+
 export function Mail({
   accounts,
   mails,
@@ -59,7 +64,20 @@ export function Mail({
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
   const [mail] = useMail()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
 
+  const handleSearch = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams)
+    if (query) {
+      params.set("query", query)
+      params.set("page", "1")
+    } else {
+      params.delete("query")
+    }
+    replace(`${pathname}?${params.toString()}`)
+  }, 300)
   return (
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
