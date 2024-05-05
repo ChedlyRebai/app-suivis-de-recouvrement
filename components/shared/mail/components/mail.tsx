@@ -1,18 +1,26 @@
 "use client"
+import { ComponentProps } from "react"
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
+
+import { Badge } from "@/components/ui/badge"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+import { useEffect, useState } from "react"
+
+import { useInView } from "react-intersection-observer"
+
+
+interface IProps {
+  items: Mail[]
+  initialData: any[]
+  search: string
+  limit: number
+}
 import * as React from "react"
 import {
-  AlertCircle,
-  Archive,
-  ArchiveX,
-  File,
-  Inbox,
-  MessagesSquare,
+  Loader2,
   Search,
-  Send,
-  ShoppingCart,
-  Trash2,
-  Users2,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -32,7 +40,7 @@ import {
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { AccountSwitcher } from "./account-switcher"
 import { MailDisplay } from "./mail-display"
-import { MailList } from "./mail-list"
+
 import { Nav } from "./nav"
 import { type Mail } from "../data"
 import { useMail } from "../use-mail"
@@ -48,6 +56,9 @@ interface MailProps {
   defaultLayout: number[] | undefined
   defaultCollapsed?: boolean
   navCollapsedSize: number
+  initialData: any[]
+  search: string
+  limit: number
 }
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -61,6 +72,8 @@ export function Mail({
   defaultLayout = [265, 440, 655],
   defaultCollapsed = false,
   navCollapsedSize,
+  search,
+  limit,initialData
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
   const [mail] = useMail()
@@ -125,10 +138,10 @@ export function Mail({
               </form>
             </div>
             <TabsContent value="all" className="m-0">
-              <MailList items={mails} />
+              <MailList  search={search} initialData={initialData} limit={limit} items={mails} />
             </TabsContent>
             <TabsContent value="unread" className="m-0">
-              <MailList items={mails.filter((item) => !item.read)} />
+              <MailList  search={search} initialData={initialData} limit={limit} items={mails.filter((item) => !item.read)} />
             </TabsContent>
           </Tabs>
         </ResizablePanel>
@@ -142,4 +155,118 @@ export function Mail({
       </ResizablePanelGroup>
     </TooltipProvider>
   )
+}
+
+export function MailList({ items,initialData, search, limit }: IProps) {
+  const [data, setData] = useState(initialData)
+  const [page, setPage] = useState(1)
+  const [ref, inView] = useInView()
+  const [isDisable, setDisable] = useState(false)
+
+  async function loadMoreData() {
+    console.log("loadMoreData")
+    const next = page + 1
+    const offset = next * limit
+    //const { data: newData } = await GetPokemons({ search, offset, limit })
+    const newData:any = []
+    if (newData.length) {
+      setPage(next)
+      setData((prev: any[] | undefined) => [
+        ...(prev?.length ? prev : []),
+        ...newData,
+      ])
+    } else {
+      setDisable(true)
+    }
+  }
+
+  useEffect(() => {
+    if (inView) {
+      console.log("inView")
+      loadMoreData()
+    }
+    console.log("inView1")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView])
+  const [mail, setMail] = useMail()
+
+  return (
+    <ScrollArea className="h-screen">
+      <div className="flex flex-col gap-2 p-4 pt-0">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            className={cn(
+              "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
+              mail.selected === item.id && "bg-muted"
+            )}
+            onClick={() =>
+              setMail({
+                ...mail,
+                selected: item.id,
+              })
+            }
+          >
+            <div className="flex w-full flex-col gap-1">
+              <div className="flex items-center">
+                <div className="flex items-center gap-2">
+                  <div className="font-semibold">{item.name}</div>
+                  {!item.read && (
+                    <span className="flex h-2 w-2 rounded-full bg-blue-600" />
+                  )}
+                </div>
+                <div
+                  className={cn(
+                    "ml-auto text-xs",
+                    mail.selected === item.id
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {/* {formatDistanceToNow(new Date(item.date), {
+                    addSuffix: true,
+                  })} */}
+                </div>
+              </div>
+              <div className="text-xs font-medium">{item.subject}</div>
+            </div>
+            <div className="line-clamp-2 text-xs text-muted-foreground">
+              {item.text.substring(0, 300)}
+            </div>
+            {item.labels.length ? (
+              <div className="flex items-center gap-2">
+                {item.labels.map((label) => (
+                  <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
+                    {label}
+                  </Badge>
+                ))}
+              </div>
+            ) : null}
+          </button>
+        ))}
+        {!isDisable ? (
+        <div ref={ref} className="mt-6 flex flex-col items-center justify-center">
+          {/* <Loader2 className="animate-spin" size={48} /> */}
+          loading
+        </div>
+      ) : (
+        <></>
+      )}
+      </div>
+    </ScrollArea>
+  )
+}
+
+function getBadgeVariantFromLabel(
+  label: string
+): ComponentProps<typeof Badge>["variant"] {
+  if (["work"].includes(label.toLowerCase())) {
+    return "default"
+  }
+
+  if (["personal"].includes(label.toLowerCase())) {
+    return "outline"
+  }
+
+  return "secondary"
 }

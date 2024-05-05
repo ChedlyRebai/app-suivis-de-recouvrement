@@ -31,13 +31,13 @@ export default function MailPage() {
         />
       </div>
       <div className="hidden flex-col md:flex">
-        <Mail
+        {/* <Mail
           accounts={accounts}
           mails={mails}
           defaultLayout={defaultLayout}
           defaultCollapsed={defaultCollapsed}
           navCollapsedSize={4}
-        />
+        /> */}
       </div>
     </>
   )

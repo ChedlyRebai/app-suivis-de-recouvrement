@@ -7,12 +7,50 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Mail } from "../data"
 import { useMail } from "../use-mail"
+import { useEffect, useState } from "react"
+
+import { Loader2 } from "lucide-react"
+import { useInView } from "react-intersection-observer"
+
+
 
 interface MailListProps {
-  items: Mail[]
+ 
 }
+interface IProps {
+  items: Mail[]
+  initialData: any[]
+  search: string
+  limit: number
+}
+export function MailList({ items,initialData, search, limit }: IProps) {
+  const [data, setData] = useState(initialData)
+  const [page, setPage] = useState(1)
+  const [ref, inView] = useInView()
+  const [isDisable, setDisable] = useState(false)
 
-export function MailList({ items }: MailListProps) {
+  async function loadMoreData() {
+    const next = page + 1
+    const offset = next * limit
+    //const { data: newData } = await GetPokemons({ search, offset, limit })
+    const newData:any = []
+    if (newData.length) {
+      setPage(next)
+      setData((prev: any[] | undefined) => [
+        ...(prev?.length ? prev : []),
+        ...newData,
+      ])
+    } else {
+      setDisable(true)
+    }
+  }
+  
+  useEffect(() => {
+    if (inView) {
+      loadMoreData()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView])
   const [mail, setMail] = useMail()
 
   return (
@@ -69,7 +107,15 @@ export function MailList({ items }: MailListProps) {
             ) : null}
           </button>
         ))}
+        
       </div>
+      {!isDisable ? (
+        <div ref={ref} className="mt-6 flex flex-col items-center justify-center">
+          <Loader2 className="animate-spin" size={48} />
+        </div>
+      ) : (
+        <></>
+      )}
     </ScrollArea>
   )
 }
