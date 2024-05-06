@@ -6,14 +6,20 @@ export interface CompteRenduList {
     cli:                                                         string;
     compte_rendu:                                                string;
     usr_nom:                                                     string;
+    ab_client:                                                   AbClient;
     compterendutype_compterendutype_compterenduidTosuivi_agenda: CompterendutypeCompterendutypeCompterenduidTosuiviAgendum[];
 }
 
+export interface AbClient {
+    id:        number;
+    nom:       string;
+    cli:      string;
+}
 export interface CompterendutypeCompterendutypeCompterenduidTosuiviAgendum {
     typeID:                number;
     types:                 Types;
     clientInjoignable:     null;
-    promesseregresse:      null;
+    promesseregresse:      promesseregresse;
     ClientInjoignableId:   null;
     promesseregresseID:    null;
     visite:                Visite;
@@ -26,6 +32,12 @@ export interface CompterendutypeCompterendutypeCompterenduidTosuiviAgendum {
     nonreconaissance:      Nonreconaissance;
 }
 
+export interface promesseregresse{
+    date_ver: string;
+lieu_ver:string; 
+mnt_reg:string; 
+
+}
 export interface Visite {
     date_visite:               null;
     h_rdv_visite_h_rdvToh_rdv: Agence;

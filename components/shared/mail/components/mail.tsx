@@ -82,7 +82,7 @@ export function Mail({
   const pathname = usePathname()
   const { replace } = useRouter()
   console.log("initialData",initialData)
-
+  const {Comptrendu,setComptrendu,setId}=useInbox()
   
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams)
@@ -151,10 +151,10 @@ export function Mail({
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[2]}>
+          { Comptrendu &&
+            <MailDisplay/>
+          }
           
-          <MailDisplay
-            mail={initialData.find((item) => item.id === mail.selected) || null}
-          />
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>

@@ -11,7 +11,7 @@ import Oval from "react-loading-icons/dist/esm/components/oval";
 const CompteRenduModal = () => {
   const { id, isOpen, onOpen, onClose } = useCompteRenduModal();
 
-  const { isPending, error, data={} as any } = useQuery({
+  const { isPending, error, data } = useQuery({
     queryKey: ["getCompteRendu", id],
     queryFn: async () => await getCompteRenduById(id),
   });
@@ -23,8 +23,8 @@ const CompteRenduModal = () => {
   console.log(data?.compterendutype_compterendutype_compterenduidTosuivi_agenda)
   return (
     <Modal
-      title={`ee`}
-      description={`ee`}
+      title={`${data.ab_client.nom}`}
+      description={`${data.ab_client.cli}`}
       isOpen={isOpen}
       onChange={onClose}
     >
@@ -36,59 +36,60 @@ const CompteRenduModal = () => {
       {error && <div>An error has occurred: {error}</div>}
       {data && (
         <>
-          <p>{data.compte_rendu}</p>
+          <p>{data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+        ?.types?.libelle} {data.compte_rendu}</p>
         </>
       )}
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 1 && (
         <div className="flex justify-center items-center">
           <Label className="text-primary">Promesse</Label>
         </div>
       )}
 
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 2 && (
         <div className="">
           <Label className="text-primary">Nouveau Telephone 1</Label>
           <p>
             {" "}
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 .nouvellecoordonnees?.nouv_tel
             }
           </p>{" "}
           <Label className="text-primary">Nouveau Telephone 2</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.nouvellecoordonnees?.nouv_te2
             }
           </p>{" "}
           <Label className="text-primary">Nouveau Addresse</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.nouvellecoordonnees?.nouv_adresse
             }
           </p>{" "}
         </div>
       )}
 
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 3 && (
         <div className="flex justify-center items-center">
           <Label className="text-primary">Montant</Label>
           <p>{
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.FacilitePaiment.mnt_rec
             }</p>
           <Label className="text-primary">Nombre echeance</Label>
           <p>{
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.FacilitePaiment.nb_ech
             }</p>
           {
-            data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+            data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
               ?.FacilitePaiment?.montantFacilites?.map((item:any, index:number) => (
                 <div key={index}>
                   <Label className="text-primary">Montant echeance</Label>
@@ -112,52 +113,52 @@ export interface MontantFacilite {
     date_ech: null;
 } */}
 
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 4 && (
         <div className="flex justify-center items-center">
           <Label className="text-primary">Observation</Label>
           <p>
           {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 .nonreconaissance?.observation
             }
           </p>
         </div>
       )}
 
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 5 && (
           <div className="">
           <Label className="text-primary">Heure visite</Label>
           <p>
             {" "}
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 .visite?.h_rdv_visite_h_rdvToh_rdv.libelle
             }
           </p>{" "}
           <Label className="text-primary">Lieu Visite 2</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.visite?.Agence.libelle
             }{" "}
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.visite?.lieu_visite
             }
           </p>{" "}
           <Label className="text-primary">Date visite</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.visite?.date_visite
             }
           </p>{" "}
         </div>
       )}
 
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
+      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 6 && (
         <div className="flex justify-center items-center">
           <Label className="text-primary">Client Injoignable</Label>

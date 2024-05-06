@@ -17,10 +17,8 @@ export default async function Page({
 }) {
   const layout = cookies().get("react-resizable-panels:layout");
   const collapsed = cookies().get("react-resizable-panels:collapsed");
-
   const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
   const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
-
   const search = searchParams?.query || "";
   const limit = 20;
   const initialdata=await getAllCompteRendu(1,limit,search);
@@ -48,7 +46,7 @@ export default async function Page({
         <div className="hidden flex-col md:flex">
           <Suspense key={search} fallback={<Oval />}>
             <Mail
-              initialData={initialdata.CompteRendu}
+              initialData={initialdata.CompteRendu || []}
               limit={5}
               search={search}
               accounts={accounts}
