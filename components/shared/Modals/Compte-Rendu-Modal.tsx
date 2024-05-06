@@ -20,11 +20,12 @@ const CompteRenduModal = () => {
   if(!data) return null;
   console.log(id);
   console.log(data);
-  console.log(data?.compterendutype_compterendutype_compterenduidTosuivi_agenda)
+  console.log()
   return (
     <Modal
-      title={`${data.ab_client.nom}`}
-      description={`${data.ab_client.cli}`}
+      title={`${data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+        ?.types?.libelle}`}
+      description={`${data?.created_at.toString().substring(0, 10)}`}
       isOpen={isOpen}
       onChange={onClose}
     >
@@ -37,7 +38,7 @@ const CompteRenduModal = () => {
       {data && (
         <>
           <p>{data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-        ?.types?.libelle} {data.compte_rendu}</p>
+        ?.types?.libelle} {data?.compte_rendu}</p>
         </>
       )}
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
@@ -50,7 +51,7 @@ const CompteRenduModal = () => {
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 2 && (
         <div className="">
-          <Label className="text-primary">Nouveau Telephone 1</Label>
+          <Label className="text-primary">Nouveau Telephone 1:</Label>
           <p>
             {" "}
             {
@@ -58,14 +59,14 @@ const CompteRenduModal = () => {
                 .nouvellecoordonnees?.nouv_tel
             }
           </p>{" "}
-          <Label className="text-primary">Nouveau Telephone 2</Label>
+          <Label className="text-primary">Nouveau Telephone 2:</Label>
           <p>
             {
               data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.nouvellecoordonnees?.nouv_te2
             }
           </p>{" "}
-          <Label className="text-primary">Nouveau Addresse</Label>
+          <Label className="text-primary">Nouveau Addresse:</Label>
           <p>
             {
               data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
