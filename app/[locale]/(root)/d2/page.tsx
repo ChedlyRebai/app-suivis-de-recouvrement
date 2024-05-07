@@ -73,6 +73,8 @@ import { AllClient } from "./_component/allclient"
 import { clientcolumns } from "./_component/ClientColumn"
 import { AllCompteRendu } from "./_component/alllCompteRendu"
 import { compterendutcolumns } from "./_component/compteRenduColumn"
+import { AllAccount } from "./_component/alllAccount"
+import { comptecolumns } from "./_component/compteColumn"
 
 
 
@@ -350,10 +352,10 @@ export default async function page() {
             </TabsContent>
             
             <TabsContent value="comptes">
-              <AllCompteRendu
-                  columns={compterendutcolumns}
+              <AllAccount
+                  columns={comptecolumns}
                   total={users.totalCount}
-                  data={compterendus.CompteRendu}                               
+                  data={comptes.result}                               
               />
             </TabsContent>
            
