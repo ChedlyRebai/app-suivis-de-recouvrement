@@ -195,6 +195,7 @@ export interface Compte {
   ab_client: AbClient | null;
   mnt_imp: string;
   mnt_sdb: string;
+  ncp: string;
   Agence: Agence;
 }
 

@@ -11,6 +11,10 @@ export const comptecolumns: ColumnDef<Compte>[] = [
     header: "cli",
   },
   {
+    accessorKey: "ncp",
+    header: "N° Compte",
+  },
+  {
     accessorKey: "ab_client.nom",
     header: "Nom de client",
   },
