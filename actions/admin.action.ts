@@ -52,7 +52,11 @@ export interface Client {
   Zone: Agence;
 }
 
-export const getAllUsers = async (currentpage?: number, perpage?: number,search?:string) => {
+export const getAllUsers = async (
+  currentpage?: number,
+  perpage?: number,
+  search?: string
+) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     //   console.log(
@@ -62,27 +66,29 @@ export const getAllUsers = async (currentpage?: number, perpage?: number,search?
       `http://localhost:10001/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
-    console.log(res.data);
-
     return (res.data as Main) || ({} as Main);
   } catch (error) {
     return {} as Main;
   }
 };
 
-export const getAllClient = async (currentpage?: number, perpage?: number,search?:string) => {
+export const getAllClient = async (
+  currentpage?: number,
+  perpage?: number,
+  search?: string
+) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
 
     //   console.log(
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );
-    console.log(`http://localhost:10001/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`)
+    console.log(
+      `http://localhost:10001/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+    );
     const res = await axios.get<clientResult>(
       `http://localhost:10001/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-
-    console.log(res.data);
 
     return (res.data as clientResult) || ({} as clientResult);
   } catch (error) {
@@ -163,7 +169,8 @@ export interface Visite {
 
 export const getAllCompteRendu = async (
   currentpage?: number,
-  perpage?: number,search?:string
+  perpage?: number,
+  search?: string
 ) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
@@ -171,12 +178,12 @@ export const getAllCompteRendu = async (
     //   console.log(
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );
-    console.log(`http://localhost:10001/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`)
+    console.log(
+      `http://localhost:10001/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+    );
     const res = await axios.get<compterenduResult>(
       `http://localhost:10001/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-
-    console.log(res.data);
 
     return (res.data as compterenduResult) || ({} as compterenduResult);
   } catch (error) {
@@ -205,15 +212,19 @@ export interface AbClient {
   nom: string;
 }
 
-export const getAllAccount = async (currentpage?: number, perpage?: number,search?:string) => {
+export const getAllAccount = async (
+  currentpage?: number,
+  perpage?: number,
+  search?: string
+) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-    console.log(`http://localhost:10001/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`)
+    console.log(
+      `http://localhost:10001/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+    );
     const res = await axios.get<CompteResult>(
       `http://localhost:10001/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-
-    console.log(res.data);
 
     return (res.data as CompteResult) || ({} as CompteResult);
   } catch (error) {
