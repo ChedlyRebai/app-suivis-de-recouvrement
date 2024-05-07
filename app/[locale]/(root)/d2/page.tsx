@@ -78,11 +78,33 @@ import { comptecolumns } from "./_component/compteColumn"
 
 
 
-export default async function page() {
-  const users = await getAllUsers()
-  const clients = await getAllClient()
-  const compterendus =await getAllCompteRendu()
-  const comptes=await getAllAccount()
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    currentPage?: string;
+    limit?: string;
+    perPage?: string;
+    groupe?: string;
+    agence?: string;
+    
+  };
+}) {
+  const search = searchParams?.query || "";
+  const group = searchParams?.groupe || "";
+  const agence = searchParams?.agence || "";
+ 
+  const currentPage = Number(searchParams?.currentPage) || 1
+  ;
+  const perPage = Number(searchParams?.perPage) || 5;
+  const limit = Number(searchParams?.limit) || 20;
+  
+  const users = await getAllUsers(currentPage,perPage,search)
+  const clients = await getAllClient(currentPage,perPage,search)
+  const compterendus =await getAllCompteRendu(currentPage,perPage,search)
+  const comptes=await getAllAccount(currentPage,perPage,search)
   console.log(users)
   return (
     <TooltipProvider >
@@ -339,14 +361,14 @@ export default async function page() {
             <TabsContent value="allUsers">
               <AllUsers
                   columns={Utilisateurcolumns}
-                  total={users.totalCount}
+                  total={users.totalPages}
                   data={users.result}                               
               />
             </TabsContent>
             <TabsContent value="allcompterendu">
               <AllCompteRendu
                   columns={compterendutcolumns}
-                  total={users.totalCount}
+                  total={users.totalPages}
                   data={compterendus.CompteRendu}                               
               />
             </TabsContent>
@@ -354,7 +376,7 @@ export default async function page() {
             <TabsContent value="comptes">
               <AllAccount
                   columns={comptecolumns}
-                  total={users.totalCount}
+                  total={users.totalPages}
                   data={comptes.result}                               
               />
             </TabsContent>
