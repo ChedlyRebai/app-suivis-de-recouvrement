@@ -65,9 +65,17 @@ import {
   TooltipTrigger,
   TooltipProvider
 } from "@/components/ui/tooltip"
-import AllClients from "./_component/allclient"
 
-const page=()=> {
+import { AllUsers } from "./_component/alllusers"
+import { Utilisateurcolumns } from "./_component/Utilisateurcolumns"
+import { getAllUsers } from "@/actions/admin.action"
+import { AllClient } from "./_component/allclient"
+
+
+
+export default async function page() {
+  const users = await getAllUsers()
+  console.log(users)
   return (
     <TooltipProvider >
     <div className="flex min-h-screen w-full flex-col bg-muted/40 mt-20"> 
@@ -231,17 +239,17 @@ const page=()=> {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb> */}
-          <div className="relative ml-auto flex-1 md:grow-0">
+          {/* <div className="relative ml-auto flex-1 md:grow-0">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search..."
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
             />
-          </div>
+          </div> */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
+              {/* <Button
                 variant="outline"
                 size="icon"
                 className="overflow-hidden rounded-full"
@@ -253,7 +261,7 @@ const page=()=> {
                   alt="Avatar"
                   className="overflow-hidden rounded-full"
                 />
-              </Button>
+              </Button> */}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -269,8 +277,8 @@ const page=()=> {
           <Tabs defaultValue="all">
             <div className="flex items-center">
               <TabsList>
-                <TabsTrigger value="allclient">All</TabsTrigger>
-                <TabsTrigger value="active">Active</TabsTrigger>
+                <TabsTrigger value="allclient">Clients</TabsTrigger>
+                <TabsTrigger value="allUsers">Utilisateurs</TabsTrigger>
                 <TabsTrigger value="draft">Draft</TabsTrigger>
                 <TabsTrigger value="archived" className="hidden sm:flex">
                   Archived
@@ -313,7 +321,18 @@ const page=()=> {
               </div>
             </div>
             <TabsContent value="allclient">
-              <AllClients />
+            <AllClient
+                  columns={Utilisateurcolumns}
+                  total={users.totalPages}
+                  data={users.result}                               
+              />
+            </TabsContent>
+            <TabsContent value="allUsers">
+              <AllUsers
+                  columns={Utilisateurcolumns}
+                  total={users.totalCount}
+                  data={users.result}                               
+              />
             </TabsContent>
           </Tabs>
         </main>
@@ -324,4 +343,3 @@ const page=()=> {
 }
 
 
-export default page;

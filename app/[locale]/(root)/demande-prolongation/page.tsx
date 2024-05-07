@@ -7,7 +7,7 @@ import {
   getClientContactes,
   getClientNonContactes,
   getGroupes,
-  getLettre,
+
 } from "@/actions/client.action";
 import {
   Card,
@@ -20,6 +20,7 @@ import { Suspense } from "react";
 
 import { DataTableDemandeDeProlongationCommercial } from "./_component/demande-prolongation-data-table";
 import { demandedeprolongation } from "./_component/demandeProlongationColumns";
+import { getLettre } from "@/actions/lettre.action";
 
 
 export default async function Home({

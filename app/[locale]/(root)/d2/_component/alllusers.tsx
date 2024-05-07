@@ -60,7 +60,7 @@ interface DataTableProps {
  
 }
 
-export function AllClient({
+export function AllUsers({
   columns,
   data,
   totalAccout,
@@ -242,9 +242,9 @@ export function AllClient({
     <>
       <Card x-chunk="dashboard-06-chunk-0">
       <CardHeader>
-        <CardTitle>Clients</CardTitle>
+        <CardTitle>Utilisateur</CardTitle>
         <CardDescription>
-        Gérez vos Clients.
+        Gérez vos utilisateurs.
         </CardDescription>
       </CardHeader>
       <CardContent>
