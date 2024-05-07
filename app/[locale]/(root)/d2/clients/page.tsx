@@ -24,14 +24,9 @@ export default async function Home({
   };
 }) {
   const search = searchParams?.query || "";
-
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
-
-
-
   const clients = await getAllClient(currentPage, perPage, search);
-
   return (
     <AllClient
       columns={clientcolumns}
