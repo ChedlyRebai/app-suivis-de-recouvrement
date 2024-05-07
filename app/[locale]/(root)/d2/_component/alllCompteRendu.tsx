@@ -61,7 +61,7 @@ import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 
 interface DataTableProps {
   columns: any[];
-  total: any;
+
   data: CompteRendu[];
   totalAccout?: number;
   totalPages?: number;
@@ -72,7 +72,7 @@ export function AllCompteRendu({
   data,
   totalAccout,
   totalPages = 0,
-  total,
+ 
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();

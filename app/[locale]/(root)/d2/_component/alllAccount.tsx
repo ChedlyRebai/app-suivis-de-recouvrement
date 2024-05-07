@@ -59,7 +59,7 @@ import { utilisateur } from "@/Models/utilisateur.model";
 
 interface DataTableProps {
   columns: any[];
-  total: any;
+  
   data: Compte[];
   totalAccout?: number;
   totalPages?: number;
@@ -70,7 +70,7 @@ export function AllAccount({
   data,
   totalAccout,
   totalPages = 0,
-  total,
+
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();

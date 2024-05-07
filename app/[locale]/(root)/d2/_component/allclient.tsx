@@ -53,7 +53,7 @@ import { utilisateur } from "@/Models/utilisateur.model";
 
 interface DataTableProps {
   columns: any[];
-  total: any;
+ 
   data: Client[];
   totalAccout?: number;
   totalPages?: number;
@@ -65,7 +65,7 @@ export function AllClient({
   data,
   totalAccout,
   totalPages = 0,
-  total,
+  
 }: DataTableProps) {
 
   const router = useRouter();

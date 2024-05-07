@@ -55,7 +55,6 @@ export interface Client {
 export const getAllUsers = async (currentpage?: number, perpage?: number,search?:string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-
     //   console.log(
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );

@@ -3,6 +3,7 @@ import Link from "next/link"
 import {
   File,
   Home,
+  Landmark,
   LineChart,
   ListFilter,
   MoreHorizontal,
@@ -11,6 +12,7 @@ import {
   PanelLeft,
   PlusCircle,
   Search,
+  
   Settings,
   ShoppingCart,
   Users2,
@@ -84,7 +86,7 @@ export default async function Page({
 }: {
   searchParams?: {
     query?: string;
-    currentPage?: string;
+    page?: string;
     limit?: string;
     perPage?: string;
     groupe?: string;
@@ -96,7 +98,7 @@ export default async function Page({
   const group = searchParams?.groupe || "";
   const agence = searchParams?.agence || "";
  
-  const currentPage = Number(searchParams?.currentPage) || 1
+  const currentPage = Number(searchParams?.page) || 1
   ;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
@@ -136,8 +138,8 @@ export default async function Page({
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <ShoppingCart className="h-5 w-5" />
-                <span className="sr-only">Orders</span>
+                <Landmark className="h-5 w-5" />
+                <span className="sr-only">Comptes</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Orders</TooltipContent>
@@ -238,7 +240,7 @@ export default async function Page({
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                   <Users2 className="h-5 w-5" />
-                  Customers
+                  Clients
                 </Link>
                 <Link
                   href="#"
@@ -354,21 +356,20 @@ export default async function Page({
             <TabsContent value="allclient">
             <AllClient
                   columns={clientcolumns}
-                  total={clients.totalPages}
-                  data={clients.result}                               
-              />
+                  totalPages={clients.totalPages}
+                  data={clients.result}              />
             </TabsContent>
             <TabsContent value="allUsers">
               <AllUsers
                   columns={Utilisateurcolumns}
-                  total={users.totalPages}
+                  totalPages={users.totalPages}
                   data={users.result}                               
               />
             </TabsContent>
             <TabsContent value="allcompterendu">
               <AllCompteRendu
                   columns={compterendutcolumns}
-                  total={users.totalPages}
+                  totalPages={compterendus.totalPages}
                   data={compterendus.CompteRendu}                               
               />
             </TabsContent>
@@ -376,7 +377,7 @@ export default async function Page({
             <TabsContent value="comptes">
               <AllAccount
                   columns={comptecolumns}
-                  total={users.totalPages}
+                  totalPages={comptes.totalPages}
                   data={comptes.result}                               
               />
             </TabsContent>
