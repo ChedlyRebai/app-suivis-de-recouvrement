@@ -6,11 +6,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
 export const clientcolumns: ColumnDef<Client>[] = [
-    {
-        accessorKey:"ncp",
-        header:"N° Compte",
-    },
-  ,{
+    
+  {
     accessorKey: "cli",
     header: "cli",
   },

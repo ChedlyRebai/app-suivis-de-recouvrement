@@ -44,7 +44,7 @@ export interface Client {
   mnt_imp: string;
   nombre_jours: number;
   sd: string;
-  ncp: string;
+
   depassement: string;
   nombre_jours_sdb: number;
   tel1: string;
