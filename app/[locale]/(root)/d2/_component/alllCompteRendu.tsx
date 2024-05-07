@@ -46,7 +46,13 @@ import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { CompteRendu, Utilisateur } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
@@ -59,7 +65,6 @@ interface DataTableProps {
   data: CompteRendu[];
   totalAccout?: number;
   totalPages?: number;
- 
 }
 
 export function AllCompteRendu({
@@ -69,13 +74,12 @@ export function AllCompteRendu({
   totalPages = 0,
   total,
 }: DataTableProps) {
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const setAgences = useListAgences((state) => state.setAgences);
-  console.log(data)
+  console.log(data);
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
@@ -89,7 +93,7 @@ export function AllCompteRendu({
   // const [groupes, setGroupes] = useState<any>([]);
   // const [agences, setAgences] = useState<any>([]);
   const { isOpen, onClose, onOpen } = useCompteRenduModal();
-  
+
   const [agenceopen, setagenceOpen] = useState(false);
   const [groupopen, setgroupOpen] = useState(false);
   const [agenceValue, setAgenceValue] = useState("");
@@ -106,12 +110,6 @@ export function AllCompteRendu({
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 100);
-
-
-
- 
-
-
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -191,112 +189,106 @@ export function AllCompteRendu({
   return (
     <>
       <Card x-chunk="dashboard-06-chunk-0">
-      <CardHeader>
-        <CardTitle>Utilisateur</CardTitle>
-        <CardDescription>
-        Gérez vos utilisateurs.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-      <div className="flex  items-center py-4 flex-wrap">
-        <>
-          <Input
-            placeholder="Cli"
-            defaultValue={searchParams.get("query")?.toString()}
-            onChange={(e) => {
-              handleSearch(e.target.value);
-            }}
-            className="max-w-sm mr-2"
-          />
-          <div className="w-1" />
-          
-          <DataTableViewOptions table={table} />
-        </>
-      </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  className="p-"
-                  // onDoubleClick={() => {
-                  //   console.log((row.original as { cli: string }).cli);
+        <CardHeader>
+          <CardTitle>Utilisateur</CardTitle>
+          <CardDescription>Gérez vos utilisateurs.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex  items-center py-4 flex-wrap">
+            <>
+              <Input
+                placeholder="Cli"
+                defaultValue={searchParams.get("query")?.toString()}
+                onChange={(e) => {
+                  handleSearch(e.target.value);
+                }}
+                className="max-w-sm mr-2"
+              />
+              <div className="w-1" />
 
-                  //   router.push(
-                  //     "compte-rendu" +
-                  //       "?" +
-                  //       createQueryString(
-                  //         "cli",
-                  //         `${(row.original as { cli: string }).cli}`
-                  //       )
-                  //   );
-                  // }}
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className="p- cursor-pointer"
-                      onClick={(e) => console.log(e)}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-          
-        </Table>
-        
-      </div>
-      <div className="mt-2 flex items-center justify-between px-2">
-        <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-          <div className="flex items-center space-x-2">
-
+              <DataTableViewOptions table={table} />
+            </>
           </div>
-        </div>
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      );
+                    })}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      className="p-"
+                      // onDoubleClick={() => {
+                      //   console.log((row.original as { cli: string }).cli);
 
-        <DataTablePagination
-          TotalAccount={totalAccout}
-          totalPages={totalPages}
-          table={table}
-        />
-      </div>
-      </CardContent>
-      <CompteRenduModal />
+                      //   router.push(
+                      //     "compte-rendu" +
+                      //       "?" +
+                      //       createQueryString(
+                      //         "cli",
+                      //         `${(row.original as { cli: string }).cli}`
+                      //       )
+                      //   );
+                      // }}
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          key={cell.id}
+                          className="p- cursor-pointer"
+                          onClick={(e) => console.log(e)}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      No results.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+          <div className="mt-2 flex items-center justify-between px-2">
+            <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
+              <div className="flex items-center space-x-2"></div>
+            </div>
+
+            <DataTablePagination
+              TotalAccount={totalAccout}
+              totalPages={totalPages}
+              table={table}
+            />
+          </div>
+        </CardContent>
+        <CompteRenduModal />
       </Card>
     </>
   );

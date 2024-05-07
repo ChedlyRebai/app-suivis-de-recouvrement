@@ -43,7 +43,7 @@ const CompteRenduModal = () => {
       )}
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 1 && (
-        <div className="flex justify-center items-center">
+        <div className="">
           <Label className="text-primary">Promesse</Label>
         </div>
       )}

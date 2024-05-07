@@ -65,7 +65,6 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
           );
         },
       },
-  
 ];
 
 // export interface CompteRendu {

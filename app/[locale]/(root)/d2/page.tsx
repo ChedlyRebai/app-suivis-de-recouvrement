@@ -68,7 +68,7 @@ import {
 
 import { AllUsers } from "./_component/alllusers"
 import { Utilisateurcolumns } from "./_component/Utilisateurcolumns"
-import { getAllClient, getAllCompteRendu, getAllUsers } from "@/actions/admin.action"
+import { getAllAccount, getAllClient, getAllCompteRendu, getAllUsers } from "@/actions/admin.action"
 import { AllClient } from "./_component/allclient"
 import { clientcolumns } from "./_component/ClientColumn"
 import { AllCompteRendu } from "./_component/alllCompteRendu"
@@ -80,6 +80,7 @@ export default async function page() {
   const users = await getAllUsers()
   const clients = await getAllClient()
   const compterendus =await getAllCompteRendu()
+  const comptes=await getAllAccount()
   console.log(users)
   return (
     <TooltipProvider >
@@ -285,7 +286,8 @@ export default async function page() {
                 <TabsTrigger value="allclient">Clients</TabsTrigger>
                 <TabsTrigger value="allUsers">Utilisateurs</TabsTrigger>
                 <TabsTrigger value="allcompterendu">Compte rendu</TabsTrigger>
-                <TabsTrigger value="archived" className="hidden sm:flex">
+                <TabsTrigger value="comptes">Comptes</TabsTrigger>
+                <TabsTrigger value="" className="hidden sm:flex">
                   Archived
                 </TabsTrigger>
               </TabsList>
@@ -340,6 +342,14 @@ export default async function page() {
               />
             </TabsContent>
             <TabsContent value="allcompterendu">
+              <AllCompteRendu
+                  columns={compterendutcolumns}
+                  total={users.totalCount}
+                  data={compterendus.CompteRendu}                               
+              />
+            </TabsContent>
+            
+            <TabsContent value="comptes">
               <AllCompteRendu
                   columns={compterendutcolumns}
                   total={users.totalCount}
