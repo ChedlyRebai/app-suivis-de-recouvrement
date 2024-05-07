@@ -123,26 +123,30 @@ export default async function Page({
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/dashboard/users"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
+                
+                <Home  className="h-5 w-5" />
+               
+                
+                {/* <img className="h-5 w-5 dark:" src="/images/icon-admin.png" className="h-5 w-5" />*/}
+                <span className="sr-only">Utilisateurs</span> 
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
+            <TooltipContent side="right">Utilisateurs</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/dashboard/comptes"
                 className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Landmark className="h-5 w-5" />
                 <span className="sr-only">Comptes</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Orders</TooltipContent>
+            <TooltipContent side="right">Comptes</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -159,19 +163,31 @@ export default async function Page({
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/dashboard/clients"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Users2 className="h-5 w-5" />
-                <span className="sr-only">Customers</span>
+                <span className="sr-only">Clients</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Customers</TooltipContent>
+            <TooltipContent side="right">Clients</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="dashboard/compterendu"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <File className="h-5 w-5" />
+                <span className="sr-only">Compte Rendu</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Compte Rendu</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="dashboard/analytics"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <LineChart className="h-5 w-5" />
@@ -185,14 +201,14 @@ export default async function Page({
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/dashboard/compterendu"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Settings className="h-5 w-5" />
-                <span className="sr-only">Settings</span>
+                <File className="h-5 w-5" />
+                <span className="sr-only">Compte Rendu</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Settings</TooltipContent>
+            <TooltipContent side="right">Compte Rendu</TooltipContent>
           </Tooltip>
         </nav>
       </aside>
@@ -306,7 +322,7 @@ export default async function Page({
           </DropdownMenu>
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-          <Tabs defaultValue="all">
+          {/* <Tabs defaultValue="all">
             <div className="flex items-center">
               <TabsList>
                 <TabsTrigger value="allclient">Clients</TabsTrigger>
@@ -350,7 +366,7 @@ export default async function Page({
                   <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                     Add Product
                   </span>
-                </Button> */}
+                </Button> 
               </div>
             </div>
             <TabsContent value="allclient">
@@ -382,7 +398,7 @@ export default async function Page({
               />
             </TabsContent>
            
-          </Tabs>
+          </Tabs> */}
         </main>
       </div>
     </div>
