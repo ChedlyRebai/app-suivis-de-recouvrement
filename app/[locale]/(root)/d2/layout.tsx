@@ -159,7 +159,7 @@ export default async function RootLayout({
             <TooltipTrigger asChild>
               <Link
                 href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground "
               >
                 <Package className="h-5 w-5" />
                 <span className="sr-only">Products</span>
@@ -171,7 +171,7 @@ export default async function RootLayout({
             <TooltipTrigger asChild>
               <Link
                 href="/dashboard/clients"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                className={`${false ? `flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8` :`flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground`}`}
               >
                 <Users2 className="h-5 w-5" />
                 <span className="sr-only">Clients</span>
