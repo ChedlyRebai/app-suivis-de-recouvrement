@@ -80,10 +80,16 @@ import { comptecolumns } from "./_component/compteColumn"
 
 
 
-
-export default async function Page({
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) 
+export default async function RootLayout({
   searchParams,
+  children
 }: {
+  children: React.ReactNode;
   searchParams?: {
     query?: string;
     page?: string;
@@ -91,6 +97,7 @@ export default async function Page({
     perPage?: string;
     groupe?: string;
     agence?: string;
+    
     
   };
 }) {
@@ -397,8 +404,13 @@ export default async function Page({
                   data={comptes.result}                               
               />
             </TabsContent>
+            
            
           </Tabs> */}
+          {
+            children
+          }
+
         </main>
       </div>
     </div>
