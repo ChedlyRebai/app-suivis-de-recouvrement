@@ -24,13 +24,8 @@ export default async function Home({
   };
 }) {
   const search = searchParams?.query || "";
-  const group = searchParams?.groupe || "";
-  const agence = searchParams?.agence || "";
-
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
-  const limit = Number(searchParams?.limit) || 20;
-
   const compterendus = await getAllCompteRendu(currentPage, perPage, search);
 
   return (
