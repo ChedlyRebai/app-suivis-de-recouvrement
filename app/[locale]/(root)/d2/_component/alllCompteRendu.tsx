@@ -48,19 +48,21 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Utilisateur } from "@/actions/admin.action";
+import { CompteRendu, Utilisateur } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
+import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
+import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 
 interface DataTableProps {
   columns: any[];
   total: any;
-  data: Utilisateur[];
+  data: CompteRendu[];
   totalAccout?: number;
   totalPages?: number;
  
 }
 
-export function AllUsers({
+export function AllCompteRendu({
   columns,
   data,
   totalAccout,
@@ -86,7 +88,8 @@ export function AllUsers({
 
   // const [groupes, setGroupes] = useState<any>([]);
   // const [agences, setAgences] = useState<any>([]);
-
+  const { isOpen, onClose, onOpen } = useCompteRenduModal();
+  
   const [agenceopen, setagenceOpen] = useState(false);
   const [groupopen, setgroupOpen] = useState(false);
   const [agenceValue, setAgenceValue] = useState("");
@@ -485,6 +488,7 @@ export function AllUsers({
         />
       </div>
       </CardContent>
+      <CompteRenduModal />
       </Card>
     </>
   );

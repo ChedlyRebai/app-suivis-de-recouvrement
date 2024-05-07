@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const Utilisateurcolumns: ColumnDef<Client>[] = [
+export const clientcolumns: ColumnDef<Client>[] = [
   {
     accessorKey: "cli",
     header: "cli",
   },
   {
-    accessorKey: "npm",
+    accessorKey: "nom",
     header: "Nom",
   },
 
@@ -22,7 +22,7 @@ export const Utilisateurcolumns: ColumnDef<Client>[] = [
     cell: ({ row }) => {
       return (
         <span>
-          {`${row.original.Agence.codug}:${row.original.Agence.libelle}`}{" "}
+          {`${row.original.Agence.codug} : ${row.original.Agence.libelle}`}{" "}
         </span>
       );
     },
@@ -33,7 +33,7 @@ export const Utilisateurcolumns: ColumnDef<Client>[] = [
     cell: ({ row }) => {
         return (
             <span>
-            {`${row.original.Zone.codug}:${row.original.Zone.libelle}`}{" "}
+            {`${row.original.Zone.codug} : ${row.original.Zone.libelle}`}{" "}
             </span>
         );
         },

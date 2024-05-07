@@ -68,13 +68,18 @@ import {
 
 import { AllUsers } from "./_component/alllusers"
 import { Utilisateurcolumns } from "./_component/Utilisateurcolumns"
-import { getAllUsers } from "@/actions/admin.action"
+import { getAllClient, getAllCompteRendu, getAllUsers } from "@/actions/admin.action"
 import { AllClient } from "./_component/allclient"
+import { clientcolumns } from "./_component/ClientColumn"
+import { AllCompteRendu } from "./_component/alllCompteRendu"
+import { compterendutcolumns } from "./_component/compteRenduColumn"
 
 
 
 export default async function page() {
   const users = await getAllUsers()
+  const clients = await getAllClient()
+  const compterendus =await getAllCompteRendu()
   console.log(users)
   return (
     <TooltipProvider >
@@ -279,7 +284,7 @@ export default async function page() {
               <TabsList>
                 <TabsTrigger value="allclient">Clients</TabsTrigger>
                 <TabsTrigger value="allUsers">Utilisateurs</TabsTrigger>
-                <TabsTrigger value="draft">Draft</TabsTrigger>
+                <TabsTrigger value="allcompterendu">Compte rendu</TabsTrigger>
                 <TabsTrigger value="archived" className="hidden sm:flex">
                   Archived
                 </TabsTrigger>
@@ -322,9 +327,9 @@ export default async function page() {
             </div>
             <TabsContent value="allclient">
             <AllClient
-                  columns={Utilisateurcolumns}
-                  total={users.totalPages}
-                  data={users.result}                               
+                  columns={clientcolumns}
+                  total={clients.totalPages}
+                  data={clients.result}                               
               />
             </TabsContent>
             <TabsContent value="allUsers">
@@ -334,6 +339,14 @@ export default async function page() {
                   data={users.result}                               
               />
             </TabsContent>
+            <TabsContent value="allcompterendu">
+              <AllCompteRendu
+                  columns={compterendutcolumns}
+                  total={users.totalCount}
+                  data={compterendus.CompteRendu}                               
+              />
+            </TabsContent>
+           
           </Tabs>
         </main>
       </div>

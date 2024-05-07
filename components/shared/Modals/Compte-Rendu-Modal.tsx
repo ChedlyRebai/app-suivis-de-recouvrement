@@ -25,7 +25,7 @@ const CompteRenduModal = () => {
     <Modal
       title={`${data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.libelle}`}
-      description={`${data?.created_at.toString().substring(0, 10)}`}
+      description={`${data?.created_at?.toString()?.substring(0, 10)}`}
       isOpen={isOpen}
       onChange={onClose}
     >
@@ -103,16 +103,6 @@ const CompteRenduModal = () => {
         </div>
       )}
 
-{/* export interface FacilitePaiment {
-    nb_ech:   null;
-    mnt_rec:  string;
-    montantFacilites: MontantFacilite[];
-}
-
-export interface MontantFacilite {
-    mntech:   string;
-    date_ech: null;
-} */}
 
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 4 && (

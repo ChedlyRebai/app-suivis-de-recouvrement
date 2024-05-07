@@ -110,6 +110,99 @@ export const getAllUsers = async (
     }
   };
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  export interface compterenduResult {
+    CompteRendu: CompteRendu[];
+    totalCount:  number;
+    totalPages:  number;
+}
+
+export interface CompteRendu {
+    created_at:                                                  Date;
+    id:                                                          number;
+    cli:                                                         string;
+    compte_rendu:                                                string;
+    usr_nom:                                                     string;
+    ab_client:                                                   AbClient;
+    compterendutype_compterendutype_compterenduidTosuivi_agenda: CompterendutypeCompterendutypeCompterenduidTosuiviAgendum[];
+}
+
+export interface AbClient {
+    nom: string;
+    cli: string;
+}
+
+export interface CompterendutypeCompterendutypeCompterenduidTosuiviAgendum {
+    typeID:                number;
+    types:                 Types;
+    clientInjoignable:     ClientInjoignable | null;
+    promesseregresse:      Promesseregresse | null;
+    ClientInjoignableId:   number | null;
+    promesseregresseID:    number | null;
+    visite:                Visite | null;
+    visiteId:              number | null;
+    nouvellecoordonnees:   Nouvellecoordonnees | null;
+    nouvellecoordonneesID: number | null;
+    facilitePaimentId:     null;
+    FacilitePaiment:       null;
+    nonReconnaissanceID:   number | null;
+    nonreconaissance:      Nonreconaissance | null;
+}
+
+export interface ClientInjoignable {
+    lieu_ver: string;
+}
+
+export interface Nonreconaissance {
+    observation: string;
+}
+
+export interface Nouvellecoordonnees {
+    nouv_te2:     string;
+    nouv_tel:     string;
+    nouv_adresse: string;
+}
+
+export interface Promesseregresse {
+    mnt_reg:  string;
+    lieu_ver: string;
+    date_ver: null;
+}
+
+export interface Types {
+    code:    number;
+    libelle: string;
+}
+
+export interface Visite {
+    date_visite:               null;
+    h_rdv_visite_h_rdvToh_rdv: Agence;
+    Agence:                    Agence;
+    lieu_visite:               number;
+    h_rdv:                     number;
+}
+
+
+
 export const getAllCompteRendu = async (
     
     currentpage?: number,
@@ -122,15 +215,15 @@ export const getAllCompteRendu = async (
     //   console.log(
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );
-      const res = await axios.get<Main>(
+      const res = await axios.get<compterenduResult>(
         `http://localhost:10001/compterendu/all`
       );
 
         console.log(res.data);
   
-      return res.data as Main || ({} as Main);
+      return res.data as compterenduResult || ({} as compterenduResult);
     } catch (error) {
-      return {} as Main;
+      return {} as compterenduResult;
     }
   };
 

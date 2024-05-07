@@ -48,13 +48,13 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Utilisateur } from "@/actions/admin.action";
+import { Client, Utilisateur } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
 
 interface DataTableProps {
   columns: any[];
   total: any;
-  data: Utilisateur[];
+  data: Client[];
   totalAccout?: number;
   totalPages?: number;
  
@@ -427,18 +427,8 @@ export function AllClient({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   className="p-"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
-
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
+                  
+                  
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
