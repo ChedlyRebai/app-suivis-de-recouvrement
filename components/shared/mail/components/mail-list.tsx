@@ -15,9 +15,6 @@ import useInbox from "@/hooks/use-inbox-hook"
 
 
 
-interface MailListProps {
- 
-}
 interface IProps {
   items: Mail[]
   initialData: any[]
