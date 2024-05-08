@@ -86,8 +86,6 @@ export function DataTableContactes<TData, TValue>({
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  // const [groupes, setGroupes] = useState<any>([]);
-  // const [agences, setAgences] = useState<any>([]);
 
   const [agenceopen, setagenceOpen] = useState(false);
   const [groupopen, setgroupOpen] = useState(false);
@@ -166,20 +164,20 @@ export function DataTableContactes<TData, TValue>({
   }, 0);
 
   const [loadingTable, setLoadingTable] = useState(false);
-  useEffect(() => {
-    setInputValue(searchParams.get("query") || "");
-    setLoadingTable(true);
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    params.delete("groupe");
-    params.delete("query");
-    params.delete("page");
-    params.delete("perPage");
-    params.delete("from");
-    params.delete("to");
-    replace(`${pathname}?${params.toString()}`);
-    setLoadingTable(false);
-  }, [type]);
+  // useEffect(() => {
+  //   setInputValue(searchParams.get("query") || "");
+  //   setLoadingTable(true);
+  //   const params = new URLSearchParams(searchParams);
+  //   params.delete("agence");
+  //   params.delete("groupe");
+  //   params.delete("query");
+  //   params.delete("page");
+  //   params.delete("perPage");
+  //   params.delete("from");
+  //   params.delete("to");
+  //   replace(`${pathname}?${params.toString()}`);
+  //   setLoadingTable(false);
+  // }, [type]);
 
   if (loadingTable) {
     return <div>Loading...</div>;
@@ -245,14 +243,14 @@ export function DataTableContactes<TData, TValue>({
 
   const [loader, setLoader] = useState(true);
   // effect
-  useEffect(() => {
-    setLoader(false);
-  }, []);
+  // useEffect(() => {
+  //   setLoader(false);
+  // }, []);
 
   // render
-  if (loader) {
-    return <div>Loading</div>;
-  }
+  // if (loader) {
+  //   return <div>Loading</div>;
+  // }
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -495,11 +493,11 @@ export function DataTableContactes<TData, TValue>({
           </TableRow>
         </Table>
       </div>
-      {/* <DataTablePagination
+      <DataTablePagination
         TotalAccount={totalAccout}
         totalPages={totalPages}
         table={table}
-      /> */}
+      />
     </>
   );
 }

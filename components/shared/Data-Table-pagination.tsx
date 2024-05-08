@@ -44,6 +44,7 @@ export function DataTablePagination<TData>({
   const createPerPage = (perPage: number | string) => {
     console.log(perPage);
     params.set("perPage", perPage.toString());
+    params.set("page", "1"); // Reset page to 1
     console.log("params", params.toString());
     console.log("pathname", pathname)
     console.log(`${pathname}?${params.toString()}`)

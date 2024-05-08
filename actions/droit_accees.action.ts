@@ -34,7 +34,7 @@ export const updateDroitAction = async (
   champ: string
 ) => {
   //console.log(`${process.env.API_URL}/droit/updateDroit`);
-  const res = await axios.put(`${process.env.API_URL}/droit/updateDroit`, {
+  const res = await axios.put(`https://app-suivis-de-recouvrement-ser-git-69cf99-chedlyrebais-projects.vercel.app/droit/updateDroit`, {
     id,
     codef,
     value,

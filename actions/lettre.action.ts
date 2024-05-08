@@ -29,7 +29,7 @@ export const getLettre = async (
     //console.log(`${process.env.API_URL}/fonction`);
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `http://localhost:10001`;
+    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
@@ -39,7 +39,7 @@ export const getLettre = async (
     );
 
     const res = await axios.get<any>(
-      `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://sprint2-two.vercel.app/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data as any;
@@ -54,7 +54,7 @@ export const updateEtatLetttre = async (
 ): Promise<any> => {
   try {
     const res = await axios.put(
-      `http://localhost:10001/lettre/updatelettre?ncp=${ncp}`,
+      `https://sprint2-two.vercel.app/lettre/updatelettre?ncp=${ncp}`,
       { etat: etat_lettre }
     );
     return res.data as any;

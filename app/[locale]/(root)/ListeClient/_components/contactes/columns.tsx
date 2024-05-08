@@ -19,7 +19,7 @@ export const columns: ColumnDef<client>[] = [
   },
   {
     accessorKey: "nom",
-    header: "Non",
+    header: "Nom",
     cell: ({ row }) => {
       return (
         <div className="flex items-center text-xs">
