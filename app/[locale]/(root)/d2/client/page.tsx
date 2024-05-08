@@ -253,6 +253,7 @@ export default function page() {
                 <Progress value={25} aria-label="25% increase" />
               </CardFooter>
             </Card>
+
             <Card x-chunk="dashboard-05-chunk-1">
               <CardHeader className="pb-2">
                 <CardDescription>This Week</CardDescription>
@@ -531,6 +532,7 @@ export default function page() {
               </Card>
             </TabsContent>
           </Tabs>
+          
         </div>
         
       </main>
