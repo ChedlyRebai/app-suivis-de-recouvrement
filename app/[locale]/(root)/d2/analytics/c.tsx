@@ -1,7 +1,7 @@
 import { PowerBIEmbed } from 'powerbi-client-react';
 import React from 'react'
 import { models } from 'powerbi-client';
-const c = () => {
+const Co = () => {
   return (
     <>
     <PowerBIEmbed
@@ -42,4 +42,4 @@ const c = () => {
   )
 }
 
-export default c
+export default Co

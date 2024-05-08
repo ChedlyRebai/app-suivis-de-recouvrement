@@ -31,11 +31,8 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const users = await getAllUsers(currentPage, perPage, search);
-  const clients = await getAllClient(currentPage, perPage, search);
-  const compterendus = await getAllCompteRendu(currentPage, perPage, search);
   const comptes = await getAllAccount(currentPage, perPage, search);
-  console.log(users);
+  
   return (
     <AllAccount
       columns={comptecolumns}

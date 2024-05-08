@@ -63,7 +63,7 @@ export const getAllUsers = async (
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );
     const res = await axios.get<Main>(
-      `http://localhost:10001/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as Main) || ({} as Main);
@@ -84,10 +84,10 @@ export const getAllClient = async (
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );
     console.log(
-      `http://localhost:10001/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
     const res = await axios.get<clientResult>(
-      `http://localhost:10001/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as clientResult) || ({} as clientResult);
@@ -179,10 +179,10 @@ export const getAllCompteRendu = async (
     //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     //   );
     console.log(
-      `http://localhost:10001/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
     const res = await axios.get<compterenduResult>(
-      `http://localhost:10001/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as compterenduResult) || ({} as compterenduResult);
@@ -220,10 +220,10 @@ export const getAllAccount = async (
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
-      `http://localhost:10001/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
     const res = await axios.get<CompteResult>(
-      `http://localhost:10001/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/compte/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as CompteResult) || ({} as CompteResult);
