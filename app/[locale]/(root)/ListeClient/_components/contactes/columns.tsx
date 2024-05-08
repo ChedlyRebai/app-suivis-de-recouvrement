@@ -1,10 +1,11 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { client } from "@/actions/client.action";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const columns: ColumnDef<ab_client>[] = [
+export const columns: ColumnDef<client>[] = [
   {
     accessorKey: "cli",
     header: ({ column }) => {
@@ -19,16 +20,40 @@ export const columns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "nom",
     header: "Non",
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center text-xs">
+          <span className="text-[0.90rem]">{row.original.nom}</span>
+        </div> 
+      );
+    }
   },
 
   {
     accessorKey: "groupe",
     header: "Groupe",
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center text-xs">
+          <span className="text-[0.90rem]">{row.original.Zone.codug} : {row.original.Zone.libelle}</span>
+        </div>
+      
+      );
+    }
   },
+
   {
     accessorKey: "agence",
     header: "Agence",
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center text-xs">
+          <span className="text-[0.90rem]">{row.original.Agence.codug} : {row.original.Agence.libelle}</span>
+        </div>
+      );
+    }
   },
+
   {
     accessorKey: "nbre_imp",
     header: "Nbr.IMP",
@@ -49,10 +74,12 @@ export const columns: ColumnDef<ab_client>[] = [
     accessorKey: "depassement",
     header: "Depassement",
   },
+
   {
     accessorKey: "nombre_jours_sdb",
     header: "Nbj.SDB",
   },
+
   {
     accessorKey: "tot_creance",
     header: "Tot.irregulier",

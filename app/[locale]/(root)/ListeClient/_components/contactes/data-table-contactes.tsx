@@ -50,7 +50,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+  columns: any[];
   total: any;
   data: TData[];
   totalAccout?: number;
@@ -495,11 +495,11 @@ export function DataTableContactes<TData, TValue>({
           </TableRow>
         </Table>
       </div>
-      <DataTablePagination
+      {/* <DataTablePagination
         TotalAccount={totalAccout}
         totalPages={totalPages}
         table={table}
-      />
+      /> */}
     </>
   );
 }

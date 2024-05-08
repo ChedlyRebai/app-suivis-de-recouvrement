@@ -42,7 +42,11 @@ export function DataTablePagination<TData>({
   };
 
   const createPerPage = (perPage: number | string) => {
+    console.log(perPage);
     params.set("perPage", perPage.toString());
+    console.log("params", params.toString());
+    console.log("pathname", pathname)
+    console.log(`${pathname}?${params.toString()}`)
     return `${pathname}?${params.toString()}`;
   };
 
