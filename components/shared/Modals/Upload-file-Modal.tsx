@@ -180,7 +180,7 @@ import Modal from "./Modal";
 import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 
 const UploadFiles = () => {
-  const {id,isOpen,onClose}=useUploadFileModal()
+  const {isOpen,onClose}=useUploadFileModal()
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
