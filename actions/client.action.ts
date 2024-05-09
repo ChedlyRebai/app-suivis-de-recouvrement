@@ -215,20 +215,7 @@ export const createCompteRendu = async (
   }
 };
 
-export const getCompteRenduById = async (IdClient?: string | number) => {
-  try {
-    axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<CompteRenduList>(
-      `http://localhost:10001/compterendu/getbyid/${IdClient}`
-    );
-    console.log("66666666666666666666666666666666666666666666666666666666666666");
-    ;
-    console.log("66666666666666666666666666666666666666666666666666666666666666");
-    return res.data || {} as CompteRenduList;
-  } catch (error) {
-    return {} as CompteRenduList;
-  }
-};
+
 
 export const demandeDeTransferAnticipe = async (
   IdClient?: string,

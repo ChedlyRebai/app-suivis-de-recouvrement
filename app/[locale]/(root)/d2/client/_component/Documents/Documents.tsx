@@ -22,7 +22,7 @@ const Documents = () => {
     <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7">
         <CardTitle>Documents</CardTitle>
-        <CardDescription>Documents récents</CardDescription>
+        <CardDescription>Documents de ce clients</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>

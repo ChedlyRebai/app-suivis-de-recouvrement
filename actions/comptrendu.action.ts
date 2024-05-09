@@ -12,11 +12,35 @@ export const getAllCompteRendu = async (page:any=1,perpage:any=4,search:string) 
           `http://localhost:10001/compterendu/all?page=${page}&perpage=8`
         );
 
-        console.log("66666666666666666666666666666666666666666666666666666666666666");
-        ;
-        console.log("66666666666666666666666666666666666666666666666666666666666666");
         return res.data || {} as Main ;
       } catch (error) {
         return {} as Main ;
       }
 }
+
+export const getCompteRenduById = async (IdClient?: string | number) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const res = await axios.get<CompteRenduList>(
+      `http://localhost:10001/compterendu/getbyid/${IdClient}`
+    );
+
+    return res.data || {} as CompteRenduList;
+  } catch (error) {
+    return {} as CompteRenduList;
+  }
+};
+
+
+export const getCompteRenduByClientId = async (IdClient?: string | number) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const res = await axios.get<any>(
+      `http://localhost:10001/compterendu/byclientid?id=${IdClient}`
+    );
+
+    return res.data || {} as any;
+  } catch (error) {
+    return {} as any;
+  }
+};
