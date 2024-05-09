@@ -187,7 +187,7 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
     const res = await axios.get<CompteRenduList[]>(
       `http://localhost:10001/compterendu/getcompterendu?cli=${IdClient}`
     );
-    console.log(res.data)
+    
     return res.data || ([] as CompteRenduList[]);
   } catch (error) {
     return [] as CompteRenduList[];
@@ -222,7 +222,7 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
       `http://localhost:10001/compterendu/getbyid/${IdClient}`
     );
     console.log("66666666666666666666666666666666666666666666666666666666666666");
-    console.log(res.data);
+    ;
     console.log("66666666666666666666666666666666666666666666666666666666666666");
     return res.data || {} as CompteRenduList;
   } catch (error) {

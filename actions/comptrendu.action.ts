@@ -13,7 +13,7 @@ export const getAllCompteRendu = async (page:any=1,perpage:any=4,search:string) 
         );
 
         console.log("66666666666666666666666666666666666666666666666666666666666666");
-        console.log(res.data);
+        ;
         console.log("66666666666666666666666666666666666666666666666666666666666666");
         return res.data || {} as Main ;
       } catch (error) {

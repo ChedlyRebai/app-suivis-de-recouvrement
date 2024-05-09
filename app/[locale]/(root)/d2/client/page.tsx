@@ -67,6 +67,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
 
 export default function page() {
   return (
@@ -534,6 +535,7 @@ export default function page() {
           </Tabs>
           
         </div>
+        <UploadFiles />
         
       </main>
     

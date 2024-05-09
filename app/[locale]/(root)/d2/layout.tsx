@@ -5,37 +5,15 @@ import {
   Home,
   Landmark,
   LineChart,
-  ListFilter,
-  MoreHorizontal,
+
   Package,
   Package2,
   PanelLeft,
-  PlusCircle,
-  Search,
-  
-  Settings,
   ShoppingCart,
   Users2,
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -45,22 +23,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+
+
 import {
   Tooltip,
   TooltipContent,
@@ -68,15 +32,9 @@ import {
   TooltipProvider
 } from "@/components/ui/tooltip"
 
-import { AllUsers } from "./_component/alllusers"
-import { Utilisateurcolumns } from "./_component/Utilisateurcolumns"
 import { getAllAccount, getAllClient, getAllCompteRendu, getAllUsers } from "@/actions/admin.action"
-import { AllClient } from "./_component/allclient"
-import { clientcolumns } from "./_component/ClientColumn"
-import { AllCompteRendu } from "./_component/alllCompteRendu"
-import { compterendutcolumns } from "./_component/compteRenduColumn"
-import { AllAccount } from "./_component/alllAccount"
-import { comptecolumns } from "./_component/compteColumn"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent,SheetTrigger } from "@/components/ui/sheet"
 
 
 
@@ -228,7 +186,7 @@ export default async function RootLayout({
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs">
+            {/* <SheetContent side="left" className="sm:max-w-xs">
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
                   href="#"
@@ -273,7 +231,7 @@ export default async function RootLayout({
                   Settings
                 </Link>
               </nav>
-            </SheetContent>
+            </SheetContent> */}
           </Sheet>
           {/* <Breadcrumb className="hidden md:flex">
             <BreadcrumbList>

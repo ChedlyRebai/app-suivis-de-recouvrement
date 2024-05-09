@@ -40,9 +40,9 @@ export const updateDroitAction = async (
     value,
     champ,
   });
-  // console.log(res.data);
+  // ;
   // console.log(id);
-  // console.log(res.data);
+  // ;
   return res.data;
 };
 
