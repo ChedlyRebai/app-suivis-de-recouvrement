@@ -9,7 +9,7 @@ import { Copy, Truck, MoreVertical, CreditCard } from 'lucide-react'
 
 
 const ClientInfo = ({client}:{client:ClientDetails}) => {
-    console;log(client)
+    console.log(client)
   return (
     <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
           <CardHeader className="flex flex-row items-start bg-muted/50">
@@ -70,25 +70,25 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
               <Separator className="my-2" />
               <ul className="grid gap-3">
                 <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Subtotal</span>
-                  <span>$299.00</span>
+                  <span className="text-muted-foreground">Depassement:</span>
+                  <span>{client.depassement}</span>
                 </li>
                 <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Shipping</span>
-                  <span>$5.00</span>
+                  <span className="text-muted-foreground">Engagement</span>
+                  <span>{client.engagement}</span>
                 </li>
                 <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Tax</span>
-                  <span>$25.00</span>
+                  <span className="text-muted-foreground">Solde debiteur</span>
+                  <span>{client.sd}</span>
                 </li>
                 <li className="flex items-center justify-between font-semibold">
-                  <span className="text-muted-foreground">Total</span>
-                  <span>$329.00</span>
+                  <span className="text-muted-foreground">Montant impayé</span>
+                  <span>{client.mnt_imp}</span>
                 </li>
               </ul>
             </div>
             <Separator className="my-4" />
-            <div className="grid grid-cols-2 gap-4">
+            {/* <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-3">
                 <div className="font-semibold">Shipping Information</div>
                 <address className="grid gap-0.5 not-italic text-muted-foreground">
@@ -103,15 +103,19 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
                   Same as shipping address
                 </div>
               </div>
-            </div>
-            <Separator className="my-4" />
+            </div> */}
+            {/* <Separator className="my-4" /> */}
             <div className="grid gap-3">
-              <div className="font-semibold">Customer Information</div>
+              <div className="font-semibold">Contact inforamation</div>
               <dl className="grid gap-3">
+                
                 <div className="flex items-center justify-between">
-                  <dt className="text-muted-foreground">Customer</dt>
+                  <dt className="text-muted-foreground">Address</dt>
                   <dd>Liam Johnson</dd>
                 </div>
+
+                
+
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Email</dt>
                   <dd>
@@ -133,7 +137,7 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
               </dl>
             </div>
             <Separator className="my-4" />
-            <div className="grid gap-3">
+            {/* <div className="grid gap-3">
               <div className="font-semibold">Payment Information</div>
               <dl className="grid gap-3">
                 <div className="flex items-center justify-between">
@@ -144,7 +148,7 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
                   <dd>**** **** **** 4532</dd>
                 </div>
               </dl>
-            </div>
+            </div> */}
           </CardContent>
           <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
             <div className="text-xs text-muted-foreground">
