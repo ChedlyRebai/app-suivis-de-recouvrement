@@ -9,6 +9,7 @@ import { Copy, Truck, MoreVertical, CreditCard } from 'lucide-react'
 
 
 const ClientInfo = ({client}:{client:ClientDetails}) => {
+    console;log(client)
   return (
     <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
           <CardHeader className="flex flex-row items-start bg-muted/50">
@@ -118,9 +119,15 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
                   </dd>
                 </div>
                 <div className="flex items-center justify-between">
-                  <dt className="text-muted-foreground">Phone</dt>
+                  <dt className="text-muted-foreground">Telephone 1</dt>
                   <dd>
-                    <a href="tel:">+1 234 567 890</a>
+                    <a href="tel:">{client.tel1}</a>
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between">
+                  <dt className="text-muted-foreground">Telephone 2</dt>
+                  <dd>
+                    <a href="tel:">{client.tel2}</a>
                   </dd>
                 </div>
               </dl>
