@@ -1,13 +1,14 @@
+import { File } from "@/Models/file.model";
 import axios from "axios";
 
 export const creatFile = async (
   clientID: Number,
   name: string,
   path: string
-) => {
+): Promise<File> => {
   console.log(`http://localhost:10001/file/create`);
   try {
-    const res = await axios.post(
+    const res = await axios.post<File>(
       `http://localhost:10001/file/create`,
 
       {
@@ -16,8 +17,9 @@ export const creatFile = async (
         path: path,
       }
     );
-    return res.data;
+    return (res.data as File) || ({} as File);
   } catch (error) {
     console.log(error);
+    return {} as File;
   }
 };

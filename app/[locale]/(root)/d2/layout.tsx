@@ -69,10 +69,7 @@ export default async function RootLayout({
   const limit = Number(searchParams?.limit) || 20;
   
   const users = await getAllUsers(currentPage,perPage,search)
-  const clients = await getAllClient(currentPage,perPage,search)
-  const compterendus =await getAllCompteRendu(currentPage,perPage,search)
-  const comptes=await getAllAccount(currentPage,perPage,search)
-  console.log(users)
+  
   return (
     <TooltipProvider >
     <div className="flex min-h-screen w-full flex-col bg-muted/40 mt-20"> 
