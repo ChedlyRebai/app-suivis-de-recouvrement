@@ -31,8 +31,8 @@ export default async function Home({
   return (
     <AllCompteRendu
       columns={compterendutcolumns}
-      totalPages={compterendus.totalPages}
-      data={compterendus.CompteRendu}
+      totalPages={compterendus.totalPages || 0}
+      data={compterendus.CompteRendu || []}
     />
   );
 }

@@ -30,8 +30,8 @@ export default async function Home({
   return (
     <AllClient
       columns={clientcolumns}
-      totalPages={clients.totalPages}
-      data={clients.result}
+      totalPages={clients.totalPages || 0}
+      data={clients.result || []}
     />
   );
 }

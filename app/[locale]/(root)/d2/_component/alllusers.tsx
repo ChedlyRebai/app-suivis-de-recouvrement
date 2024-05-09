@@ -54,13 +54,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Utilisateur } from "@/actions/admin.action";
+import { Utilisateur, usersAdmin } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
 
 interface DataTableProps {
   columns: any[];
 
-  data: Utilisateur[];
+  data: usersAdmin[];
   totalAccout?: number;
   totalPages?: number;
 }
@@ -84,7 +84,6 @@ export function AllUsers({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -92,9 +91,6 @@ export function AllUsers({
   // const [agences, setAgences] = useState<any>([]);
 
   const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
 
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -108,64 +104,9 @@ export function AllUsers({
     replace(`${pathname}?${params.toString()}`);
   }, 100);
 
-  const handleGroup = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("groupe", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
+  
 
-  const handleFrom = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("from", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("from")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleTo = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("to");
-      params.set("page", "1");
-    } else {
-      params.set("to", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("to")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleAgence = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("from");
-      params.set("page", "1");
-    }
-    if (query) {
-      params.set("agence", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
+ 
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -206,19 +147,7 @@ export function AllUsers({
     [searchParams, selectedCode]
   );
 
-  const resetAgence = () => {
-    setAgenceValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const resetGroup = () => {
-    setgroupeValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("groupe");
-    replace(`${pathname}?${params.toString()}`);
-  };
+  
 
   useEffect(() => {
     setSearch(`${searchParams.get("code")}`);

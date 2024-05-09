@@ -35,8 +35,8 @@ export default async function Home({
     
     <AllUsers
       columns={Utilisateurcolumns}
-      totalPages={users.totalPages}
-      data={users.result}
+      totalPages={users.totalPages || 0}
+      data={users.result || []}
     />
   );
 }

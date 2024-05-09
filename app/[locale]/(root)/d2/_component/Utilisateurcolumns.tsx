@@ -1,11 +1,11 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
-import { Utilisateur } from "@/actions/admin.action";
+import { Utilisateur, usersAdmin } from "@/actions/admin.action";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const Utilisateurcolumns: ColumnDef<Utilisateur>[] = [
+export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
   {
     accessorKey: "usr_matricule",
     header: "Matricule",
@@ -56,6 +56,31 @@ export const Utilisateurcolumns: ColumnDef<Utilisateur>[] = [
     accessorKey: "tel_chargee",
     header: "telephone",
   },
+  {
+    accessorKey:"Fonction",
+    header:"Fonction",
+    cell: ({ row }) => {
+      console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
+      return (
+        <div>
+          {row.original?.fonction.lib_fonction}     
+        </div>
+      );
+    },
+  },
+
+  {
+    accessorKey:"Departement",
+    header:"Department",
+    cell: ({ row }) => {
+      console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
+      return (
+        <div>
+          {row.original?.fonction.departement.nom_depart}     
+        </div>
+      );
+    },
+  },
 
   {
     accessorKey: "Affectation",
@@ -65,8 +90,7 @@ export const Utilisateurcolumns: ColumnDef<Utilisateur>[] = [
       return (
         <div>
           {row.original?.AffecterA?.[0]?.Zone?.libelle}
-          {row.original?.AffecterA?.[0]?.Agence?.libelle}
-          {row.original?.AffecterA?.[0]?.Agence?.libelle}
+          
         </div>
       );
     },

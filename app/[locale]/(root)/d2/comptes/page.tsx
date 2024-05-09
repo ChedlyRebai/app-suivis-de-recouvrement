@@ -36,8 +36,8 @@ export default async function Home({
   return (
     <AllAccount
       columns={comptecolumns}
-      totalPages={comptes.totalPages}
-      data={comptes.result}
+      totalPages={comptes.totalPages || 0}
+      data={comptes.result || []}
     />
   );
 }

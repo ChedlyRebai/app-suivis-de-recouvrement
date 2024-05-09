@@ -37,40 +37,33 @@ export interface clientResult {
 }
 
 export interface Client {
-  id: string;
-  nom: string;
-  Agence: Agence;
-  nbre_imp: number;
-  mnt_imp: string;
-  nombre_jours: number;
-  sd: string;
-
-  depassement: string;
-  nombre_jours_sdb: number;
-  tel1: string;
-  tel2: null;
-  Zone: Agence;
+  id:            number;
+    usr_matricule: string;
+    usr_nomprenom: string;
+    email_chargee: string;
+    affectation:   number | null;
+    fonction:      Fonction;
+    AffecterA:     AffecterA[];
+    flgstatut:     string;
+    tel_chargee:   string;
 }
 
-export const getAllUsers = async (
-  currentpage?: number,
-  perpage?: number,
-  search?: string
-) => {
-  try {
-    axios.defaults.baseURL = `${process.env.API_URL}`;
-    //   console.log(
-    //     `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
-    //   );
-    const res = await axios.get<Main>(
-      `https://release4.vercel.app/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
-    );
 
-    return (res.data as Main) || ({} as Main);
-  } catch (error) {
-    return {} as Main;
-  }
-};
+export interface Zone {
+    codug:   number;
+    libelle: string;
+}
+
+export interface Fonction {
+    lib_fonction: string;
+    departement:  Departement;
+}
+
+export interface Departement {
+    nom_depart: string;
+}
+
+
 
 export const getAllClient = async (
   currentpage?: number,
@@ -229,5 +222,75 @@ export const getAllAccount = async (
     return (res.data as CompteResult) || ({} as CompteResult);
   } catch (error) {
     return {} as CompteResult;
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export interface UserResult {
+  result:     usersAdmin[];
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface usersAdmin {
+  id:            number;
+  usr_matricule: string;
+  usr_nomprenom: string;
+  email_chargee: string;
+  affectation:   number | null;
+  fonction:      Fonction;
+  AffecterA:     AffecterA[];
+  flgstatut:     string;
+  tel_chargee:   string;
+}
+
+
+export interface Zone {
+  codug:   number;
+  libelle: string;
+}
+
+export interface Fonction {
+  lib_fonction: string;
+  departement:  Departement;
+}
+
+export interface Departement {
+  nom_depart: string;
+}
+
+
+
+export const getAllUsers = async (
+  currentpage?: number,
+  perpage?: number,
+  search?: string
+) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+      console.log(
+        `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${search}`
+      );
+    const res = await axios.get<UserResult>(
+      `http://localhost:10001/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+    );
+    console.log(res.data)
+    return (res.data as UserResult) || ({} as UserResult);
+  } catch (error) {
+    return {} as UserResult;
   }
 };
