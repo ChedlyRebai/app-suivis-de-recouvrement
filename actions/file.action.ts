@@ -1,7 +1,9 @@
+"use server"
 import { Agence } from "@/Models/agence.model";
 import { File } from "@/Models/file.model";
 import axios from "axios";
 import { Zone } from "./admin.action";
+import { cookies } from "next/headers";
 
 
 export interface Main {
@@ -31,6 +33,12 @@ export const creatFile = async (
 ): Promise<File> => {
   console.log(`http://localhost:10001/file/create`);
   try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     const res = await axios.post<File>(
       `http://localhost:10001/file/create`,
 
@@ -61,3 +69,26 @@ export const getAllfilesByClientId = async (clientID: Number): Promise<File[]> =
   }
 };
 
+
+
+export interface fileresult {
+  result:     File[];
+  totalCount: number;
+  totalPages: number;
+}
+export const getAllfiles = async (
+  currentpage?: number,
+  perpage?: number,
+  search?: string
+): Promise<fileresult> => {
+  try {
+    const res = await axios.get<fileresult>(
+      `http://localhost:10001/file/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+    );
+    console.log(res.data);
+    return (res.data as fileresult) || ({} as fileresult);
+  } catch (error) {
+    console.log(error);
+    return {} as fileresult;
+  }
+};

@@ -1,3 +1,4 @@
+import { AbClient } from "@/actions/admin.action";
 import { Agence } from "./agence.model";
 import { Zone } from "./zone.model";
 
@@ -8,6 +9,7 @@ export interface File {
     FilePath:    string;
     created_at:  Date;
     Utilisateur: Utilisateur;
+    ab_client:   AbClient;
   }
   
   export interface Utilisateur {

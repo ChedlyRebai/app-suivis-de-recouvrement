@@ -180,7 +180,7 @@ export default async function page({
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                {/* <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
                     size="sm"
@@ -189,8 +189,8 @@ export default async function page({
                     <ListFilter className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only">Filter</span>
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                </DropdownMenuTrigger> */}
+                {/* <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuCheckboxItem checked>
@@ -198,12 +198,12 @@ export default async function page({
                   </DropdownMenuCheckboxItem>
                   <DropdownMenuCheckboxItem>Declined</DropdownMenuCheckboxItem>
                   <DropdownMenuCheckboxItem>Refunded</DropdownMenuCheckboxItem>
-                </DropdownMenuContent>
+                </DropdownMenuContent> */}
               </DropdownMenu>
-              <Button size="sm" variant="outline" className="h-7 gap-1 text-sm">
+              {/* <Button size="sm" variant="outline" className="h-7 gap-1 text-sm">
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only">Export</span>
-              </Button>
+              </Button> */}
             </div>
           </div>
           <TabsContent value="Documents">
