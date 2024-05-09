@@ -24,8 +24,8 @@ export const creatFile = async (
   }
 };
 
-export const getAllfilesById = async (clientID: Number): Promise<File[]> => {
-  console.log(`http://localhost:10001/file/ALL?id=${clientID}`);
+export const getAllfilesByClientId = async (clientID: Number): Promise<File[]> => {
+  console.log(`http://localhost:10001/file/all?id=${clientID}`);
   try {
     const res = await axios.get<File[]>(
       `http://localhost:10001/file/all?id=${clientID}`
@@ -36,3 +36,4 @@ export const getAllfilesById = async (clientID: Number): Promise<File[]> => {
     return {} as File[];
   }
 };
+

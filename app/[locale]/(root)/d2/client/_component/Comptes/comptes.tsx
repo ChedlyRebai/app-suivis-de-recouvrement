@@ -17,63 +17,68 @@ import {
 
 import React from "react";
 
-const Comptes = () => {
-    return (
-        <Card x-chunk="dashboard-05-chunk-3">
-          <CardHeader className="px-7">
-            <CardTitle>Comptes</CardTitle>
-            <CardDescription>Comptes de ce client</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Customer</TableHead>
-                  <TableHead className="hidden sm:table-cell">Type</TableHead>
-                  <TableHead className="hidden sm:table-cell">Status</TableHead>
-                  <TableHead className="hidden md:table-cell">Date</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow className="bg-accent">
-                  <TableCell>
-                    <div className="font-medium">Liam Johnson</div>
-                    <div className="hidden text-sm text-muted-foreground md:inline">
-                      liam@example.com
-                    </div>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">Sale</TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <Badge className="text-xs" variant="secondary">
-                      Fulfilled
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <div className="font-medium">Olivia Smith</div>
-                    <div className="hidden text-sm text-muted-foreground md:inline">
-                      olivia@example.com
-                    </div>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">Refund</TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <Badge className="text-xs" variant="outline">
-                      Declined
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-                  <TableCell className="text-right">$150.00</TableCell>
-                </TableRow>
-               
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      );
-    };
+const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
+  console.log('***********************************************')
+  console.log(comptes)
+  return (
+    <Card x-chunk="dashboard-05-chunk-3">
+      <CardHeader className="px-7">
+        <CardTitle>Comptes</CardTitle>
+        <CardDescription>Comptes de ce client</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>N° Compte</TableHead>
+              <TableHead className="hidden sm:table-cell">
+                Montant impaye
+              </TableHead>
+              <TableHead className="hidden sm:table-cell">
+                Solde debiteur
+              </TableHead>
+              <TableHead className="hidden md:table-cell">Agence</TableHead>
+              <TableHead className="text-right">Zone</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Depassement
+              </TableHead>
+              <TableHead className="text-right">Totale Engagement</TableHead>
+              <TableHead className="text-right">TMontant autorise</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {
+              comptes.map((compte: any, index: number) => {
+                return (
+                  <TableRow key={index} className="bg-accent">
+                    <TableCell>{compte.ncp}</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      {compte.mnt_imp}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      {compte.mnt_sdb}
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {compte.Agence.nom}
+                    </TableCell>
+                    <TableCell className="text-right">{compte.Zone.nom}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {compte.depassement}
+                    </TableCell>
+                    <TableCell className="text-right">{compte.tot_eng}</TableCell>
+                    <TableCell className="text-right">
+                      {compte.montant_aut}
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            }
+            
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default Comptes;
