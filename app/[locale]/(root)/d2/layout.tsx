@@ -68,7 +68,6 @@ export default async function RootLayout({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
   
-  const users = await getAllUsers(currentPage,perPage,search)
   
   return (
     <TooltipProvider >
