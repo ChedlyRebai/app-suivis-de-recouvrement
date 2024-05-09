@@ -13,9 +13,10 @@
 import { ab_client } from "@/Models/ab_client.model";
 import { File } from "@/Models/file.model";
 import { Utilisateur, usersAdmin } from "@/actions/admin.action";
+import { deleteFile } from "@/actions/file.action";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Download } from "lucide-react";
+import { ArrowUpDown, Download, Trash2 } from "lucide-react";
 
 export const filecolumns: ColumnDef<File>[] = [
   {
@@ -68,6 +69,7 @@ export const filecolumns: ColumnDef<File>[] = [
     header: "download File",
     cell: ({ row }) => {
       return (
+        <>
         <Button
           variant="default"
           onClick={() => {
@@ -76,6 +78,18 @@ export const filecolumns: ColumnDef<File>[] = [
         >
           <Download size={16} />
         </Button>
+        {" "}
+        <Button
+          variant="destructive"
+          onClick={async () => {
+            await deleteFile(row.original.id);
+          }}
+        >
+          <Trash2 size={16} />
+         
+        </Button>
+
+        </>
       );
     },
   },

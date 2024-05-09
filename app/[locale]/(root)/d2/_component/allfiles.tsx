@@ -178,8 +178,8 @@ export function AllFilles({
     <>
       <Card x-chunk="dashboard-06-chunk-0">
         <CardHeader>
-          <CardTitle>Utilisateur</CardTitle>
-          <CardDescription>Gérez vos utilisateurs.</CardDescription>
+          <CardTitle>Documents</CardTitle>
+          <CardDescription>Gérez vos Documents.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex  items-center py-4 flex-wrap">

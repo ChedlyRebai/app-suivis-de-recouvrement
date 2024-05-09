@@ -92,3 +92,21 @@ export const getAllfiles = async (
     return {} as fileresult;
   }
 };
+
+
+
+export const deleteFile = async (
+  idFile: Number | string
+): Promise<File> => {
+  console.log(`http://localhost:10001/file/create`);
+  try {
+    
+    const res = await axios.delete<File>(
+      `http://localhost:10001/file/deleteById?id=${idFile}`
+    );
+    return (res.data as File) || ({} as File);
+  } catch (error) {
+    console.log(error);
+    return {} as File;
+  }
+};
