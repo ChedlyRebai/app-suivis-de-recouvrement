@@ -1,13 +1,4 @@
-// {
-//     FileName: 'Facture_TN480353.pdf',
-//     FilePath: 'https://adnugdihznkdjipy.public.blob.vercel-storage.com/kDsBbBg-W9pArcuP7Z3qvPDBmBtC1r31RvdeR9.form-data;%20boundary=----WebKitFormBoundary1bAZPQZ0bgdZ4SsK',
-//     created_at: '2024-05-09T19:16:37.877Z',
-//     Utilisateur: {
-//       usr_nomprenom: 'DIRECTEUR ',
-//       usr_matricule: '1802',
-//       AffecterA: []
-//     }
-//   }
+
 
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
@@ -76,6 +67,7 @@ export const filecolumns: ColumnDef<File>[] = [
             window.open(row.original.FilePath);
           }}
         >
+
           <Download size={16} />
         </Button>
         {" "}
