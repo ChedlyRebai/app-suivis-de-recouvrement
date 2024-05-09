@@ -10,7 +10,7 @@ interface UploadFileModalStore {
 
 const useUploadFileModal = create<UploadFileModalStore>((set) => ({
   id:0,
-  isOpen: false,
+  isOpen: true,
   onOpen: (id:number) => set({ isOpen: true, id: id}),
   onClose: () => set({ isOpen: false }),
 }));

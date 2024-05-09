@@ -1,5 +1,3 @@
-import { EdgeStoreProvider } from "@/lib/edgestore";
-
 export default async function RootLayout({
   children,
 }: {
@@ -7,8 +5,7 @@ export default async function RootLayout({
 }) {
   return (
     <html>
-      <body className="min-h-screen">
-      <EdgeStoreProvider>{children}</EdgeStoreProvider></body>
+      <body className="min-h-screen">{children}</body>
     </html>
   );
 }

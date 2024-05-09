@@ -27,13 +27,13 @@
 //   const onDrop = useCallback((acceptedFiles: any) => {
 //     acceptedFiles.forEach((file: File) => {
 //       const reader = new FileReader();
-  
+
 //       reader.onloadend = () => {
 //         const blob = new Blob([reader?.result as BlobPart], { type: file.type });
 //         console.log(blob)
 //         setFiles((old:any) => [...old, blob]);
 //       };
-  
+
 //       reader.readAsArrayBuffer(file);
 //     });
 //   }, []);
@@ -161,43 +161,41 @@
 //               onClick={() => deleteFile(index)}
 //               className="text-gray-700 h-7 w-7 rounded-full relative cursor-pointer -top-8 -right-5 bg-red-600  hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-200"
 //             />
-            
+
 //           </div>
 //         ))}
-      
+
 //     </Modal>
 //   );
 // };
 
 // export default UploadFiles;
 
+import { Toaster } from "@/components/ui/toaster";
+import Image from "next/image";
+import Link from "next/link";
+import ExpandingArrow from "../expanding-arrow";
+import Uploader from "../uploader";
+import Modal from "./Modal";
+import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 
-import { Toaster } from '@/components/ui/toaster'
-import Image from 'next/image'
-import Link from 'next/link'
-import ExpandingArrow from '../expanding-arrow'
-import Uploader from '../uploader'
-import Modal from './Modal'
-
-
-const UploadFiles=()=> {
+const UploadFiles = () => {
+  const {id,isOpen,onClose}=useUploadFileModal()
+  const onChange = (open: boolean) => {
+    if (!open) {
+      onClose();
+    }
+  };
   return (
     <Modal
-      title="Upload a file"
-      description="Accepted formats: .png, .jpg, .gif, .mp4"
-      isOpen={true}
-      onChange={() => {}}
+      title="Téléverser un fichier"
+      description="Formats acceptés : .pdf , .word"
+      isOpen={isOpen}
+      onChange={onClose}
     >
-    
-     
-        <Uploader />
-      
-      
-      
-   
+      <Uploader />
     </Modal>
-  )
-}
-
+  );
+};
 
 export default UploadFiles;

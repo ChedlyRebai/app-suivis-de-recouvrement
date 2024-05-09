@@ -6,11 +6,13 @@ import { PutBlobResult } from "@vercel/blob";
 import { File, FilePlus2Icon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { creatFile } from "@/actions/file.action";
-
+import { useParams, useSearchParams } from 'next/navigation'
+import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 export default function Uploader() {
   const [data, setData] = useState({
     images: [] as string[],
   });
+  const {onClose}=useUploadFileModal()
   const [files, setFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
 
@@ -48,7 +50,13 @@ export default function Uploader() {
     },
     []
   );
-
+  const params = useSearchParams()
+ 
+  // Route -> /shop/[tag]/[item]
+  // URL -> /shop/shoes/nike-air-max-97
+  // `params` -> { tag: 'shoes', item: 'nike-air-max-97' }
+  
+  const id = Number(params.get('id'))
   const handleDelete = () => {
     // Delete operation goes here
     console.log("Delete operation triggered");
@@ -80,8 +88,9 @@ export default function Uploader() {
             if (res.ok) {
 
               const result = await res.json();
-              await creatFile(1,file.name,result.url).then(()=>{
+              await creatFile(id,file.name,result.url).then(()=>{
                 toast.success("Files uploaded successfully!");
+                onClose()
               }).catch(
                 ()=>{
                   toast.error("error");
