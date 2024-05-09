@@ -1,6 +1,8 @@
 import { Agence } from "@/Models/agence.model";
 
 export interface CompteRenduList {
+    
+    usr_matricule: string;
     created_at:                                                  Date;
     id:                                                          number;
     cli:                                                         string;

@@ -269,3 +269,43 @@ export const getValidationProposeDeTransferAnticipe = async (
     return {} as ab_client;
   }
 };
+
+
+
+
+export interface ClientDetails {
+  id:               string;
+  created_at:       Date;
+  catl:             string;
+  nom:              string;
+  Agence:           Agence;
+  engagement:       string;
+  cli:              string;
+  tel:              string;
+  nbre_imp:         number;
+  mnt_imp:          string;
+  nombre_jours:     number;
+  sd:               string;
+  depassement:      string;
+  nombre_jours_sdb: number;
+  tel1:             string;
+  tel2:             null;
+  Zone:             Zone;
+}
+
+
+
+export const getClientById = async (IdClient?: string | number) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(
+      `http://localhost:10001/client/byid?id=${IdClient}`
+    );
+    const res = await axios.get<ClientDetails>(
+      `http://localhost:10001/client/byid?id=${IdClient}`
+    );
+    return res.data || ({} as ClientDetails);
+  } catch (error) {
+    return {} as ClientDetails;
+  }
+};

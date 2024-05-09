@@ -1,4 +1,7 @@
+"use client"
+import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -14,10 +17,15 @@ import {
   TableCell,
   Table,
 } from "@/components/ui/table";
+import { CompteRenduList } from "@/constants/types";
+import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
+import { SearchIcon } from "lucide-react";
 
 import React from "react";
 
-const CompteRendu = () => {
+const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
+  const {  onOpen } = useCompteRenduModal();
+
   return (
     <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7">
@@ -28,50 +36,48 @@ const CompteRendu = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Customer</TableHead>
-              <TableHead className="hidden sm:table-cell">Type</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead>
-              <TableHead className="hidden md:table-cell">Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Non utilistaeur</TableHead>
+              <TableHead>utilistaeur Matricule</TableHead>
+              <TableHead className="hidden md:table-cell">Type</TableHead>
+              <TableHead className="text-right">Date</TableHead>
+              <TableHead className="text-right">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className="bg-accent">
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-              <TableCell className="text-right">$250.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Olivia Smith</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  olivia@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Refund</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="outline">
-                  Declined
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-              <TableCell className="text-right">$150.00</TableCell>
-            </TableRow>
-           
+            {compterendus.map((compterendu: CompteRenduList, index: number) => {
+              return (
+                <TableRow key={index} className="bg-accent">
+                  <TableCell>{compterendu.usr_nom}</TableCell>
+                  <TableCell className="hidden sm:table-cell">{compterendu.usr_matricule}</TableCell>
+                  {/* <TableCell className="hidden sm:table-cell">
+                    <Badge className="text-xs" variant="secondary"></Badge>
+                  </TableCell> */}
+                  <TableCell className="hidden md:table-cell">
+                    {
+                      compterendu
+                        .compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                        ?.types.libelle
+                    }
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {compterendu.created_at.toString().substring(0, 10)}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      className="flex items-center h-full  justify-center"
+                      variant="default"
+                      onClick={() => onOpen(compterendu.id)}
+                    >
+                      <SearchIcon className="mr-" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </CardContent>
+      
     </Card>
   );
 };

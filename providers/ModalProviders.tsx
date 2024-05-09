@@ -1,4 +1,5 @@
 import AddDroitModal from "@/components/shared/Modals/Add-Droit-modal";
+import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import EditDroitModal from "@/components/shared/Modals/Edit-Droit-Modal";
 import InvalidCredentialModal from "@/components/shared/Modals/Invalid-Credential-Modal";
 import IInvalidCredentialModal from "@/components/shared/Modals/Invalid-Credential-Modal";
@@ -13,6 +14,7 @@ const ModalProviders = () => {
       <AddDroitModal />
       <ListeAgenceModal />
       <SearchFonctionModal />
+      
     </>
   );
 };

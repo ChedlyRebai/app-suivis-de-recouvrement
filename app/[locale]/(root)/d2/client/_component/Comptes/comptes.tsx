@@ -18,8 +18,7 @@ import {
 import React from "react";
 
 const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
-  console.log('***********************************************')
-  console.log(comptes)
+  
   return (
     <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7">
@@ -59,9 +58,9 @@ const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
                       {compte.mnt_sdb}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {compte.Agence.nom}
+                      {compte.Agence.codug}:{compte.Agence.libelle}
                     </TableCell>
-                    <TableCell className="text-right">{compte.Zone.nom}</TableCell>
+                    <TableCell className="text-right">{compte.Zone.codug}:{compte.Zone.libelle}</TableCell>
                     <TableCell className="hidden md:table-cell">
                       {compte.depassement}
                     </TableCell>

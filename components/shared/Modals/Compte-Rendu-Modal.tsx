@@ -3,10 +3,11 @@ import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 import React from "react";
 import Modal from "./Modal";
 import { useQuery } from "@tanstack/react-query";
-import { getCompteRenduById } from "@/actions/client.action";
+
 import { Label } from "@/components/ui/label";
 import { ClipboardListIcon } from "lucide-react";
 import Oval from "react-loading-icons/dist/esm/components/oval";
+import { getCompteRenduById } from "@/actions/comptrendu.action";
 
 const CompteRenduModal = () => {
   const { id, isOpen, onOpen, onClose } = useCompteRenduModal();
