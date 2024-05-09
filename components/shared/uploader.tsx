@@ -5,6 +5,7 @@ import LoadingDots from "./loading-dots";
 import { PutBlobResult } from "@vercel/blob";
 import { File, FilePlus2Icon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import { creatFile } from "@/actions/file.action";
 
 export default function Uploader() {
   const [data, setData] = useState({
@@ -71,15 +72,22 @@ export default function Uploader() {
         const formData = new FormData();
         files.forEach((file) => {
           formData.append("files", file);
-
+          console.log(file.name)
           fetch("/api/upload", {
             method: "POST",
             body: formData,
           }).then(async (res) => {
             if (res.ok) {
+
               const result = await res.json();
-              // Handle success
-              toast.success("Files uploaded successfully!");
+              await creatFile(1,file.name,result.url).then(()=>{
+                toast.success("Files uploaded successfully!");
+              }).catch(
+                ()=>{
+                  toast.error("error");
+                }
+              )
+              console.log(result)
             } else {
               // Handle error
               const error = await res.text();
