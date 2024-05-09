@@ -1,5 +1,28 @@
+import { Agence } from "@/Models/agence.model";
 import { File } from "@/Models/file.model";
 import axios from "axios";
+import { Zone } from "./admin.action";
+
+
+export interface Main {
+  FileName:    string;
+  FilePath:    string;
+  created_at:  Date;
+  Utilisateur: Utilisateur;
+}
+
+export interface Utilisateur {
+  usr_nomprenom: string;
+  usr_matricule: string;
+  AffecterA:     AffecterA[];
+}
+
+export interface AffecterA {
+  Zone:   Zone;
+  Agence: Agence;
+}
+
+
 
 export const creatFile = async (
   clientID: Number,
@@ -27,7 +50,7 @@ export const creatFile = async (
 export const getAllfilesByClientId = async (clientID: Number): Promise<File[]> => {
   console.log(`http://localhost:10001/file/allbyid?id=${clientID}`);
   try {
-    const res = await axios.get<File[]>(
+    const res = await axios.get<Main[]>(
       `http://localhost:10001/file/allbyid?id=${clientID}`
     );
     console.log(res.data);

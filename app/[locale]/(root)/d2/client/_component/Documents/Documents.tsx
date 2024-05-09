@@ -1,5 +1,6 @@
 import { File } from "@/Models/file.model";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -15,25 +16,39 @@ import {
   TableCell,
   Table,
 } from "@/components/ui/table";
-import { Download } from "lucide-react";
+import { Download, ListPlusIcon } from "lucide-react";
 import Link from "next/link";
 
 import React from "react";
+import OpenModelButton from "./openModelButton";
 
 const Documents = ({ file }: { file: File[] }) => {
   return (
     <Card x-chunk="dashboard-05-chunk-3">
-      <CardHeader className="px-7">
+      <CardHeader className="px-7 flex flex-row justify-between items-center">
+        <div>
         <CardTitle>Documents</CardTitle>
+        
         <CardDescription>Documents de ce clients</CardDescription>
+
+        </div>
+        
+        <OpenModelButton/>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
+            <TableHead >
+                Matricule de l'utilisateur
+              </TableHead>
+              <TableHead >
+                Nom de l'utilisateur
+              </TableHead>
               <TableHead >
                 Nom de documents
               </TableHead>
+              <TableHead >Agence/Zone</TableHead>
               <TableHead >Date</TableHead>
               <TableHead >Download</TableHead>
             </TableRow>
@@ -42,11 +57,17 @@ const Documents = ({ file }: { file: File[] }) => {
             {file.map((file: File, index) => {
               return (
                 <TableRow className="bg-accen">
-                  <TableCell>{file.FileName}</TableCell>
-                  <TableCell >
+                  <TableCell className="p-2">{file.Utilisateur.usr_matricule}</TableCell>
+                  <TableCell className="p-3">{file.Utilisateur.usr_nomprenom}</TableCell>
+                  <TableCell className="p-3">{file.FileName}</TableCell>
+                  <TableCell className="p-3">
+                    {file.Utilisateur.AffecterA?.[0]?.Agence?.libelle} 
+                    {file.Utilisateur.AffecterA?.[0]?.Zone?.libelle}
+                  </TableCell>
+                  <TableCell className="p-3">
                     {file.created_at.toString().substring(0, 10)}
                   </TableCell>
-                  <TableCell >
+                  <TableCell className="p-3">
                     <Link   download  href={file.FilePath}>
                       <Download className="text-center" />
                     </Link>

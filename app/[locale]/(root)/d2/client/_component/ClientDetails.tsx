@@ -58,32 +58,32 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
                   <span className="text-muted-foreground">
                     Agence <span></span>
                   </span>
-                  <span>{client.Agence.codug} : {client.Agence.libelle}</span>
+                  <span>{client?.Agence?.codug} : {client.Agence?.libelle}</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">
                     Zone <span></span>
                   </span>
-                  <span>{client.Zone.codug} : {client.Zone.libelle}</span>
+                  <span>{client?.Zone?.codug} : {client.Zone?.libelle}</span>
                 </li>
               </ul>
               <Separator className="my-2" />
               <ul className="grid gap-3">
                 <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">Depassement:</span>
-                  <span>{client.depassement}</span>
+                  <span>{client?.depassement}</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">Engagement</span>
-                  <span>{client.engagement}</span>
+                  <span>{client?.engagement}</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">Solde debiteur</span>
-                  <span>{client.sd}</span>
+                  <span>{client?.sd}</span>
                 </li>
                 <li className="flex items-center justify-between font-semibold">
                   <span className="text-muted-foreground">Montant impayé</span>
-                  <span>{client.mnt_imp}</span>
+                  <span>{client?.mnt_imp}</span>
                 </li>
               </ul>
             </div>
@@ -125,13 +125,13 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Telephone 1</dt>
                   <dd>
-                    <a href="tel:">{client.tel1}</a>
+                    <a href="tel:">{client?.tel1}</a>
                   </dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Telephone 2</dt>
                   <dd>
-                    <a href="tel:">{client.tel2}</a>
+                    <a href="tel:">{client?.tel2}</a>
                   </dd>
                 </div>
               </dl>
@@ -152,7 +152,7 @@ const ClientInfo = ({client}:{client:ClientDetails}) => {
           </CardContent>
           <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
             <div className="text-xs text-muted-foreground">
-               <time >{client.created_at.toString().substring(0,10)}</time>
+               <time >{client?.created_at?.toString()?.substring(0,10)}</time>
             </div>
             {/* <Pagination className="ml-auto mr-0 w-auto">
                   <PaginationContent>

@@ -30,15 +30,15 @@ const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
           <TableHeader>
             <TableRow>
               <TableHead>N° Compte</TableHead>
-              <TableHead className="hidden sm:table-cell">
+              <TableHead>
                 Montant impaye
               </TableHead>
-              <TableHead className="hidden sm:table-cell">
+              <TableHead>
                 Solde debiteur
               </TableHead>
-              <TableHead className="hidden md:table-cell">Agence</TableHead>
+              <TableHead>Agence</TableHead>
               <TableHead className="text-right">Zone</TableHead>
-              <TableHead className="hidden md:table-cell">
+              <TableHead>
                 Depassement
               </TableHead>
               <TableHead className="text-right">Totale Engagement</TableHead>
@@ -50,22 +50,22 @@ const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
               comptes.map((compte: any, index: number) => {
                 return (
                   <TableRow key={index} className="bg-accent">
-                    <TableCell>{compte.ncp}</TableCell>
-                    <TableCell className="hidden sm:table-cell">
+                    <TableCell className="p-3">{compte.ncp}</TableCell>
+                    <TableCell className="p-3">
                       {compte.mnt_imp}
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell">
+                    <TableCell className="p-3">
                       {compte.mnt_sdb}
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">
+                    <TableCell className="p-3">
                       {compte.Agence.codug}:{compte.Agence.libelle}
                     </TableCell>
                     <TableCell className="text-right">{compte.Zone.codug}:{compte.Zone.libelle}</TableCell>
-                    <TableCell className="hidden md:table-cell">
+                    <TableCell className="p-3">
                       {compte.depassement}
                     </TableCell>
-                    <TableCell className="text-right">{compte.tot_eng}</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell className="p-3">{compte.tot_eng}</TableCell>
+                    <TableCell className="p-3">
                       {compte.montant_aut}
                     </TableCell>
                   </TableRow>
