@@ -72,7 +72,6 @@ export function AllCompteRendu({
   data,
   totalAccout,
   totalPages = 0,
- 
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -190,8 +189,8 @@ export function AllCompteRendu({
     <>
       <Card x-chunk="dashboard-06-chunk-0">
         <CardHeader>
-          <CardTitle>Utilisateur</CardTitle>
-          <CardDescription>Gérez vos utilisateurs.</CardDescription>
+          <CardTitle>Compte Rendus</CardTitle>
+          <CardDescription>Gérez vos Compte Rendus</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex  items-center py-4 flex-wrap">

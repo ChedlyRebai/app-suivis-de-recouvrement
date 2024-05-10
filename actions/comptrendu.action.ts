@@ -44,3 +44,16 @@ export const getCompteRenduByClientId = async (IdClient?: string | number) => {
     return {} as any;
   }
 };
+
+
+export const deleteCompteRenduById = async (idCompRendu: Number | string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const res = await axios.delete(
+      `http://localhost:10001/compterendu/deleteById?id=${idCompRendu}`
+    );
+    return res.data ;
+  } catch (error) {
+    return {} as any;
+  }
+}

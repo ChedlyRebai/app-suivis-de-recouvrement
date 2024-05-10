@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -14,7 +13,15 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal, SearchIcon, ZoomInIcon, ZoomOut } from "lucide-react";
+import {
+  ArrowUpDown,
+  ChevronDown,
+  MoreHorizontal,
+  SearchIcon,
+  Trash2,
+  ZoomInIcon,
+  ZoomOut,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +45,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getListCompteRenduHistorique } from "@/actions/client.action";
 import { useSearchParams } from "next/navigation";
 import { CompteRenduList } from "@/constants/types";
+import { deleteFile } from "@/actions/file.action";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: CompteRenduList[];
@@ -47,18 +55,17 @@ const CompteRenduHistorique = ({
   listHistorique: data,
 }: CompteRenduHistoriqueProps) => {
   const { isOpen, onClose, onOpen } = useCompteRenduModal();
-  
-const searchParams = useSearchParams();
-const cli = searchParams.get('cli');
+
+  const searchParams = useSearchParams();
+  const cli = searchParams.get("cli");
   // const { isPending, error, data} = useQuery<CompteRenduList[]>({
   //   queryKey: ['getCompteRenduHistorique'],
   //   queryFn:async ()=>await getListCompteRenduHistorique(cli as string),
   //   refetchOnMount: true,
   // })
-  console.log(data)
+  console.log(data);
   const columns: ColumnDef<CompteRenduList>[] = [
     {
-      
       accessorKey: "num",
       header: ({ column }) => {
         return (
@@ -71,9 +78,7 @@ const cli = searchParams.get('cli');
           </Button>
         );
       },
-      cell: ({ row }) => (
-        <div className="capitalize">{row.index + 1}</div>
-      ),
+      cell: ({ row }) => <div className="capitalize">{row.index + 1}</div>,
     },
     {
       accessorKey: "id",
@@ -82,13 +87,9 @@ const cli = searchParams.get('cli');
       //     <div className="hidden"/>
       //   );
       // },
-      cell: ({ row }) => (
-        <div className="hidden">
-          {row.getValue("id")}
-          </div>
-      ),
+      cell: ({ row }) => <div className="hidden">{row.getValue("id")}</div>,
     },
-    
+
     {
       accessorKey: "created_at",
       header: ({ column }) => {
@@ -111,9 +112,8 @@ const cli = searchParams.get('cli');
 
     {
       accessorKey: "compte_rendu",
-      header: ({ column }) =>
-        {
-         // console.log(data[14].compterendutype_compterendutype_compterenduidTosuivi_agenda[0].types)
+      header: ({ column }) => {
+        // console.log(data[14].compterendutype_compterendutype_compterenduidTosuivi_agenda[0].types)
         return <span>Compte Rendu</span>;
       },
 
@@ -141,14 +141,26 @@ const cli = searchParams.get('cli');
         const payment = row.original;
 
         return (
-          <Button
-            className="flex items-center h-full  justify-center"
-            variant="default"
-            onClick={()=>onOpen(row.getValue("id"))}
-          >
-            <SearchIcon  className="mr-" />
-           
-          </Button>
+          <>
+            <Button
+              className="flex items-center h-full  justify-center"
+              variant="default"
+              onClick={() => onOpen(row.getValue("id"))}
+            >
+              {" "}
+              <SearchIcon className="mr-" />
+            </Button>
+
+            <Button
+              variant="destructive"
+              onClick={async () => {
+                await deleteFile(row.original.id);
+              }}
+            >
+              {" "}
+              <Trash2 size={16} />
+            </Button>
+          </>
         );
       },
     },
@@ -163,8 +175,7 @@ const cli = searchParams.get('cli');
   const [rowSelection, setRowSelection] = React.useState({});
 
   console.log(data);
- 
-  
+
   const table = useReactTable({
     data,
     columns,
@@ -176,7 +187,7 @@ const cli = searchParams.get('cli');
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    
+
     state: {
       sorting,
       columnFilters,
@@ -184,8 +195,8 @@ const cli = searchParams.get('cli');
       rowSelection,
     },
   });
-  if(!data){
-    return <div>Loading...</div>
+  if (!data) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -277,7 +288,7 @@ const cli = searchParams.get('cli');
           </TableBody>
         </Table>
       </div>
-      
+
       <CompteRenduModal />
     </div>
   );
