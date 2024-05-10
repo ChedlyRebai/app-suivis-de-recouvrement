@@ -37,6 +37,8 @@ export interface UserDetails {
 }
 
 export interface SuiviAgendum {
+  id: number;
+  ab_client: AbClient;
   created_at: Date;
   compterendutype_compterendutype_compterenduidTosuivi_agenda: CompterendutypeCompterendutypeCompterenduidTosuiviAgendum[];
 }
@@ -104,6 +106,8 @@ export interface AbClient {
   id: string;
   nom: string;
   cli: string;
+  Agence: Agence;
+  Zone: Zone;
 }
 
 export interface Fonction {

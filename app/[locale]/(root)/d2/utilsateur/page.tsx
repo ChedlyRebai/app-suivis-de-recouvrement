@@ -22,6 +22,7 @@ import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import { getUserDetails } from "@/actions/utilisateur.action";
 import UserInfo from "./_component/UserDetails";
 import UserDocuments from "./_component/Documents/Documents";
+import UserCompteRendu from "./_component/Compterendu/CompteRendus";
 
 export default async function page({
   searchParams,
@@ -148,10 +149,10 @@ export default async function page({
           <TabsContent value="Documents">
             <UserDocuments file={User.Files} />
           </TabsContent>
-          {/* <TabsContent value="comptrendu">
-            <CompteRendu compterendus={compterendus} />
+          <TabsContent value="comptrendu">
+            <UserCompteRendu compterendus={User.suivi_agenda} />
           </TabsContent>
-          <TabsContent value="comptes">
+          {/* <TabsContent value="comptes">
             <Comptes comptes={comptes} />
           </TabsContent> */}
         </Tabs>
