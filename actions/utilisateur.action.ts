@@ -33,6 +33,67 @@ export interface UserDetails {
   flgstatut: string;
   tel_chargee: string;
   created_at: Date;
+  suivi_agenda: SuiviAgendum[];
+}
+
+export interface SuiviAgendum {
+  created_at: Date;
+  compterendutype_compterendutype_compterenduidTosuivi_agenda: CompterendutypeCompterendutypeCompterenduidTosuiviAgendum[];
+}
+
+export interface CompterendutypeCompterendutypeCompterenduidTosuiviAgendum {
+  id: number;
+  created_at: Date;
+  compterenduid: number;
+  visiteId: number;
+  facilitePaimentId: null;
+  ClientInjoignableId: null;
+  nouvellecoordonneesID: null;
+  promesseregresseID: null;
+  typeID: number;
+  nonReconnaissanceID: null;
+  types: Types;
+  clientInjoignable: ClientInjoignable | null;
+  FacilitePaiment: FacilitePaiment | null;
+  nonreconaissance: Nonreconaissance | null;
+  nouvellecoordonnees: null;
+  promesseregresse: Promesseregresse | null;
+  visite: Visite;
+}
+
+export interface FacilitePaiment {
+  id: number;
+  nb_ech: null;
+  mnt_rec: string;
+  lieu_rec: string;
+  suiviagendaid: number;
+  created_at: Date;
+  updated_at: Date;
+  montantFacilites: MontantFacilite[];
+}
+
+export interface MontantFacilite {
+  id: number;
+  mntech: string;
+  date_ech: null;
+  facilitePaimentId: number;
+}
+
+export interface Nonreconaissance {
+  id: number;
+  observation: string;
+}
+
+export interface Types {
+  code: number;
+  libelle: string;
+}
+
+export interface Visite {
+  id: number;
+  date_visite: null;
+  lieu_visite: number;
+  h_rdv: number;
 }
 
 export interface AffecterA {
@@ -50,6 +111,17 @@ export interface Fonction {
   departement: Departement;
 }
 
+export interface ClientInjoignable {
+  id: number;
+  lieu_ver: string;
+}
+
+export interface Promesseregresse {
+  id: number;
+  mnt_reg: string;
+  date_ver: null;
+  lieu_ver: string;
+}
 export const getUserDetails = async (
   id: string | number
 ): Promise<UserDetails> => {
