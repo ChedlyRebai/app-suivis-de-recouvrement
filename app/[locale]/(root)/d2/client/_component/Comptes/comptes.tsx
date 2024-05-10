@@ -17,8 +17,7 @@ import {
 
 import React from "react";
 
-const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
-  
+const Comptes = ({ comptes = [] }: { comptes: any[] }) => {
   return (
     <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7">
@@ -30,49 +29,39 @@ const Comptes = ({ comptes=[] }: { comptes: any[] }) => {
           <TableHeader>
             <TableRow>
               <TableHead>N° Compte</TableHead>
-              <TableHead>
-                Montant impaye
-              </TableHead>
-              <TableHead>
-                Solde debiteur
-              </TableHead>
+              <TableHead>Montant impaye</TableHead>
+              <TableHead>Solde debiteur</TableHead>
               <TableHead>Agence</TableHead>
               <TableHead className="text-right">Zone</TableHead>
-              <TableHead>
-                Depassement
-              </TableHead>
+              <TableHead>Depassement</TableHead>
               <TableHead className="text-right">Totale Engagement</TableHead>
               <TableHead className="text-right">TMontant autorise</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {
-              comptes.map((compte: any, index: number) => {
-                return (
-                  <TableRow key={index} className="bg-accent">
-                    <TableCell className="p-3">{compte.ncp}</TableCell>
-                    <TableCell className="p-3">
-                      {compte.mnt_imp}
-                    </TableCell>
-                    <TableCell className="p-3">
-                      {compte.mnt_sdb}
-                    </TableCell>
-                    <TableCell className="p-3">
-                      {compte.Agence.codug}:{compte.Agence.libelle}
-                    </TableCell>
-                    <TableCell className="text-right">{compte.Zone.codug}:{compte.Zone.libelle}</TableCell>
-                    <TableCell className="p-3">
-                      {compte.depassement}
-                    </TableCell>
-                    <TableCell className="p-3">{compte.tot_eng}</TableCell>
-                    <TableCell className="p-3">
-                      {compte.montant_aut}
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            }
-            
+            {comptes.map((compte: any, index: number) => {
+              return (
+                <TableRow key={index} className="bg-accent">
+                  <TableCell className="p-3">{compte.ncp}</TableCell>
+                  <TableCell className="p-3">{compte.mnt_imp}</TableCell>
+                  <TableCell className="p-3">{compte.mnt_sdb}</TableCell>
+                  <TableCell className="p-3">
+                    {compte.Agence.codug}:{compte.Agence.libelle}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {compte.Zone.codug}:{compte.Zone.libelle}
+                  </TableCell>
+                  <TableCell className="p-3">{compte.depassement}</TableCell>
+                  <TableCell className="p-3">{compte.tot_eng}</TableCell>
+                  <TableCell className="p-3">{compte.montant_aut}</TableCell>
+                </TableRow>
+              );
+            })}
+            {comptes.length === 0 && (
+              <TableRow>
+                <TableCell className="h-24 text-center">No results.</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </CardContent>

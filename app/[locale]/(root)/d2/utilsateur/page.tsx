@@ -23,6 +23,7 @@ import { getUserDetails } from "@/actions/utilisateur.action";
 import UserInfo from "./_component/UserDetails";
 import UserDocuments from "./_component/Documents/Documents";
 import UserCompteRendu from "./_component/Compterendu/CompteRendus";
+import CountUp from "react-countup/build/CountUp";
 
 export default async function page({
   searchParams,
@@ -56,7 +57,10 @@ export default async function page({
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
               <CardDescription>This Week</CardDescription>
-              <CardTitle className="text-4xl">$1,329</CardTitle>
+              <CardTitle className="text-4xl">
+                $1,329
+                <CountUp end={1329} duration={1} preserveValue />
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xs text-muted-foreground">

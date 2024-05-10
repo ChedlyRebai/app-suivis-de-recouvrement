@@ -76,6 +76,11 @@ const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
                 </TableRow>
               );
             })}
+            {compterendus.length === 0 && (
+              <TableRow>
+                <TableCell className="h-24 text-center">No results.</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </CardContent>

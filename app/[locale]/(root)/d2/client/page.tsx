@@ -1,36 +1,5 @@
 import * as React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
-  PanelLeft,
-  Search,
-  Settings,
-  ShoppingCart,
-  Truck,
-  Users2,
-} from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -39,34 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
 import Comptes from "./_component/Comptes/comptes";
 import CompteRendu from "./_component/Compterendu/CompteRendus";
@@ -76,23 +24,21 @@ import { getCompteRenduByClientId } from "@/actions/comptrendu.action";
 import { getAllfilesByClientId } from "@/actions/file.action";
 import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import { getClientById } from "@/actions/client.action";
-
+import { CountUp } from "@/components/ui/count-up";
 import ClientInfo from "./_component/ClientDetails";
 
-
-
 export default async function page({
-  searchParams
+  searchParams,
 }: {
   searchParams?: {
     id?: string;
   };
-})  {
-  const id = Number(searchParams?.id)
+}) {
+  const id = Number(searchParams?.id);
   const comptes = await getCompteByClientId(id);
   const compterendus = await getCompteRenduByClientId(id);
   const documents = await getAllfilesByClientId(id);
-  const client =await getClientById(id);
+  const client = await getClientById(id);
   console.log(compterendus);
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
@@ -116,11 +62,13 @@ export default async function page({
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
               <CardDescription>This Week</CardDescription>
-              <CardTitle className="text-4xl">$1,329</CardTitle>
+              <CardTitle className="text-4xl">
+                <CountUp end={1329} duration={2} preserveValue />
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xs text-muted-foreground">
-                +25% from last week
+                +<CountUp end={25} duration={2} preserveValue />% from last week
               </div>
             </CardContent>
             <CardFooter>

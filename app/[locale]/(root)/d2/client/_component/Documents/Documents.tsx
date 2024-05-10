@@ -95,6 +95,13 @@ const Documents = ({ file }: { file: File[] }) => {
             })}
           </TableBody>
         </Table>
+        {file.length === 0 && (
+          <TableRow className="w-full">
+            <TableCell className="h-24 text-center  text-center">
+              No results.
+            </TableCell>
+          </TableRow>
+        )}
       </CardContent>
     </Card>
   );
