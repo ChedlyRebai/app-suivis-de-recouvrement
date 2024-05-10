@@ -116,7 +116,6 @@ export default async function page({
             <TabsList>
               <TabsTrigger value="Documents">Documents</TabsTrigger>
               <TabsTrigger value="comptrendu">Compterendu</TabsTrigger>
-              <TabsTrigger value="comptes">Comptes</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
               <DropdownMenu>
@@ -152,9 +151,6 @@ export default async function page({
           <TabsContent value="comptrendu">
             <UserCompteRendu compterendus={User.suivi_agenda} />
           </TabsContent>
-          {/* <TabsContent value="comptes">
-            <Comptes comptes={comptes} />
-          </TabsContent> */}
         </Tabs>
       </div>
       <CompteRenduModal />

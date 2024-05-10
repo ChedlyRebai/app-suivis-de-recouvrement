@@ -30,7 +30,6 @@ const UserCompteRendu = ({
   compterendus: SuiviAgendum[];
 }) => {
   const { onOpen } = useCompteRenduModal();
-
   return (
     <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7">
@@ -47,7 +46,6 @@ const UserCompteRendu = ({
               <TableHead>Agence</TableHead>
               <TableHead>Zone</TableHead>
               <TableHead>Date</TableHead>
-
               <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
