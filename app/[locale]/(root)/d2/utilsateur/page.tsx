@@ -1,36 +1,5 @@
 import * as React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreVertical,
-  Package,
-  Package2,
-  PanelLeft,
-  Search,
-  Settings,
-  ShoppingCart,
-  Truck,
-  Users2,
-} from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -39,45 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
-import Comptes from "./_component/Comptes/comptes";
-import CompteRendu from "./_component/Compterendu/CompteRendus";
-import Documents from "./_component/Documents/Documents";
-import { getCompteByClientId } from "@/actions/comptes.action";
-import { getCompteRenduByClientId } from "@/actions/comptrendu.action";
-import { getAllfilesByClientId } from "@/actions/file.action";
-import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
-import { getClientById } from "@/actions/client.action";
 
-import ClientInfo from "./_component/ClientDetails";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
+
+import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
+
+import { getUserDetails } from "@/actions/utilisateur.action";
+import UserInfo from "./_component/UserDetails";
+import UserDocuments from "./_component/Documents/Documents";
 
 export default async function page({
   searchParams,
@@ -87,15 +31,12 @@ export default async function page({
   };
 }) {
   const id = Number(searchParams?.id);
-  const comptes = await getCompteByClientId(id);
-  const compterendus = await getCompteRenduByClientId(id);
-  const documents = await getAllfilesByClientId(id);
-  const client = await getClientById(id);
-  console.log(compterendus);
+  const User = await getUserDetails(id);
+
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
       <div>
-        <ClientInfo client={client} />
+        <UserInfo user={User} />
       </div>
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
@@ -205,14 +146,14 @@ export default async function page({
             </div>
           </div>
           <TabsContent value="Documents">
-            <Documents file={documents} />
+            <UserDocuments file={User.Files} />
           </TabsContent>
-          <TabsContent value="comptrendu">
+          {/* <TabsContent value="comptrendu">
             <CompteRendu compterendus={compterendus} />
           </TabsContent>
           <TabsContent value="comptes">
             <Comptes comptes={comptes} />
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </div>
       <CompteRenduModal />

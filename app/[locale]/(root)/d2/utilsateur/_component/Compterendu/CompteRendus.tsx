@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,8 +23,12 @@ import { SearchIcon } from "lucide-react";
 
 import React from "react";
 
-const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
-  const {  onOpen } = useCompteRenduModal();
+const UserCompteRendu = ({
+  compterendus,
+}: {
+  compterendus: CompteRenduList[];
+}) => {
+  const { onOpen } = useCompteRenduModal();
 
   return (
     <Card x-chunk="dashboard-05-chunk-3">
@@ -48,7 +52,9 @@ const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
               return (
                 <TableRow key={index} className="bg-accent">
                   <TableCell>{compterendu.usr_nom}</TableCell>
-                  <TableCell className="hidden sm:table-cell">{compterendu.usr_matricule}</TableCell>
+                  <TableCell className="hidden sm:table-cell">
+                    {compterendu.usr_matricule}
+                  </TableCell>
                   {/* <TableCell className="hidden sm:table-cell">
                     <Badge className="text-xs" variant="secondary"></Badge>
                   </TableCell> */}
@@ -77,9 +83,8 @@ const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
           </TableBody>
         </Table>
       </CardContent>
-      
     </Card>
   );
 };
 
-export default CompteRendu;
+export default UserCompteRendu;

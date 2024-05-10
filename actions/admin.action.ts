@@ -37,33 +37,30 @@ export interface clientResult {
 }
 
 export interface Client {
-  id:            number;
-    usr_matricule: string;
-    usr_nomprenom: string;
-    email_chargee: string;
-    affectation:   number | null;
-    fonction:      Fonction;
-    AffecterA:     AffecterA[];
-    flgstatut:     string;
-    tel_chargee:   string;
+  id: number;
+  usr_matricule: string;
+  usr_nomprenom: string;
+  email_chargee: string;
+  affectation: number | null;
+  fonction: Fonction;
+  AffecterA: AffecterA[];
+  flgstatut: string;
+  tel_chargee: string;
 }
 
-
 export interface Zone {
-    codug:   number;
-    libelle: string;
+  codug: number;
+  libelle: string;
 }
 
 export interface Fonction {
-    lib_fonction: string;
-    departement:  Departement;
+  lib_fonction: string;
+  departement: Departement;
 }
 
 export interface Departement {
-    nom_depart: string;
+  nom_depart: string;
 }
-
-
 
 export const getAllClient = async (
   currentpage?: number,
@@ -203,6 +200,7 @@ export interface Compte {
 export interface AbClient {
   depassement: string;
   nom: string;
+  Agence: Agence;
 }
 
 export const getAllAccount = async (
@@ -225,55 +223,37 @@ export const getAllAccount = async (
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export interface UserResult {
-  result:     usersAdmin[];
+  result: usersAdmin[];
   totalCount: number;
   totalPages: number;
 }
 
 export interface usersAdmin {
-  id:            number;
+  id: number;
   usr_matricule: string;
   usr_nomprenom: string;
   email_chargee: string;
-  affectation:   number | null;
-  fonction:      Fonction;
-  AffecterA:     AffecterA[];
-  flgstatut:     string;
-  tel_chargee:   string;
+  affectation: number | null;
+  fonction: Fonction;
+  AffecterA: AffecterA[];
+  flgstatut: string;
+  tel_chargee: string;
 }
 
-
 export interface Zone {
-  codug:   number;
+  codug: number;
   libelle: string;
 }
 
 export interface Fonction {
   lib_fonction: string;
-  departement:  Departement;
+  departement: Departement;
 }
 
 export interface Departement {
   nom_depart: string;
 }
-
-
 
 export const getAllUsers = async (
   currentpage?: number,
@@ -282,13 +262,13 @@ export const getAllUsers = async (
 ) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-      console.log(
-        `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${search}`
-      );
+    console.log(
+      `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${search}`
+    );
     const res = await axios.get<UserResult>(
       `http://localhost:10001/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-    console.log(res.data)
+    console.log(res.data);
     return (res.data as UserResult) || ({} as UserResult);
   } catch (error) {
     return {} as UserResult;
