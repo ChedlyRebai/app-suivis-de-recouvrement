@@ -23,8 +23,7 @@ import { getUserDetails } from "@/actions/utilisateur.action";
 import UserInfo from "./_component/UserDetails";
 import UserDocuments from "./_component/Documents/Documents";
 import UserCompteRendu from "./_component/Compterendu/CompteRendus";
-import CountUp from "react-countup/build/CountUp";
-
+import { CountUp } from "@/components/ui/count-up";
 export default async function page({
   searchParams,
 }: {
