@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { LucideIcon } from "lucide-react"
+import Link from "next/link";
+import { LucideIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { buttonVariants } from "@/components/ui/button"
+} from "@/components/ui/tooltip";
+import { buttonVariants } from "@/components/ui/button";
 
 interface NavProps {
-  isCollapsed: boolean
+  isCollapsed: boolean;
   links: {
-    title: string
-    label?: string
-    icon: LucideIcon
-    variant: "default" | "ghost"
-  }[]
+    title: string;
+    label?: string;
+    icon: LucideIcon;
+    variant: "default" | "ghost";
+  }[];
 }
 
 export function Nav({ links, isCollapsed }: NavProps) {
@@ -49,9 +49,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
               <TooltipContent side="right" className="flex items-center gap-4">
                 {link.title}
                 {link.label && (
-                  <span className="ml-auto text-muted-foreground">
-                    link
-                  </span>
+                  <span className="ml-auto text-muted-foreground">link</span>
                 )}
               </TooltipContent>
             </Tooltip>
@@ -67,7 +65,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
               )}
             >
               <link.icon className="mr-2 h-4 w-4" />
-              tit
+              {link.title}
               {link.label && (
                 <span
                   className={cn(
@@ -75,14 +73,12 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     link.variant === "default" &&
                       "text-background dark:text-white"
                   )}
-                >
-                 aaa
-                </span>
+                ></span>
               )}
             </Link>
           )
         )}
       </nav>
     </div>
-  )
+  );
 }

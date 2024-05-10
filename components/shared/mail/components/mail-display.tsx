@@ -80,12 +80,12 @@ export function MailDisplay() {
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
                 <Archive className="h-4 w-4" />
-                <span className="sr-only">Archive</span>
+                <span className="sr-only">déplacer vers contacté</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Archive</TooltipContent>
+            <TooltipContent>déplacer vers contacté</TooltipContent>
           </Tooltip>
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
                 <ArchiveX className="h-4 w-4" />
@@ -102,17 +102,17 @@ export function MailDisplay() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>Move to trash</TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
           <Separator orientation="vertical" className="mx-1 h-6" />
           <Tooltip>
             <Popover>
               <PopoverTrigger asChild>
-                <TooltipTrigger asChild>
+                {/* <TooltipTrigger asChild>
                   <Button variant="ghost" size="icon" disabled={!data}>
                     <Clock className="h-4 w-4" />
                     <span className="sr-only">Snooze</span>
                   </Button>
-                </TooltipTrigger>
+                </TooltipTrigger> */}
               </PopoverTrigger>
               <PopoverContent className="flex w-[535px] p-0">
                 <div className="flex flex-col gap-2 border-r px-2 py-4">
@@ -169,7 +169,7 @@ export function MailDisplay() {
           </Tooltip>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
                 <Reply className="h-4 w-4" />
@@ -195,7 +195,7 @@ export function MailDisplay() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>Forward</TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
         </div>
         <Separator orientation="vertical" className="mx-2 h-6" />
         <DropdownMenu>
@@ -214,6 +214,11 @@ export function MailDisplay() {
         </DropdownMenu>
       </div>
       <Separator />
+      {!data.id && (
+        <div className="p-8  w-full h-screen flex items-center justify-center text-muted-foreground">
+          No row Selected
+        </div>
+      )}
       {isLoading ? (
         <div className="p-8  w-full h-screen flex items-center justify-center text-muted-foreground">
           <Oval className="animate-spin w-16" />

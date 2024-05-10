@@ -149,31 +149,11 @@ export function AllCompteRendu({
     [searchParams, selectedCode]
   );
 
-  const resetAgence = () => {
-    setAgenceValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const resetGroup = () => {
-    setgroupeValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("groupe");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
   useEffect(() => {
     setSearch(`${searchParams.get("code")}`);
     console.log(search);
   }, [searchParams.get("code")]);
 
-  const addQuery = (row: any) => {
-    console.log();
-    router.push(
-      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
-    );
-  };
   const [loader, setLoader] = useState(true);
   // effect
   useEffect(() => {

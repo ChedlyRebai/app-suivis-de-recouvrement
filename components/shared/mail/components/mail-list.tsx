@@ -1,56 +1,54 @@
-import { ComponentProps } from "react"
-import formatDistanceToNow from "date-fns/formatDistanceToNow"
+import { ComponentProps } from "react";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import { Mail } from "../data"
-import { useMail } from "../use-mail"
-import { useEffect, useState } from "react"
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Mail } from "../data";
+import { useMail } from "../use-mail";
+import { useEffect, useState } from "react";
 
-import { Loader2 } from "lucide-react"
-import { useInView } from "react-intersection-observer"
-import useInbox from "@/hooks/use-inbox-hook"
-
-
+import { Loader2 } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+import useInbox from "@/hooks/use-inbox-hook";
 
 interface IProps {
-  items: Mail[]
-  initialData: any[]
-  search: string
-  limit: number
+  items: Mail[];
+  initialData: any[];
+  search: string;
+  limit: number;
 }
-export function MailList({ items,initialData, search, limit }: IProps) {
-  const [data, setData] = useState(initialData)
-  const [page, setPage] = useState(1)
-  const [ref, inView] = useInView()
-  const [isDisable, setDisable] = useState(false)
+export function MailList({ items, initialData, search, limit }: IProps) {
+  const [data, setData] = useState(initialData);
+  const [page, setPage] = useState(1);
+  const [ref, inView] = useInView();
+  const [isDisable, setDisable] = useState(false);
 
   async function loadMoreData() {
-    const next = page + 1
-    const offset = next * limit
+    const next = page + 1;
+    const offset = next * limit;
     //const { data: newData } = await GetPokemons({ search, offset, limit })
-    const newData:any = []
+    const newData: any = [];
     if (newData.length) {
-      setPage(next)
+      setPage(next);
       setData((prev: any[] | undefined) => [
         ...(prev?.length ? prev : []),
         ...newData,
-      ])
+      ]);
     } else {
-      setDisable(true)
+      setDisable(true);
     }
   }
-  
+
   useEffect(() => {
     if (inView) {
-      loadMoreData()
+      loadMoreData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView])
-  const [mail, setMail] = useMail()
-  const{Comptrendu,setComptrendu,setId}=useInbox()
+  }, [inView]);
+  const [mail, setMail] = useMail();
+  const { Comptrendu, setComptrendu, setId } = useInbox();
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
@@ -61,15 +59,14 @@ export function MailList({ items,initialData, search, limit }: IProps) {
               "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
               mail.selected === item.id && "bg-muted"
             )}
-            onClick={() =>{
-              console.log("item",item)
-              }
-            }
+            onClick={() => {
+              console.log("item", item);
+            }}
           >
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
-                  <div className="font-semibold" >{item.name}</div>
+                  <div className="font-semibold">{item.name}</div>
                   {!item.read && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
                   )}
@@ -103,29 +100,31 @@ export function MailList({ items,initialData, search, limit }: IProps) {
             ) : null}
           </button>
         ))}
-        
       </div>
       {!isDisable ? (
-        <div ref={ref} className="mt-6 flex flex-col items-center justify-center">
+        <div
+          ref={ref}
+          className="mt-6 flex flex-col items-center justify-center"
+        >
           <Loader2 className="animate-spin" size={48} />
         </div>
       ) : (
         <></>
       )}
     </ScrollArea>
-  )
+  );
 }
 
 function getBadgeVariantFromLabel(
   label: string
 ): ComponentProps<typeof Badge>["variant"] {
   if (["work"].includes(label.toLowerCase())) {
-    return "default"
+    return "default";
   }
 
   if (["personal"].includes(label.toLowerCase())) {
-    return "outline"
+    return "outline";
   }
 
-  return "secondary"
+  return "secondary";
 }

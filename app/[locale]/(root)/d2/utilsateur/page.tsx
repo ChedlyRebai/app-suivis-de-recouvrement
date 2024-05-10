@@ -57,7 +57,7 @@ export default async function page({
             <CardHeader className="pb-2">
               <CardDescription>This Week</CardDescription>
               <CardTitle className="text-4xl">
-                $1,329
+                $
                 <CountUp end={1329} duration={1} preserveValue />
               </CardTitle>
             </CardHeader>

@@ -13,7 +13,7 @@ export const getAllCompteRendu = async (
   try {
     // axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<Main>(
-      `http://localhost:10001/compterendu/all?page=${page}&perpage=8`
+      `http://localhost:10001/compterendu/all?page=${page}&perpage=8&search=${search}`
     );
 
     return res.data || ({} as Main);
