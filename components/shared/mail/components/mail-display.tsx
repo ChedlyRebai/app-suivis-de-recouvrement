@@ -42,8 +42,10 @@ import { Mail } from "../data";
 import { formatDate } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
 import { useQuery } from "@tanstack/react-query";
-import { getCompteRenduById } from "@/actions/client.action";
+
 import { CompteRenduList } from "@/constants/types";
+import { getCompteRenduById } from "@/actions/comptrendu.action";
+import { Oval } from "react-loading-icons";
 
 interface MailDisplayProps {
   mail: Mail | null;
@@ -66,10 +68,10 @@ export function MailDisplay() {
 
   console.log("data", data);
 
-  if(!data){
-    return <div>loading...</div>
+  if (!data) {
+    return <div>loading...</div>;
   }
-  
+
   return (
     <div className="flex h-fit flex-col">
       <div className="flex items-center p-2">
@@ -213,7 +215,9 @@ export function MailDisplay() {
       </div>
       <Separator />
       {isLoading ? (
-        <div className="p-8 text-center text-muted-foreground">Loading...</div>
+        <div className="p-8  w-full h-screen flex items-center justify-center text-muted-foreground">
+          <Oval className="animate-spin w-16" />
+        </div>
       ) : (
         <div className="flex flex-1 flex-col">
           <div className="flex items-start p-4">
@@ -221,30 +225,32 @@ export function MailDisplay() {
               <Avatar>
                 <AvatarImage alt={data.cli} />
                 <AvatarFallback>
-                  {/* {data.name
-                      .split(" ")
-                      .map((chunk) => chunk[0])
-                      .join("")} */}
+                  {data?.ab_client?.nom
+                    .split(" ")
+                    .map((chunk: any) => chunk[0])
+                    .join("")}
                 </AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
                 <div className="font-semibold">
-                  {data.compterendutype_compterendutype_compterenduidTosuivi_agenda &&
+                  {/* {data.compterendutype_compterendutype_compterenduidTosuivi_agenda &&
                   data
                     .compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
                     ? data
                         .compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
                         .types.libelle
-                    : ""}
+                    : ""} */}
+                  {data?.ab_client?.nom}
                 </div>
                 <div className="line-clamp-1 text-xs">
-                  {data.compterendutype_compterendutype_compterenduidTosuivi_agenda &&
+                  {/* {data.compterendutype_compterendutype_compterenduidTosuivi_agenda &&
                   data
                     .compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
                     ? data
                         .compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
                         .types.libelle
-                    : ""}
+                    : ""} */}
+                  {data?.ab_client?.cli}
                 </div>
                 <div className="line-clamp-1 text-xs">
                   {/* <span className="font-medium">Reply-To:</span> {data.edata} */}
@@ -264,93 +270,103 @@ export function MailDisplay() {
             {data.compte_rendu}
           </div>
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-    ?.types?.code === 1 && (
-            <div className="">
-              <Label className="text-primary">Montant</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    .promesseregresse.mnt_reg
-                }
-              </p>
-              <Label className="text-primary">Lieu ver</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    .promesseregresse.lieu_ver
-                }
-              </p>
-              <Label className="text-primary">Date </Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    .promesseregresse.date_ver
-                }
-              </p>
+            {data
+              ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              ?.types?.code === 1 && (
+              <div className="">
+                <Label className="text-primary">Montant</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      .promesseregresse.mnt_reg
+                  }
+                </p>
+                <Label className="text-primary">Lieu ver</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      .promesseregresse.lieu_ver
+                  }
+                </p>
+                <Label className="text-primary">Date </Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      .promesseregresse.date_ver
+                  }
+                </p>
+              </div>
+            )}
 
-            </div>
-          )}
+            {data
+              ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              ?.types?.code === 2 && (
+              <div className="">
+                <Label className="text-primary">Nouveau Telephone 1</Label>
+                <p>
+                  {" "}
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      .nouvellecoordonnees?.nouv_tel
+                  }
+                </p>{" "}
+                <Label className="text-primary">Nouveau Telephone 2</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.nouvellecoordonnees?.nouv_te2
+                  }
+                </p>{" "}
+                <Label className="text-primary">Nouveau Addresse</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.nouvellecoordonnees?.nouv_adresse
+                  }
+                </p>{" "}
+              </div>
+            )}
 
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-            ?.types?.code === 2 && (
-            <div className="">
-              <Label className="text-primary">Nouveau Telephone 1</Label>
-              <p>
-                {" "}
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    .nouvellecoordonnees?.nouv_tel
-                }
-              </p>{" "}
-              <Label className="text-primary">Nouveau Telephone 2</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.nouvellecoordonnees?.nouv_te2
-                }
-              </p>{" "}
-              <Label className="text-primary">Nouveau Addresse</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.nouvellecoordonnees?.nouv_adresse
-                }
-              </p>{" "}
-            </div>
-          )}
+            {data
+              ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              ?.types?.code === 3 && (
+              <div className="flex justify-center items-center">
+                <Label className="text-primary">Montant</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.FacilitePaiment.mnt_rec
+                  }
+                </p>
+                <Label className="text-primary">Nombre echeance</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.FacilitePaiment.nb_ech
+                  }
+                </p>
+                {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.FacilitePaiment?.montantFacilites?.map(
+                  (item: any, index: number) => (
+                    <div key={index}>
+                      <Label className="text-primary">Montant echeance</Label>
+                      <p>{item.mntech}</p>
+                      <Label className="text-primary">Date echeance</Label>
+                      <p>{item.date_ech}</p>
+                    </div>
+                  )
+                )}
+              </div>
+            )}
 
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-            ?.types?.code === 3 && (
-            <div className="flex justify-center items-center">
-              <Label className="text-primary">Montant</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.FacilitePaiment.mnt_rec
-                }
-              </p>
-              <Label className="text-primary">Nombre echeance</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.FacilitePaiment.nb_ech
-                }
-              </p>
-              {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.FacilitePaiment?.montantFacilites?.map(
-                (item: any, index: number) => (
-                  <div key={index}>
-                    <Label className="text-primary">Montant echeance</Label>
-                    <p>{item.mntech}</p>
-                    <Label className="text-primary">Date echeance</Label>
-                    <p>{item.date_ech}</p>
-                  </div>
-                )
-              )}
-            </div>
-          )}
-
-          {/* export interface FacilitePaiment {
+            {/* export interface FacilitePaiment {
     nb_ech:   null;
     mnt_rec:  string;
     montantFacilites: MontantFacilite[];
@@ -361,67 +377,74 @@ export interface MontantFacilite {
     date_ech: null;
 } */}
 
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-            ?.types?.code === 4 && (
-            <div className="">
-              <Label className="text-primary">Observation</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    .nonreconaissance?.observation
-                }
-              </p>
-            </div>
-          )}
+            {data
+              ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              ?.types?.code === 4 && (
+              <div className="">
+                <Label className="text-primary">Observation</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      .nonreconaissance?.observation
+                  }
+                </p>
+              </div>
+            )}
 
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-            ?.types?.code === 5 && (
-            <div className="">
-              <Label className="text-primary">Heure visite</Label>
-              <p>
-                {" "}
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    .visite?.h_rdv_visite_h_rdvToh_rdv.libelle
-                }
-              </p>{" "}
-              <Label className="text-primary">Lieu Visite 2</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.visite?.Agence.libelle
-                }{" "}
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.visite?.lieu_visite
-                }
-              </p>{" "}
-              <Label className="text-primary">Date visite</Label>
-              <p>
-                {
-                  data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.visite?.date_visite
-                }
-              </p>{" "}
-            </div>
-          )}
+            {data
+              ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              ?.types?.code === 5 && (
+              <div className="">
+                <Label className="text-primary">Heure visite</Label>
+                <p>
+                  {" "}
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      .visite?.h_rdv_visite_h_rdvToh_rdv.libelle
+                  }
+                </p>{" "}
+                <Label className="text-primary">Lieu Visite 2</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.visite?.Agence.libelle
+                  }{" "}
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.visite?.lieu_visite
+                  }
+                </p>{" "}
+                <Label className="text-primary">Date visite</Label>
+                <p>
+                  {
+                    data
+                      ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                      ?.visite?.date_visite
+                  }
+                </p>{" "}
+              </div>
+            )}
 
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-            ?.types?.code === 6 && (
-            <div className="flex justify-center items-center">
-              <Label className="text-primary">Client Injoignable</Label>
-            </div>
-          )}
-        </div>
+            {data
+              ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              ?.types?.code === 6 && (
+              <div className="flex justify-center items-center">
+                <Label className="text-primary">Client Injoignable</Label>
+              </div>
+            )}
+          </div>
         </div>
       )}
-      {data && !isLoading ? (
-        <div className="flex flex-1 flex-col"></div>
-      ) : (
-        <div className="p-8 text-center text-muted-foreground">
-          No message selected
-        </div>
-      )}
+
+      {!data && !isLoading && !error
+        ? "No message selected"
+        : error
+        ? "An error occurred"
+        : null}
     </div>
   );
 }

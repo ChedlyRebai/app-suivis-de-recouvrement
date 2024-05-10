@@ -268,7 +268,7 @@ export const getAllUsers = async (
     const res = await axios.get<UserResult>(
       `http://localhost:10001/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-    console.log(res.data);
+
     return (res.data as UserResult) || ({} as UserResult);
   } catch (error) {
     return {} as UserResult;

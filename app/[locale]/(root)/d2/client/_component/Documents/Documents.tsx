@@ -1,3 +1,4 @@
+"use client";
 import { File } from "@/Models/file.model";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,61 +17,78 @@ import {
   TableCell,
   Table,
 } from "@/components/ui/table";
-import { Download, ListPlusIcon } from "lucide-react";
+import { Download, ListPlusIcon, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import React from "react";
 import OpenModelButton from "./openModelButton";
+import { deleteFile } from "@/actions/file.action";
 
 const Documents = ({ file }: { file: File[] }) => {
   return (
     <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7 flex flex-row justify-between items-center">
         <div>
-        <CardTitle>Documents</CardTitle>
-        
-        <CardDescription>Documents de ce clients</CardDescription>
+          <CardTitle>Documents</CardTitle>
 
+          <CardDescription>Documents de ce clients</CardDescription>
         </div>
-        
-        <OpenModelButton/>
+
+        <OpenModelButton />
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-            <TableHead >
+              <TableHead className=" px-1">
                 Matricule de l'utilisateur
               </TableHead>
-              <TableHead >
-                Nom de l'utilisateur
-              </TableHead>
-              <TableHead >
-                Nom de documents
-              </TableHead>
-              <TableHead >Agence/Zone</TableHead>
-              <TableHead >Date</TableHead>
-              <TableHead >Download</TableHead>
+              <TableHead className=" px-1">Nom de l'utilisateur</TableHead>
+              <TableHead>Nom de documents</TableHead>
+              <TableHead>Agence/Zone</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {file.map((file: File, index) => {
               return (
                 <TableRow className="bg-accen">
-                  <TableCell className="p-2">{file.Utilisateur.usr_matricule}</TableCell>
-                  <TableCell className="p-3">{file.Utilisateur.usr_nomprenom}</TableCell>
+                  <TableCell className="p-2">
+                    {file.Utilisateur.usr_matricule}
+                  </TableCell>
+                  <TableCell className="p-3">
+                    {file.Utilisateur.usr_nomprenom}
+                  </TableCell>
                   <TableCell className="p-3">{file.FileName}</TableCell>
                   <TableCell className="p-3">
-                    {file.Utilisateur.AffecterA?.[0]?.Agence?.libelle} 
+                    {file.Utilisateur.AffecterA?.[0]?.Agence?.libelle}
                     {file.Utilisateur.AffecterA?.[0]?.Zone?.libelle}
                   </TableCell>
                   <TableCell className="p-3">
                     {file.created_at.toString().substring(0, 10)}
                   </TableCell>
-                  <TableCell className="p-3">
-                    <Link   download  href={file.FilePath}>
+                  <TableCell className="p-3 flex flex-row">
+                    {/* <Link download href={file.FilePath}>
                       <Download className="text-center" />
-                    </Link>
+                    </Link> */}
+                    <Button
+                      variant="default"
+                      onClick={() => {
+                        window.open(file.FilePath);
+                      }}
+                    >
+                      <Download size={16} />
+                    </Button>{" "}
+                    <Button
+                      className="ml-1"
+                      variant="destructive"
+                      onClick={async () => {
+                        await deleteFile(file.id);
+                      }}
+                    >
+                      <Trash2 size={16} />
+                    </Button>
                   </TableCell>
                 </TableRow>
               );

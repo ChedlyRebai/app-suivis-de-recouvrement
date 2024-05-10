@@ -1,30 +1,27 @@
-"use server"
+"use server";
 import { Agence } from "@/Models/agence.model";
 import { File } from "@/Models/file.model";
 import axios from "axios";
 import { Zone } from "./admin.action";
 import { cookies } from "next/headers";
 
-
 export interface Main {
-  FileName:    string;
-  FilePath:    string;
-  created_at:  Date;
+  FileName: string;
+  FilePath: string;
+  created_at: Date;
   Utilisateur: Utilisateur;
 }
 
 export interface Utilisateur {
   usr_nomprenom: string;
   usr_matricule: string;
-  AffecterA:     AffecterA[];
+  AffecterA: AffecterA[];
 }
 
 export interface AffecterA {
-  Zone:   Zone;
+  Zone: Zone;
   Agence: Agence;
 }
-
-
 
 export const creatFile = async (
   clientID: Number,
@@ -55,13 +52,15 @@ export const creatFile = async (
   }
 };
 
-export const getAllfilesByClientId = async (clientID: Number): Promise<File[]> => {
+export const getAllfilesByClientId = async (
+  clientID: Number
+): Promise<File[]> => {
   console.log(`http://localhost:10001/file/allbyid?id=${clientID}`);
   try {
     const res = await axios.get<Main[]>(
       `http://localhost:10001/file/allbyid?id=${clientID}`
     );
-    console.log(res.data);
+
     return (res.data as File[]) || ({} as File[]);
   } catch (error) {
     console.log(error);
@@ -69,10 +68,8 @@ export const getAllfilesByClientId = async (clientID: Number): Promise<File[]> =
   }
 };
 
-
-
 export interface fileresult {
-  result:     File[];
+  result: File[];
   totalCount: number;
   totalPages: number;
 }
@@ -85,7 +82,7 @@ export const getAllfiles = async (
     const res = await axios.get<fileresult>(
       `http://localhost:10001/file/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-    console.log(res.data);
+
     return (res.data as fileresult) || ({} as fileresult);
   } catch (error) {
     console.log(error);
@@ -93,14 +90,9 @@ export const getAllfiles = async (
   }
 };
 
-
-
-export const deleteFile = async (
-  idFile: Number | string
-): Promise<File> => {
+export const deleteFile = async (idFile: Number | string): Promise<File> => {
   console.log(`http://localhost:10001/file/create`);
   try {
-    
     const res = await axios.delete<File>(
       `http://localhost:10001/file/deleteById?id=${idFile}`
     );

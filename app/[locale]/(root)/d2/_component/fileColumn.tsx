@@ -1,5 +1,3 @@
-
-
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
 import { File } from "@/Models/file.model";
@@ -61,26 +59,22 @@ export const filecolumns: ColumnDef<File>[] = [
     cell: ({ row }) => {
       return (
         <>
-        <Button
-          variant="default"
-          onClick={() => {
-            window.open(row.original.FilePath);
-          }}
-        >
-
-          <Download size={16} />
-        </Button>
-        {" "}
-        <Button
-          variant="destructive"
-          onClick={async () => {
-            await deleteFile(row.original.id);
-          }}
-        >
-          <Trash2 size={16} />
-         
-        </Button>
-
+          <Button
+            variant="default"
+            onClick={() => {
+              window.open(row.original.FilePath);
+            }}
+          >
+            <Download size={16} />
+          </Button>{" "}
+          <Button
+            variant="destructive"
+            onClick={async () => {
+              await deleteFile(row.original.id);
+            }}
+          >
+            <Trash2 size={16} />
+          </Button>
         </>
       );
     },
