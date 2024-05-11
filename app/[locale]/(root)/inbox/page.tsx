@@ -21,8 +21,8 @@ export default async function Page({
   const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
   const search = searchParams?.query || "";
   const limit = 20;
-  const initialdata=await getAllCompteRendu(1,limit,search);
-  console.log("initialData",initialdata);
+  const initialdata = await getAllCompteRendu(1, limit, search);
+  console.log("initialData", initialdata);
   return (
     <>
       <div className="" />
@@ -35,6 +35,7 @@ export default async function Page({
             alt="Mail"
             className="hidden dark:block"
           />
+
           <Image
             src="/examples/mail-light.png"
             width={1280}

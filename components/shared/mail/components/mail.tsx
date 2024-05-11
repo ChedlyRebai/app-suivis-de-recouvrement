@@ -71,6 +71,7 @@ import { CompteRenduList } from "@/constants/types";
 import { formatDistanceToNowStrict } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
 import { getAllCompteRendu } from "@/actions/comptrendu.action";
+import { format } from "date-fns/format";
 
 export function Mail({
   accounts,
@@ -304,7 +305,8 @@ export function MailList({ items, initialData, search, limit }: IProps) {
                   {/* {formatDistanceToNowStrict(new Date(item.created_at), {
                     addSuffix: true,
                   })}  */}
-                  {item.created_at.toString().substring(0, 10)}
+                  {/* {item.created_at.toString().substring(0, 10)} */}
+                  {format(new Date(item.created_at.toString()), "PPpp")}
                 </div>
               </div>
               <div className="text-xs font-medium">{item?.ab_client?.cli}</div>

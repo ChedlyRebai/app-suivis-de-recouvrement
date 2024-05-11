@@ -5,6 +5,7 @@ import nextSaturday from "date-fns/nextSaturday";
 import {
   Archive,
   ArchiveX,
+  Check,
   Clock,
   Forward,
   MoreVertical,
@@ -79,7 +80,7 @@ export function MailDisplay() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
-                <Archive className="h-4 w-4" />
+                <Check className="h-4 w-4" />
                 <span className="sr-only">déplacer vers contacté</span>
               </Button>
             </TooltipTrigger>
@@ -266,7 +267,8 @@ export function MailDisplay() {
               <div className="ml-auto text-xs text-muted-foreground">
                 {/* {format(new Date(data.date), "PPpp")} 
                   data.date */}
-                {data.created_at.toString().substring(0, 10)}
+                {/* {data.created_at.toString().substring(0, 10)} */}
+                {formatDate(new Date(data.created_at.toString()), "PPpp")}
               </div>
             )}
           </div>
