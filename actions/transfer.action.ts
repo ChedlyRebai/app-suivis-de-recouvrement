@@ -56,10 +56,10 @@ export const updatedemandeprolongation = async (
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-
+    const newdata = data == true ? "O" : "N";
     const response = await axios.put<any>(
-      `http://localhost:10001/prolongation/updatedemandeprolongation?cli=${cli}`,
-      { data: data, column: column }
+      `http://localhost:10001/prolongation/updateprolongation?cli=${cli}`,
+      { data: newdata, column: column }
     );
 
     return response.data || ([] as any);

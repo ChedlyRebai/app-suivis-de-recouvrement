@@ -64,12 +64,13 @@ export const getvalidationprpositiondeprolongation = async (
       `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
-    const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    const res = await axios.get<any>(
+      `http://localhost:10001/prolongation/validationprolongation?cli&page&perPage&search&groupe&agence&from&to`
     );
-    return res.data || ({} as Main);
+    console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data);
+    return res.data || ({} as any);
   } catch (error) {
-    return [];
+    return {} as any;
   }
 };
 

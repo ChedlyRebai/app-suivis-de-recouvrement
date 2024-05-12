@@ -16,6 +16,8 @@ import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaire
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
 import { demandeProlongationColumns } from "./_component/demandeProlongationColumns";
 import { DataTableDemandeDeProlongation } from "./_component/demande-prolongation-data-table";
+import { getvalidationprpositiondeprolongation } from "@/actions/prologation.action";
+import { validationprolongation } from "./_component/validationPropositionColumns";
 
 export default async function Home({
   searchParams,
@@ -50,17 +52,15 @@ export default async function Home({
   //     to
   //   );
 
-  //   const dataNon = await getClientNonContactes(
-  //     search,
-  //     currentPage,
-  //     perPage,
-  //     group,
-  //     agence,
-  //     from,
-  //     to
-  //   );
-
-  const data: any = [];
+  const data = await getvalidationprpositiondeprolongation(
+    search,
+    currentPage,
+    perPage,
+    group,
+    agence,
+    from,
+    to
+  );
 
   const groupes = await getGroupes();
   const agences = await getAgences();
@@ -73,55 +73,25 @@ export default async function Home({
         </div>
         <Suspense fallback={<div>Loading...</div>}>
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
-            <Tabs defaultValue="Critéred'integration" className="">
-              <TabsList className="grid w-fit grid-cols-2">
-                <TabsTrigger value="Critéred'integration">
-                  Critére d'integration{" "}
-                </TabsTrigger>
-                <TabsTrigger value="HistoriqueCommentaire">
-                  Historique Commentaire{" "}
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="Critéred'integration">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Critére d'integration</CardTitle>
-                    {/* <CardDescription>
+            <Card>
+              <CardHeader>
+                <CardTitle>Critére d'integration</CardTitle>
+                {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}
-                  </CardHeader>
-                  <CardContent>
-                    <DataTableDemandeDeProlongation
-                      agences={agences || []}
-                      groupes={groupes || []}
-                      total={data.total || 0}
-                      totalAccout={data.totalCount || 0}
-                      totalPages={data.totalPages || 1}
-                      columns={demandeProlongationColumns}
-                      data={data.result || []}
-                    />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="HistoriqueCommentaire">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Historique Commentaire</CardTitle>
-                    {/* <CardDescription>
-                    Manage your products and view their sales performance.
-                  </CardDescription> */}
-                  </CardHeader>
-                  <CardContent>
-                    <HistoriqueCommentaireDataTable
-                      totalAccout={data.totalCount || 0}
-                      totalPages={data.totalPages || 1}
-                      columns={HistoriqueCommentaireColumns}
-                      data={data.result || []}
-                    />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+              </CardHeader>
+              <CardContent>
+                <DataTableDemandeDeProlongation
+                  agences={agences || []}
+                  groupes={groupes || []}
+                  total={data.total || 0}
+                  totalAccout={data.totalCount || 0}
+                  totalPages={data.totalPages || 1}
+                  columns={validationprolongation}
+                  data={data.result || []}
+                />
+              </CardContent>
+            </Card>
           </div>
         </Suspense>
       </div>

@@ -14,7 +14,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-
 import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -40,7 +39,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,7 +51,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+  columns: any[];
   total: any;
   data: TData[];
   totalAccout?: number;
@@ -366,7 +364,6 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      
                       {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
@@ -483,14 +480,12 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
               {total.tot_creance || 0}
             </TableCell>
             <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
+            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
           </TableRow>
         </Table>
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
-        <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-         
-        </div>
+        <div className="flex items-center space-x-6 lg:space-x-8 mt-2"></div>
 
         <DataTablePagination
           TotalAccount={totalAccout}
