@@ -1,7 +1,7 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
 import { MOTT, VTRF, getMotif } from "@/actions/motif.action";
-import { getTypeTransfer } from "@/actions/transfer.action";
+import { getTypeTransfer, updateTransferAnti } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -60,7 +60,7 @@ export const validationTransferColumns: ColumnDef<any>[] = [
     header: "Nbj.Imp",
   },
   {
-    accessorKey: "mnt_sdb",
+    accessorKey: "sd",
     header: "Solde Debiteur",
   },
   {
@@ -130,14 +130,10 @@ export const validationTransferColumns: ColumnDef<any>[] = [
         //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
         // </span>
         <Select
-          // onValueChange={(newValue) =>
-          //   update(
-          //     row.getValue("code_fonction"),
-          //     row.getValue("id"),
-          //     newValue,
-          //     "acces"
-          //   )
-          // }
+          onValueChange={(newValue) => {
+            console.log(newValue, row.original?.cli);
+            updateTransferAnti(row.original?.cli, "mott", newValue);
+          }}
           defaultValue={row.original?.mott}
         >
           <SelectTrigger
@@ -174,7 +170,13 @@ export const validationTransferColumns: ColumnDef<any>[] = [
     cell: async ({ row }) => {
       const vtrf = await VTRF();
       return (
-        <Select defaultValue={row.getValue("trf_propose_v")}>
+        <Select
+          defaultValue={row.getValue("trf_propose_v")}
+          onValueChange={(newValue) => {
+            console.log(newValue, row.original?.cli);
+            updateTransferAnti(row.original?.cli, "trf_propose_v", newValue);
+          }}
+        >
           <SelectTrigger
             className={` w-fit ${
               row.getValue("trf_propose_v") == "O"

@@ -16,6 +16,7 @@ export interface Total {
   engagement: string;
 }
 export const getHistoriqueDemandDeTransferAnticipe = async (
+  cli: string,
   IdClient?: string,
   currentpage?: number,
   perpage?: number,
@@ -35,12 +36,16 @@ export const getHistoriqueDemandDeTransferAnticipe = async (
       `http://localhost:10001/transfer/gethistoriquetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
-    const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/gethistoriquetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    // const res = await axios.get<any>(
+    //   `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+    // );
+    const res = await axios.get<any>(
+      `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
     );
+    console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data);
     return res.data || ({} as any);
   } catch (error) {
-    return [];
+    return {} as any;
   }
 };
 
@@ -109,7 +114,6 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
   cli,
   motif,
   flag_trf,
- 
 }: {
   matricule: string;
   obs: string;
@@ -117,7 +121,6 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
   cli: string;
   motif: string;
   flag_trf: string;
-
 }) => {
   try {
     const res = await axios.put(
