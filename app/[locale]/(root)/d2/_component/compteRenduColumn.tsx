@@ -21,8 +21,8 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
     header: "Nom de client",
   },
   {
-    accessorKey:"created_at",
-    header:"Date de création",
+    accessorKey: "created_at",
+    header: "Date de création",
     cell: ({ row }) => {
       return (
         <span>
@@ -31,7 +31,7 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
       );
     },
   },
-  
+
   {
     accessorKey: "Type de compte rendu",
     header: "Type de compte rendu",
@@ -42,29 +42,32 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
         </span>
       );
     },
-},
-    {
-        id: "actions",
-        enableHiding: false,
-        header: ({ column }) => {
-          return <div>Action</div>;
-        },
-        cell: ({ row }) => {
-          const payment = row.original;
-          const { isOpen, onClose, onOpen } = useCompteRenduModal();
-  
-          return (
-            <Button
-              className="flex items-center h-full  justify-center"
-              variant="default"
-              onClick={()=>onOpen(row.original.id)}
-            >
-              <SearchIcon  className="mr-" />
-             
-            </Button>
-          );
-        },
-      },
+  },
+  {
+    accessorKey: "Utilisateur.usr_nomprenom",
+    header: "Utilisateur",
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    header: ({ column }) => {
+      return <div>Action</div>;
+    },
+    cell: ({ row }) => {
+      const payment = row.original;
+      const { isOpen, onClose, onOpen } = useCompteRenduModal();
+
+      return (
+        <Button
+          className="flex items-center h-full  justify-center"
+          variant="default"
+          onClick={() => onOpen(row.original.id)}
+        >
+          <SearchIcon className="mr-" />
+        </Button>
+      );
+    },
+  },
 ];
 
 // export interface CompteRendu {

@@ -67,6 +67,13 @@ export const columns: ColumnDef<any>[] = [
   {
     accessorKey: "age",
     header: "Agence",
+    cell: ({ row }) => {
+      return (
+        <>
+          {row.original.Agence?.codug} : {row.original.Agence?.libelle}
+        </>
+      );
+    },
   },
   {
     accessorKey: "nbre_imp",
@@ -100,6 +107,7 @@ export const columns: ColumnDef<any>[] = [
     accessorKey: "max_nbj",
     header: "Max NBJ",
   },
+
   {
     accessorKey: "tot_eng",
     header: "Engagement",
@@ -119,7 +127,10 @@ export const columns: ColumnDef<any>[] = [
         <Checkbox
           defaultChecked={row.original.etat_lettre === "O"}
           onCheckedChange={async (value) => {
-            await updateEtatLetttre(row.original.ncp, row.original.etat_lettre==="N" ? "O" : "N");
+            await updateEtatLetttre(
+              row.original.ncp,
+              row.original.etat_lettre === "N" ? "O" : "N"
+            );
             console.log(row.original.etat_lettre);
           }}
         />

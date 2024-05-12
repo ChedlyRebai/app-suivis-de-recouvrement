@@ -1,6 +1,7 @@
 "use server";
 import { Agence } from "@/Models/agence.model";
 import axios from "axios";
+import { cookies } from "next/headers";
 
 export interface Main {
   result: Utilisateur[];
@@ -68,6 +69,12 @@ export const getAllClient = async (
   search?: string
 ) => {
   try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     axios.defaults.baseURL = `${process.env.API_URL}`;
 
     //   console.log(
@@ -99,6 +106,8 @@ export interface CompteRendu {
   compte_rendu: string;
   usr_nom: string;
   ab_client: AbClient;
+  Utilisateur: Utilisateur;
+
   compterendutype_compterendutype_compterenduidTosuivi_agenda: CompterendutypeCompterendutypeCompterenduidTosuiviAgendum[];
 }
 

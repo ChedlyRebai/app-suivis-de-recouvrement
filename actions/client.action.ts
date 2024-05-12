@@ -18,28 +18,28 @@ export interface Main {
 }
 
 export interface client {
-  nom:              string;
-  cli:              string;
-  flag_trt:         string;
-  phase:            string;
-  susp_crd:         null;
-  trt_agc:          null;
-  groupe:           number;
-  agence:           number;
-  nbre_imp:         number;
-  mnt_imp:          string;
-  nombre_jours:     number;
-  sd:               string;
-  depassement:      string;
+  nom: string;
+  cli: string;
+  flag_trt: string;
+  phase: string;
+  susp_crd: null;
+  trt_agc: null;
+  groupe: number;
+  agence: number;
+  nbre_imp: number;
+  mnt_imp: string;
+  nombre_jours: number;
+  sd: string;
+  depassement: string;
   nombre_jours_sdb: number;
-  tot_creance:      string;
-  max_nbj:          number;
-  engagement:       string;
-  classe:           number;
-  tel1:             string;
-  tel2:             null;
-  Zone:             Agence;
-  Agence:           Agence;
+  tot_creance: string;
+  max_nbj: number;
+  engagement: string;
+  classe: number;
+  tel1: string;
+  tel2: null;
+  Zone: Agence;
+  Agence: Agence;
 }
 export interface Total {
   mnt_imp: string;
@@ -70,7 +70,10 @@ export const getClientContactes = async (
     const res = await axios.get<Main>(
       `http://localhost:10001/client/listclientcontactes?page=0&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
-    console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",res.data.total);
+    console.log(
+      "dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      res.data.total
+    );
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -141,7 +144,7 @@ export const getCompterendu = async (IdClient?: string) => {
     const res = await axios.get<any>(
       `https://release2.vercel.app/client/compteRendu?cli=${IdClient}`
     );
-    
+
     return res.data || ({} as any);
   } catch (error) {
     return {} as any;
@@ -163,7 +166,9 @@ export const getListCompte = async (IdClient?: string) => {
   }
 };
 
-export const getListCompteRenduHistoriqu= async (IdClient?: string):Promise<SuiviAgenda[]> => {
+export const getListCompteRenduHistoriqu = async (
+  IdClient?: string
+): Promise<SuiviAgenda[]> => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
@@ -172,7 +177,7 @@ export const getListCompteRenduHistoriqu= async (IdClient?: string):Promise<Suiv
     const res = await axios.get<SuiviAgenda[]>(
       `https://release2.vercel.app/client/listhistorique?cli=${IdClient}`
     );
-    return res.data || [] as SuiviAgenda[];
+    return res.data || ([] as SuiviAgenda[]);
   } catch (error) {
     return [] as SuiviAgenda[];
   }
@@ -187,7 +192,7 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
     const res = await axios.get<CompteRenduList[]>(
       `http://localhost:10001/compterendu/getcompterendu?cli=${IdClient}`
     );
-    
+
     return res.data || ([] as CompteRenduList[]);
   } catch (error) {
     return [] as CompteRenduList[];
@@ -206,16 +211,14 @@ export const createCompteRendu = async (
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.post(
       `http://localhost:10001/compterendu/createcompterendu`,
-      { suiviAgenda, compteRendu, user, cli, type:Number(type) }
+      { suiviAgenda, compteRendu, user, cli, type: Number(type) }
     );
-    
+
     return res.data;
   } catch (error) {
     return {} as SuiviAgenda;
   }
 };
-
-
 
 export const demandeDeTransferAnticipe = async (
   IdClient?: string,
@@ -234,9 +237,9 @@ export const demandeDeTransferAnticipe = async (
       session?.value as string
     }`;
     const res = await axios.get(
-      `https://release2.vercel.app/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
-    
+
     return res.data || ({} as ab_client);
   } catch (error) {
     return {} as ab_client;
@@ -261,46 +264,40 @@ export const getValidationProposeDeTransferAnticipe = async (
       session?.value as string
     }`;
     const res = await axios.get(
-      `https://release2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page&perPage&search&groupe&agence&from&to`
     );
 
+    console.log(res.data);
     return res.data || ({} as ab_client);
   } catch (error) {
     return {} as ab_client;
   }
 };
 
-
-
-
 export interface ClientDetails {
-  id:               string;
-  created_at:       Date;
-  catl:             string;
-  nom:              string;
-  Agence:           Agence;
-  engagement:       string;
-  cli:              string;
-  tel:              string;
-  nbre_imp:         number;
-  mnt_imp:          string;
-  nombre_jours:     number;
-  sd:               string;
-  depassement:      string;
+  id: string;
+  created_at: Date;
+  catl: string;
+  nom: string;
+  Agence: Agence;
+  engagement: string;
+  cli: string;
+  tel: string;
+  nbre_imp: number;
+  mnt_imp: string;
+  nombre_jours: number;
+  sd: string;
+  depassement: string;
   nombre_jours_sdb: number;
-  tel1:             string;
-  tel2:             null;
-  Zone:             Zone;
+  tel1: string;
+  tel2: null;
+  Zone: Zone;
 }
-
-
 
 export const getClientById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
-    console.log(
-      `http://localhost:10001/client/byid?id=${IdClient}`
-    );
+    console.log(`http://localhost:10001/client/byid?id=${IdClient}`);
     const res = await axios.get<ClientDetails>(
       `http://localhost:10001/client/byid?id=${IdClient}`
     );

@@ -14,7 +14,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-
 import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -39,7 +38,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import { Button } from "@/components/ui/button";
@@ -71,7 +69,7 @@ export function DataTableValidationDeTransfer<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
-
+  console.log(data);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -360,7 +358,6 @@ export function DataTableValidationDeTransfer<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      
                       {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
@@ -477,14 +474,12 @@ export function DataTableValidationDeTransfer<TData, TValue>({
               {total.tot_creance || 0}
             </TableCell>
             <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
+            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
           </TableRow>
         </Table>
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
-        <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-         
-        </div>
+        <div className="flex items-center space-x-6 lg:space-x-8 mt-2"></div>
 
         <DataTablePagination
           TotalAccount={totalAccout}

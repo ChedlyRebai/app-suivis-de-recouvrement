@@ -39,7 +39,7 @@ export const getLettre = async (
     );
 
     const res = await axios.get<any>(
-      `https://sprint2-two.vercel.app/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data as any;
@@ -54,9 +54,10 @@ export const updateEtatLetttre = async (
 ): Promise<any> => {
   try {
     const res = await axios.put(
-      `https://sprint2-two.vercel.app/lettre/updatelettre?ncp=${ncp}`,
+      `http://localhost:10001/lettre/updatelettre?ncp=${ncp}`,
       { etat: etat_lettre }
     );
+    console.log(res.data);
     return res.data as any;
   } catch (error) {
     console.log(error);

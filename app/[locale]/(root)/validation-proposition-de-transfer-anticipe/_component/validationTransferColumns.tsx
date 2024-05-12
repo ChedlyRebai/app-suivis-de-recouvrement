@@ -1,5 +1,6 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
+import { MOTT, VTRF, getMotif } from "@/actions/motif.action";
 import { getTypeTransfer } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -14,7 +15,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, SearchIcon } from "lucide-react";
 
-export const validationTransferColumns: ColumnDef<ab_client>[] = [
+export const validationTransferColumns: ColumnDef<any>[] = [
   {
     accessorKey: "cli",
     header: "cli",
@@ -25,12 +26,26 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
   },
 
   {
-    accessorKey: "ncp",
-    header: "N°compte",
+    accessorKey: "age",
+    header: "Agence",
+    cell: ({ row }) => {
+      return (
+        <span>
+          {row.original?.Agence.codug} {row.original?.Agence.libelle}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "age",
-    header: "Agence",
+    header: "Zone",
+    cell: ({ row }) => {
+      return (
+        <span>
+          {row.original?.Zone.codug} {row.original?.Zone.libelle}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "nbre_imp",
@@ -65,7 +80,7 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     header: "Max NBJ",
   },
   {
-    accessorKey: "tot_eng",
+    accessorKey: "engagement",
     header: "Engagement",
   },
 
@@ -74,34 +89,36 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     header: "Classe",
   },
   {
-    accessorKey: "TRAF_A",
+    accessorKey: "Trans.libelle",
     header: "Transferer à",
-    cell: async ({ row }) => {
-      const typeTransfer = await getTypeTransfer();
-      return (
-        <Select defaultValue={row.getValue("TRAF_A")}>
-          <SelectTrigger className={` w-fit `}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="TRAF_A">
-              {" "}
-              {typeTransfer.map((item: any) => (
-                <SelectItem key={item.codenv} value={`${item.codenv}`}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
+    // cell: async ({ row }) => {
+    //   const typeTransfer = await getTypeTransfer();
+    //   return (
+    //     <Select defaultValue={row.getValue("TRAF_A")}>
+    //       <SelectTrigger className={` w-fit `}>
+    //         <SelectValue className="" placeholder="Select a fruit" />
+    //       </SelectTrigger>
+    //       <SelectContent>
+    //         <SelectGroup id="TRAF_A">
+    //           {" "}
+    //           {typeTransfer.map((item: any) => (
+    //             <SelectItem key={item.codenv} value={`${item.codenv}`}>
+    //               {item.libelle}
+    //             </SelectItem>
+    //           ))}
+    //         </SelectGroup>
+    //       </SelectContent>
+    //     </Select>
+    //   );
+    // },
   },
 
   {
-    accessorKey: "mott",
+    accessorKey: "Mott.codenv",
     header: "Motif de transfer",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const motif = await MOTT();
+      console.log(motif);
       return (
         // <span
         //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
@@ -121,22 +138,25 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
           //     "acces"
           //   )
           // }
-          defaultValue={row.getValue("mott")}
+          defaultValue={row.original?.mott}
         >
           <SelectTrigger
-            className={` w-fit ${
-              row.getValue("acces") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
+          // className={` w-fit ${
+          //   row.getValue("Mott.codenv") == "O"
+          //     ? "border-green-500"
+          //     : "border-red-500"
+          // }`}
           >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="MOTT">
               {" "}
-              <SelectItem value="O">Oui</SelectItem>
-              <SelectItem value="N">Non</SelectItem>
+              {motif.map((item: any) => (
+                <SelectItem key={item.codenv} value={item.codenv}>
+                  {item.libelle}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -144,19 +164,20 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey: "OBS1",
+    accessorKey: "OBS",
     header: "Commentaire",
   },
 
   {
-    accessorKey: "TRF_PROPOSE_V",
+    accessorKey: "trf_propose_v",
     header: "validations",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const vtrf = await VTRF();
       return (
-        <Select defaultValue={row.getValue("TRAF_A")}>
+        <Select defaultValue={row.getValue("trf_propose_v")}>
           <SelectTrigger
             className={` w-fit ${
-              row.getValue("acces") == "O"
+              row.getValue("trf_propose_v") == "O"
                 ? "border-green-500"
                 : "border-red-500"
             }`}
@@ -166,8 +187,13 @@ export const validationTransferColumns: ColumnDef<ab_client>[] = [
           <SelectContent>
             <SelectGroup id="TRAF_A">
               {" "}
-              <SelectItem value="O">Validé</SelectItem>
-              <SelectItem value="N">Non Validé</SelectItem>
+              {vtrf.map((item: any) => (
+                <SelectItem key={item.codenv} value={item.codenv}>
+                  {item.libelle}
+                </SelectItem>
+              ))}
+              {/* <SelectItem value="O">Validé</SelectItem>
+              <SelectItem value="N">Non Validé</SelectItem> */}
             </SelectGroup>
           </SelectContent>
         </Select>

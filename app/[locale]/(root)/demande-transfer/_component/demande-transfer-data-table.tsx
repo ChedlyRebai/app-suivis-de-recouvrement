@@ -363,7 +363,6 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      
                       {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
@@ -480,15 +479,13 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
               {total.tot_creance || 0}
             </TableCell>
             <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
+            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
           </TableRow>
         </Table>
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
         <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-          <div className="flex items-center space-x-2">
-           
-          </div>
+          <div className="flex items-center space-x-2"></div>
         </div>
 
         <DataTablePagination
