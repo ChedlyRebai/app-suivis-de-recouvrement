@@ -68,7 +68,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
-
+  console.log("historique demande data table", data);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -357,7 +357,6 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      
                       {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
@@ -480,9 +479,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
         <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-          <div className="flex items-center space-x-2">
-
-          </div>
+          <div className="flex items-center space-x-2"></div>
         </div>
 
         <DataTablePagination

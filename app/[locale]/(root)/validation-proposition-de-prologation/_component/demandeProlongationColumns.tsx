@@ -3,7 +3,14 @@ import { ab_client } from "@/Models/ab_client.model";
 import { getMotifCommercial } from "@/actions/motif.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, SearchIcon } from "lucide-react";
 
@@ -65,12 +72,12 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
     accessorKey: "classe",
     header: "Classe",
   },
-   
+
   {
     accessorKey: "mott_prol_c",
     header: "Motif de Prolongation",
     cell: async ({ row }) => {
-      const motifCommercial=await getMotifCommercial()
+      const motifCommercial = await getMotifCommercial();
       return (
         // <span
         //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
@@ -82,7 +89,6 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
         //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
         // </span>
         <Select
-        
           // onValueChange={(newValue) =>
           //   update(
           //     row.getValue("code_fonction"),
@@ -91,20 +97,22 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
           //     "acces"
           //   )
           // }
-          defaultValue={row.getValue("mott_prol_c")}
+          defaultValue={row.getValue("mott_prol_c") || ""}
         >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="mott_prol_c">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Oui</SelectItem>
+              <SelectItem value="N">Non</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -112,29 +120,29 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"obs1",
-    header:"Commentaire",
+    accessorKey: "obs1",
+    header: "Commentaire",
   },
   {
-    accessorKey:"prol_c",
-    header:"prol_c",
+    accessorKey: "prol_c",
+    header: "prol_c",
     cell: ({ row }) => {
       return (
-        <Select
-          defaultValue={row.getValue("prol_c")}
-        >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+        <Select defaultValue={row.getValue("prol_c")}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("acces") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="prol_c">
               {" "}
-              <SelectItem  value="O">
-                Oui
-              </SelectItem>
-              <SelectItem  value="N">
-                Non
-              </SelectItem>
+              <SelectItem value="O">Oui</SelectItem>
+              <SelectItem value="N">Non</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -143,8 +151,8 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
   },
 
   {
-    accessorKey:"Action",
-    header:"Action",
+    accessorKey: "Action",
+    header: "Action",
     cell: ({ row }) => {
       return (
         <div className="flex justify-center">
@@ -162,5 +170,5 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
         </div>
       );
     },
-  }
+  },
 ];

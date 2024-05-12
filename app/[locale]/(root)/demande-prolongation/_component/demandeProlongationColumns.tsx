@@ -1,14 +1,24 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
 import { getMotifCommercial } from "@/actions/motif.action";
+import {
+  updateTransferAnti,
+  updatedemandeprolongation,
+} from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const demandedeprolongation: ColumnDef<ab_client>[] = [
-  
+export const demandedeprolongation: ColumnDef<any>[] = [
   {
     accessorKey: "cli",
     header: ({ column }) => {
@@ -73,12 +83,12 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
     accessorKey: "classe",
     header: "Classe",
   },
-  
+
   {
-    accessorKey:"motif_prol_c",
-    header:"Motif de prolongation",
+    accessorKey: "motif_prol_c",
+    header: "Motif de prolongation",
     cell: async ({ row }) => {
-      const motifCommercial=await getMotifCommercial()
+      const motifCommercial = await getMotifCommercial();
       return (
         // <span
         //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
@@ -90,7 +100,6 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
         //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
         // </span>
         <Select
-        
           // onValueChange={(newValue) =>
           //   update(
           //     row.getValue("code_fonction"),
@@ -99,16 +108,30 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
           //     "acces"
           //   )
           // }
-          defaultValue={row.getValue("motif_prol_c")}
+          defaultValue={row.getValue("motif_prol_c") || ""}
+          onValueChange={(newValue) => {
+            console.log(newValue, row.original?.cli);
+            updatedemandeprolongation(
+              row.original?.cli,
+              "motif_prol_c",
+              newValue
+            );
+          }}
         >
-          <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+          <SelectTrigger
+            className={` w-fit ${
+              row.getValue("motif_prol_c") == "O"
+                ? "border-green-500"
+                : "border-red-500"
+            }`}
+          >
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup id="motif_prol_c">
               {" "}
               {motifCommercial.map((item) => (
-                <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                <SelectItem key={item.codenv} value={item.codenv}>
                   {item.libelle}
                 </SelectItem>
               ))}
@@ -119,11 +142,11 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey:"OBS1",
-    header:"Commentaire",
+    accessorKey: "obs",
+    header: "Commentaire",
     // cell: ({ row }) => {
     //   return (
-      
+
     //     <Select
 
     //       defaultValue={row.getValue("OBS1")}
@@ -151,7 +174,7 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
   //   header:"Motif de transfer",
   //   cell: ({ row }) => {
   //     return (
-      
+
   //       <Select
 
   //         defaultValue={row.getValue("MOTT")}
@@ -179,7 +202,7 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
   //   header:"Transferer à",
   //   cell: ({ row }) => {
   //     return (
-      
+
   //       <Select
 
   //         defaultValue={row.getValue("TRAF_A")}
@@ -204,23 +227,22 @@ export const demandedeprolongation: ColumnDef<ab_client>[] = [
   // },
   // PROL_PROPOSE_C
   {
-    accessorKey:"prol_propose_c",
-    header:"checkbox",
+    accessorKey: "prol_propose_c",
+    header: "checkbox",
     cell: ({ row }) => {
       return (
-        <Checkbox id="terms" defaultChecked={row.getValue('prol_propose_c') =='O' ? true :false} />
+        <Checkbox
+          id="terms"
+          defaultChecked={row.getValue("prol_propose_c") == "O" ? true : false}
+        />
       );
     },
   },
   {
-    accessorKey:"",
-    header:"Action",
+    accessorKey: "",
+    header: "Action",
     cell: ({ row }) => {
-      return (
-        <Button id="terms" >
-          DETAILS
-        </Button>
-      );
+      return <Button id="terms">DETAILS</Button>;
     },
   },
 ];

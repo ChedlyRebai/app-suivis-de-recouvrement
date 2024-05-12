@@ -7,7 +7,6 @@ import {
   getClientContactes,
   getClientNonContactes,
   getGroupes,
-
 } from "@/actions/client.action";
 import {
   Card,
@@ -21,7 +20,7 @@ import { Suspense } from "react";
 import { DataTableDemandeDeProlongationCommercial } from "./_component/demande-prolongation-data-table";
 import { demandedeprolongation } from "./_component/demandeProlongationColumns";
 import { getLettre } from "@/actions/lettre.action";
-
+import { getDemandeDeProlongation } from "@/actions/prologation.action";
 
 export default async function Home({
   searchParams,
@@ -46,7 +45,7 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const data = await getLettre(
+  const data = await getDemandeDeProlongation(
     search,
     currentPage,
     perPage,
