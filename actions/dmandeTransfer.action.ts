@@ -15,6 +15,7 @@ export interface Total {
   tot_creance: string;
   engagement: string;
 }
+
 export const getHistoriqueDemandDeTransferAnticipe = async (
   cli: string,
   IdClient?: string,
@@ -39,6 +40,9 @@ export const getHistoriqueDemandDeTransferAnticipe = async (
     // const res = await axios.get<any>(
     //   `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     // );
+    console.log(
+      `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
+    );
     const res = await axios.get<any>(
       `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
     );

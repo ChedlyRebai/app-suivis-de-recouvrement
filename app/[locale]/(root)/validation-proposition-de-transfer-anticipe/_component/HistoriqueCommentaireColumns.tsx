@@ -1,8 +1,6 @@
-
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
-  
   {
     accessorKey: "NUMOBS",
     header: "N°",

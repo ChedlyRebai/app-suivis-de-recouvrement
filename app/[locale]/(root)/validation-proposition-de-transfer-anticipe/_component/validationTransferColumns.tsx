@@ -160,7 +160,7 @@ export const validationTransferColumns: ColumnDef<any>[] = [
     },
   },
   {
-    accessorKey: "OBS",
+    accessorKey: "obs",
     header: "Commentaire",
   },
 

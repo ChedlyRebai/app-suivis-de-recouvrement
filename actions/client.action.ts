@@ -221,7 +221,7 @@ export const createCompteRendu = async (
 };
 
 export const demandeDeTransferAnticipe = async (
-  IdClient?: string,
+  cli?: string,
   currentpage?: number,
   perpage?: number,
   groupe?: string,
@@ -236,8 +236,9 @@ export const demandeDeTransferAnticipe = async (
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
+
     const res = await axios.get(
-      `http://localhost:10001/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data || ({} as ab_client);

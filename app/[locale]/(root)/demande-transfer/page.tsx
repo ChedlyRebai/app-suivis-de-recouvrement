@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/card";
 import { Suspense } from "react";
 
-
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { demandeTransferColumns } from "./_component/demandeTransferColumns";
 
@@ -44,7 +43,7 @@ export default async function Home({
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
-  
+
   const data = await demandeDeTransferAnticipe(
     search,
     currentPage,

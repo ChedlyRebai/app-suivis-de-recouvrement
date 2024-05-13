@@ -1,8 +1,8 @@
 "use client";
 
 import { ab_client } from "@/Models/ab_client.model";
-import { getMotif } from "@/actions/motif.action";
-import { getTypeTransfer } from "@/actions/transfer.action";
+import { MOTT, getMotif } from "@/actions/motif.action";
+import { getTypeTransfer, updateTransferAnti } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -15,7 +15,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const demandeTransferColumns: ColumnDef<ab_client>[] = [
+export const demandeTransferColumns: ColumnDef<any>[] = [
   {
     accessorKey: "cli",
     header: ({ column }) => {
@@ -39,6 +39,13 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   {
     accessorKey: "agence",
     header: "Agence",
+    cell: ({ row }) => {
+      return (
+        <span>
+          {row.original?.Agence.codug} {row.original?.Agence.libelle}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "nbre_imp",
@@ -82,9 +89,10 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   },
 
   {
-    accessorKey: "MOTT",
+    accessorKey: "mott",
     header: "Motif de transfer",
-    cell: ({ row }) => {
+    cell: async ({ row }) => {
+      const motif = await MOTT();
       return (
         // <span
         //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
@@ -95,27 +103,31 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
         // >
         //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
         // </span>
+
         <Select
-          // onValueChange={(newValue) =>
-          //   update(
-          //     row.getValue("code_fonction"),
-          //     row.getValue("id"),
-          //     newValue,
-          //     "acces"
-          //   )
-          // }
-          defaultValue={row.getValue("MOTT")}
+          onValueChange={(newValue) => {
+            console.log(newValue, row.original?.cli);
+            updateTransferAnti(row.original?.cli, "mott", newValue);
+          }}
+          defaultValue={row.getValue("mott") || ""}
         >
-          <SelectTrigger
-            className={` w-fit`}
-          >
+          {/* <Select
+          defaultValue={row.getValue("trf_propose_v")}
+          onValueChange={(newValue) => {
+            console.log(newValue, row.original?.cli);
+            updateTransferAnti(row.original?.cli, "trf_propose_v", newValue);
+          }}
+        > */}
+          <SelectTrigger className={` w-fit`}>
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup id="MOTT">
-              {" "}
-              <SelectItem value="O">Oui</SelectItem>
-              <SelectItem value="N">Non</SelectItem>
+            <SelectGroup id="mott">
+              {motif.map((item: any) => (
+                <SelectItem key={item.codenv} value={item.codenv}>
+                  {item.libelle}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -123,7 +135,7 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
     },
   },
   {
-    accessorKey: "OBS1",
+    accessorKey: "obs",
     header: "Commentaire",
     // cell: ({ row }) => {
     //   return (
@@ -170,24 +182,28 @@ export const demandeTransferColumns: ColumnDef<ab_client>[] = [
   //     );
   //   },
   // },
-  
+
   {
-    accessorKey: "TRAF_A",
+    accessorKey: "trf_a",
     header: "Transferer à",
     cell: async ({ row }) => {
       const typeTransfer = await getTypeTransfer();
       return (
-        <Select defaultValue={row.getValue("TRAF_A")}>
-          <SelectTrigger
-            className={` w-fit `}
-          >
+        <Select
+          defaultValue={row.getValue("trf_a") || ""}
+          onValueChange={(newValue) => {
+            console.log(newValue, row.original?.cli);
+            updateTransferAnti(row.original?.cli, "trf_a", newValue);
+          }}
+        >
+          <SelectTrigger className={` w-fit `}>
             <SelectValue className="" placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup id="TRAF_A">
+            <SelectGroup id="trf_a">
               {" "}
               {typeTransfer.map((item: any) => (
-                <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                <SelectItem key={item.codenv} value={item.codenv}>
                   {item.libelle}
                 </SelectItem>
               ))}
