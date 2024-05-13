@@ -95,8 +95,10 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
     );
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&cli=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
+    console.log("============================================");
+    console.log(res.data);
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;

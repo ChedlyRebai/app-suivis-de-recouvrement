@@ -41,10 +41,12 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
       );
     },
   },
+
   // {
   //   accessorKey: "VTRF.libelle",
   //   header: "validation",
   // },
+
   {
     accessorKey: "Mott.libelle",
     header: "Motifs",

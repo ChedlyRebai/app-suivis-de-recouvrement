@@ -14,6 +14,20 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { MOTT, getMotif } from "@/actions/motif.action";
+import { getTypeTransfer, updateTransferAnti } from "@/actions/transfer.action";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { ArrowUpDown } from "lucide-react";
+
 import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -68,12 +82,147 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
   agences,
   groupes,
 }: DataTableProps<TData, TValue>) {
-  console.log(agences);
-  console.log(groupes);
-  console.log(data);
-  console.log(totalAccout);
-  console.log(total);
-  console.log(totalPages);
+  const [motif, setMotif] = useState<any>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const motif = await MOTT();
+      setMotif(motif);
+    };
+    fetchData();
+  }, []); // Le tableau de dépendances est vide car nous ne dépendons pas de l'état précédent de motif
+
+  const demandeTransferColumns: ColumnDef<any>[] = [
+    {
+      accessorKey: "cli",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost">
+            Cli
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "nom",
+      header: "Non",
+    },
+    {
+      accessorKey: "agence",
+      header: "Agence",
+      cell: ({ row }) => {
+        return (
+          <span>
+            {row.original?.Agence.codug} {row.original?.Agence.libelle}
+          </span>
+        );
+      },
+    },
+    {
+      accessorKey: "nbre_imp",
+      header: "Nbr.IMP",
+    },
+    {
+      accessorKey: "mnt_imp",
+      header: "Impayé",
+    },
+    {
+      accessorKey: "nombre_jours",
+      header: "Nbj.Imp",
+    },
+    {
+      accessorKey: "sd",
+      header: "Solde Debiteur",
+    },
+    {
+      accessorKey: "depassement",
+      header: "Depassement",
+    },
+    {
+      accessorKey: "nombre_jours_sdb",
+      header: "Nbj.SDB",
+    },
+    {
+      accessorKey: "tot_creance",
+      header: "Tot.irregulier",
+    },
+    {
+      accessorKey: "max_nbj",
+      header: "Max NBJ",
+    },
+    {
+      accessorKey: "engagement",
+      header: "Engagement",
+    },
+    {
+      accessorKey: "classe",
+      header: "Classe",
+    },
+
+    {
+      accessorKey: "mott",
+      header: "Motif de transfer",
+      cell: async ({ row }) => {
+        return (
+          <Select
+            onValueChange={(newValue) => {
+              console.log(newValue, row.original?.cli);
+              updateTransferAnti(row.original?.cli, "mott", newValue);
+            }}
+            defaultValue={row.getValue("mott") || ""}
+          >
+            <SelectTrigger className={` w-fit`}>
+              <SelectValue className="" placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup id="mott">
+                {motif.map((item: any) => (
+                  <SelectItem key={item.codenv} value={item.codenv}>
+                    {item.libelle}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+    {
+      accessorKey: "obs",
+      header: "Commentaire",
+    },
+
+    {
+      accessorKey: "trf_a",
+      header: "Transferer à",
+      cell: async ({ row }) => {
+        const typeTransfer = await getTypeTransfer();
+        return (
+          <Select
+            defaultValue={row.getValue("trf_a") || ""}
+            onValueChange={(newValue) => {
+              console.log(newValue, row.original?.cli);
+              updateTransferAnti(row.original?.cli, "trf_a", newValue);
+            }}
+          >
+            <SelectTrigger className={` w-fit `}>
+              <SelectValue className="" placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup id="trf_a">
+                {" "}
+                {typeTransfer.map((item: any) => (
+                  <SelectItem key={item.codenv} value={item.codenv}>
+                    {item.libelle}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+  ];
 
   const router = useRouter();
   const pathname = usePathname();
@@ -178,7 +327,7 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
 
   const table = useReactTable({
     data,
-    columns,
+    columns: demandeTransferColumns,
     state: {
       sorting,
       columnVisibility,
