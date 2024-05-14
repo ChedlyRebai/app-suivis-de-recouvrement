@@ -66,7 +66,7 @@ export const getvalidationprpositiondeprolongation = async (
     );
 
     const res = await axios.get<any>(
-      `http://localhost:10001/prolongation/validationprolongation?cli&page&perPage&search&groupe&agence&from&to`
+      `https://release3-v2.vercel.app/prolongation/validationprolongation?cli=${IdClient}&page=${currentpage}&perPage=${perpage}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data);
     return res.data || ({} as any);
@@ -154,7 +154,7 @@ export const getDemandeDeProlongation = async (
     );
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/prolongation/demandeprolongation?cli&page&perPage&search&groupe&agence&from&to`
+      `https://release3-v2.vercel.app/prolongation/demandeprolongation?cli&page&perPage&search&groupe&agence&from&to`
     );
     return res.data || ({} as Main);
   } catch (error) {

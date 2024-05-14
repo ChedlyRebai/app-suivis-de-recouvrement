@@ -238,7 +238,7 @@ export const demandeDeTransferAnticipe = async (
     }`;
 
     const res = await axios.get(
-      `http://localhost:10001/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release3-v2.vercel.app/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     return res.data || ({} as ab_client);
@@ -265,7 +265,7 @@ export const getValidationProposeDeTransferAnticipe = async (
       session?.value as string
     }`;
     const res = await axios.get(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page&perPage&search&groupe&agence&from&to`
+      `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page&perPage&search&groupe&agence&from&to`
     );
 
     console.log(res.data);
