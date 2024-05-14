@@ -46,7 +46,7 @@ export const getHistoriqueDemandDeProlongation = async (
 };
 
 export const getvalidationprpositiondeprolongation = async (
-  IdClient?: string,
+  cli?: string,
   currentpage?: number,
   perpage?: number,
   groupe?: string,
@@ -62,11 +62,11 @@ export const getvalidationprpositiondeprolongation = async (
       session?.value as string
     }`;
     console.log(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     const res = await axios.get<any>(
-      `https://release3-v2.vercel.app/prolongation/validationprolongation?cli=${IdClient}&page=${currentpage}&perPage=${perpage}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/prolongation/validationprolongation?page=${currentpage}&perPage=${perpage}&cli=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data);
     return res.data || ({} as any);
@@ -154,7 +154,7 @@ export const getDemandeDeProlongation = async (
     );
 
     const res = await axios.get<Main>(
-      `https://release3-v2.vercel.app/prolongation/demandeprolongation?cli&page&perPage&search&groupe&agence&from&to`
+      `http://localhost:10001/prolongation/demandeprolongation?page=${currentpage}&perPage=${perpage}&cli=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     return res.data || ({} as Main);
   } catch (error) {

@@ -68,7 +68,7 @@ export const getClientContactes = async (
       `https://sprint2-two.vercel.app/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     const res = await axios.get<Main>(
-      `http://localhost:10001/client/listclientcontactes?page=0&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/listclientcontactes?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     console.log(
       "dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -113,7 +113,7 @@ export const getGroupes = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
 
-    const res = await axios.get<Zone[]>(
+    const res = await axios.get<any[]>(
       `https://release2.vercel.app/client/getgroupes`
     );
 
@@ -238,12 +238,12 @@ export const demandeDeTransferAnticipe = async (
     }`;
 
     const res = await axios.get(
-      `https://release3-v2.vercel.app/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/client/demandedetransferanticipe?page&perPage&search&groupe&agence&from&to`
     );
 
-    return res.data || ({} as ab_client);
+    return (res.data as any) || ({} as any);
   } catch (error) {
-    return {} as ab_client;
+    return {} as any;
   }
 };
 
@@ -265,13 +265,13 @@ export const getValidationProposeDeTransferAnticipe = async (
       session?.value as string
     }`;
     const res = await axios.get(
-      `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page&perPage&search&groupe&agence&from&to`
+      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&cli=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
 
     console.log(res.data);
-    return res.data || ({} as ab_client);
+    return res.data || ([] as ab_client);
   } catch (error) {
-    return {} as ab_client;
+    return [] as ab_client;
   }
 };
 

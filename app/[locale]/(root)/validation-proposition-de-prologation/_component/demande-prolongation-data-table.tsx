@@ -49,6 +49,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { DataTableToolbar } from "../../listeclient/_components/contactes/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: any[];
@@ -237,19 +238,18 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
   };
   const [loader, setLoader] = useState(true);
   // effect
-  useEffect(() => {
-    setLoader(false);
-  }, []);
+  // useEffect(() => {
+  //   setLoader(false);
+  // }, []);
 
-  // render
-  if (loader) {
-    return <div>Loading</div>;
-  }
+  // if (loader) {
+  //   return <div>Loading</div>;
+  // }
 
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <>
+        {/* <>
           <Input
             placeholder="Cli"
             defaultValue={searchParams.get("query")?.toString()}
@@ -399,7 +399,8 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
           </Card>
 
           <DataTableViewOptions table={table} />
-        </>
+        </> */}
+        <DataTableToolbar table={table} type={"contactes"} />
       </div>
       <div className="rounded-md border">
         <Table>

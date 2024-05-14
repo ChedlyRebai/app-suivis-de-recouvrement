@@ -49,6 +49,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { DataTableToolbar } from "../../listeclient/_components/contactes/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -242,7 +243,8 @@ export function DataTableValidationDeTransfer<TData, TValue>({
 
   return (
     <>
-      <div className="flex  items-center py-4 flex-wrap">
+      <DataTableToolbar table={table} type="contactes" />
+      {/* <div className="flex  items-center py-4 flex-wrap">
         <>
           <Input
             placeholder="Cli"
@@ -394,7 +396,7 @@ export function DataTableValidationDeTransfer<TData, TValue>({
 
           <DataTableViewOptions table={table} />
         </>
-      </div>
+      </div> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>

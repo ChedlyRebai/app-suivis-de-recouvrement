@@ -13,6 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useMemo } from "react";
 
 import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 
@@ -48,6 +49,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { DataTableToolbar } from "../../listeclient/_components/contactes/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -71,49 +73,47 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   console.log("historique demande data table", data);
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const { replace } = useRouter();
-  const setAgences = useListAgences((state) => state.setAgences);
-  setAgences(agences);
+  // const setAgences = useListAgences((state) => state.setAgences);
+  // // setAgences(agences);
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [inputValue, setInputValue] = useState("");
-  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
 
   // const [groupes, setGroupes] = useState<any>([]);
   // const [agences, setAgences] = useState<any>([]);
 
-  const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
+  // const [agenceopen, setagenceOpen] = useState(false);
+  // const [groupopen, setgroupOpen] = useState(false);
+  // const [agenceValue, setAgenceValue] = useState("");
+  // const [groupeValue, setgroupeValue] = useState("");
 
-  const handleSearch = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("query", query);
-      params.set("page", "1");
-    } else {
-      params.delete("query");
-    }
-    console.log(params.get("query")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 100);
+  // const handleSearch = useDebouncedCallback((query: string) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (query) {
+  //     params.set("query", query);
+  //     params.set("page", "1");
+  //   } else {
+  //     params.delete("query");
+  //   }
+  //   console.log(params.get("query")?.toString());
+  //   replace(`${pathname}?${params.toString()}`);
+  // }, 100);
 
-  const handleGroup = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("groupe", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
+  // const handleGroup = useDebouncedCallback((query: string) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (query) {
+  //     params.set("groupe", query);
+  //     params.set("page", "1");
+  //   }
+  //   console.log(params.get("groupe")?.toString());
+  //   replace(`${pathname}?${params.toString()}`);
+  // }, 0);
 
   const handleFrom = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -144,25 +144,25 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
     replace(`${pathname}?${params.toString()}`);
   }, 0);
 
-  const handleAgence = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("from");
-      params.set("page", "1");
-    }
-    if (query) {
-      params.set("agence", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
+  // const handleAgence = useDebouncedCallback((query: string) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (
+  //     query === "" ||
+  //     query === null ||
+  //     query === undefined ||
+  //     query === "0"
+  //   ) {
+  //     console.log(query);
+  //     params.delete("from");
+  //     params.set("page", "1");
+  //   }
+  //   if (query) {
+  //     params.set("agence", query);
+  //     params.set("page", "1");
+  //   }
+  //   console.log(params.get("groupe")?.toString());
+  //   replace(`${pathname}?${params.toString()}`);
+  // }, 0);
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -193,56 +193,149 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+  // const createQueryString = useCallback(
+  //   (name: string, value: string) => {
+  //     const params = new URLSearchParams(searchParams.toString());
+  //     params.set(name, value);
 
-      return params.toString();
-    },
-    [searchParams, selectedCode]
-  );
+  //     return params.toString();
+  //   },
+  //   [searchParams, selectedCode]
+  // );
 
-  const resetAgence = () => {
-    setAgenceValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    replace(`${pathname}?${params.toString()}`);
-  };
+  // const resetAgence = () => {
+  //   setAgenceValue("");
+  //   const params = new URLSearchParams(searchParams);
+  //   params.delete("agence");
+  //   replace(`${pathname}?${params.toString()}`);
+  // };
 
-  const resetGroup = () => {
-    setgroupeValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("groupe");
-    replace(`${pathname}?${params.toString()}`);
-  };
+  // const resetGroup = () => {
+  //   setgroupeValue("");
+  //   const params = new URLSearchParams(searchParams);
+  //   params.delete("groupe");
+  //   replace(`${pathname}?${params.toString()}`);
+  // };
 
-  useEffect(() => {
-    setSearch(`${searchParams.get("code")}`);
-    console.log(search);
-  }, [searchParams.get("code")]);
+  // useEffect(() => {
+  //   setSearch(`${searchParams.get("code")}`);
+  //   console.log(search);
+  // }, [searchParams.get("code")]);
 
-  const addQuery = (row: any) => {
-    console.log();
-    router.push(
-      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
-    );
-  };
+  // const addQuery = (row: any) => {
+  //   console.log();
+  //   router.push(
+  //     pathname + "?" + createQueryString("code", `${selectedCode as string}`)
+  //   );
+  // };
   const [loader, setLoader] = useState(true);
   // effect
-  useEffect(() => {
-    setLoader(false);
-  }, []);
+  // useEffect(() => {
+  //   setLoader(false);
+  // }, []);
 
-  // render
-  if (loader) {
-    return <div>Loading</div>;
-  }
+  // // render
+  // if (loader) {
+  //   return <div>Loading</div>;
+  // }
+  const [agenceopen, setagenceOpen] = useState(false);
+  const [groupopen, setgroupOpen] = useState(false);
+  const [agenceValue, setAgenceValue] = useState("");
+  const [groupeValue, setgroupeValue] = useState("");
+  const searchParams = useSearchParams();
+  const handleSearch = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (query) {
+      params.set("query", query);
+      params.set("page", "1");
+    } else {
+      params.delete("query");
+    }
+    console.log(params.get("query")?.toString());
+    replace(`${pathname}?${params.toString()}`);
+  }, 100);
+
+  const handleGroup = (group: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (group) {
+      params.set("groupe", group);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const handleAgence = (agence: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (agence) {
+      params.set("agence", agence);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  // useEffect(() => {
+  //   const fetchGroupes = async () => {
+  //     try {
+  //       const groupesData = await getGroupes();
+  //       setGroupes(groupesData);
+  //     } catch (error) {
+  //       console.error("Error fetching groupes:", error);
+  //     }
+  //   };
+
+  //   const fetchAgences = async () => {
+  //     try {
+  //       const agencesData = await getAgences();
+  //       setAgences(agencesData);
+  //     } catch (error) {
+  //       console.error("Error fetching agences:", error);
+  //     }
+  //   };
+
+  //   fetchAgences();
+  //   fetchGroupes();
+  // }, []);
+
+  const groupPopoverContent = useMemo(
+    () => (
+      <PopoverContent className="w-[200px] p-0 ml-2">
+        <Command>
+          <CommandInput placeholder="Search group" />
+          <CommandEmpty>No framework found.</CommandEmpty>
+
+          <CommandGroup>
+            {groupes.map((item: any, i: number) => (
+              <CommandItem
+                key={i}
+                value={item.libelle}
+                onSelect={(currentValue) => {
+                  handleGroup(item.codug);
+                  setgroupeValue(
+                    item.codug === searchParams.get("groupe") ? "" : item.codug
+                  );
+                  setgroupOpen(false);
+                }}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    groupeValue === item.codug ? "opacity-100" : "opacity-0"
+                  )}
+                />
+                {item.codug}:{item.libelle}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    ),
+    [groupes, handleGroup, groupeValue, searchParams]
+  );
 
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <>
+        <DataTableToolbar table={table} type={"noncontactes"} />
+        {/* <>
           <Input
             placeholder="Cli"
             defaultValue={searchParams.get("query")?.toString()}
@@ -304,11 +397,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
-          <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetAgence}
-          >
+          <Button variant="default" className="font-black mx-1">
             <RefreshCcwIcon className="font-b" />
           </Button>
           <div className="w-1" />
@@ -337,7 +426,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
                 <CommandGroup>
                   {groupes.map((item: any, i: number) => (
                     <CommandItem
-                      key={item.codug}
+                      key={i}
                       value={item.libelle}
                       onSelect={(currentValue) => {
                         handleGroup(item.codug);
@@ -364,11 +453,26 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
-          <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetGroup}
-          >
+          <Popover open={groupopen} onOpenChange={setgroupOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="default"
+                role="combobox"
+                aria-expanded={groupopen}
+                className="w-[200px] justify-between"
+              >
+                {searchParams.get("groupe")
+                  ? agences.find(
+                      (framework: any) =>
+                        framework.codug === searchParams.get("groupe")
+                    )?.libelle || "Sélectionner un groupe"
+                  : "Sélectionner un groupe"}
+                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            {groupPopoverContent}
+          </Popover>
+          <Button variant="default" className="font-black mx-1">
             <RefreshCcwIcon className="font-b" />
           </Button>
 
@@ -392,16 +496,16 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
           </Card>
 
           <DataTableViewOptions table={table} />
-        </>
+        </> */}
       </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
+                {headerGroup.headers.map((header, i) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={i}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -416,27 +520,27 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map((row, i) => (
                 <TableRow
                   className="p-"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
+                  // onDoubleClick={() => {
+                  //   console.log((row.original as { cli: string }).cli);
 
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
-                  key={row.id}
+                  //   router.push(
+                  //     "compte-rendu" +
+                  //       "?" +
+                  //       createQueryString(
+                  //         "cli",
+                  //         `${(row.original as { cli: string }).cli}`
+                  //       )
+                  //   );
+                  // }}
+                  key={i}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map((cell, i) => (
                     <TableCell
-                      key={cell.id}
+                      key={i}
                       className="p- cursor-pointer"
                       onClick={(e) => console.log(e)}
                     >
@@ -473,7 +577,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
               {total.tot_creance || 0}
             </TableCell>
             <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
+            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
           </TableRow>
         </Table>
       </div>

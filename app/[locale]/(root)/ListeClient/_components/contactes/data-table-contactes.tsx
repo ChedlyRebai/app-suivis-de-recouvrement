@@ -85,8 +85,6 @@ export function DataTableContactes<TData, TValue>({
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
-
-
   const [agenceopen, setagenceOpen] = useState(false);
   const [groupopen, setgroupOpen] = useState(false);
   const [agenceValue, setAgenceValue] = useState("");
@@ -309,7 +307,7 @@ export function DataTableContactes<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                     {item.codug}: {item.libelle}
+                      {item.codug}: {item.libelle}
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -332,7 +330,6 @@ export function DataTableContactes<TData, TValue>({
                 aria-expanded={groupopen}
                 className="w-[200px] justify-between"
               >
-                
                 {searchParams.get("agence")
                   ? agences.find(
                       (framework: any) =>
@@ -346,12 +343,12 @@ export function DataTableContactes<TData, TValue>({
               <Command>
                 <CommandInput placeholder="Search group" />
                 <CommandEmpty>No framework found.</CommandEmpty>
-                
+
                 <CommandGroup>
                   {groupes.map((item: any, i: number) => (
                     <CommandItem
-                    key={item.codug}
-                    value={item.libelle}
+                      key={item.codug}
+                      value={item.libelle}
                       onSelect={(currentValue) => {
                         handleGroup(item.codug);
                         setgroupeValue(
@@ -370,7 +367,6 @@ export function DataTableContactes<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-
                       {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
@@ -386,8 +382,8 @@ export function DataTableContactes<TData, TValue>({
             <RefreshCcwIcon className="font-b" />
           </Button>
           {type !== "contactes" && (
-            <Card  className="h-10" >
-              <CardContent className="flex items-center justify-center my-1" >
+            <Card className="h-10">
+              <CardContent className="flex items-center justify-center my-1">
                 <p>Nombre de jour :</p>
                 <Input
                   type="number"
@@ -411,12 +407,12 @@ export function DataTableContactes<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader >
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow  key={headerGroup.id}>
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead  key={header.id} >
+                    <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(

@@ -87,7 +87,7 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
     accessorKey: "mott",
     header: "Motif de transfer",
     cell: async ({ row }) => {
-      const motif = await MOTT();
+      const motif: any = [];
       return (
         <Select
           onValueChange={(newValue) => {

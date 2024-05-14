@@ -66,29 +66,29 @@ export default async function Home({
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white"></h1>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div className=" mx-auto px-4 sm:px-6 md:px-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Demande de Proposition de prolongation</CardTitle>
-                {/* <CardDescription>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
+        <div className=" mx-auto px-4 sm:px-6 md:px-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Demande de Proposition de prolongation</CardTitle>
+              {/* <CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription> */}
-              </CardHeader>
-              <CardContent>
-                <DataTableDemandeDeProlongationCommercial
-                  agences={agences || []}
-                  groupes={groupes || []}
-                  total={data.total || 0}
-                  totalAccout={data.totalCount || 0}
-                  totalPages={data.totalPages || 1}
-                  columns={demandedeprolongation}
-                  data={data.result || []}
-                />
-              </CardContent>
-            </Card>
-          </div>
-        </Suspense>
+            </CardHeader>
+            <CardContent>
+              <DataTableDemandeDeProlongationCommercial
+                agences={agences || []}
+                groupes={groupes || []}
+                total={data.total || 0}
+                totalAccout={data.totalCount || 0}
+                totalPages={data.totalPages || 1}
+                columns={demandedeprolongation}
+                data={data.result || []}
+              />
+            </CardContent>
+          </Card>
+        </div>
+        {/* </Suspense> */}
       </div>
     </div>
   );

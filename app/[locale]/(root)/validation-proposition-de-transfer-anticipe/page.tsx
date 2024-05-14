@@ -10,7 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Suspense } from "react";
-import { getAgences, getGroupes, getValidationProposeDeTransferAnticipe } from "@/actions/client.action";
+import {
+  getAgences,
+  getGroupes,
+  getValidationProposeDeTransferAnticipe,
+} from "@/actions/client.action";
 
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
@@ -40,15 +44,15 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-    const data = await getValidationProposeDeTransferAnticipe(
-      search,
-      currentPage,
-      perPage,
-      group,
-      agence,
-      from,
-      to
-    );
+  const data = await getValidationProposeDeTransferAnticipe(
+    search,
+    currentPage,
+    perPage,
+    group,
+    agence,
+    from,
+    to
+  );
 
   //   const dataNon = await getClientNonContactes(
   //     search,
@@ -71,59 +75,27 @@ export default async function Home({
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-white"></h1>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div className=" mx-auto px-4 sm:px-6 md:px-8">
-            <Tabs defaultValue="Critéred'integration" className="">
-              <TabsList className="grid w-fit grid-cols-2">
-                <TabsTrigger value="Critéred'integration">
-                  Critére d'integration{" "}
-                </TabsTrigger>
-                <TabsTrigger value="HistoriqueCommentaire">
-                  Historique Commentaire{" "}
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="Critéred'integration">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Critére d'integration</CardTitle>
-                 {/*<CardDescription>
+        <div className=" mx-auto px-4 sm:px-6 md:px-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Critére d'integration</CardTitle>
+              {/*<CardDescription>
                       Manage your products and view their sales performance.
                     </CardDescription>*/}
-                  </CardHeader>
-                  <CardContent>
-                    <DataTableValidationDeTransfer
-                      agences={agences || []}
-                      groupes={groupes || []}
-                      total={data.total || 0}
-                      totalAccout={data.totalCount || 0}
-                      totalPages={data.totalPages || 1}
-                      columns={validationTransferColumns}
-                      data={data.result || []}
-                    />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="HistoriqueCommentaire">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Historique Commentaire</CardTitle>
-                    {/* <CardDescription>
-                    Manage your products and view their sales performance.
-                  </CardDescription> */}
-                  </CardHeader>
-                  <CardContent>
-                    <HistoriqueCommentaireDataTable
-                      totalAccout={data.totalCount || 0}
-                      totalPages={data.totalPages || 1}
-                      columns={HistoriqueCommentaireColumns}
-                      data={data.result || []}
-                    />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </Suspense>
+            </CardHeader>
+            <CardContent>
+              <DataTableValidationDeTransfer
+                agences={agences || []}
+                groupes={groupes || []}
+                total={data.total || 0}
+                totalAccout={data.totalCount || 0}
+                totalPages={data.totalPages || 1}
+                columns={validationTransferColumns}
+                data={data.result || []}
+              />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

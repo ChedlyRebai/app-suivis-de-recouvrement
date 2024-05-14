@@ -62,6 +62,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { DataTableToolbar } from "../../listeclient/_components/contactes/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -83,146 +84,6 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
   groupes,
 }: DataTableProps<TData, TValue>) {
   const [motif, setMotif] = useState<any>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const motif = await MOTT();
-      setMotif(motif);
-    };
-    fetchData();
-  }, []); // Le tableau de dépendances est vide car nous ne dépendons pas de l'état précédent de motif
-
-  const demandeTransferColumns: ColumnDef<any>[] = [
-    {
-      accessorKey: "cli",
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost">
-            Cli
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-    },
-    {
-      accessorKey: "nom",
-      header: "Non",
-    },
-    {
-      accessorKey: "agence",
-      header: "Agence",
-      cell: ({ row }) => {
-        return (
-          <span>
-            {row.original?.Agence.codug} {row.original?.Agence.libelle}
-          </span>
-        );
-      },
-    },
-    {
-      accessorKey: "nbre_imp",
-      header: "Nbr.IMP",
-    },
-    {
-      accessorKey: "mnt_imp",
-      header: "Impayé",
-    },
-    {
-      accessorKey: "nombre_jours",
-      header: "Nbj.Imp",
-    },
-    {
-      accessorKey: "sd",
-      header: "Solde Debiteur",
-    },
-    {
-      accessorKey: "depassement",
-      header: "Depassement",
-    },
-    {
-      accessorKey: "nombre_jours_sdb",
-      header: "Nbj.SDB",
-    },
-    {
-      accessorKey: "tot_creance",
-      header: "Tot.irregulier",
-    },
-    {
-      accessorKey: "max_nbj",
-      header: "Max NBJ",
-    },
-    {
-      accessorKey: "engagement",
-      header: "Engagement",
-    },
-    {
-      accessorKey: "classe",
-      header: "Classe",
-    },
-
-    {
-      accessorKey: "mott",
-      header: "Motif de transfer",
-      cell: async ({ row }) => {
-        return (
-          <Select
-            onValueChange={(newValue) => {
-              console.log(newValue, row.original?.cli);
-              updateTransferAnti(row.original?.cli, "mott", newValue);
-            }}
-            defaultValue={row.getValue("mott") || ""}
-          >
-            <SelectTrigger className={` w-fit`}>
-              <SelectValue className="" placeholder="Select a fruit" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup id="mott">
-                {motif.map((item: any) => (
-                  <SelectItem key={item.codenv} value={item.codenv}>
-                    {item.libelle}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        );
-      },
-    },
-    {
-      accessorKey: "obs",
-      header: "Commentaire",
-    },
-
-    {
-      accessorKey: "trf_a",
-      header: "Transferer à",
-      cell: async ({ row }) => {
-        const typeTransfer = await getTypeTransfer();
-        return (
-          <Select
-            defaultValue={row.getValue("trf_a") || ""}
-            onValueChange={(newValue) => {
-              console.log(newValue, row.original?.cli);
-              updateTransferAnti(row.original?.cli, "trf_a", newValue);
-            }}
-          >
-            <SelectTrigger className={` w-fit `}>
-              <SelectValue className="" placeholder="Select a fruit" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup id="trf_a">
-                {" "}
-                {typeTransfer.map((item: any) => (
-                  <SelectItem key={item.codenv} value={item.codenv}>
-                    {item.libelle}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        );
-      },
-    },
-  ];
 
   const router = useRouter();
   const pathname = usePathname();
@@ -327,7 +188,7 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
 
   const table = useReactTable({
     data,
-    columns: demandeTransferColumns,
+    columns,
     state: {
       sorting,
       columnVisibility,
@@ -385,19 +246,20 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
   };
   const [loader, setLoader] = useState(true);
   // effect
-  useEffect(() => {
-    setLoader(false);
-  }, []);
+  // useEffect(() => {
+  //   setLoader(false);
+  // }, []);
 
-  // render
-  if (loader) {
-    return <div>Loading</div>;
-  }
+  // // render
+  // if (loader) {
+  //   return <div>Loading</div>;
+  // }
 
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <>
+        <DataTableToolbar table={table} type="contactes" />
+        {/* <>
           <Input
             placeholder="Cli"
             defaultValue={searchParams.get("query")?.toString()}
@@ -459,6 +321,7 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
+
           <Button
             variant="default"
             className="font-black mx-1"
@@ -475,12 +338,12 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
                 aria-expanded={groupopen}
                 className="w-[200px] justify-between"
               >
-                {searchParams.get("groupe")
+                {searchParams.get("agence")
                   ? agences.find(
                       (framework: any) =>
-                        framework.codug === searchParams.get("groupe")
-                    )?.libelle || "Sélectionner un groupe"
-                  : "Sélectionner un groupe"}
+                        framework.codug === searchParams.get("agence")
+                    )?.libelle || "Sélectionner un agence"
+                  : "Sélectionner un agence"}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -545,9 +408,8 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
               />
             </CardContent>
           </Card>
-
           <DataTableViewOptions table={table} />
-        </>
+        </> */}
       </div>
       <div className="rounded-md border">
         <Table>

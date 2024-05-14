@@ -13,8 +13,7 @@ const FaciliteDePaiementForm = () => {
   const { onOpen, setColumn } = useListeAgencestModal();
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   const getAgence = useListAgences((state) => state.getAgence);
- 
-  
+
   return (
     <div className="-auto my p-2  rounded-lg shadow-md">
       <div className="flex flex-col   w-[280px] ">
@@ -47,7 +46,7 @@ const FaciliteDePaiementForm = () => {
           />
         </div>
 
-        {[...Array(Number(suiviAgenda.nb_ech))].map((_, i) => (
+        {[...Array(Number(suiviAgenda.nb_ech || 0))].map((_, i) => (
           <>
             {" "}
             <div className="flex w-[280px] flex-col my-3 mr-4" key={i}>
@@ -68,7 +67,6 @@ const FaciliteDePaiementForm = () => {
             </div>
             <div className="flex w-[280px] flex-col my-3 mr-4">
               <Label
-               
                 className={`${
                   suiviAgenda.nb_ech!! < 3 && "text-muted-foreground"
                 }`}
