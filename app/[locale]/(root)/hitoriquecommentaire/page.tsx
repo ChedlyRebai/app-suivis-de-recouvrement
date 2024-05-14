@@ -44,15 +44,7 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
   const cli = searchParams?.cli || "";
-  const dataf = await getValidationProposeDeTransferAnticipe(
-    search,
-    currentPage,
-    perPage,
-    group,
-    agence,
-    from,
-    to
-  );
+
   const data: any = await getHistoriqueDemandDeTransferAnticipe(
     cli,
     search,

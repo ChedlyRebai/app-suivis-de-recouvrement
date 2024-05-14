@@ -22,6 +22,7 @@ import {
   getHistoriqueDemandDeTransferAnticipe,
   getHistoriquevalidationpropsedetransfertanticipeByCli,
 } from "@/actions/dmandeTransfer.action";
+import { getHistoriqueDemandDeProlongation } from "@/actions/prologation.action";
 
 export default async function Home({
   searchParams,
@@ -48,8 +49,9 @@ export default async function Home({
   const limit = Number(searchParams?.limit) || 20;
   const cli = searchParams?.cli || "";
 
-  const data: any = await getHistoriquevalidationpropsedetransfertanticipeByCli(
+  const data: any = await getHistoriqueDemandDeProlongation(
     cli,
+
     currentPage,
     perPage,
     group,

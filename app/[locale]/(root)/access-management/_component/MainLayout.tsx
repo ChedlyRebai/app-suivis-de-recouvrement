@@ -204,13 +204,11 @@ const Mainlayout = ({
                                     )}
                                   >
                                     <Icon
-                                      className="mr-3 flex-shrink-0 h-4 w-4 text-white  group-hover:text-gray-300
-                              "
+                                      className="mr-3 flex-shrink-0 h-4 w-4 text-white  group-hover:text-gray-300 "
                                       aria-hidden="true"
                                     />
-
                                     <span className="flex-1 capitalize">
-                                      {item.name}
+                                      {item.name}z
                                     </span>
                                     <svg
                                       className={classNames(

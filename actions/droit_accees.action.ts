@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 export const getAllDroitAccess = async () => {
   console.log(`${process.env.API_URL}/droit`);
-  const res = await axios.get(`https://app-suivis-de-recouvrement-ser-git-69cf99-chedlyrebais-projects.vercel.app/droit`);
+  const res = await axios.get(`https://sprint2-v2.vercel.app/droit`);
   return res.data;
 };
 
@@ -21,7 +21,7 @@ export const getDroitAccessByCodeFonction = async (
   );
   console.log(`${process.env.API_URL} `);
   const res = await axios.get(
-    `https://app-suivis-de-recouvrement-ser-git-69cf99-chedlyrebais-projects.vercel.app/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
+    `https://sprint2-v2.vercel.app/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
   );
   return res.data;
 };
@@ -34,12 +34,15 @@ export const updateDroitAction = async (
   champ: string
 ) => {
   //console.log(`${process.env.API_URL}/droit/updateDroit`);
-  const res = await axios.put(`https://app-suivis-de-recouvrement-ser-git-69cf99-chedlyrebais-projects.vercel.app/droit/updateDroit`, {
-    id,
-    codef,
-    value,
-    champ,
-  });
+  const res = await axios.put(
+    `https://sprint2-v2.vercel.app/droit/updateDroit`,
+    {
+      id,
+      codef,
+      value,
+      champ,
+    }
+  );
   // ;
   // console.log(id);
   // ;

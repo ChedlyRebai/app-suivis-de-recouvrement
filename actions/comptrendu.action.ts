@@ -13,7 +13,7 @@ export const getAllCompteRendu = async (
   try {
     // axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<Main>(
-      `http://localhost:10001/compterendu/all?page=${page}&perpage=8&search=${search}`
+      `https://release4.vercel.app/compterendu/all?page=${page}&perpage=8&search=${search}`
     );
 
     return res.data || ({} as Main);
@@ -26,7 +26,7 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<CompteRenduList>(
-      `http://localhost:10001/compterendu/getbyid/${IdClient}`
+      `https://release4.vercel.app/compterendu/getbyid/${IdClient}`
     );
 
     return res.data || ({} as CompteRenduList);

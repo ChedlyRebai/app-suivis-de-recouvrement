@@ -49,7 +49,7 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-
+  console.log(data);
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

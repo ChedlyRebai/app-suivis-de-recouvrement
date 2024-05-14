@@ -83,7 +83,7 @@ export const getvalidationpropsedetransfertanticipe = async (
 };
 
 export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
-  IdClient?: string,
+  cli?: string,
   currentpage?: number,
   perpage?: number,
   groupe?: string,
@@ -99,11 +99,11 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
       session?.value as string
     }`;
     console.log(
-      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&cli=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     return res.data || ({} as any);
   } catch (error) {
