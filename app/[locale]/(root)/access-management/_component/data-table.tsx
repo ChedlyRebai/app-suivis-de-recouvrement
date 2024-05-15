@@ -128,7 +128,6 @@ export function AccessManagementDataTable<
           //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
           // </span>
           <Select
-          
             onValueChange={(newValue) =>
               update(
                 row.getValue("code_fonction"),
@@ -139,18 +138,20 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("acces")}
           >
-            <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+            <SelectTrigger
+              className={` w-fit ${
+                row.getValue("acces") == "O"
+                  ? "border-green-500"
+                  : "border-red-500"
+              }`}
+            >
               <SelectValue className="" placeholder="Select a fruit" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup id="acces">
                 {" "}
-                <SelectItem  value="O">
-                  Oui
-                </SelectItem>
-                <SelectItem  value="N">
-                  Non
-                </SelectItem>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -188,18 +189,20 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("creation")}
           >
-             <SelectTrigger className={` w-fit ${row.getValue("creation")=='O'?'border-green-500' :'border-red-500'}`}>
+            <SelectTrigger
+              className={` w-fit ${
+                row.getValue("creation") == "O"
+                  ? "border-green-500"
+                  : "border-red-500"
+              }`}
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 {" "}
-                <SelectItem  value="O">
-                  Oui
-                </SelectItem>
-                <SelectItem  value="N">
-                  Non
-                </SelectItem>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -224,19 +227,20 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("modification")}
           >
-              <SelectTrigger className={` w-fit ${row.getValue("modification")=='O'?'border-green-500' :'border-red-500'}`}>
-           
+            <SelectTrigger
+              className={` w-fit ${
+                row.getValue("modification") == "O"
+                  ? "border-green-500"
+                  : "border-red-500"
+              }`}
+            >
               <SelectValue placeholder="Select a fruit" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 {" "}
-                <SelectItem  value="O">
-                  Oui
-                </SelectItem>
-                <SelectItem  value="N">
-                  Non
-                </SelectItem>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -270,18 +274,19 @@ export function AccessManagementDataTable<
             }
             defaultValue={row.getValue("suppression")}
           >
-              <SelectTrigger className={` w-fit ${row.getValue("suppression")=='O'?'border-green-500' :'border-red-500'}`}>
-           
+            <SelectTrigger
+              className={` w-fit ${
+                row.getValue("suppression") == "O"
+                  ? "border-green-500"
+                  : "border-red-500"
+              }`}
+            >
               <SelectValue placeholder="Select a fruit" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem  value="O">
-                  Oui
-                </SelectItem>
-                <SelectItem  value="N">
-                  Non
-                </SelectItem>
+                <SelectItem value="O">Oui</SelectItem>
+                <SelectItem value="N">Non</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -506,13 +511,13 @@ export function AccessManagementDataTable<
                   </TableRow>
                 ))
               ) : (
-                // Replace <TableCell>No results.</TableCell> with your custom no results component
+                // Replace <TableCell>Pas de résultats.</TableCell> with your custom no results component
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
                     className="h-24 text-center"
                   >
-                    No results.
+                    Pas de résultats.
                   </TableCell>
                 </TableRow>
               )}

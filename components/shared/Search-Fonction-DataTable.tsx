@@ -112,7 +112,7 @@ export function DataTable<TData, TValue>({
         />
       </div>
       <div className="rounded-md border max-h-60 overflow-auto">
-        <Table >
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -183,7 +183,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Pas de résultats.
                 </TableCell>
               </TableRow>
             )}

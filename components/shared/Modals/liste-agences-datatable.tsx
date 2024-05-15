@@ -27,13 +27,11 @@ import useClientSore from "@/hooks/useCompteRenduForm";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-
 }
 
 export function ListeAgenceDataTable<TData, TValue>({
   columns,
   data,
- 
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -50,16 +48,16 @@ export function ListeAgenceDataTable<TData, TValue>({
     },
   });
 
-  const { onClose,column } = useListeAgencestModal();
-  const { handleIputChangeSuiviAgenda,suiviAgenda } = useClientSore();
-  console.log(table)
+  const { onClose, column } = useListeAgencestModal();
+  const { handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
+  console.log(table);
 
-  const handleChange=(e:any)=>{
-    handleIputChangeSuiviAgenda(column,e.codug)
-    console.log(column)
-    console.log(suiviAgenda.lieu_visite)
-    onClose()
-  }
+  const handleChange = (e: any) => {
+    handleIputChangeSuiviAgenda(column, e.codug);
+    console.log(column);
+    console.log(suiviAgenda.lieu_visite);
+    onClose();
+  };
 
   return (
     <>
@@ -108,7 +106,7 @@ export function ListeAgenceDataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                className="cursor-pointer"
+                  className="cursor-pointer"
                   onClick={() => handleChange(row.original)}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -129,7 +127,7 @@ export function ListeAgenceDataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Pas de résultats.
                 </TableCell>
               </TableRow>
             )}

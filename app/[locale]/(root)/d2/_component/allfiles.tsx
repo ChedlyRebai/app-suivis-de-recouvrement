@@ -59,7 +59,6 @@ import { utilisateur } from "@/Models/utilisateur.model";
 import { fileresult } from "@/actions/file.action";
 import { File } from "@/Models/file.model";
 
-
 interface DataTableProps {
   columns: any[];
 
@@ -73,7 +72,6 @@ export function AllFilles({
   data,
   totalAccout,
   totalPages = 0,
-  
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -106,10 +104,6 @@ export function AllFilles({
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 100);
-
-  
-
- 
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -149,8 +143,6 @@ export function AllFilles({
     },
     [searchParams, selectedCode]
   );
-
-  
 
   useEffect(() => {
     setSearch(`${searchParams.get("code")}`);
@@ -396,7 +388,7 @@ export function AllFilles({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      No results.
+                      Pas de résultats.
                     </TableCell>
                   </TableRow>
                 )}

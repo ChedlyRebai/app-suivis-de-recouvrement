@@ -46,18 +46,23 @@ import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { Client, Utilisateur } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
 
 interface DataTableProps {
   columns: any[];
- 
+
   data: Client[];
   totalAccout?: number;
   totalPages?: number;
- 
 }
 
 export function AllClient({
@@ -65,15 +70,13 @@ export function AllClient({
   data,
   totalAccout,
   totalPages = 0,
-  
 }: DataTableProps) {
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const setAgences = useListAgences((state) => state.setAgences);
-  console.log(data)
+  console.log(data);
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
@@ -241,25 +244,23 @@ export function AllClient({
   return (
     <>
       <Card x-chunk="dashboard-06-chunk-0">
-      <CardHeader>
-        <CardTitle>Clients</CardTitle>
-        <CardDescription>
-        Gérez vos Clients.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-      <div className="flex  items-center py-4 flex-wrap">
-        <>
-          <Input
-            placeholder="Cli"
-            defaultValue={searchParams.get("query")?.toString()}
-            onChange={(e) => {
-              handleSearch(e.target.value);
-            }}
-            className="max-w-sm mr-2"
-          />
-          <Popover open={agenceopen} onOpenChange={setagenceOpen}>
-            {/* <PopoverTrigger asChild>
+        <CardHeader>
+          <CardTitle>Clients</CardTitle>
+          <CardDescription>Gérez vos Clients.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex  items-center py-4 flex-wrap">
+            <>
+              <Input
+                placeholder="Cli"
+                defaultValue={searchParams.get("query")?.toString()}
+                onChange={(e) => {
+                  handleSearch(e.target.value);
+                }}
+                className="max-w-sm mr-2"
+              />
+              <Popover open={agenceopen} onOpenChange={setagenceOpen}>
+                {/* <PopoverTrigger asChild>
               <Button
                 variant="default"
                 role="combobox"
@@ -276,7 +277,7 @@ export function AllClient({
               </Button>
             </PopoverTrigger> */}
 
-            {/* <PopoverContent className="w-[200px] p-0">
+                {/* <PopoverContent className="w-[200px] p-0">
               <Command>
                 <CommandInput placeholder="Search agence" />
                 <CommandEmpty>No framework found.</CommandEmpty>
@@ -310,16 +311,16 @@ export function AllClient({
                 </CommandGroup>
               </Command>
             </PopoverContent> */}
-          </Popover>
-          {/* <Button
+              </Popover>
+              {/* <Button
             variant="default"
             className="font-black mx-1"
             onClick={resetAgence}
           >
             <RefreshCcwIcon className="font-b" />
           </Button> */}
-          <div className="w-1" />
-          {/* <Popover open={groupopen} onOpenChange={setgroupOpen}>
+              <div className="w-1" />
+              {/* <Popover open={groupopen} onOpenChange={setgroupOpen}>
             <PopoverTrigger asChild>
               <Button
                 variant="default"
@@ -372,7 +373,7 @@ export function AllClient({
               </Command>
             </PopoverContent>
           </Popover> */}
-          {/* <Button
+              {/* <Button
             variant="default"
             className="font-black mx-1"
             onClick={resetGroup}
@@ -380,7 +381,7 @@ export function AllClient({
             <RefreshCcwIcon className="font-b" />
           </Button> */}
 
-          {/* <Card className="h-10">
+              {/* <Card className="h-10">
             <CardContent className="flex items-center justify-center my-1">
               <p>Nombre de jour :</p>
               <Input
@@ -399,82 +400,76 @@ export function AllClient({
             </CardContent>
           </Card> */}
 
-          <DataTableViewOptions table={table} />
-        </>
-      </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  className="p-"
-                  
-                  
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className="p- cursor-pointer"
-                      onClick={(e) => console.log(e)}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-          
-        </Table>
-        
-      </div>
-      <div className="mt-2 flex items-center justify-between px-2">
-        <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-          <div className="flex items-center space-x-2">
-
+              <DataTableViewOptions table={table} />
+            </>
           </div>
-        </div>
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      );
+                    })}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      className="p-"
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          key={cell.id}
+                          className="p- cursor-pointer"
+                          onClick={(e) => console.log(e)}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      Pas de résultats.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+          <div className="mt-2 flex items-center justify-between px-2">
+            <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
+              <div className="flex items-center space-x-2"></div>
+            </div>
 
-        <DataTablePagination
-          TotalAccount={totalAccout}
-          totalPages={totalPages}
-          table={table}
-        />
-      </div>
-      </CardContent>
+            <DataTablePagination
+              TotalAccount={totalAccout}
+              totalPages={totalPages}
+              table={table}
+            />
+          </div>
+        </CardContent>
       </Card>
     </>
   );

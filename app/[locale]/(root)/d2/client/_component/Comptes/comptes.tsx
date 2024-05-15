@@ -60,7 +60,9 @@ const Comptes = ({ comptes = [] }: { comptes: any[] }) => {
               })}
             {comptes.length === 0 && (
               <TableRow>
-                <TableCell className="h-24 text-center">No results.</TableCell>
+                <TableCell className="h-24 text-center">
+                  Pas de résultats.
+                </TableCell>
               </TableRow>
             )}
           </TableBody>

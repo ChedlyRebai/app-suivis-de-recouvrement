@@ -70,7 +70,6 @@ export function AllUsers({
   data,
   totalAccout,
   totalPages = 0,
-  
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -103,10 +102,6 @@ export function AllUsers({
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
   }, 100);
-
-  
-
- 
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -146,8 +141,6 @@ export function AllUsers({
     },
     [searchParams, selectedCode]
   );
-
-  
 
   useEffect(() => {
     setSearch(`${searchParams.get("code")}`);
@@ -393,7 +386,7 @@ export function AllUsers({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      No results.
+                      Pas de résultats.
                     </TableCell>
                   </TableRow>
                 )}

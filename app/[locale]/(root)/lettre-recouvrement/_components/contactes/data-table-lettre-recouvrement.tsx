@@ -357,7 +357,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                             : "opacity-0"
                         )}
                       />
-                      
                       {item.codug}:{item.libelle}
                     </CommandItem>
                   ))}
@@ -455,7 +454,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Pas de résultats.
                 </TableCell>
               </TableRow>
             )}
@@ -480,8 +479,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
         <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-          <div className="flex items-center space-x-2">
-          </div>
+          <div className="flex items-center space-x-2"></div>
         </div>
 
         <DataTablePagination
@@ -489,7 +487,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
           totalPages={totalPages}
           table={table}
         />
-
       </div>
     </>
   );

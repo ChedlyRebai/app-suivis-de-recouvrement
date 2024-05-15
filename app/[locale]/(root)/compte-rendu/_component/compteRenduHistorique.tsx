@@ -69,7 +69,7 @@ const CompteRenduHistorique = ({
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
 
-  if (!dataCompte) return <div>No result</div>;
+  if (!dataCompte) return <div>Pas de résultat</div>;
 
   console.log(dataCompte);
   const columns: ColumnDef<CompteRenduList>[] = [
@@ -183,7 +183,7 @@ const CompteRenduHistorique = ({
   const [rowSelection, setRowSelection] = React.useState({});
 
   console.log(dataCompte);
-  if (!dataCompte) return <div>No result</div>;
+  if (!dataCompte) return <div>Pas de résultat</div>;
   const table = useReactTable({
     data: dataCompte,
     columns,
@@ -293,7 +293,7 @@ const CompteRenduHistorique = ({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Pas de résultats.
                 </TableCell>
               </TableRow>
             )}
