@@ -37,8 +37,7 @@ function classNames(...classes: string[]) {
 const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
   return (
     <div>
-      
-      {children && ( 
+      {children && (
         <Disclosure as="div" key={name} className="space-y-1">
           {({ open }) => {
             let IconComponent = IconMap[icon || "consicons/users"];
@@ -52,13 +51,17 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                     "flex items-center w-full gap-3 rounded-lg px-3 py-2  "
                   )}
                 >
-                  
                   <IconComponent
                     className="mr- flex-shrink-0 h-4 w-4 dark:text-inherit text-black group-hover:text-gray-300"
                     aria-hidden="true"
                   />
 
-                  <Link href={`/`}  className="hover:underline capitalize dark:text-inherit text-black text-sm text-nowrap">{name}</Link>
+                  <Link
+                    href={`en/${href}`}
+                    className="hover:underline capitalize dark:text-inherit text-black text-sm text-nowrap"
+                  >
+                    {name}
+                  </Link>
 
                   {children.length !== 0 && (
                     <svg
@@ -80,23 +83,25 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                     {children &&
                       Array.isArray(children) &&
                       children.map((subItem: any, index: number) => {
-                        let SubIconComponent = IconMap[subItem.icon || "consicons/ug"];
+                        let SubIconComponent =
+                          IconMap[subItem.icon || "consicons/ug"];
                         console.log(subItem.children);
                         return (
                           <div
-                            key={subItem.href}
+                            key={`${subItem.href}`}
                             style={{ marginLeft: `${subItem.level * 14}px` }}
                           >
                             <NavbarItem
                               key={subItem.href}
                               children={subItem.children}
                               icon={subItem.icon}
-                              name={subItem.name}
+                              href={subItem.href}
+                              name={`${subItem.name} ${subItem.href}`}
                             />
                           </div>
                         );
                       })}
-                  </Disclosure.Panel>      
+                  </Disclosure.Panel>
                 )}
               </>
             );
@@ -105,12 +110,12 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
       )}
     </div>
   );
-}
+};
 
 export default NavbarItem;
 
-
-      {/* {children &&
+{
+  /* {children &&
         Array.isArray(children) &&
         children.map((item: Navigation) =>
           !item.children ? (
@@ -144,8 +149,10 @@ export default NavbarItem;
                       {/* <Icon
                         className="mr-3 flex-shrink-0 h-5 w-5 text-white group-hover:text-gray-300"
                         aria-hidden="true"
-                      /> */}
-                      {/* <span className="flex-1 capitalize">{item.name}</span> 
+                      /> */
+}
+{
+  /* <span className="flex-1 capitalize">{item.name}</span> 
 
                       <Icon
                         className={
@@ -200,4 +207,5 @@ export default NavbarItem;
                   </>
                 );
               }}
-            </Disclosure>*/}
+            </Disclosure>*/
+}

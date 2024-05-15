@@ -1,5 +1,5 @@
 "use client";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as React from "react";
 import {
   ColumnDef,
@@ -46,24 +46,32 @@ import { getListCompteRenduHistorique } from "@/actions/client.action";
 import { useSearchParams } from "next/navigation";
 import { CompteRenduList } from "@/constants/types";
 import { deleteFile } from "@/actions/file.action";
+import { deleteCompteRenduById } from "@/actions/comptrendu.action";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: CompteRenduList[];
 }
 
 const CompteRenduHistorique = ({
-  listHistorique: data,
+  listHistorique: daa,
 }: CompteRenduHistoriqueProps) => {
-  const { isOpen, onClose, onOpen } = useCompteRenduModal();
-
+  const { onOpen } = useCompteRenduModal();
+  const {
+    isRefetching,
+    data: dataCompte = [],
+    isLoading,
+    refetch,
+  } = useQuery<CompteRenduList[]>({
+    queryKey: ["getCompteRenduHistorique"],
+    queryFn: async () => await getListCompteRenduHistorique(cli as string),
+    refetchOnMount: true,
+  });
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
-  // const { isPending, error, data} = useQuery<CompteRenduList[]>({
-  //   queryKey: ['getCompteRenduHistorique'],
-  //   queryFn:async ()=>await getListCompteRenduHistorique(cli as string),
-  //   refetchOnMount: true,
-  // })
-  console.log(data);
+
+  if (!dataCompte) return <div>No result</div>;
+
+  console.log(dataCompte);
   const columns: ColumnDef<CompteRenduList>[] = [
     {
       accessorKey: "num",
@@ -80,15 +88,15 @@ const CompteRenduHistorique = ({
       },
       cell: ({ row }) => <div className="capitalize">{row.index + 1}</div>,
     },
-    {
-      accessorKey: "id",
-      // header: ({ column }) => {
-      //   return (
-      //     <div className="hidden"/>
-      //   );
-      // },
-      cell: ({ row }) => <div className="hidden">{row.getValue("id")}</div>,
-    },
+    // {
+    //   accessorKey: "id",
+    //   // header: ({ column }) => {
+    //   //   return (
+    //   //     <div className="hidden"/>
+    //   //   );
+    //   // },
+    //   cell: ({ row }) => <div className="hidden">{row.getValue("id")}</div>,
+    // },
 
     {
       accessorKey: "created_at",
@@ -141,7 +149,7 @@ const CompteRenduHistorique = ({
         const payment = row.original;
 
         return (
-          <>
+          <div className="flex justify-center">
             <Button
               className="flex items-center h-full  justify-center"
               variant="default"
@@ -154,13 +162,13 @@ const CompteRenduHistorique = ({
             <Button
               variant="destructive"
               onClick={async () => {
-                await deleteFile(row.original.id);
+                await deleteCompteRenduById(row.original.id);
+                refetch();
               }}
             >
-              {" "}
               <Trash2 size={16} />
             </Button>
-          </>
+          </div>
         );
       },
     },
@@ -174,10 +182,10 @@ const CompteRenduHistorique = ({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  console.log(data);
-
+  console.log(dataCompte);
+  if (!dataCompte) return <div>No result</div>;
   const table = useReactTable({
-    data,
+    data: dataCompte,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -195,8 +203,12 @@ const CompteRenduHistorique = ({
       rowSelection,
     },
   });
-  if (!data) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isRefetching) {
+    refetch();
   }
 
   return (

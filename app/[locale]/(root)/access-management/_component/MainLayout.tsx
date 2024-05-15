@@ -63,7 +63,7 @@ const Mainlayout = ({
     { name: "Sign out", href: "#" },
   ];
   //console.log(navigation);
-
+  console.log(navigaion);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [defaultSize, setDefaultSize] = useState(20);
 
@@ -163,7 +163,7 @@ const Mainlayout = ({
                         !item.children ? (
                           <div key={item.name}>
                             <a
-                              href="#"
+                              href={item.href}
                               className={classNames(
                                 item.current
                                   ? "bg-gray-900 text-white"
@@ -234,7 +234,7 @@ const Mainlayout = ({
                                         href={subItem.href}
                                         className="group capitalize w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
                                       >
-                                        {subItem.name}
+                                        {subItem.name} {subItem.href}
                                       </Disclosure.Button>
                                     ))}
                                   </Disclosure.Panel>

@@ -58,3 +58,17 @@ export const VTRF = async () => {
     return [] as any[];
   }
 };
+
+export const getHrdv = async () => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const response = await axios.get<Cxuntges[]>(
+      `http://localhost:10001/client/gethrdv`
+    );
+
+    return response.data || ([] as Cxuntges[]);
+  } catch (error) {
+    console.log(error);
+    return [] as Cxuntges[];
+  }
+};

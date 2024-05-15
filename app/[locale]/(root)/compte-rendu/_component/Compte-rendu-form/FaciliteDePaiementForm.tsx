@@ -9,10 +9,51 @@ import useListeAgencestModal from "@/hooks/useListeAgences";
 import { ListIcon } from "lucide-react";
 import React from "react";
 
+import { useState } from "react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 const FaciliteDePaiementForm = () => {
   const { onOpen, setColumn } = useListeAgencestModal();
   const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
   const getAgence = useListAgences((state) => state.getAgence);
+
+  const [montantFacilites, setFa] = useState<{ [key: string]: string }[]>([
+    {
+      mntech: "",
+      date_ech: "",
+    },
+  ]);
+
+  // Function to handle changes in input fields
+  const handleInputChange = (index: number, field: string, value: string) => {
+    // const updatedFa = [...montantFacilites];
+    // updatedFa[index][field] = value;
+    // setFa(updatedFa);
+    // console.log(montantFacilites);
+    if (montantFacilites.length < suiviAgenda.nb_ech!!) {
+      setFa([...montantFacilites, { [field]: value }]);
+    } else {
+      const updatedFa = montantFacilites.map((item, i) => {
+        if (i === index) {
+          return { ...item, [field]: value };
+        }
+        return item;
+      });
+      setFa(updatedFa);
+    }
+    suiviAgenda.montantFacilites = montantFacilites;
+    console.log(suiviAgenda.montantFacilites);
+  };
 
   return (
     <div className="-auto my p-2  rounded-lg shadow-md">
@@ -23,7 +64,7 @@ const FaciliteDePaiementForm = () => {
           </Label>
           <Input
             onChange={(e) =>
-              handleIputChangeSuiviAgenda("nb_ech", e.target.value)
+              handleIputChangeSuiviAgenda("mnt_plan", e.target.value)
             }
             id="MontantImpaye"
             type="number"
@@ -48,7 +89,6 @@ const FaciliteDePaiementForm = () => {
 
         {[...Array(Number(suiviAgenda.nb_ech || 0))].map((_, i) => (
           <>
-            {" "}
             <div className="flex w-[280px] flex-col my-3 mr-4" key={i}>
               <Label
                 htmlFor={`Montant${i + 1}ere`}
@@ -57,9 +97,7 @@ const FaciliteDePaiementForm = () => {
                 Montant {i + 1}ére éch
               </Label>
               <Input
-                onChange={(e) =>
-                  handleIputChangeSuiviAgenda(`mntech${i + 1}`, e.target.value)
-                }
+                onChange={(e) => handleInputChange(i, "mntech", e.target.value)}
                 id={`Montant${i + 1}ere`}
                 type="number"
                 disabled={suiviAgenda.nb_ech!! < i + 1}
@@ -74,12 +112,37 @@ const FaciliteDePaiementForm = () => {
                 Date {i + 1}ére Echeance
               </Label>
 
-              <DatePickerDemo
-                date={suiviAgenda.date_trois_ech || ""}
-                champ={"date_trois_ech"}
-                setDate={handleIputChangeSuiviAgenda}
-                disabled={suiviAgenda.nb_ech!! < i + 1}
-              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    // className={cn(
+                    //   "w-[280px] justify-start  text-left font-normal",
+                    //   !date && `text-muted-foreground cursor-not-allowe ${disable && "cursor-not-allowed"} `,
+                    // )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4 w" />
+
+                    {montantFacilites[i]?.date_ech ? (
+                      format(montantFacilites[i]?.date_ech, "PPP")
+                    ) : (
+                      <span>Choisis une date</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    // onSelect={(e: any) =>
+                    //   handleInputChange(i, "date_ech", e.target.value)
+                    // }
+                    onSelect={(selectedDate: any) => {
+                      console.log(selectedDate);
+                      handleInputChange(i, "date_ech", selectedDate);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
           </>
         ))}

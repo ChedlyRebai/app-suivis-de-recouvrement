@@ -41,19 +41,26 @@ export const getCompteRenduByClientId = async (IdClient?: string | number) => {
     const res = await axios.get<any>(
       `http://localhost:10001/compterendu/byclientid?id=${IdClient}`
     );
-
+    revalidatePath("");
+    revalidatePath("/en/compte-rendu");
+    revalidatePath("/compte-rendu");
+    revalidatePath("/en/compte-rendu?cli=049105812036");
     return res.data || ({} as any);
   } catch (error) {
     return {} as any;
   }
 };
-
+import { revalidatePath } from "next/cache";
 export const deleteCompteRenduById = async (idCompRendu: Number | string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.delete(
       `http://localhost:10001/compterendu/deleteById?id=${idCompRendu}`
     );
+    revalidatePath("");
+    revalidatePath("/en/compte-rendu");
+    revalidatePath("/compte-rendu");
+    revalidatePath("/en/compte-rendu?cli=049105812036");
     return res.data;
   } catch (error) {
     return {} as any;
