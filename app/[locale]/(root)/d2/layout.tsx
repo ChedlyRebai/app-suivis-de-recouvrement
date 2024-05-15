@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  ArrowBigLeftIcon,
+  ArrowLeftCircleIcon,
+  ArrowLeftIcon,
   File,
   Home,
   Landmark,
@@ -71,16 +74,16 @@ export default async function RootLayout({
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
           <nav className="flex flex-col items-center gap-4 px-2 py-4">
             <Link
-              href="#"
+              href="/en"
               className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
             >
-              <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
+              <ArrowLeftIcon className="h-4 w-4 transition-all group-hover:scale-110" />
               <span className="sr-only">Acme Inc</span>
             </Link>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/dashboard/users"
+                  href="/en/d2/users"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <Home className="h-5 w-5" />
@@ -93,7 +96,7 @@ export default async function RootLayout({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/dashboard/comptes"
+                  href="/en/d2/comptes"
                   className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <Landmark className="h-5 w-5" />
@@ -117,7 +120,7 @@ export default async function RootLayout({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/dashboard/clients"
+                  href="/en/d2/clients"
                   className={`${
                     false
                       ? `flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`
@@ -133,7 +136,7 @@ export default async function RootLayout({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="dashboard/compterendu"
+                  href="/en/d2/compterendu"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <File className="h-5 w-5" />
@@ -145,7 +148,7 @@ export default async function RootLayout({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="dashboard/analytics"
+                  href="/en/d2/analytics"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <LineChart className="h-5 w-5" />
@@ -159,7 +162,7 @@ export default async function RootLayout({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/dashboard/compterendu"
+                  href="/en/d2/compterendu"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <File className="h-5 w-5" />

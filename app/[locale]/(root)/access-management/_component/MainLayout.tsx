@@ -57,11 +57,7 @@ const Mainlayout = ({
     { name: "Documents", href: "#", icon: InboxIcon, current: false },
     { name: "Reports", href: "#", icon: BarChart2Icon, current: false },
   ];
-  const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
-  ];
+
   //console.log(navigation);
   console.log(navigaion);
   const [sidebarOpen, setSidebarOpen] = useState(false);

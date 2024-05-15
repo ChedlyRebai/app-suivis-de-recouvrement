@@ -26,9 +26,9 @@ export const getCompteRenduById = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<CompteRenduList>(
-      `https://release4.vercel.app/compterendu/getbyid/${IdClient}`
+      `http://localhost:10004/compterendu/getbyid/${IdClient}`
     );
-
+    console.log(`http://localhost:10004/compterendu/getbyid/${IdClient}`);
     return res.data || ({} as CompteRenduList);
   } catch (error) {
     return {} as CompteRenduList;
@@ -39,7 +39,7 @@ export const getCompteRenduByClientId = async (IdClient?: string | number) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<any>(
-      `http://localhost:10001/compterendu/byclientid?id=${IdClient}`
+      `https://release4.vercel.app/compterendu/byclientid?id=${IdClient}`
     );
     revalidatePath("");
     revalidatePath("/en/compte-rendu");

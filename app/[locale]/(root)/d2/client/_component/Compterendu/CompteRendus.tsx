@@ -44,38 +44,41 @@ const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {compterendus.map((compterendu: CompteRenduList, index: number) => {
-              return (
-                <TableRow key={index} className="bg-accent">
-                  <TableCell>{compterendu.usr_nom}</TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    {compterendu.usr_matricule}
-                  </TableCell>
-                  {/* <TableCell className="hidden sm:table-cell">
+            {compterendus.length > 0 &&
+              compterendus.map(
+                (compterendu: CompteRenduList, index: number) => {
+                  return (
+                    <TableRow key={index} className="bg-accent">
+                      <TableCell>{compterendu.usr_nom}</TableCell>
+                      <TableCell className="hidden sm:table-cell">
+                        {compterendu.usr_matricule}
+                      </TableCell>
+                      {/* <TableCell className="hidden sm:table-cell">
                     <Badge className="text-xs" variant="secondary"></Badge>
                   </TableCell> */}
-                  <TableCell className="hidden md:table-cell">
-                    {
-                      compterendu
-                        .compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                        ?.types.libelle
-                    }
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {compterendu.created_at.toString().substring(0, 10)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button
-                      className="ml-1"
-                      variant="default"
-                      onClick={() => onOpen(compterendu.id)}
-                    >
-                      <SearchIcon size={16} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                      <TableCell className="hidden md:table-cell">
+                        {
+                          compterendu
+                            .compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                            ?.types.libelle
+                        }
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {compterendu.created_at.toString().substring(0, 10)}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                          className="ml-1"
+                          variant="default"
+                          onClick={() => onOpen(compterendu.id)}
+                        >
+                          <SearchIcon size={16} />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
+              )}
             {compterendus.length === 0 && (
               <TableRow>
                 <TableCell className="h-24 text-center">No results.</TableCell>

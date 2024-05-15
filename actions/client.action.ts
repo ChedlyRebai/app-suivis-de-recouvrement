@@ -190,7 +190,7 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
       `https://release2.vercel.app/client/getcompterendu/${IdClient}`
     );
     const res = await axios.get<CompteRenduList[]>(
-      `http://localhost:10001/compterendu/getcompterendu?cli=${IdClient}`
+      `http://localhost:10004/compterendu/getcompterendu?cli=${IdClient}`
     );
 
     return res.data || ([] as CompteRenduList[]);
@@ -306,7 +306,7 @@ export const getClientById = async (IdClient?: string | number) => {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(`http://localhost:10001/client/byid?id=${IdClient}`);
     const res = await axios.get<ClientDetails>(
-      `http://localhost:10001/client/byid?id=${IdClient}`
+      `https://release4.vercel.app/client/byid?id=${IdClient}`
     );
     return res.data || ({} as ClientDetails);
   } catch (error) {

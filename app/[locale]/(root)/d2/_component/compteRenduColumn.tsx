@@ -38,7 +38,7 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
     cell: ({ row }) => {
       return (
         <span>
-          {`${row.original?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0].types?.libelle}`}{" "}
+          {`${row.original?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.types?.libelle}`}{" "}
         </span>
       );
     },

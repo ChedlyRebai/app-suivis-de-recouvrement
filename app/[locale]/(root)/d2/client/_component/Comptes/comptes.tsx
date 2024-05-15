@@ -39,24 +39,25 @@ const Comptes = ({ comptes = [] }: { comptes: any[] }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {comptes.map((compte: any, index: number) => {
-              return (
-                <TableRow key={index} className="bg-accent">
-                  <TableCell className="p-3">{compte.ncp}</TableCell>
-                  <TableCell className="p-3">{compte.mnt_imp}</TableCell>
-                  <TableCell className="p-3">{compte.mnt_sdb}</TableCell>
-                  <TableCell className="p-3">
-                    {compte.Agence.codug}:{compte.Agence.libelle}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {compte.Zone.codug}:{compte.Zone.libelle}
-                  </TableCell>
-                  <TableCell className="p-3">{compte.depassement}</TableCell>
-                  <TableCell className="p-3">{compte.tot_eng}</TableCell>
-                  <TableCell className="p-3">{compte.montant_aut}</TableCell>
-                </TableRow>
-              );
-            })}
+            {comptes.length > 0 &&
+              comptes.map((compte: any, index: number) => {
+                return (
+                  <TableRow key={index} className="bg-accent">
+                    <TableCell className="p-3">{compte.ncp}</TableCell>
+                    <TableCell className="p-3">{compte.mnt_imp}</TableCell>
+                    <TableCell className="p-3">{compte.mnt_sdb}</TableCell>
+                    <TableCell className="p-3">
+                      {compte.Agence.codug}:{compte.Agence.libelle}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {compte.Zone.codug}:{compte.Zone.libelle}
+                    </TableCell>
+                    <TableCell className="p-3">{compte.depassement}</TableCell>
+                    <TableCell className="p-3">{compte.tot_eng}</TableCell>
+                    <TableCell className="p-3">{compte.montant_aut}</TableCell>
+                  </TableRow>
+                );
+              })}
             {comptes.length === 0 && (
               <TableRow>
                 <TableCell className="h-24 text-center">No results.</TableCell>

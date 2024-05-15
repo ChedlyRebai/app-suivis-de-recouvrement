@@ -59,7 +59,7 @@ import { utilisateur } from "@/Models/utilisateur.model";
 
 interface DataTableProps {
   columns: any[];
-  
+
   data: Compte[];
   totalAccout?: number;
   totalPages?: number;
@@ -70,7 +70,6 @@ export function AllAccount({
   data,
   totalAccout,
   totalPages = 0,
-
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -246,8 +245,8 @@ export function AllAccount({
     <>
       <Card x-chunk="dashboard-06-chunk-0">
         <CardHeader>
-          <CardTitle>Utilisateur</CardTitle>
-          <CardDescription>Gérez vos utilisateurs.</CardDescription>
+          <CardTitle>Comptes</CardTitle>
+          <CardDescription>Gérez vos comptes.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex  items-center py-4 flex-wrap">

@@ -275,7 +275,7 @@ export const getAllUsers = async (
       `https://sprint2-two.vercel.app/client/listclientnoncontactes?page=${currentpage}&perPage=${perpage}&search=${search}`
     );
     const res = await axios.get<UserResult>(
-      `http://localhost:10001/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/users/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as UserResult) || ({} as UserResult);

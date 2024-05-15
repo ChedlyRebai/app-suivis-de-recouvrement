@@ -132,7 +132,7 @@ export const getUserDetails = async (
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<UserDetails>(
-      `http://localhost:10001/users/byid?id=${id}`
+      `https://release4.vercel.app/users/byid?id=${id}`
     );
     return (response.data as UserDetails) || ({} as UserDetails);
   } catch (error) {

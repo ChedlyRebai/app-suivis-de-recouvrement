@@ -153,9 +153,9 @@ const CompteRenduHistorique = ({
             <Button
               className="flex items-center h-full  justify-center"
               variant="default"
-              onClick={() => onOpen(row.getValue("id"))}
+              onClick={() => onOpen(row.original.id)}
             >
-              {" "}
+              {row.original.id}
               <SearchIcon className="mr-" />
             </Button>
 

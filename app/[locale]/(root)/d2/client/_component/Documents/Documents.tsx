@@ -51,51 +51,52 @@ const Documents = ({ file }: { file: File[] }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {file.map((file: File, index) => {
-              return (
-                <TableRow className="bg-accen">
-                  <TableCell className="p-2">
-                    {file.Utilisateur.usr_matricule}
-                  </TableCell>
-                  <TableCell className="p-3">
-                    {file.Utilisateur.usr_nomprenom}
-                  </TableCell>
-                  <TableCell className="p-3">{file.FileName}</TableCell>
-                  <TableCell className="p-3">
-                    {file.Utilisateur.AffecterA?.[0]?.Agence?.libelle}
-                    {file.Utilisateur.AffecterA?.[0]?.Zone?.libelle}
-                  </TableCell>
-                  <TableCell className="p-3">
-                    {file.created_at.toString().substring(0, 10)}
-                  </TableCell>
-                  <TableCell className="p-3 flex flex-row">
-                    {/* <Link download href={file.FilePath}>
+            {file.length > 0 &&
+              file?.map((file: File, index) => {
+                return (
+                  <TableRow className="bg-accen">
+                    <TableCell className="p-2">
+                      {file?.Utilisateur?.usr_matricule}
+                    </TableCell>
+                    <TableCell className="p-3">
+                      {file?.Utilisateur?.usr_nomprenom}
+                    </TableCell>
+                    <TableCell className="p-3">{file?.FileName}</TableCell>
+                    <TableCell className="p-3">
+                      {file?.Utilisateur?.AffecterA?.[0]?.Agence?.libelle}
+                      {file?.Utilisateur?.AffecterA?.[0]?.Zone?.libelle}
+                    </TableCell>
+                    <TableCell className="p-3">
+                      {file?.created_at.toString().substring(0, 10)}
+                    </TableCell>
+                    <TableCell className="p-3 flex flex-row">
+                      {/* <Link download href={file.FilePath}>
                       <Download className="text-center" />
                     </Link> */}
-                    <Button
-                      variant="default"
-                      onClick={() => {
-                        window.open(file.FilePath);
-                      }}
-                    >
-                      <Download size={16} />
-                    </Button>{" "}
-                    <Button
-                      className="ml-1"
-                      variant="destructive"
-                      onClick={async () => {
-                        await deleteFile(file.id);
-                      }}
-                    >
-                      <Trash2 size={16} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                      <Button
+                        variant="default"
+                        onClick={() => {
+                          window.open(file?.FilePath);
+                        }}
+                      >
+                        <Download size={16} />
+                      </Button>{" "}
+                      <Button
+                        className="ml-1"
+                        variant="destructive"
+                        onClick={async () => {
+                          await deleteFile(file?.id);
+                        }}
+                      >
+                        <Trash2 size={16} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
-        {file.length === 0 && (
+        {file?.length === 0 && (
           <TableRow className="w-full">
             <TableCell className="h-24 text-center  text-center">
               No results.
