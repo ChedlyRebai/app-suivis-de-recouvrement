@@ -1,5 +1,5 @@
 export type droit_accees = {
-  id: number;
+  id: number | string;
   ordre1: number;
   ordre2: number;
   nom: String;

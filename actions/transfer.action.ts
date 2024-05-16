@@ -8,7 +8,7 @@ export const getTypeTransfer = async (): Promise<Cxuntges[]> => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<Cxuntges[]>(
-      `http://localhost:10001/client/typetransfer`
+      `https://release3-v2.vercel.app/client/typetransfer`
     );
     return response.data || ([] as Cxuntges[]);
   } catch (error) {
@@ -26,13 +26,13 @@ export const updateTransferAnti = async (
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `http://localhost:10001`;
+    axios.defaults.baseURL = `https://release3-v2.vercel.app`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
 
     const response = await axios.put<any>(
-      `http://localhost:10001/transfer/updatetrans?cli=${cli}`,
+      `https://release3-v2.vercel.app/transfer/updatetrans?cli=${cli}`,
       { data: data, column: column }
     );
 
@@ -58,7 +58,7 @@ export const updatedemandeprolongation = async (
     }`;
     const newdata = data == true ? "O" : "N";
     const response = await axios.put<any>(
-      `http://localhost:10001/prolongation/updateprolongation?cli=${cli}`,
+      `https://release3-v2.vercel.app/prolongation/updateprolongation?cli=${cli}`,
       { data: newdata, column: column }
     );
 

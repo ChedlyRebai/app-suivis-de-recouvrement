@@ -22,7 +22,7 @@ export const MOTT = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<ab_cxrepenv[]>(
-      `http://localhost:10001/client/motif`
+      `https://release3-v2.vercel.app/client/motif`
     );
     console.log(response.data);
     return (response.data as any[]) || ([] as any[]);
@@ -35,7 +35,7 @@ export const getMotifCommercial = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<ab_cxrepenv[]>(
-      `http://localhost:10001/client/motifcommercial`
+      `https://release3-v2.vercel.app/client/motifcommercial`
     );
 
     return response.data || ([] as ab_cxrepenv[]);
@@ -49,7 +49,7 @@ export const VTRF = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<any[]>(
-      `http://localhost:10001/transfer/vtrf`
+      `https://release3-v2.vercel.app/transfer/vtrf`
     );
 
     return response.data || ([] as any[]);

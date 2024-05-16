@@ -66,6 +66,12 @@ export function AccessManagementDataTable<
   const columns: ColumnDef<droit_accees>[] = [
     {
       accessorKey: "id",
+      header: ({ column }) => {
+        return <></>;
+      },
+      cell: ({ row }) => {
+        return <></>;
+      },
     },
     {
       accessorKey: "nom",
@@ -352,7 +358,7 @@ export function AccessManagementDataTable<
           })
           .then(() => setIsLoading(false)),
         {
-          loading: "Chargement......",
+          loading: "Loading...",
           success: "Success",
           error: <b>Could not save.</b>,
         }
@@ -413,14 +419,14 @@ export function AccessManagementDataTable<
         <Button
           variant="outline"
           onClick={() => onOpen()}
-          className="mr-auto w-auto ml-1 "
+          className="ml-auto w-auto mr-1 "
         >
           {lang("access-management.searchf")}
         </Button>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto mr-1">
+            <Button variant="outline" className="ml-aut mr-1">
               <MixerHorizontalIcon className="mr-2 h-4 w-4" />
               {lang("access-management.View")}
             </Button>
@@ -480,13 +486,13 @@ export function AccessManagementDataTable<
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Chargement......
+                  Loading...
                 </TableCell>
               </TableRow>
             ) :*/}
 
             {/* {isLoading ? (
-              // Replace <div>Chargement......</div> with your custom loading component
+              // Replace <div>Loading...</div> with your custom loading component
               <TableRow className="text-center">
                 <TableCell>
                   <Oval />

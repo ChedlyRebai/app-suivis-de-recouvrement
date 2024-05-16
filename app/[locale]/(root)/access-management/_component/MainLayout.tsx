@@ -31,6 +31,7 @@ import LocalSwitcher from "@/components/shared/Local-switcher";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/shared/Navbar";
 import { IconMap } from "@/constants";
+import Link from "next/link";
 
 interface NavBarProps {
   children?: ReactNode;
@@ -158,7 +159,7 @@ const Mainlayout = ({
                       navigation.map((item) =>
                         !item.children ? (
                           <div key={item.name}>
-                            <a
+                            <Link
                               href={item.href}
                               className={classNames(
                                 item.current
@@ -177,8 +178,8 @@ const Mainlayout = ({
                               )}
                               aria-hidden="true"
                             /> */}
-                              {item.name}n
-                            </a>
+                              {item.name}
+                            </Link>
                           </div>
                         ) : (
                           <Disclosure
@@ -204,7 +205,7 @@ const Mainlayout = ({
                                       aria-hidden="true"
                                     />
                                     <span className="flex-1 capitalize">
-                                      {item.name}z
+                                      {item.name}
                                     </span>
                                     <svg
                                       className={classNames(
@@ -226,11 +227,12 @@ const Mainlayout = ({
                                     {item.children.map((subItem: any) => (
                                       <Disclosure.Button
                                         key={subItem.name}
-                                        as="a"
-                                        href={subItem.href}
+                                        as="p"
                                         className="group capitalize w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
                                       >
-                                        {subItem.name} {subItem.href}
+                                        <Link href={subItem.href}>
+                                          {subItem.name} {subItem.href}
+                                        </Link>
                                       </Disclosure.Button>
                                     ))}
                                   </Disclosure.Panel>
