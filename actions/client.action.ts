@@ -266,12 +266,12 @@ export const getValidationProposeDeTransferAnticipe = async (
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
-    axios.defaults.baseURL = `https://sprint2-two.vercel.app`;
+    axios.defaults.baseURL = `https://release3-v2.vercel.app`;
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
     const res = await axios.get(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&cli=${IdClient}&from=${dayfrom}&to=${dayto}`
+      `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&cli=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
 
     console.log(res.data);

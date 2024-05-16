@@ -58,7 +58,7 @@ export const filecolumns: ColumnDef<File>[] = [
     header: "download File",
     cell: ({ row }) => {
       return (
-        <>
+        <div className="flex justify-center items-center">
           <Button
             variant="default"
             onClick={() => {
@@ -75,7 +75,7 @@ export const filecolumns: ColumnDef<File>[] = [
           >
             <Trash2 size={16} />
           </Button>
-        </>
+        </div>
       );
     },
   },

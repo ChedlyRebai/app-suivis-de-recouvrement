@@ -80,7 +80,7 @@ export const getAllfiles = async (
 ): Promise<fileresult> => {
   try {
     const res = await axios.get<fileresult>(
-      `http://localhost:10001/file/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/file/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as fileresult) || ({} as fileresult);

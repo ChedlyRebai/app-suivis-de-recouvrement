@@ -4,6 +4,7 @@ import {
   ArrowBigLeftIcon,
   ArrowLeftCircleIcon,
   ArrowLeftIcon,
+  Clipboard,
   File,
   Home,
   Landmark,
@@ -139,7 +140,8 @@ export default async function RootLayout({
                   href="/en/d2/compterendu"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
-                  <File className="h-5 w-5" />
+                  <Clipboard className="h-5 w-5" />
+
                   <span className="sr-only">Compte Rendu</span>
                 </Link>
               </TooltipTrigger>
@@ -156,6 +158,18 @@ export default async function RootLayout({
                 </Link>
               </TooltipTrigger>
               <TooltipContent side="right">Analytics</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/en/d2/files"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <File className="h-5 w-5" />
+                  <span className="sr-only">Documents</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Documents</TooltipContent>
             </Tooltip>
           </nav>
           <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
