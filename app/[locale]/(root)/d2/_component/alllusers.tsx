@@ -168,7 +168,7 @@ export function AllUsers({
     <>
       <Card x-chunk="dashboard-06-chunk-0">
         <CardHeader>
-          <CardTitle>Utilisateur</CardTitle>
+          <CardTitle>Utilisateurs</CardTitle>
           <CardDescription>Gérez vos utilisateurs.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -351,6 +351,13 @@ export function AllUsers({
                   table.getRowModel().rows.map((row) => (
                     <TableRow
                       className="p-"
+                      onDoubleClick={() => {
+                        router.push(
+                          "utilsateur" +
+                            "?" +
+                            createQueryString("id", `${row.original.id}`)
+                        );
+                      }}
                       // onDoubleClick={() => {
                       //   console.log((row.original as { cli: string }).cli);
 

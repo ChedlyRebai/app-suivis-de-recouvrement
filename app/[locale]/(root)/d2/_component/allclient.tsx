@@ -430,6 +430,13 @@ export function AllClient({
                       className="p-"
                       key={row.id}
                       data-state={row.getIsSelected() && "selected"}
+                      onDoubleClick={() => {
+                        router.push(
+                          "client" +
+                            "?" +
+                            createQueryString("id", `${row.original.id}`)
+                        );
+                      }}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell
