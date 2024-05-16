@@ -21,7 +21,7 @@ export const getDroitAccessByCodeFonction = async (
   );
   console.log(`${process.env.API_URL} `);
   const res = await axios.get(
-    `https://sprint2-v2.vercel.app/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
+    `https://sprint1-v2-beta.vercel.app/droit/getByCodeFunc?codeFunction=${code}&page=${currentpage}&perPage=${perpage}&search=${search}`
   );
   return res.data;
 };
