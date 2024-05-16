@@ -352,7 +352,7 @@ export function AccessManagementDataTable<
           })
           .then(() => setIsLoading(false)),
         {
-          loading: "Loading...",
+          loading: "Chargement......",
           success: "Success",
           error: <b>Could not save.</b>,
         }
@@ -480,13 +480,13 @@ export function AccessManagementDataTable<
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Loading...
+                  Chargement......
                 </TableCell>
               </TableRow>
             ) :*/}
 
             {/* {isLoading ? (
-              // Replace <div>Loading...</div> with your custom loading component
+              // Replace <div>Chargement......</div> with your custom loading component
               <TableRow className="text-center">
                 <TableCell>
                   <Oval />

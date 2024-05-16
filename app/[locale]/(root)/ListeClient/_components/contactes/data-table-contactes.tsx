@@ -178,7 +178,7 @@ export function DataTableContactes<TData, TValue>({
   // }, [type]);
 
   if (loadingTable) {
-    return <div>Loading...</div>;
+    return <div>Chargement......</div>;
   }
 
   const table = useReactTable({
@@ -247,7 +247,7 @@ export function DataTableContactes<TData, TValue>({
 
   // render
   // if (loader) {
-  //   return <div>Loading</div>;
+  //   return <div>Chargement...</div>;
   // }
   return (
     <>

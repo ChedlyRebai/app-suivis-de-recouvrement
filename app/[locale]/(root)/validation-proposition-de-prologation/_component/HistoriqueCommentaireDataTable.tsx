@@ -81,7 +81,7 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
   const [loadingTable, setLoadingTable] = useState(false);
 
   if (loadingTable) {
-    return <div>Loading...</div>;
+    return <div>Chargement......</div>;
   }
 
   const table = useReactTable({
@@ -150,7 +150,7 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
 
   // render
   if (loader) {
-    return <div>Loading</div>;
+    return <div>Chargement...</div>;
   }
 
   return (

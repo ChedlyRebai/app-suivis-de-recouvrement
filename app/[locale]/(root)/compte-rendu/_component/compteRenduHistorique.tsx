@@ -204,7 +204,7 @@ const CompteRenduHistorique = ({
     },
   });
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Chargement......</div>;
   }
 
   if (isRefetching) {
