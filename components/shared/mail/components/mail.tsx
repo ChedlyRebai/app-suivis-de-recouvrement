@@ -25,7 +25,7 @@ import { useInView } from "react-intersection-observer";
 
 interface IProps {
   items: Mail[];
-  initialData: any[];
+  initialData: Alerte[];
   search: string;
   limit: number;
 }
@@ -56,6 +56,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
 import { getAllCompteRendu } from "@/actions/comptrendu.action";
 import { format } from "date-fns/format";
+import { Alerte } from "@/actions/Alerts.action";
 interface MailProps {
   accounts: {
     label: string;
@@ -258,25 +259,14 @@ export function MailList({ items, initialData, search, limit }: IProps) {
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
-        {data.map((item: CompteRenduList) => (
+        {data.map((item: Alerte) => (
           <button
             key={item.id}
-            // className={cn(
-            //   "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
-            //   mail.selected === item.id && "bg-muted"
-            // )}
-            // onClick={() =>
-            //   setMail({
-            //     ...mail,
-            //     selected: item.id,
-            //   })
-            // }
-
-            onClick={() => {
-              console.log("item", item);
-              setComptrendu(item);
-              setId(item.id);
-            }}
+            // onClick={() => {
+            //   console.log("item", item);
+            //   setComptrendu(item);
+            //   setId(item.id);
+            // }}
             className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"
           >
             <div className="flex w-full flex-col gap-1">
@@ -284,9 +274,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
                 <div className="flex items-center gap-2">
                   {/* <div className="font-semibold">{item.compterendutype_compterendutype_compterenduidTosuivi_agenda[0].types.libelle }</div> */}
                   <div className="font-semibold">{item?.ab_client?.nom}</div>
-                  {!item
-                    ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                    ?.types?.libelle && (
+                  {!item?.compterendutype?.types.libelle && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
                   )}
                 </div>
@@ -303,32 +291,22 @@ export function MailList({ items, initialData, search, limit }: IProps) {
                     addSuffix: true,
                   })}  */}
                   {/* {item.created_at.toString().substring(0, 10)} */}
-                  {format(new Date(item.created_at.toString()), "PPpp")}
+                  {/* {format(new Date(item.created_at?.toString()), "PPpp")} */}
                 </div>
               </div>
               <div className="text-xs font-medium">{item?.ab_client?.cli}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {
-                item
-                  ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-                  ?.types?.libelle
-              }
+              {item?.message.substring(0, 100)}...
             </div>
 
             <div className="flex items-center gap-2">
               <Badge
                 variant={getBadgeVariantFromLabel(
-                  item
-                    ?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
-                    ?.types?.libelle
+                  `${item?.compterendutype?.types?.libelle}`
                 )}
               >
-                {
-                  item
-                    ?.compterendutype_compterendutype_compterenduidTosuivi_agenda[0]
-                    ?.types?.libelle
-                }
+                {item?.compterendutype?.types?.libelle}
               </Badge>
             </div>
           </button>
@@ -352,7 +330,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
 function getBadgeVariantFromLabel(
   label: string
 ): ComponentProps<typeof Badge>["variant"] {
-  if (["visite"].includes(label.toLowerCase())) {
+  if (["visite"].includes(label?.toLowerCase())) {
     return "default";
   }
 

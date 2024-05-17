@@ -60,3 +60,16 @@ export const getAllAlerts = async (
     return {} as AlertsMain;
   }
 };
+
+export const getAlerteById = async (id: number) => {
+  try {
+    // axios.defaults.baseURL = `${process.env.API_URL}`;
+    const res = await axios.get<Alerte>(
+      `http://localhost:10001/alerts/byid/${id}`
+    );
+
+    return res.data || ({} as Alerte);
+  } catch (error) {
+    return {} as Alerte;
+  }
+};
