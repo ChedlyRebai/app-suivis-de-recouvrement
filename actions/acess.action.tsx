@@ -16,10 +16,7 @@ export const acces = async () => {
     const res = await axios.post("http://localhost:10000/droit/accesspage", {
       page: getPath,
     });
-    console.log(
-      "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-      res.data
-    );
+
     return res.data;
   } catch (error) {}
 };

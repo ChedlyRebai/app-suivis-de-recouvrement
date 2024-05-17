@@ -7,7 +7,7 @@ import {
 import { droit_accees } from "@/Models/droit_accees.model";
 import { fonction } from "@/Models/fonction.model";
 import { object } from "zod";
-import create from "zustand";
+import { create } from "zustand";
 
 export type State = {
   droitAccess: droit_accees[];
