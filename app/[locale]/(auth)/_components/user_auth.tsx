@@ -60,7 +60,7 @@ export function UserAuthForm({
     try {
       setIsLoading(true);
       const res = await Login(values.matricule, values.password);
-      console.log(res);
+
       if (res?.status === 200) {
         toast.success(res.data);
         router.push("/");
@@ -77,8 +77,7 @@ export function UserAuthForm({
 
   const getUsername = async (values: z.infer<typeof formSchema>) => {
     const response = await getUserBuMatricule(values.matricule);
-    console.log("response");
-    console.log(response);
+
     setUsername(response);
   };
 
@@ -89,7 +88,6 @@ export function UserAuthForm({
       password: "",
     },
   });
-
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>

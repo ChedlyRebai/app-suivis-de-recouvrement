@@ -60,7 +60,7 @@ const Mainlayout = ({
   ];
 
   //console.log(navigation);
-  console.log(navigaion);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [defaultSize, setDefaultSize] = useState(20);
 

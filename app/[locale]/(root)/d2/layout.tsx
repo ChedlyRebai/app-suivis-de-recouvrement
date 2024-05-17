@@ -41,7 +41,8 @@ import {
 } from "@/actions/admin.action";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
+import { acces } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 // export default function RootLayout({
 //   children,
 // }: Readonly<{
@@ -68,7 +69,10 @@ export default async function RootLayout({
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
-
+  const access = await acces();
+  // if (!access) {
+  //   return < />;
+  // }
   return (
     <TooltipProvider>
       <div className="flex min-h-screen w-full flex-col bg-muted/40 mt-20">

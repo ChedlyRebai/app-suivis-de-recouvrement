@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AccessManagementDataTable } from "./_component/data-table";
 import { getSession } from "@/lib";
 import { redirect } from "next/navigation";
+import { GetServerSideProps } from "next";
+import TakePathnameComponent from "@/components/shared/TakePathnameComponent";
 
 export default async function Home({
   searchParams,

@@ -1,43 +1,50 @@
-/* This example requires Tailwind CSS v2.0+ */
-export default function Custom403() {
+const NotFound = () => {
   return (
     <>
-      <div className="bg-white min-h-full flex flex-col lg:relative">
+      {/*
+      This example requires updating your template:
+
+      ```
+      <html class="h-full">
+      <body class="h-full">
+      ```
+    */}
+      <div className="bg-white dark:bg-slate-950 min-h-full flex flex-col lg:relative">
         <div className="flex-grow flex flex-col">
-          <main className="flex-grow flex flex-col bg-white">
+          <main className="flex-grow flex flex-col dark:bg-slate-950 bg-white">
             <div className="flex-grow mx-auto max-w-7xl w-full flex flex-col px-4 sm:px-6 lg:px-8">
               <div className="flex-shrink-0 pt-10 sm:pt-16">
                 <a href="/" className="inline-flex">
                   <span className="sr-only">Workflow</span>
-                  <img
+                  {/* <img
                     className="h-12 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
                     alt=""
-                  />
+                  /> */}
                 </a>
               </div>
               <div className="flex-shrink-0 my-auto py-16 sm:py-32">
                 <p className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">
-                  404 error
+                  404
                 </p>
-                <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-                  Page not found
+                <h1 className="mt-2 text-4xl font-extrabold text-gray-900 dark:text-slate-50  tracking-tight sm:text-5xl">
+                  Page non trouvée
                 </h1>
-                <p className="mt-2 text-base text-gray-500">
-                  Sorry, we couldn’t find the page you’re looking for.
+                <p className="mt-2 text-base text-gray-500 dark:text-slate-300">
+                  Désolé, nous n’avons pas trouvé la page que vous recherchez.
                 </p>
-                <div className="mt-6">
+                {/* <div className="mt-6">
                   <a
                     href="#"
                     className="text-base font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    Go back home<span aria-hidden="true"> &rarr;</span>
+                    Rentrer à la maison →<span aria-hidden="true"> &rarr;</span>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </main>
-          <footer className="flex-shrink-0 bg-gray-50">
+          {/* <footer className="flex-shrink-0 bg-gray-50">
             <div className="mx-auto max-w-7xl w-full px-4 py-16 sm:px-6 lg:px-8">
               <nav className="flex space-x-4">
                 <a
@@ -68,7 +75,7 @@ export default function Custom403() {
                 </a>
               </nav>
             </div>
-          </footer>
+          </footer> */}
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
@@ -80,4 +87,6 @@ export default function Custom403() {
       </div>
     </>
   );
-}
+};
+
+export default NotFound;
