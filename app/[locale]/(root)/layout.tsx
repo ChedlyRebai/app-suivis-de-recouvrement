@@ -44,7 +44,8 @@ export default async function RootLayout({
       title={t("title")}
       session={session}
     >
-      {access ? children : <ForBidden />}
+      {/* {access ? children : <ForBidden />} */}
+      {children}
     </Mainlayout>
   );
 }

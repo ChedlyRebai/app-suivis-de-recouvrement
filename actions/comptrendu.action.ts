@@ -5,6 +5,8 @@ export interface Main {
   totalCount: number;
   totalPages: number;
 }
+
+// const initialdata = await getAllCompteRendu(1, limit, search);
 export const getAllCompteRendu = async (
   page: any = 1,
   perpage: any = 4,

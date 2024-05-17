@@ -7,6 +7,7 @@ import { Mail } from "@/components/shared/mail/components/mail";
 import { accounts, mails } from "@/components/shared/mail/data";
 import LoadingIcons, { Oval } from "react-loading-icons";
 import { getAllCompteRendu } from "@/actions/comptrendu.action";
+import { getAllAlerts } from "@/actions/Alerts.action";
 
 export default async function Page({
   searchParams,
@@ -21,7 +22,7 @@ export default async function Page({
   const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
   const search = searchParams?.query || "";
   const limit = 20;
-  const initialdata = await getAllCompteRendu(1, limit, search);
+  const initialdata = await getAllAlerts(1, limit, search);
   console.log("initialData", initialdata);
   return (
     <>
