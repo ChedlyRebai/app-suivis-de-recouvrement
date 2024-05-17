@@ -1,20 +1,20 @@
+import { Alerte } from "@/actions/Alerts.action";
 import Comp from "@/app/[locale]/test2/_component/comp";
 import { CompteRenduList } from "@/constants/types";
 import { create } from "zustand";
 
 interface InboxStore {
-  Comptrendu: CompteRenduList;
-id : number;
-  setComptrendu: (Comptrendu: CompteRenduList) => void;
-    setId: (id: number) => void;
+  alerte: Alerte;
+  id: number;
+  setAlert: (alert: Alerte) => void;
+  setId: (id: number) => void;
 }
 
 const useInbox = create<InboxStore>((set) => ({
-  id:0,
+  id: 0,
   setId: (id: number) => set({ id }),
-  Comptrendu: {} as CompteRenduList,
-  setComptrendu: (Comptrendu: CompteRenduList) =>
-    set({ Comptrendu: Comptrendu }),
+  alerte: {} as Alerte,
+  setAlert: (alerte: Alerte) => set({ alerte: alerte }),
 }));
 
 export default useInbox;

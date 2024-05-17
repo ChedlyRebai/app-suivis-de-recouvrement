@@ -9,6 +9,7 @@ import {
   Clock,
   Forward,
   MoreVertical,
+  Phone,
   Reply,
   ReplyAll,
   Trash2,
@@ -47,6 +48,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CompteRenduList } from "@/constants/types";
 import { getCompteRenduById } from "@/actions/comptrendu.action";
 import { Oval } from "react-loading-icons";
+import { Alerte, getAlerteById } from "@/actions/Alerts.action";
 
 interface MailDisplayProps {
   mail: Mail | null;
@@ -54,17 +56,16 @@ interface MailDisplayProps {
 
 export function MailDisplay() {
   const today = new Date();
-  const { Comptrendu, id } = useInbox();
-  console.log("Comptrendu", Comptrendu);
+  const { alerte, id } = useInbox();
 
   const {
     isPending,
     error,
     isLoading,
-    data = {} as CompteRenduList,
-  } = useQuery<CompteRenduList>({
+    data = {} as Alerte,
+  } = useQuery<Alerte>({
     queryKey: ["getCompteRendu", id],
-    queryFn: async () => await getCompteRenduById(id),
+    queryFn: async () => await getAlerteById(id),
   });
 
   console.log("data", data);
@@ -86,14 +87,16 @@ export function MailDisplay() {
             </TooltipTrigger>
             <TooltipContent>déplacer vers contacté</TooltipContent>
           </Tooltip>
-          {/* <Tooltip>
+          <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
-                <ArchiveX className="h-4 w-4" />
-                <span className="sr-only">Move to junk</span>
+                <Phone className="h-4 w-4" />
+                <a href={`tel:${data?.ab_client?.tel1}`} className="sr-only">
+                  Telephone
+                </a>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Move to junk</TooltipContent>
+            <TooltipContent>Telephone</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -103,7 +106,7 @@ export function MailDisplay() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>Move to trash</TooltipContent>
-          </Tooltip> */}
+          </Tooltip>
           <Separator orientation="vertical" className="mx-1 h-6" />
           <Tooltip>
             <Popover>
@@ -229,7 +232,7 @@ export function MailDisplay() {
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
               <Avatar>
-                <AvatarImage alt={data.cli} />
+                <AvatarImage alt={data?.ab_client?.nom} />
                 <AvatarFallback>
                   {data?.ab_client?.nom
                     .split(" ")
@@ -263,20 +266,18 @@ export function MailDisplay() {
                 </div>
               </div>
             </div>
-            {data.created_at && (
+            {/* {data.created_at && (
               <div className="ml-auto text-xs text-muted-foreground">
-                {/* {format(new Date(data.date), "PPpp")} 
-                  data.date */}
-                {/* {data.created_at.toString().substring(0, 10)} */}
+               
                 {formatDate(new Date(data.created_at.toString()), "PPpp")}
               </div>
-            )}
+            )} */}
           </div>
           <Separator />
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-            {data.compte_rendu}
+            {data.message}
           </div>
-          <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
+          {/* <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
             {data
               ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
               ?.types?.code === 1 && (
@@ -373,17 +374,6 @@ export function MailDisplay() {
               </div>
             )}
 
-            {/* export interface FacilitePaiment {
-    nb_ech:   null;
-    mnt_rec:  string;
-    montantFacilites: MontantFacilite[];
-}
-
-export interface MontantFacilite {
-    mntech:   string;
-    date_ech: null;
-} */}
-
             {data
               ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
               ?.types?.code === 4 && (
@@ -443,7 +433,7 @@ export interface MontantFacilite {
                 <Label className="text-primary">Client Injoignable</Label>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       )}
 

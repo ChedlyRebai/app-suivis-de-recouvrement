@@ -22,6 +22,7 @@ export interface AbClient {
   nom: string;
   tel1: string;
   tel2: null;
+  email: string;
 }
 
 export interface Agence {

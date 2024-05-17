@@ -87,7 +87,7 @@ export function Mail({
   const pathname = usePathname();
   const { replace } = useRouter();
   console.log("initialData", initialData);
-  const { Comptrendu, setComptrendu, setId } = useInbox();
+  const { alerte, setAlert, setId } = useInbox();
 
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -212,7 +212,7 @@ export function Mail({
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[2]}>
-          {Comptrendu && <MailDisplay />}
+          {alerte && <MailDisplay />}
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>
@@ -255,18 +255,18 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
   const [mail, setMail] = useMail();
-  const { Comptrendu, setComptrendu, setId } = useInbox();
+  const { alerte, setAlert, setId } = useInbox();
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
         {data.map((item: Alerte) => (
           <button
             key={item.id}
-            // onClick={() => {
-            //   console.log("item", item);
-            //   setComptrendu(item);
-            //   setId(item.id);
-            // }}
+            onClick={() => {
+              console.log("item", item);
+              setAlert(item);
+              setId(item.id);
+            }}
             className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"
           >
             <div className="flex w-full flex-col gap-1">
