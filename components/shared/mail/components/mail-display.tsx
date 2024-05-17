@@ -8,6 +8,7 @@ import {
   Check,
   Clock,
   Forward,
+  Mail,
   MoreVertical,
   Phone,
   Reply,
@@ -40,7 +41,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Mail } from "../data";
+
 import { formatDate } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
 import { useQuery } from "@tanstack/react-query";
@@ -49,10 +50,7 @@ import { CompteRenduList } from "@/constants/types";
 import { getCompteRenduById } from "@/actions/comptrendu.action";
 import { Oval } from "react-loading-icons";
 import { Alerte, getAlerteById } from "@/actions/Alerts.action";
-
-interface MailDisplayProps {
-  mail: Mail | null;
-}
+import Link from "next/link";
 
 export function MailDisplay() {
   const today = new Date();
@@ -78,7 +76,7 @@ export function MailDisplay() {
     <div className="flex h-fit flex-col">
       <div className="flex items-center p-2">
         <div className="flex items-center gap-2">
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
                 <Check className="h-4 w-4" />
@@ -86,14 +84,14 @@ export function MailDisplay() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>déplacer vers contacté</TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
                 <Phone className="h-4 w-4" />
-                <a href={`tel:${data?.ab_client?.tel1}`} className="sr-only">
+                <Link href={`tel:${data?.ab_client?.tel1}`} className="sr-only">
                   Telephone
-                </a>
+                </Link>
               </Button>
             </TooltipTrigger>
             <TooltipContent>Telephone</TooltipContent>
@@ -101,11 +99,16 @@ export function MailDisplay() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!data}>
-                <Trash2 className="h-4 w-4" />
-                <span className="sr-only">Move to trash</span>
+                <Mail className="h-4 w-4" />
+                <Link
+                  href={`mailto:${data?.ab_client?.email}`}
+                  className="sr-only"
+                >
+                  Email
+                </Link>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Move to trash</TooltipContent>
+            <TooltipContent>Email</TooltipContent>
           </Tooltip>
           <Separator orientation="vertical" className="mx-1 h-6" />
           <Tooltip>
