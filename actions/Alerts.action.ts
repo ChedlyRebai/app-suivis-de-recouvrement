@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export interface Main {
+export interface AlertsMain {
   alertes: Alerte[];
   totalCount: number;
   totalPages: number;
@@ -51,12 +51,12 @@ export const getAllAlerts = async (
 ) => {
   try {
     // axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<Main>(
+    const res = await axios.get<AlertsMain>(
       `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
     );
 
-    return res.data || ({} as Main);
+    return res.data || ({} as AlertsMain);
   } catch (error) {
-    return {} as Main;
+    return {} as AlertsMain;
   }
 };

@@ -40,7 +40,7 @@ import useClientSore from "@/hooks/useCompteRenduForm";
 import { SuiviAgenda } from "@/Models/SuiviAgenda.model";
 import { AbCompte } from "@/Models/AbCompte.model";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
+
 import { useSearchParams } from "next/navigation";
 import {
   Accordion,
@@ -51,7 +51,11 @@ import {
 import CompteRenduHistorique from "./CompteRenduHistorique";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { getMotif } from "@/actions/motif.action";
-import { getappreciation, getcomptrendutypes, getcontact } from "@/actions/utils.actions";
+import {
+  getappreciation,
+  getcomptrendutypes,
+  getcontact,
+} from "@/actions/utils.actions";
 import { CompteRenduList } from "@/constants/types";
 
 interface CompteRenduFormProps {
@@ -113,25 +117,25 @@ const CompteRenduForm = ({
     setTab(num);
   };
 
+  const { isPending: MotifPending, data: Motifdata } = useQuery({
+    queryKey: ["getMotif"],
+    queryFn: async () => await getMotif(),
+  });
 
-  const { isPending:MotifPending, data:Motifdata } = useQuery({
-    queryKey: ['getMotif'],
-    queryFn:async ()=>await getMotif(),
-  })
-
-  const { isPending:contactpending, data:contactdata } = useQuery({
-    queryKey: ['getcontact'],
-    queryFn:async ()=>await getcontact(),
-  })
-  const { isPending:comptrendutypespending, data:comptrendutypesdata } = useQuery({
-    queryKey: ['getconptrendutypes'],
-    queryFn:async ()=>await getcomptrendutypes(),
-  })
-  console.log(contactdata)
-  const { isPending:appreciationpending, data:appreciationdata } = useQuery({
-    queryKey: ['appreciation'],
-    queryFn:async ()=>await getappreciation(),
-  })
+  const { isPending: contactpending, data: contactdata } = useQuery({
+    queryKey: ["getcontact"],
+    queryFn: async () => await getcontact(),
+  });
+  const { isPending: comptrendutypespending, data: comptrendutypesdata } =
+    useQuery({
+      queryKey: ["getconptrendutypes"],
+      queryFn: async () => await getcomptrendutypes(),
+    });
+  console.log(contactdata);
+  const { isPending: appreciationpending, data: appreciationdata } = useQuery({
+    queryKey: ["appreciation"],
+    queryFn: async () => await getappreciation(),
+  });
 
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
@@ -144,13 +148,16 @@ const CompteRenduForm = ({
     console.log(tab);
   };
 
-
   const handleSubmit = async () => {
     console.log(suiviAgenda);
     console.log(selectedRadio);
-    await queryClient.refetchQueries()
-    queryClient.invalidateQueries({ queryKey: ['getCompteRenduHistorique',cli] })
-    await queryClient.prefetchQuery({ queryKey: ['getCompteRenduHistorique',cli] })
+    await queryClient.refetchQueries();
+    queryClient.invalidateQueries({
+      queryKey: ["getCompteRenduHistorique", cli],
+    });
+    await queryClient.prefetchQuery({
+      queryKey: ["getCompteRenduHistorique", cli],
+    });
     let compte_rendu = "";
     if (selectedRadio === "1") {
       compte_rendu = `Promesse de paiement : Montant =  ${
@@ -232,8 +239,8 @@ const CompteRenduForm = ({
       compte_rendu = `Client injoignable: ${suiviAgenda.compte_rendu || ""}`;
     }
 
-    console.log(suiviAgenda,cli,selectedRadio);
-     saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!,selectedRadio)
+    console.log(suiviAgenda, cli, selectedRadio);
+    saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!, selectedRadio);
     //   .then((res) => {
     //     toast.success("Compte rendu enregistré avec succès");
     //   })
@@ -479,8 +486,7 @@ const CompteRenduForm = ({
               <Card className="my-2 backdrop-blur-xl">
                 <CardContent className="space-y-2 ">
                   <div className="flex flex-col grid-cols-3 gap-4 my-2">
-                  <div className="flex w-[280px] flex-col mr-4">
-                    
+                    <div className="flex w-[280px] flex-col mr-4">
                       <Label
                         className="mb-1 text-sm font-medium"
                         htmlFor="amount"
@@ -497,18 +503,10 @@ const CompteRenduForm = ({
                         <SelectTrigger className="">
                           <SelectValue placeholder="Choisis un motif" />
                         </SelectTrigger>
-                        <SelectContent
-                          onChange={(e) => {
-                            console.log(e);
-                          }}
-                        >
-                          <SelectGroup
-                            onChange={(e) => {
-                              console.log(e);
-                            }}
-                          >
+                        <SelectContent>
+                          <SelectGroup>
                             <SelectLabel>Motifs</SelectLabel>
-                            {Motifdata?.map((item:any) => (
+                            {Motifdata?.map((item: any) => (
                               <SelectItem
                                 key={item.code}
                                 value={`${item.code}`}
@@ -521,7 +519,6 @@ const CompteRenduForm = ({
                       </Select>
                     </div>
                     <div className="flex w-[280px] flex-col mr-4">
-                    
                       <Label
                         className="mb-1 text-sm font-medium "
                         htmlFor="location"
@@ -541,7 +538,7 @@ const CompteRenduForm = ({
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Contacts</SelectLabel>
-                            {contactdata?.map((item:any) => (
+                            {contactdata?.map((item: any) => (
                               <SelectItem
                                 key={item.code}
                                 value={`${item.code}`}
@@ -554,7 +551,6 @@ const CompteRenduForm = ({
                       </Select>
                     </div>
                     <div className="flex w-[280px] flex-col mr-4">
-                    
                       <Label
                         className="mb-1 text-sm font-medium "
                         htmlFor="location"
@@ -666,18 +662,16 @@ const CompteRenduForm = ({
                       Client injoignable
                     </TabsTrigger> */}
 
-                    {
-                      comptrendutypesdata?.map((item:any) => (
-                        <TabsTrigger
-                          className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                          onClick={() => handleTabChange(`${item.code}`)}
-                          // disabled
-                          value={`${item.code}`}
-                        >
-                          {item.libelle}
-                        </TabsTrigger>
-                      ))
-                    }
+                    {comptrendutypesdata?.map((item: any) => (
+                      <TabsTrigger
+                        className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
+                        onClick={() => handleTabChange(`${item.code}`)}
+                        // disabled
+                        value={`${item.code}`}
+                      >
+                        {item.libelle}
+                      </TabsTrigger>
+                    ))}
                   </TabsList>
 
                   <TabsContent value="1">
@@ -756,7 +750,7 @@ const CompteRenduForm = ({
                         <SelectContent>
                           <SelectGroup>
                             {/* <SelectLabel></SelectLabel> */}
-                            {appreciationdata?.map((item:any) => (
+                            {appreciationdata?.map((item: any) => (
                               <SelectItem
                                 key={item.code}
                                 value={`${item.code}`}
@@ -789,10 +783,10 @@ const CompteRenduForm = ({
                     </div>
                   </div>
                   <Button
-                    onClick={ async() => {
+                    onClick={async () => {
                       handleSubmit();
                       //queryClient.invalidateQueries(['getCompteRenduHistorique']);
-                      await queryClient.refetchQueries()
+                      await queryClient.refetchQueries();
                     }}
                   >
                     Save

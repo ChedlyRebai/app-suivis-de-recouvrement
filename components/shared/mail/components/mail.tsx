@@ -14,6 +14,7 @@ import {
   File,
   Inbox,
   MessagesSquare,
+  Search,
   Send,
   ShoppingCart,
   Trash2,
@@ -28,8 +29,6 @@ interface IProps {
   search: string;
   limit: number;
 }
-
-import { Loader2, Search } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -49,6 +48,14 @@ import { type Mail } from "../data";
 import { useMail } from "../use-mail";
 import { Input } from "@/components/ui/input";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+import { useDebouncedCallback } from "use-debounce";
+import { CompteRenduList } from "@/constants/types";
+import { formatDistanceToNowStrict } from "date-fns";
+import useInbox from "@/hooks/use-inbox-hook";
+import { getAllCompteRendu } from "@/actions/comptrendu.action";
+import { format } from "date-fns/format";
 interface MailProps {
   accounts: {
     label: string;
@@ -63,16 +70,6 @@ interface MailProps {
   search: string;
   limit: number;
 }
-
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-import { useDebouncedCallback } from "use-debounce";
-import { CompteRenduList } from "@/constants/types";
-import { formatDistanceToNowStrict } from "date-fns";
-import useInbox from "@/hooks/use-inbox-hook";
-import { getAllCompteRendu } from "@/actions/comptrendu.action";
-import { format } from "date-fns/format";
-
 export function Mail({
   accounts,
   mails,

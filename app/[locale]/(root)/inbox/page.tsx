@@ -48,7 +48,7 @@ export default async function Page({
         <div className="hidden flex-col md:flex">
           <Suspense key={search} fallback={<Oval />}>
             <Mail
-              initialData={initialdata.CompteRendu || []}
+              initialData={initialdata.alertes || []}
               limit={5}
               search={search}
               accounts={accounts}
