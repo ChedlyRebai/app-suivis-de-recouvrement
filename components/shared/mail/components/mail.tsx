@@ -7,19 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
 
 import * as React from "react";
-import {
-  AlertCircle,
-  Archive,
-  ArchiveX,
-  File,
-  Inbox,
-  MessagesSquare,
-  Search,
-  Send,
-  ShoppingCart,
-  Trash2,
-  Users2,
-} from "lucide-react";
+import { AlertCircle, Archive, Bell, Search } from "lucide-react";
 
 import { useInView } from "react-intersection-observer";
 
@@ -129,8 +117,8 @@ export function Mail({
         >
           <div
             className={cn(
-              "flex h-[52px] items-center justify-center",
-              isCollapsed ? "h-[52px]" : "px-2"
+              "flex h-[56px] items-center justify-center",
+              isCollapsed ? "h-[56px]" : "px-2"
             )}
           >
             {/* <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} /> */}
@@ -140,16 +128,10 @@ export function Mail({
             isCollapsed={isCollapsed}
             links={[
               {
-                title: "Compte rendus",
+                title: "Alertes",
                 label: "128",
-                icon: Inbox,
+                icon: Bell,
                 variant: "default",
-              },
-              {
-                title: "Contactés",
-                label: "",
-                icon: Archive,
-                variant: "ghost",
               },
             ]}
           />
@@ -158,7 +140,7 @@ export function Mail({
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <Tabs defaultValue="all">
             <div className="flex items-center px-4 py-2">
-              <h1 className="text-xl font-bold">Inbox</h1>
+              <h1 className="text-xl font-bold">Alertes</h1>
               <TabsList className="ml-auto">
                 {/* <TabsTrigger
                   value="all"

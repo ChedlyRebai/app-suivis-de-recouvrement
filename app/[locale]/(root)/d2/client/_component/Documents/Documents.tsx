@@ -17,7 +17,7 @@ import {
   TableCell,
   Table,
 } from "@/components/ui/table";
-import { Download, ListPlusIcon, Trash2 } from "lucide-react";
+import { Download, EyeIcon, ListPlusIcon, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import React from "react";
@@ -30,10 +30,8 @@ const Documents = ({ file }: { file: File[] }) => {
       <CardHeader className="px-7 flex flex-row justify-between items-center">
         <div>
           <CardTitle>Documents</CardTitle>
-
           <CardDescription>Documents de ce clients</CardDescription>
         </div>
-
         <OpenModelButton />
       </CardHeader>
       <CardContent>
@@ -79,7 +77,7 @@ const Documents = ({ file }: { file: File[] }) => {
                           window.open(file?.FilePath);
                         }}
                       >
-                        <Download size={16} />
+                        <EyeIcon size={16} />
                       </Button>{" "}
                       <Button
                         className="ml-1"

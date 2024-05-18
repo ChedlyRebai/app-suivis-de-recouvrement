@@ -6,33 +6,16 @@ import { PutBlobResult } from "@vercel/blob";
 import { File, FilePlus2Icon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { creatFile } from "@/actions/file.action";
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams } from "next/navigation";
 import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 export default function Uploader() {
   const [data, setData] = useState({
     images: [] as string[],
   });
-  const {onClose}=useUploadFileModal()
+  const { onClose } = useUploadFileModal();
   const [files, setFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
 
-  // const onChangePicture = useCallback(
-  //   (event: ChangeEvent<HTMLInputElement>) => {
-  //     const fileList = event.currentTarget.files
-  //     if (fileList) {
-  //       const newFiles = Array.from(fileList)
-  //       const totalSize = newFiles.reduce((acc, curr) => acc + curr.size, 0)
-  //       if (totalSize / 1024 / 1024 > 50) {
-  //         toast.error('Total file size too big (max 50MB)')
-  //       } else {
-  //         setFiles(newFiles)
-  //         const images = newFiles.map(file => URL.createObjectURL(file))
-  //         setData(prev => ({ ...prev, images }))
-  //       }
-  //     }
-  //   },
-  //   []
-  // )
   const onChangePicture = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const fileList = event.currentTarget.files;
@@ -50,13 +33,13 @@ export default function Uploader() {
     },
     []
   );
-  const params = useSearchParams()
- 
+  const params = useSearchParams();
+
   // Route -> /shop/[tag]/[item]
   // URL -> /shop/shoes/nike-air-max-97
   // `params` -> { tag: 'shoes', item: 'nike-air-max-97' }
-  
-  const id = Number(params.get('id'))
+
+  const id = Number(params.get("id"));
   const handleDelete = () => {
     // Delete operation goes here
     console.log("Delete operation triggered");
@@ -80,23 +63,26 @@ export default function Uploader() {
         const formData = new FormData();
         files.forEach((file) => {
           formData.append("files", file);
-          console.log(file.name)
+          console.log(file.name);
           fetch("/api/upload", {
             method: "POST",
+            headers: {
+              "content-type": file?.type || "application/octet-stream",
+            },
             body: formData,
           }).then(async (res) => {
             if (res.ok) {
+              const { url } = await res.json();
+              await creatFile(id, file.name, url)
+                .then(() => {
+                  toast.success("Files uploaded successfully!");
 
-              const result = await res.json();
-              await creatFile(id,file.name,result.url).then(()=>{
-                toast.success("Files uploaded successfully!");
-                onClose()
-              }).catch(
-                ()=>{
+                  onClose();
+                })
+                .catch(() => {
                   toast.error("error");
-                }
-              )
-              console.log(result)
+                });
+              console.log(url);
             } else {
               // Handle error
               const error = await res.text();
@@ -320,17 +306,13 @@ export default function Uploader() {
 
       <Button
         disabled={saveDisabled}
-      //   className={`${
-      //     saveDisabled
-      //       ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
-      //       : "border-black bg-black text-white hover:bg-white hover:text-black"
-      //   } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
+        //   className={`${
+        //     saveDisabled
+        //       ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
+        //       : "border-black bg-black text-white hover:bg-white hover:text-black"
+        //   } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
       >
-        {saving ? (
-          <LoadingDots color="#808080" />
-        ) : (
-           <>Confirm upload</>
-        )}
+        {saving ? <LoadingDots color="#808080" /> : <>Confirm upload</>}
       </Button>
     </form>
   );

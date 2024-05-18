@@ -28,7 +28,7 @@ export const creatFile = async (
   name: string,
   path: string
 ): Promise<File> => {
-  console.log(`http://localhost:10001/file/create`);
+  console.log(`https://release4.vercel.app/file/create`);
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
@@ -37,7 +37,7 @@ export const creatFile = async (
       session?.value as string
     }`;
     const res = await axios.post<File>(
-      `http://localhost:10001/file/create`,
+      `https://release4.vercel.app/file/create`,
 
       {
         clientID: clientID,
@@ -55,10 +55,10 @@ export const creatFile = async (
 export const getAllfilesByClientId = async (
   clientID: Number
 ): Promise<File[]> => {
-  console.log(`http://localhost:10001/file/allbyid?id=${clientID}`);
+  console.log(`https://release4.vercel.app/file/allbyid?id=${clientID}`);
   try {
     const res = await axios.get<Main[]>(
-      `http://localhost:10001/file/allbyid?id=${clientID}`
+      `https://release4.vercel.app/file/allbyid?id=${clientID}`
     );
 
     return (res.data as File[]) || ({} as File[]);
