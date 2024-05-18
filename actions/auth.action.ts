@@ -1,10 +1,8 @@
 "use server";
 import axios from "axios";
-import { STATUS_CODES } from "http";
-import { jwtDecode } from "jwt-decode";
-import Cookies from "js-cookie";
-import { encrypt } from "@/lib";
+
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 export const Logn = async (matricule: string, password: string) => {
   //2axios.defaults.baseURL =
   //"https://app-suivis-de-recouvrement-server-37up.vercel.app/";
@@ -38,6 +36,26 @@ export const Login = async (matricule: string, password: string) => {
       cookies().set("session", res.data.token, { expires, httpOnly: true });
       return Promise.resolve({ status: res.status, data: res.data.message });
     }
+  } catch (error: any) {
+    console.error("Login error:", error?.response?.data?.message);
+    return Promise.resolve({
+      status: error?.response.status,
+      data: error?.response?.data?.message,
+    }); // Or any other generic error message
+  }
+};
+
+export const Logout = async (matricule: string, password: string) => {
+  try {
+    console.log(`${process.env.LOGIN_API_URL}/auth/login`);
+    const res = await axios.post(`${process.env.LOGIN_API_URL}/auth/logout`, {
+      matricule,
+      password,
+    });
+
+    cookies().delete("session");
+    redirect("/login");
+    return Promise.resolve({ status: res.status, data: res.data.message });
   } catch (error: any) {
     console.error("Login error:", error?.response?.data?.message);
     return Promise.resolve({
