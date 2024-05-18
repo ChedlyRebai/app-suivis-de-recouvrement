@@ -1,5 +1,6 @@
 "use server";
 import axios from "axios";
+import { Console } from "console";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -45,14 +46,19 @@ export const Login = async (matricule: string, password: string) => {
   }
 };
 
-export const Logout = async (matricule: string, password: string) => {
+export const Logout = async () => {
   try {
-    console.log(`${process.env.LOGIN_API_URL}/auth/login`);
-    const res = await axios.post(`${process.env.LOGIN_API_URL}/auth/logout`, {
-      matricule,
-      password,
-    });
-
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `${process.env.LOGIN_API_URL}`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+    const res = await axios.post(
+      `${process.env.LOGIN_API_URL}/auth/logout`,
+      {}
+    );
+    console.log(res.data);
     cookies().delete("session");
     redirect("/login");
     return Promise.resolve({ status: res.status, data: res.data.message });

@@ -1,3 +1,4 @@
+"use client";
 import { Transition, Menu } from "@headlessui/react";
 import {
   MenuIcon,
@@ -6,6 +7,7 @@ import {
   BellIcon,
   ArrowBigLeft,
   ArrowLeft,
+  LogOut,
 } from "lucide-react";
 import React, { Fragment } from "react";
 import LocalSwitcher from "./Local-switcher";
@@ -14,25 +16,25 @@ import { redirect, usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Cookies from "js-cookie";
 import { useLocale } from "next-intl";
+import { Logout } from "@/actions/auth.action";
+import { cookies } from "next/headers";
 
 type NavbarProps = {
   onChange: (value: boolean) => void;
   session: any;
 };
 
-
-
-
 const Navbar = ({ onChange, session }: NavbarProps) => {
-  const logout= async()=>{
-    const router = useRouter();
-    Cookies.remove("session");
-    router.push("/login");
-  }
   const router = useRouter();
   const pathname = usePathname();
-  const local=useLocale()
+  const local = useLocale();
+  const logout = () => {
+    Cookies.set("session", "");
+    Cookies.get("session");
 
+    console.log(Cookies.get("session"));
+    redirect("/login");
+  };
   return (
     <div className="fixed w-screen top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button
@@ -52,7 +54,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
           <ArrowLeft className="h-6 w-6" aria-hidden="true" />
         </button>
       )}
-      
+
       <div className="flex-1 backdrop-blur- mb  px-4 flex justify-between">
         <div className="flex-1 flex">
           <form className="w-full flex md:ml-0" action="#" method="GET">
@@ -76,6 +78,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
                     className="h-5 w-5 text-gray-600 dark:text-gray-300"
                     aria-hidden="true"
                   />
+
                   <p className="pl-2 text-base text-gray-600 font-semibold dark:text-gray-300  ">
                     {session?.role}
                   </p>
@@ -93,10 +96,14 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
             <BellIcon className="h-6 w-6" aria-hidden="true" />
           </button> */}
           <ThemeButton />
-          
+
           <div className="w-1" />
           <LocalSwitcher />
-          <Menu as="div" className="ml-3 relative pr-1">
+          <Button onClick={async () => Logout}>
+            <LogOut className="cursor-pointer" />
+          </Button>
+
+          {/* <Menu as="div" className="ml-3 relative pr-1">
             <div>
               <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <span className="sr-only">Open user menu</span>
@@ -115,8 +122,8 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
               leave="transition ease-in duration-75"
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
-            >
-              {/* <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            > */}
+          {/* <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 {userNavigation.map((item) => (
                   <Menu.Item key={item.name}>
                     {({ active }) => (
@@ -133,8 +140,8 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
                   </Menu.Item>
                 ))}
               </Menu.Items> */}
-            </Transition>
-          </Menu>
+          {/* </Transition>
+          </Menu> */}
         </div>
       </div>
     </div>

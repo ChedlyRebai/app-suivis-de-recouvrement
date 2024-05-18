@@ -41,10 +41,10 @@ export const getHistoriqueDemandDeTransferAnticipe = async (
     //   `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     // );
     console.log(
-      `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
+      `https://release3-v2.vercel.app/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
     );
     const res = await axios.get<any>(
-      `http://localhost:10001/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
+      `https://release3-v2.vercel.app/transfer/gethistoriquetransferanticipe?cli=${cli}&page=${currentpage}&perPage=${perpage}`
     );
     console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data);
     return res.data || ({} as any);
@@ -70,11 +70,11 @@ export const getvalidationpropsedetransfertanticipe = async (
       session?.value as string
     }`;
     console.log(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     return res.data || ({} as any);
   } catch (error) {
@@ -99,11 +99,11 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
       session?.value as string
     }`;
     console.log(
-      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release3-v2.vercel.app/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     const res = await axios.get<Main>(
-      `http://localhost:10001/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&cli=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release3-v2.vercel.app/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&cli=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     return res.data || ({} as any);
   } catch (error) {
@@ -128,7 +128,7 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
 }) => {
   try {
     const res = await axios.put(
-      `http://localhost:10001/transfer/createhistoriquevalidationpropsedetransfertanticipe`,
+      `https://release3-v2.vercel.app/transfer/createhistoriquevalidationpropsedetransfertanticipe`,
       { matricule, obs, numobs, cli, motif, flag_trf }
     );
     return res.data;
