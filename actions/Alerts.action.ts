@@ -53,7 +53,7 @@ export const getAllAlerts = async (
   try {
     // axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<AlertsMain>(
-      `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
+      `https://release2.vercel.app/alerts/all?page=${page}&perpage=8&search=${search}`
     );
 
     return res.data || ({} as AlertsMain);
@@ -66,7 +66,7 @@ export const getAlerteById = async (id: number) => {
   try {
     // axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.get<Alerte>(
-      `http://localhost:10001/alerts/byid/${id}`
+      `https://release2.vercel.app/alerts/byid/${id}`
     );
 
     return res.data || ({} as Alerte);

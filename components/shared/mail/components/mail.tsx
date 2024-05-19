@@ -279,7 +279,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
               <div className="text-xs font-medium">{item?.ab_client?.cli}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {item?.message.substring(0, 100)}...
+              {item?.message?.substring(0, 100)}...
             </div>
 
             <div className="flex items-center gap-2">
@@ -299,7 +299,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
             className="mt-6 flex flex-col items-center justify-center"
           >
             {/* <Loader2 className="animate-spin" size={48} /> */}
-            loading
+            Chargement...
           </div>
         ) : (
           <></>
