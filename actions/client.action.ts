@@ -10,6 +10,7 @@ import axios from "axios";
 import { revalidatePath } from "next/cache";
 
 import { cookies } from "next/headers";
+import { creteAcess } from "./acess.action";
 
 export interface Main {
   result: client[];
@@ -219,6 +220,9 @@ export const createCompteRendu = async (
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
+
+    const createacess = await creteAcess("compte-rendu");
+    console.log("createacess", createacess);
     const res = await axios.post(
       `http://localhost:10004/compterendu/createcompterendu`,
       { suiviAgenda, compteRendu, user, cli, type: Number(type) }

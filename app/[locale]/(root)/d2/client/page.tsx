@@ -26,6 +26,7 @@ import CompteRenduModal from "@/components/shared/Modals/Compte-Rendu-Modal";
 import { getClientById } from "@/actions/client.action";
 import { CountUp } from "@/components/ui/count-up";
 import ClientInfo from "./_component/ClientDetails";
+import { getClientStat } from "@/actions/admin.action";
 
 export default async function page({
   searchParams,
@@ -39,6 +40,7 @@ export default async function page({
   const compterendus = await getCompteRenduByClientId(id);
   const documents = await getAllfilesByClientId(id);
   const client = await getClientById(id);
+  const stat = await getClientStat(id);
   console.log(compterendus);
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
@@ -63,16 +65,29 @@ export default async function page({
             <CardHeader className="pb-2">
               <CardDescription>This Week</CardDescription>
               <CardTitle className="text-4xl">
-                <CountUp end={1329} duration={2} preserveValue />
+                <CountUp
+                  end={stat.comptrenduThisWeek}
+                  duration={2}
+                  preserveValue
+                />
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xs text-muted-foreground">
-                +<CountUp end={25} duration={2} preserveValue />% from last week
+                +
+                <CountUp
+                  end={stat.percentageWeekChange}
+                  duration={2}
+                  preserveValue
+                />
+                % from last week
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={25} aria-label="25% increase" />
+              <Progress
+                value={stat.percentageWeekChange}
+                aria-label="25% increase"
+              />
             </CardFooter>
           </Card>
 

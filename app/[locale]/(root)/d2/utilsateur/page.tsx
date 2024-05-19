@@ -24,6 +24,7 @@ import UserInfo from "./_component/UserDetails";
 import UserDocuments from "./_component/Documents/Documents";
 import UserCompteRendu from "./_component/Compterendu/CompteRendus";
 import { CountUp } from "@/components/ui/count-up";
+import { getUserStat } from "@/actions/admin.action";
 export default async function page({
   searchParams,
 }: {
@@ -33,6 +34,7 @@ export default async function page({
 }) {
   const id = Number(searchParams?.id);
   const User = await getUserDetails(id);
+  const stat = await getUserStat(id);
 
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">

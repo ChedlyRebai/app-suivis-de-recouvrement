@@ -241,7 +241,18 @@ const CompteRenduForm = ({
     }
 
     console.log(suiviAgenda, cli, selectedRadio);
-    saveSuiviAgenda(suiviAgenda, compte_rendu, cli!!, selectedRadio);
+    saveSuiviAgenda(
+      suiviAgenda,
+      compte_rendu,
+      searchParams.get("cli")!!,
+      selectedRadio
+    )
+      .then((res) => {
+        toast.success("Compte rendu enregistré avec succès");
+      })
+      .catch(() => {
+        toast.error("Erreur lors de l'enregistrement du compte rendu");
+      });
     //   .then((res) => {
     //     toast.success("Compte rendu enregistré avec succès");
     //   })
@@ -785,15 +796,7 @@ const CompteRenduForm = ({
                   </div>
                   <Button
                     onClick={async () => {
-                      handleSubmit()
-                        .then(() => {
-                          toast.success("Compte rendu enregistré avec succès");
-                        })
-                        .catch(() => {
-                          toast.error(
-                            "Erreur lors de l'enregistrement du compte rendu"
-                          );
-                        });
+                      handleSubmit();
 
                       //queryClient.invalidateQueries(['getCompteRenduHistorique']);
                       await queryClient.refetchQueries();

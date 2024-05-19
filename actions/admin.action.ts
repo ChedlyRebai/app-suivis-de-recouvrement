@@ -283,3 +283,31 @@ export const getAllUsers = async (
     return {} as UserResult;
   }
 };
+
+export const getUserStat = async (id: number) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(`http://localhost:10004/stat/userstat?id=${id}`);
+    const res = await axios.get<any>(
+      `http://localhost:10004/stat/userstat?id=${id}`
+    );
+
+    return (res.data as {}) || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};
+
+export const getClientStat = async (id: number) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(`http://localhost:10004/stat/clientstat?id=${id}`);
+    const res = await axios.get<any>(
+      `http://localhost:10004/stat/clientstat?id=${id}`
+    );
+
+    return (res.data as {}) || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};
