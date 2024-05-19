@@ -17,13 +17,15 @@ import { DatePickerDemo } from "@/components/ui/DatePicker";
 import useListeAgencestModal from "@/hooks/useListeAgences";
 import useClientSore from "@/hooks/useCompteRenduForm";
 import useListAgences from "@/hooks/use-agences-list";
-const PromiseDereglement = () => {
+const PromiseDereglement = ({ montant }: { montant: number }) => {
   const [date, setdate] = useState(new Date());
   const { onOpen, setColumn } = useListeAgencestModal();
   const getAgence = useListAgences((state) => state.getAgence);
   const AGENCES = useListAgences((state) => state.listAgences);
 
-  const { client, handleIputChangeSuiviAgenda, suiviAgenda } = useClientSore();
+  const { client, handleIputChangeSuiviAgenda, suiviAgenda, seTsuiAgenda } =
+    useClientSore();
+  // seTsuiAgenda({ ...suiviAgenda, mnt_reg: montant });
   return (
     <div className="">
       <div className="flex p-4 flex-col">
@@ -42,6 +44,7 @@ const PromiseDereglement = () => {
             placeholder={`${client.tot_creance}`}
           />
         </div>
+
         <div className="flex w-[280px] flex-col my-1 mr-4">
           <Label className="mb-1 text-sm font-medium   " htmlFor="amount">
             Date

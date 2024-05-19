@@ -146,7 +146,7 @@ export const getCompterendu = async (IdClient?: string) => {
     const res = await axios.get<any>(
       `http://localhost:10002/client/client?cli=${IdClient}`
     );
-
+    console.log("res.data", res.data);
     return res.data || ({} as any);
   } catch (error) {
     return {} as any;

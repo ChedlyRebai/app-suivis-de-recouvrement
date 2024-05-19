@@ -1,4 +1,3 @@
-
 import CompteRenduForm from "./_component/Compte-rendu-form";
 import {
   getCompterendu,
@@ -14,7 +13,6 @@ export default async function Home({
     cli?: string;
   };
 }) {
-  
   const cli = searchParams?.cli || "";
   const suiviAgenda = await getCompterendu(cli);
   const listecompte = await getListCompte(cli);

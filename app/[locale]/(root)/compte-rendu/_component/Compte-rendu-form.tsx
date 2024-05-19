@@ -106,7 +106,7 @@ const CompteRenduForm = ({
   };
   const handleTabChange = (num: string) => {
     setSelectedRadio(num);
-    let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix } =
+    let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix, mnt_reg } =
       suiviAgenda;
     setSuiviAgenda({
       compte_rendu,
@@ -147,6 +147,7 @@ const CompteRenduForm = ({
 
   const onTabChange = (value: string) => {
     setTab(value);
+
     console.log(tab);
   };
 
@@ -305,14 +306,14 @@ const CompteRenduForm = ({
                   <div className="flex ">
                     <Input
                       readOnly
-                      value={client.groupe}
+                      value={client?.Zone?.codug}
                       id="groupe"
                       className="w-1/3 px-2 mr-1"
                       type="number"
                     />
                     <Input
                       readOnly
-                      value={client.nom_groupe}
+                      value={client?.Zone?.libelle}
                       id="nom_groupe"
                       className="w-2/3"
                       type="text"
@@ -324,14 +325,14 @@ const CompteRenduForm = ({
                   <div className="flex ">
                     <Input
                       readOnly
-                      value={client.agence}
+                      value={client?.Agence?.codug}
                       id="agence"
                       className="w-1/3 px-2 mr-1"
                       type="number"
                     />
                     <Input
                       readOnly
-                      value={client.nom_agence}
+                      value={client?.Agence?.libelle}
                       id="nom_agence"
                       className="w-2/3"
                       type="text"
@@ -690,7 +691,7 @@ const CompteRenduForm = ({
                   <TabsContent value="1">
                     <Card className="my-2">
                       <CardContent className="space-y-2 ">
-                        <PromiseDereglement />
+                        <PromiseDereglement montant={client.tot_creance} />
                       </CardContent>
                     </Card>
                   </TabsContent>
