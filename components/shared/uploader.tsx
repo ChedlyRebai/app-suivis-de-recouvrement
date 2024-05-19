@@ -75,7 +75,7 @@ export default function Uploader() {
               const { url } = await res.json();
               await creatFile(id, file.name, url)
                 .then(() => {
-                  toast.success("Files uploaded successfully!");
+                  toast.success("Fichiers téléchargés avec succès !");
 
                   onClose();
                 })
