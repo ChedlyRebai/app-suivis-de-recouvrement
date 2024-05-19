@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export const clientcolumns: ColumnDef<Client>[] = [
-    
+export const clientcolumns: ColumnDef<any>[] = [
   {
     accessorKey: "cli",
     header: "cli",
@@ -15,7 +14,6 @@ export const clientcolumns: ColumnDef<Client>[] = [
     accessorKey: "nom",
     header: "Nom",
   },
-
 
   {
     accessorKey: "Agence",
@@ -32,43 +30,43 @@ export const clientcolumns: ColumnDef<Client>[] = [
     accessorKey: "Zone",
     header: "Zone",
     cell: ({ row }) => {
-        return (
-            <span>
-            {`${row.original.Zone.codug} : ${row.original.Zone.libelle}`}{" "}
-            </span>
-        );
-        },
+      return (
+        <span>
+          {`${row.original.Zone.codug} : ${row.original.Zone.libelle}`}{" "}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "tel1",
     header: "Telephone 1",
   },
-    {
-        accessorKey: "tel2",
-        header: "Telephone 2",
-    },
-    {
-        accessorKey: "nbre_imp",
-        header: "Nombre Impayé",
-    },
-    {
-        accessorKey: "mnt_imp",
-        header: "Montant Impayé",
-    },
-    {
-        accessorKey: "nombre_jours",
-        header: "Nombre de jours",
-    },
-    {
-        accessorKey: "sd",
-        header: "sd",
-    },
-    {
-        accessorKey: "depassement",
-        header: "depassement",
-    },
-    {
-        accessorKey: "nombre_jours_sdb",
-        header: "nombre_jours_sdb",
-    },
+  {
+    accessorKey: "tel2",
+    header: "Telephone 2",
+  },
+  {
+    accessorKey: "nbre_imp",
+    header: "Nombre Impayé",
+  },
+  {
+    accessorKey: "mnt_imp",
+    header: "Montant Impayé",
+  },
+  {
+    accessorKey: "nombre_jours",
+    header: "Nombre de jours",
+  },
+  {
+    accessorKey: "sd",
+    header: "sd",
+  },
+  {
+    accessorKey: "depassement",
+    header: "depassement",
+  },
+  {
+    accessorKey: "nombre_jours_sdb",
+    header: "nombre_jours_sdb",
+  },
 ];

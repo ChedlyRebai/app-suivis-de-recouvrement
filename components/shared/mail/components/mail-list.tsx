@@ -48,7 +48,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
   const [mail, setMail] = useMail();
-  const { Comptrendu, setComptrendu, setId } = useInbox();
+  const { alerte, setAlert, setId } = useInbox();
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">

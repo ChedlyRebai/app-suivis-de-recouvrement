@@ -11,10 +11,8 @@ function classNames(...classes: String[]) {
 
 export default async function RootLayout({
   children,
-  searchParams,
 }: Readonly<{
   children: React.ReactNode;
-  searchParams?: string;
 }>) {
   const links = await getLinksByCodeFonction();
   const t = await getTranslations("access-management");

@@ -11,9 +11,7 @@ import { AllAccount } from "../_component/alllAccount";
 import { comptecolumns } from "../_component/compteColumn";
 export default async function Home({
   searchParams,
-  children,
 }: {
-  children: React.ReactNode;
   searchParams?: {
     query?: string;
     page?: string;
@@ -32,7 +30,7 @@ export default async function Home({
   const limit = Number(searchParams?.limit) || 20;
 
   const comptes = await getAllAccount(currentPage, perPage, search);
-  
+
   return (
     <AllAccount
       columns={comptecolumns}

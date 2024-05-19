@@ -1,27 +1,25 @@
 import { getLinksByCodeFonction } from "@/actions/navbar.action";
 import { getSession } from "@/lib";
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
-import Navbar from "./(root)/access-management/_component/MainLayout";
 import Mainlayout from "./(root)/access-management/_component/MainLayout";
 import { redirect } from "next/navigation";
+import { ReactNode } from "react";
+// Define the props for the Page component
+// interface PageProps {
+//   children: ReactNode;
+// }
 
-const Page = async ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
-  const links = await getLinksByCodeFonction();
-  const t = await getTranslations("access-management");
-  const session = await getSession();
-  if(!session){
-    return redirect("login");
-  }
+const Page = async () => {
+  // const links = await getLinksByCodeFonction();
+  // const t = await getTranslations("access-management");
+  // const session = await getSession();
+
+  // if (!session) {
+  //   return redirect("login");
+  // }
 
   return (
-    <Mainlayout showSidebar links={links} title={t("title")} session={session}>
-      {children}
-    </Mainlayout>
+    <Mainlayout showSidebar links={[]} title={"t"} session={{}}></Mainlayout>
   );
 };
 

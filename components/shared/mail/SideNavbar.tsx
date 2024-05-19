@@ -10,7 +10,7 @@ import {
   LayoutDashboard,
   UsersRound,
   Settings,
-  ChevronRight
+  ChevronRight,
 } from "lucide-react";
 
 import { useWindowWidth } from "@react-hook/window-size";
@@ -45,28 +45,28 @@ export default function SideNavbar({}: Props) {
         links={[
           {
             title: "Dashboard",
-            href: "/",
+            // href: "/",
             icon: LayoutDashboard,
-            variant: "default"
+            variant: "default",
           },
           {
             title: "Users",
-            href: "/users",
+            // href: "/users",
             icon: UsersRound,
-            variant: "ghost"
+            variant: "ghost",
           },
           {
             title: "Ordrs",
-            href: "/orders",
+            // href: "/orders",
             icon: ShoppingCart,
-            variant: "ghost"
+            variant: "ghost",
           },
           {
             title: "Settings",
-            href: "/settings",
+            // href: "/settings",
             icon: Settings,
-            variant: "ghost"
-          }
+            variant: "ghost",
+          },
         ]}
       />
     </div>

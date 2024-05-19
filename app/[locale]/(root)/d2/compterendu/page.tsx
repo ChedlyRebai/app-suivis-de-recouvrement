@@ -11,9 +11,7 @@ import { AllCompteRendu } from "../_component/alllCompteRendu";
 import { compterendutcolumns } from "../_component/compteRenduColumn";
 export default async function Home({
   searchParams,
-  children,
 }: {
-  children: React.ReactNode;
   searchParams?: {
     query?: string;
     page?: string;

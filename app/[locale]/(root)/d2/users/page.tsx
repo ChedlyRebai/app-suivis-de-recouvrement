@@ -9,9 +9,7 @@ import { AllUsers } from "../_component/alllusers";
 import { Utilisateurcolumns } from "../_component/Utilisateurcolumns";
 export default async function Home({
   searchParams,
-  children,
 }: {
-  children: React.ReactNode;
   searchParams?: {
     query?: string;
     page?: string;
@@ -30,9 +28,8 @@ export default async function Home({
   const limit = Number(searchParams?.limit) || 20;
 
   const users = await getAllUsers(currentPage, perPage, search);
- 
+
   return (
-    
     <AllUsers
       columns={Utilisateurcolumns}
       totalPages={users.totalPages || 0}

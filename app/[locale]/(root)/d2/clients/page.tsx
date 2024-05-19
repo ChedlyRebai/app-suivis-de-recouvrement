@@ -11,9 +11,7 @@ import { AllClient } from "../_component/allclient";
 import { clientcolumns } from "../_component/ClientColumn";
 export default async function Home({
   searchParams,
-  children,
 }: {
-  children: React.ReactNode;
   searchParams?: {
     query?: string;
     page?: string;
