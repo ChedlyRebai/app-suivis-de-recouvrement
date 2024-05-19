@@ -57,19 +57,23 @@ export default async function page({
             </Card> */}
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>This Week</CardDescription>
+              <CardDescription>Nbr compte rendu cette semaine</CardDescription>
               <CardTitle className="text-4xl">
-                $
                 <CountUp
                   end={stat.comptrenduThisWeek}
-                  duration={1}
+                  duration={2}
                   preserveValue
                 />
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                +{stat.percentageWeekChange}% from last week
+                <CountUp
+                  end={stat.percentageWeekChange}
+                  duration={2}
+                  preserveValue
+                />
+                % de la semaine dernière
               </div>
             </CardContent>
             <CardFooter>
@@ -82,12 +86,19 @@ export default async function page({
 
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>This Week</CardDescription>
-              <CardTitle className="text-4xl">{stat.filesThisMonth}</CardTitle>
+              <CardDescription>Nbr documents ce mois-ci</CardDescription>
+              <CardTitle className="text-4xl">
+                <CountUp end={stat.filesThisMonth} duration={2} preserveValue />
+              </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                {stat.percentageMonthChangeFiles}% from last week
+                <CountUp
+                  end={stat.percentageMonthChangeFiles}
+                  duration={2}
+                  preserveValue
+                />
+                % du mois dernier
               </div>
             </CardContent>
             <CardFooter>
@@ -99,12 +110,19 @@ export default async function page({
           </Card>
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>This Week</CardDescription>
-              <CardTitle className="text-4xl">{stat.filesThisWeek}</CardTitle>
+              <CardDescription>Nbr documents Cette semaine</CardDescription>
+              <CardTitle className="text-4xl">
+                <CountUp end={stat.filesThisWeek} duration={2} preserveValue />
+              </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                +{stat.percentageWeekChangeFiles}% from last week
+                <CountUp
+                  end={stat.percentageWeekChangeFiles}
+                  duration={2}
+                  preserveValue
+                />
+                % de la semaine dernière
               </div>
             </CardContent>
             <CardFooter>
@@ -117,14 +135,23 @@ export default async function page({
 
           <Card x-chunk="dashboard-05-chunk-2">
             <CardHeader className="pb-2">
-              <CardDescription>This Month</CardDescription>
+              <CardDescription>Nbr compte rendu ce mois-ci</CardDescription>
               <CardTitle className="text-4xl">
-                {stat.compterenduThisMonth}
+                <CountUp
+                  end={stat.compterenduThisMonth}
+                  duration={2}
+                  preserveValue
+                />
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                {stat.percentageMonthChange}% from last month
+                <CountUp
+                  end={stat.percentageMonthChange}
+                  duration={2}
+                  preserveValue
+                />
+                % du mois dernier
               </div>
             </CardContent>
             <CardFooter>

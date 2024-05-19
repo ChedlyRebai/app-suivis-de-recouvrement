@@ -43,7 +43,7 @@ const Documents = ({ file }: { file: File[] }) => {
               </TableHead>
               <TableHead className=" px-1">Nom de l'utilisateur</TableHead>
               <TableHead>Nom de documents</TableHead>
-              <TableHead>Agence/Zone</TableHead>
+              {/* <TableHead>Agence/Zone</TableHead> */}
               <TableHead>Date</TableHead>
               <TableHead>Action</TableHead>
             </TableRow>
@@ -60,10 +60,10 @@ const Documents = ({ file }: { file: File[] }) => {
                       {file?.Utilisateur?.usr_nomprenom}
                     </TableCell>
                     <TableCell className="p-3">{file?.FileName}</TableCell>
-                    <TableCell className="p-3">
+                    {/* <TableCell className="p-3">
                       {file?.Utilisateur?.AffecterA?.[0]?.Agence?.libelle}
                       {file?.Utilisateur?.AffecterA?.[0]?.Zone?.libelle}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell className="p-3">
                       {file?.created_at.toString().substring(0, 10)}
                     </TableCell>

@@ -47,6 +47,7 @@ export default async function page({
       <div>
         <ClientInfo client={client} />
       </div>
+
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
           {/* <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
@@ -57,13 +58,13 @@ export default async function page({
                   Management and Insightful Analysis.
                 </CardDescription>
               </CardHeader>
-              <CardFooter>
+              <CardFooter >
                 <Button>Create New Order</Button>
               </CardFooter>
             </Card> */}
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>This Week</CardDescription>
+              <CardDescription>Nbr compte rendu cette semaine</CardDescription>
               <CardTitle className="text-4xl">
                 <CountUp
                   end={stat.comptrenduThisWeek}
@@ -72,15 +73,14 @@ export default async function page({
                 />
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                +
                 <CountUp
                   end={stat.percentageWeekChange}
                   duration={2}
                   preserveValue
                 />
-                % from last week
+                % de la semaine dernière
               </div>
             </CardContent>
             <CardFooter>
@@ -93,44 +93,78 @@ export default async function page({
 
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>This Week</CardDescription>
-              <CardTitle className="text-4xl">$1,329</CardTitle>
+              <CardDescription>Nbr compte rendu ce mois</CardDescription>
+              <CardTitle className="text-4xl">
+                <CountUp
+                  end={stat.compterenduThisMonth}
+                  duration={2}
+                  preserveValue
+                />
+              </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                +25% from last week
+                <CountUp
+                  end={stat.percentageMonthChange}
+                  duration={2}
+                  preserveValue
+                />
+                % du mois dernier {"                 "}
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={25} aria-label="25% increase" />
+              <Progress
+                value={stat.percentageMonthChange}
+                aria-label="25% increase"
+              />
             </CardFooter>
           </Card>
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>This Week</CardDescription>
-              <CardTitle className="text-4xl">$1,329</CardTitle>
+              <CardDescription>Nbr documents ce mois-ci</CardDescription>
+              <CardTitle className="text-4xl">
+                <CountUp end={stat.filesThisMonth} duration={2} preserveValue />
+              </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                +25% from last week
+                <CountUp
+                  end={stat.percentageMonthChangeFiles}
+                  duration={2}
+                  preserveValue
+                />
+                % du mois dernier
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={25} aria-label="25% increase" />
+              <Progress
+                value={stat.percentageMonthChangeFiles}
+                aria-label="25% increase"
+              />
             </CardFooter>
           </Card>
           <Card x-chunk="dashboard-05-chunk-2">
             <CardHeader className="pb-2">
-              <CardDescription>This Month</CardDescription>
-              <CardTitle className="text-4xl">$5,329</CardTitle>
+              <CardDescription>Nbr documents cette semaine</CardDescription>
+              <CardTitle className="text-4xl">
+                <CountUp end={stat.filesThisWeek} duration={2} preserveValue />
+              </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-10">
               <div className="text-xs text-muted-foreground">
-                +10% from last month
+                <CountUp
+                  end={stat.percentageWeekChangeFiles}
+                  duration={2}
+                  preserveValue
+                />
+                % de la semaine dernière
               </div>
             </CardContent>
             <CardFooter>
-              <Progress value={12} aria-label="12% increase" />
+              <Progress
+                value={stat.percentageWeekChangeFiles}
+                aria-label="12% increase"
+              />
             </CardFooter>
           </Card>
         </div>
