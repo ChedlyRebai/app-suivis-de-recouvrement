@@ -151,11 +151,12 @@ const CompteRenduHistorique = ({
         return (
           <div className="flex justify-center">
             <Button
-              className="flex items-center h-full  justify-center"
+              className="mr-1"
               variant="default"
               onClick={() => onOpen(row.original.id)}
             >
-              <SearchIcon className="mr-" />
+              {row.original.id}
+              <SearchIcon className="mr-" size={20} />
             </Button>
 
             <Button
@@ -165,7 +166,7 @@ const CompteRenduHistorique = ({
                 refetch();
               }}
             >
-              <Trash2 size={16} />
+              <Trash2 size={20} />
             </Button>
           </div>
         );
