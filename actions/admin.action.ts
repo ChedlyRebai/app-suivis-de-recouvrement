@@ -181,7 +181,7 @@ export const getAllCompteRendu = async (
       `https://release4.vercel.app/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
     const res = await axios.get<compterenduResult>(
-      `http://localhost:10004/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/compterendu/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
     return (res.data as compterenduResult) || ({} as compterenduResult);

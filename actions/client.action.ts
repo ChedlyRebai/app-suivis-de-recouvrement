@@ -144,7 +144,7 @@ export const getCompterendu = async (IdClient?: string) => {
       `https://release2.vercel.app/client/getcompterendu/${IdClient}`
     );
     const res = await axios.get<any>(
-      `https://release2.vercel.app/client/compteRendu?cli=${IdClient}`
+      `http://localhost:10002/client/client?cli=${IdClient}`
     );
 
     return res.data || ({} as any);

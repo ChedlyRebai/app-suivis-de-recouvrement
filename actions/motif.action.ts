@@ -63,7 +63,7 @@ export const getHrdv = async () => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const response = await axios.get<Cxuntges[]>(
-      `http://localhost:10001/client/gethrdv`
+      `https://release4.vercel.app/client/gethrdv`
     );
 
     return response.data || ([] as Cxuntges[]);

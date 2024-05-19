@@ -17,15 +17,14 @@ const CompteRenduModal = () => {
     queryFn: async () => await getCompteRenduById(id),
   });
 
-  if(error) return null;
-  if(!data) return null;
+  if (error) return null;
+  if (!data) return null;
   console.log(id);
   console.log(data);
-  console.log()
+  console.log();
   return (
     <Modal
-      title={`${data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-        ?.types?.libelle}`}
+      title={`${data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.types?.libelle}`}
       description={`${data?.created_at?.toString()?.substring(0, 10)}`}
       isOpen={isOpen}
       onChange={onClose}
@@ -38,8 +37,14 @@ const CompteRenduModal = () => {
       {error && <div>An error has occurred: {error}</div>}
       {data && (
         <>
-          <p>{data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-        ?.types?.libelle} {data?.compte_rendu}</p>
+          <p>
+            {
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+                ?.types?.libelle
+            }{" "}
+            {data?.compte_rendu}
+          </p>
         </>
       )}
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
@@ -56,21 +61,24 @@ const CompteRenduModal = () => {
           <p>
             {" "}
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 .nouvellecoordonnees?.nouv_tel
             }
           </p>{" "}
           <Label className="text-primary">Nouveau Telephone 2:</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.nouvellecoordonnees?.nouv_te2
             }
           </p>{" "}
           <Label className="text-primary">Nouveau Addresse:</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.nouvellecoordonnees?.nouv_adresse
             }
           </p>{" "}
@@ -81,37 +89,42 @@ const CompteRenduModal = () => {
         ?.types?.code === 3 && (
         <div className="flex justify-center items-center">
           <Label className="text-primary">Montant</Label>
-          <p>{
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+          <p>
+            {
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.FacilitePaiment.mnt_rec
-            }</p>
+            }
+          </p>
           <Label className="text-primary">Nombre echeance</Label>
-          <p>{
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+          <p>
+            {
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.FacilitePaiment.nb_ech
-            }</p>
-          {
-            data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
-              ?.FacilitePaiment?.montantFacilites?.map((item:any, index:number) => (
-                <div key={index}>
-                  <Label className="text-primary">Montant echeance</Label>
-                  <p>{item.mntech}</p>
-                  <Label className="text-primary">Date echeance</Label>
-                  <p>{item.date_ech}</p>
-                </div>
-              ))
-          }
+            }
+          </p>
+          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.FacilitePaiment?.montantFacilites?.map(
+            (item: any, index: number) => (
+              <div key={index}>
+                <Label className="text-primary">Montant echeance</Label>
+                <p>{item.mntech}</p>
+                <Label className="text-primary">Date echeance</Label>
+                <p>{item.date_ech}</p>
+              </div>
+            )
+          )}
         </div>
       )}
-
 
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 4 && (
         <div className="flex justify-center items-center">
           <Label className="text-primary">Observation</Label>
           <p>
-          {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+            {
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 .nonreconaissance?.observation
             }
           </p>
@@ -120,30 +133,34 @@ const CompteRenduModal = () => {
 
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 5 && (
-          <div className="">
+        <div className="">
           <Label className="text-primary">Heure visite</Label>
           <p>
             {" "}
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 .visite?.h_rdv_visite_h_rdvToh_rdv.libelle
             }
           </p>{" "}
           <Label className="text-primary">Lieu Visite 2</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.visite?.Agence.libelle
             }{" "}
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.visite?.lieu_visite
             }
           </p>{" "}
           <Label className="text-primary">Date visite</Label>
           <p>
             {
-              data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+              data
+                ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
                 ?.visite?.date_visite
             }
           </p>{" "}
