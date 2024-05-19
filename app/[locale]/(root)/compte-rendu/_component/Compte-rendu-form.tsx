@@ -57,6 +57,7 @@ import {
   getcontact,
 } from "@/actions/utils.actions";
 import { CompteRenduList } from "@/constants/types";
+import toast from "react-hot-toast";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
@@ -784,7 +785,16 @@ const CompteRenduForm = ({
                   </div>
                   <Button
                     onClick={async () => {
-                      handleSubmit();
+                      handleSubmit()
+                        .then(() => {
+                          toast.success("Compte rendu enregistré avec succès");
+                        })
+                        .catch(() => {
+                          toast.error(
+                            "Erreur lors de l'enregistrement du compte rendu"
+                          );
+                        });
+
                       //queryClient.invalidateQueries(['getCompteRenduHistorique']);
                       await queryClient.refetchQueries();
                     }}
