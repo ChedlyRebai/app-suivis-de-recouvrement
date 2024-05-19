@@ -14,22 +14,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-
 import {
   Table,
   TableBody,
@@ -49,7 +33,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { DataTableToolbar } from "../../listeclient/_components/contactes/data-table-toolbar";
+import { DataTableToolbar } from "../../../../../components/shared/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
