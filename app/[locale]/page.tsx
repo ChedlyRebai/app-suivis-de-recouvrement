@@ -10,16 +10,21 @@ import { ReactNode } from "react";
 // }
 
 const Page = async () => {
-  // const links = await getLinksByCodeFonction();
-  // const t = await getTranslations("access-management");
-  // const session = await getSession();
+  const links = await getLinksByCodeFonction();
+  const t = await getTranslations("access-management");
+  const session = await getSession();
 
-  // if (!session) {
-  //   return redirect("login");
-  // }
+  if (!session) {
+    return redirect("login");
+  }
 
   return (
-    <Mainlayout showSidebar links={[]} title={"t"} session={{}}></Mainlayout>
+    <Mainlayout
+      showSidebar
+      links={links || []}
+      title={"t"}
+      session={session || {}}
+    ></Mainlayout>
   );
 };
 
