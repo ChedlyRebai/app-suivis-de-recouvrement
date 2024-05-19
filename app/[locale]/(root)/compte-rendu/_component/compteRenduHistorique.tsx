@@ -155,7 +155,6 @@ const CompteRenduHistorique = ({
               variant="default"
               onClick={() => onOpen(row.original.id)}
             >
-              {row.original.id}
               <SearchIcon className="mr-" />
             </Button>
 
