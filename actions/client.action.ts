@@ -7,6 +7,7 @@ import { Zone } from "@/Models/zone.model";
 import { CompteRenduList } from "@/constants/types";
 import { getSession } from "@/lib";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 import { cookies } from "next/headers";
 
@@ -192,7 +193,10 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
     const res = await axios.get<CompteRenduList[]>(
       `https://release4.vercel.app/compterendu/getcompterendu?cli=${IdClient}`
     );
-
+    revalidatePath("/");
+    revalidatePath("/en/compte-rendu");
+    revalidatePath("/compte-rendu");
+    // revalidatePath("/en/compte-rendu?cli=049105812036");
     return res.data || ([] as CompteRenduList[]);
   } catch (error) {
     return [] as CompteRenduList[];
@@ -216,9 +220,12 @@ export const createCompteRendu = async (
       session?.value as string
     }`;
     const res = await axios.post(
-      `http://localhost:10001/compterendu/createcompterendu`,
+      `http://localhost:10004/compterendu/createcompterendu`,
       { suiviAgenda, compteRendu, user, cli, type: Number(type) }
     );
+    revalidatePath("/");
+    revalidatePath("/en/compte-rendu");
+    revalidatePath("/compte-rendu");
 
     return res.data;
   } catch (error) {

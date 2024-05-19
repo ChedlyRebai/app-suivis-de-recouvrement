@@ -52,7 +52,7 @@ export const getCompteRenduByClientId = async (IdClient?: string | number) => {
     return {} as any;
   }
 };
-import { revalidatePath } from "next/cache";
+
 export const deleteCompteRenduById = async (idCompRendu: Number | string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
