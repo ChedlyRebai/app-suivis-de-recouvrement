@@ -175,14 +175,14 @@ export function AllCompteRendu({
         <CardContent>
           <div className="flex  items-center py-4 flex-wrap">
             <>
-              {/* <Input
+              <Input
                 placeholder="Cli"
                 defaultValue={searchParams.get("query")?.toString()}
                 onChange={(e) => {
                   handleSearch(e.target.value);
                 }}
                 className="max-w-sm mr-2"
-              /> */}
+              />
               <div className="w-1" />
 
               <DataTableViewOptions table={table} />
