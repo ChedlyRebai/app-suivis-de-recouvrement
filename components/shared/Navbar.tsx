@@ -99,8 +99,12 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
 
           <div className="w-1" />
           <LocalSwitcher />
-          <Button onClick={async () => Logout}>
-            <LogOut className="cursor-pointer" />
+          <Button
+            className="mx-2 "
+            size={"default"}
+            onClick={async () => Logout}
+          >
+            <LogOut className="cursor-pointer" size={17} />
           </Button>
 
           {/* <Menu as="div" className="ml-3 relative pr-1">

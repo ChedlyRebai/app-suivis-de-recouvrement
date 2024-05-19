@@ -80,7 +80,7 @@ const CompteRenduForm = ({
     setClient,
     seTsuiAgenda: setSuiviAgenda,
   } = useClientSore();
-
+  console.log(suiviagendaprops);
   useEffect(() => {
     setClient(suiviagendaprops);
     console.log(suiviAgenda);

@@ -28,7 +28,7 @@ export default async function Home({
         <Card className="min-h-56">
           {" "}
           <CardHeader>
-            <CardTitle>Access Management</CardTitle>
+            <CardTitle>Gestion des accès</CardTitle>
           </CardHeader>
           <CardContent>
             <AccessManagementDataTable />

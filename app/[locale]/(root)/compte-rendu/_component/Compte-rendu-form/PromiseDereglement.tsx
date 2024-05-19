@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, List, ListIcon } from "lucide-react";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 
 import { format } from "date-fns";
 import { DatePickerDemo } from "@/components/ui/DatePicker";
@@ -25,7 +25,10 @@ const PromiseDereglement = ({ montant }: { montant: number }) => {
 
   const { client, handleIputChangeSuiviAgenda, suiviAgenda, seTsuiAgenda } =
     useClientSore();
-  // seTsuiAgenda({ ...suiviAgenda, mnt_reg: montant });
+  //seTsuiAgenda({ ...suiviAgenda, mnt_reg: montant });
+  useEffect(() => {
+    seTsuiAgenda({ ...suiviAgenda, mnt_reg: montant });
+  }, [montant]);
   return (
     <div className="">
       <div className="flex p-4 flex-col">

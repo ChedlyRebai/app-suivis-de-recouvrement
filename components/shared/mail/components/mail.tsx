@@ -42,9 +42,9 @@ import { useDebouncedCallback } from "use-debounce";
 import { CompteRenduList } from "@/constants/types";
 import { formatDistanceToNowStrict } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
-import { getAllCompteRendu } from "@/actions/comptrendu.action";
+
 import { format } from "date-fns/format";
-import { Alerte } from "@/actions/Alerts.action";
+import { Alerte, getAllAlerts } from "@/actions/Alerts.action";
 interface MailProps {
   accounts: {
     label: string;
@@ -202,7 +202,7 @@ export function Mail({
 }
 
 export function MailList({ items, initialData, search, limit }: IProps) {
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState([] as any[]);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView();
   const [isDisable, setDisable] = useState(false);
@@ -211,15 +211,15 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     console.log("loadMoreData");
     const next = page + 1;
     const offset = next * limit;
-    const newData = await getAllCompteRendu(next, limit, search);
+    const newData = await getAllAlerts(next, limit, search);
     //const { data: newData } = await GetPokemons({ search, offset, limit })
     // const newData: any = [];
-    if (newData.CompteRendu.length) {
+    if (newData?.alertes?.length) {
       setPage(next);
 
       setData((prev: any[] | undefined) => [
         ...(prev?.length ? prev : []),
-        ...newData.CompteRendu,
+        ...newData.alertes,
       ]);
       console.log("newData length", data.length);
     } else {
@@ -236,6 +236,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     console.log("inView1");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
+  console.log("data ", data);
   const [mail, setMail] = useMail();
   const { alerte, setAlert, setId } = useInbox();
   return (

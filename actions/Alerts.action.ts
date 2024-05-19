@@ -1,4 +1,5 @@
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 export interface AlertsMain {
   alertes: Alerte[];
@@ -55,7 +56,10 @@ export const getAllAlerts = async (
     const res = await axios.get<AlertsMain>(
       `https://release2.vercel.app/alerts/all?page=${page}&perpage=8&search=${search}`
     );
-
+    console.log("alertes", res.data);
+    revalidatePath("/alerts/all");
+    revalidatePath("/inbox");
+    revalidatePath("/");
     return res.data || ({} as AlertsMain);
   } catch (error) {
     return {} as AlertsMain;
