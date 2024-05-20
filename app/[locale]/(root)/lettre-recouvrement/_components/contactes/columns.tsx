@@ -149,16 +149,19 @@ export const columns: ColumnDef<any>[] = [
         // />
 
         <AlertConfirmation
-          title="Are you absolutely sure?"
-          description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+          buttonText="Envoyer"
+          title="Êtes-vous absolument sûr ?"
+          description="Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs."
           onConfirm={async () => {
             await updateEtatLetttre(row.original.ncp, "O")
               .then((res) => {
                 console.log(res);
-                toast.success("Etat lettre updated");
+                toast.success("État de la lettre mis à jour");
               })
               .catch((error) => {
-                toast.error("Error updating etat lettre");
+                toast.error(
+                  "Erreur lors de la mise à jour de l'état de la lettre"
+                );
               });
             console.log(row.original.etat_lettre);
           }}

@@ -12,18 +12,20 @@ import {
 } from "@/components/ui/alert-dialog";
 
 interface AlertProps {
-  title: string;
-  description: string;
+  buttonText: string;
+  title?: string;
+  description?: string;
   onConfirm: () => void;
 }
 
 const AlertConfirmation: React.FC<AlertProps> = ({
+  buttonText,
   title,
   description,
   onConfirm,
 }) => (
   <AlertDialog>
-    <AlertDialogTrigger>Open</AlertDialogTrigger>
+    <AlertDialogTrigger>{buttonText}</AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>{title}</AlertDialogTitle>
