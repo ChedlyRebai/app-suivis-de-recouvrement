@@ -1,5 +1,6 @@
 "use server";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export interface Main {
@@ -42,6 +43,7 @@ export const getLettre = async (
       `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
+    // revalidatePath("/lettre-recouvrement");
     return res.data as any;
   } catch (error) {
     return {} as Main;
@@ -58,6 +60,8 @@ export const updateEtatLetttre = async (
       { etat: etat_lettre }
     );
     console.log(res.data);
+
+    // revalidatePath("/lettre-recouvrement");
     return res.data as any;
   } catch (error) {
     console.log(error);
