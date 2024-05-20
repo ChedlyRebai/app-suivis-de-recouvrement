@@ -254,7 +254,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
           <Popover open={agenceopen} onOpenChange={setagenceOpen}>
             <PopoverTrigger asChild>
               <Button
-                variant="default"
+                variant={"outline"}
                 role="combobox"
                 aria-expanded={agenceopen}
                 className="w-[200px] justify-between"
@@ -305,7 +305,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             </PopoverContent>
           </Popover>
           <Button
-            variant="default"
+            variant={"outline"}
             className="font-black mx-1"
             onClick={resetAgence}
           >
@@ -315,7 +315,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
           <Popover open={groupopen} onOpenChange={setgroupOpen}>
             <PopoverTrigger asChild>
               <Button
-                variant="default"
+                variant={"outline"}
                 role="combobox"
                 aria-expanded={groupopen}
                 className="w-[200px] justify-between"
@@ -365,7 +365,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             </PopoverContent>
           </Popover>
           <Button
-            variant="default"
+            variant={"outline"}
             className="font-black mx-1"
             onClick={resetGroup}
           >
