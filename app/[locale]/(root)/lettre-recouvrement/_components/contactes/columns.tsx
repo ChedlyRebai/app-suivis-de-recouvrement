@@ -5,6 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import toast from "react-hot-toast";
+import AlertConfirmation from "./confirmationAlert";
 
 export const columns: ColumnDef<any>[] = [
   // {
@@ -124,13 +137,29 @@ export const columns: ColumnDef<any>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <Checkbox
-          defaultChecked={row.original.etat_lettre === "O"}
-          onCheckedChange={async (value) => {
-            await updateEtatLetttre(
-              row.original.ncp,
-              row.original.etat_lettre === "N" ? "O" : "N"
-            );
+        // <Checkbox
+        //   defaultChecked={row.original.etat_lettre === "O"}
+        //   onCheckedChange={async (value) => {
+        //     await updateEtatLetttre(
+        //       row.original.ncp,
+        //       row.original.etat_lettre === "N" ? "O" : "N"
+        //     );
+        //     console.log(row.original.etat_lettre);
+        //   }}
+        // />
+
+        <AlertConfirmation
+          title="Are you absolutely sure?"
+          description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+          onConfirm={async () => {
+            await updateEtatLetttre(row.original.ncp, "O")
+              .then((res) => {
+                console.log(res);
+                toast.success("Etat lettre updated");
+              })
+              .catch((error) => {
+                toast.error("Error updating etat lettre");
+              });
             console.log(row.original.etat_lettre);
           }}
         />
