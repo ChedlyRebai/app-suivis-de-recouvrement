@@ -47,6 +47,8 @@ import { useSearchParams } from "next/navigation";
 import { CompteRenduList } from "@/constants/types";
 import { deleteFile } from "@/actions/file.action";
 import { deleteCompteRenduById } from "@/actions/comptrendu.action";
+import AlertConfirmation from "../../../../../components/shared/confirmationAlert";
+import toast from "react-hot-toast";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: CompteRenduList[];
@@ -159,7 +161,24 @@ const CompteRenduHistorique = ({
               <SearchIcon className="mr-" size={20} />
             </Button>
 
-            <Button
+            <AlertConfirmation
+              buttonText={""}
+              icon={<Trash2 size={20} />}
+              description=""
+              title=""
+              onConfirm={async () => {
+                await deleteCompteRenduById(row.original.id)
+                  .then(() => {
+                    toast.success("Compte rendu supprimé avec succès");
+                  })
+                  .catch(() => {
+                    toast.error("Erreur lors de la suppression");
+                  });
+                refetch();
+              }}
+            ></AlertConfirmation>
+
+            {/* <Button
               variant="destructive"
               onClick={async () => {
                 await deleteCompteRenduById(row.original.id);
@@ -167,7 +186,7 @@ const CompteRenduHistorique = ({
               }}
             >
               <Trash2 size={20} />
-            </Button>
+            </Button> */}
           </div>
         );
       },

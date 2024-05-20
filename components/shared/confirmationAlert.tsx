@@ -15,6 +15,13 @@ import { Button } from "@/components/ui/button";
 interface AlertProps {
   icon?: React.ReactNode;
   buttonText: string;
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   title?: string;
   description?: string;
   onConfirm: () => void;
@@ -24,12 +31,13 @@ const AlertConfirmation: React.FC<AlertProps> = ({
   icon,
   buttonText,
   title,
+  variant,
   description,
   onConfirm,
 }) => (
   <AlertDialog>
     <AlertDialogTrigger className="flex items-center justify-center">
-      <Button className="flex items-center">
+      <Button className="flex items-center" variant={variant}>
         {buttonText} {icon}
       </Button>
     </AlertDialogTrigger>

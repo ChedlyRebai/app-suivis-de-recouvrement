@@ -17,7 +17,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import toast from "react-hot-toast";
-import AlertConfirmation from "./confirmationAlert";
+import AlertConfirmation from "../../../../../../components/shared/confirmationAlert";
 
 export const columns: ColumnDef<any>[] = [
   // {
