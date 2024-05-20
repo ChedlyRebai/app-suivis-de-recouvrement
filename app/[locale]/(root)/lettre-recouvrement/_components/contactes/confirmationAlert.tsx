@@ -10,8 +10,10 @@ import {
   AlertDialogAction,
   AlertDialog,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 interface AlertProps {
+  icon?: React.ReactNode;
   buttonText: string;
   title?: string;
   description?: string;
@@ -19,13 +21,18 @@ interface AlertProps {
 }
 
 const AlertConfirmation: React.FC<AlertProps> = ({
+  icon,
   buttonText,
   title,
   description,
   onConfirm,
 }) => (
   <AlertDialog>
-    <AlertDialogTrigger>{buttonText}</AlertDialogTrigger>
+    <AlertDialogTrigger className="flex items-center justify-center">
+      <Button className="flex items-center">
+        {buttonText} {icon}
+      </Button>
+    </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>{title}</AlertDialogTitle>

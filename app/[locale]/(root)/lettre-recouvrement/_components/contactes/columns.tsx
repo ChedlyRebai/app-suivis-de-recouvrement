@@ -4,7 +4,7 @@ import { updateEtatLetttre } from "@/actions/lettre.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Send } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -149,6 +149,7 @@ export const columns: ColumnDef<any>[] = [
         // />
 
         <AlertConfirmation
+          // icon={<Send size={13} />}
           buttonText="Envoyer"
           title="Êtes-vous absolument sûr ?"
           description="Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs."
