@@ -163,9 +163,10 @@ const CompteRenduHistorique = ({
 
             <AlertConfirmation
               buttonText={""}
+              variant="destructive"
               icon={<Trash2 size={20} />}
-              description=""
-              title=""
+              description=" Voulez-vous vraiment supprimer ce compte rendu ?"
+              title="Suppression de compte rendu"
               onConfirm={async () => {
                 await deleteCompteRenduById(row.original.id)
                   .then(() => {
