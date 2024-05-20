@@ -147,7 +147,6 @@ export function DataTableToolbar<TData>({
         </PopoverTrigger> */}
         <PopoverTrigger asChild>
           <Button
-            variant="default"
             role="combobox"
             aria-expanded={agenceopen}
             className="w-[200px] justify-between"
