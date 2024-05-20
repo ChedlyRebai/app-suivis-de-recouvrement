@@ -217,10 +217,10 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     replace(`${pathname}?${params.toString()}`);
   };
 
-  useEffect(() => {
-    setSearch(`${searchParams.get("code")}`);
-    console.log(search);
-  }, [searchParams.get("code")]);
+  // useEffect(() => {
+  //   setSearch(`${searchParams.get("code")}`);
+  //   console.log(search);
+  // }, [searchParams.get("code")]);
 
   const addQuery = (row: any) => {
     console.log();
@@ -228,16 +228,16 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
       pathname + "?" + createQueryString("code", `${selectedCode as string}`)
     );
   };
-  const [loader, setLoader] = useState(true);
-  // effect
-  useEffect(() => {
-    setLoader(false);
-  }, []);
+  // const [loader, setLoader] = useState(true);
+  // // effect
+  // useEffect(() => {
+  //   setLoader(false);
+  // }, []);
 
-  // render
-  if (loader) {
-    return <div>Chargement...</div>;
-  }
+  // // render
+  // if (loader) {
+  //   return <div>Chargement...</div>;
+  // }
 
   // const { rows } = table.getCoreRowModel();
   // console.log(rows);
