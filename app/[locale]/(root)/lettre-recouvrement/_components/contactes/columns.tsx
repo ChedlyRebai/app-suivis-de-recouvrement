@@ -148,25 +148,27 @@ export const columns: ColumnDef<any>[] = [
         //   }}
         // />
 
-        <AlertConfirmation
-          // icon={<Send size={13} />}
-          buttonText="Envoyer"
-          title="Êtes-vous absolument sûr ?"
-          description="Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs."
-          onConfirm={async () => {
-            await updateEtatLetttre(row.original.ncp, "O")
-              .then((res) => {
-                console.log(res);
-                toast.success("État de la lettre mis à jour");
-              })
-              .catch((error) => {
-                toast.error(
-                  "Erreur lors de la mise à jour de l'état de la lettre"
-                );
-              });
-            console.log(row.original.etat_lettre);
-          }}
-        />
+        // <AlertConfirmation
+        //   // icon={<Send size={13} />}
+        //   buttonText="Envoyer"
+        //   title="Êtes-vous absolument sûr ?"
+        //   description="Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs."
+        //   onConfirm={async () => {
+        //     await updateEtatLetttre(row.original.ncp, "O")
+        //       .then((res) => {
+        //         console.log(res);
+        //         toast.success("État de la lettre mis à jour");
+        //       })
+        //       .catch((error) => {
+        //         toast.error(
+        //           "Erreur lors de la mise à jour de l'état de la lettre"
+        //         );
+        //       });
+        //     console.log(row.original.etat_lettre);
+        //   }}
+        // />
+
+        <></>
       );
     },
   },

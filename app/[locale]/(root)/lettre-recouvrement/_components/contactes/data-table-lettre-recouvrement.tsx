@@ -239,6 +239,8 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     return <div>Chargement...</div>;
   }
 
+  // const { rows } = table.getCoreRowModel();
+  // console.log(rows);
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
@@ -438,7 +440,9 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                     <TableCell
                       key={cell.id}
                       className=" px-2 py-1 cursor-pointer"
-                      onClick={(e) => console.log(e)}
+                      onClick={() =>
+                        console.log(table.getRowModel().rows?.length)
+                      }
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
