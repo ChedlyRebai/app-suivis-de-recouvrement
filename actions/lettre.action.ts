@@ -61,7 +61,7 @@ export const updateEtatLetttre = async (
     );
     console.log(res.data);
 
-    // revalidatePath("/lettre-recouvrement");
+    revalidatePath("/lettre-recouvrement");
     return res.data as any;
   } catch (error) {
     console.log(error);

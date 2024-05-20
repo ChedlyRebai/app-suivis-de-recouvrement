@@ -207,6 +207,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     setAgenceValue("");
     const params = new URLSearchParams(searchParams);
     params.delete("agence");
+    params.delete("groupe");
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -264,9 +265,11 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                 {searchParams.get("agence")
                   ? agences.find(
                       (framework: any) =>
-                        framework.codug === searchParams.get("agence")
+                        framework.codug === Number(searchParams.get("agence"))
                     )?.libelle || "Sélectionner un agence"
                   : "Sélectionner un agence"}
+
+                {}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -306,13 +309,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
-          <Button
-            variant={"outline"}
-            className="font-black mx-1"
-            onClick={resetAgence}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button>
+
           <div className="w-1" />
           <Popover open={groupopen} onOpenChange={setgroupOpen}>
             <PopoverTrigger asChild>
@@ -323,9 +320,9 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                 className="w-[200px] justify-between"
               >
                 {searchParams.get("groupe")
-                  ? agences.find(
+                  ? groupes.find(
                       (framework: any) =>
-                        framework.codug === searchParams.get("groupe")
+                        framework.codug === Number(searchParams.get("groupe"))
                     )?.libelle || "Sélectionner un groupe"
                   : "Sélectionner un groupe"}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -366,13 +363,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
               </Command>
             </PopoverContent>
           </Popover>
-          <Button
-            variant={"outline"}
-            className="font-black mx-1"
-            onClick={resetGroup}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button>
 
           <Card className="h-10">
             <CardContent className="flex items-center justify-center my-1">
@@ -392,7 +382,16 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
               />
             </CardContent>
           </Card>
-
+          <Button
+            className="ml-auto mr-1"
+            variant="outline"
+            onClick={() => {
+              resetAgence();
+              resetGroup();
+            }}
+          >
+            <RefreshCcwIcon className="h-4 w-4" />
+          </Button>
           <DataTableViewOptions table={table} />
         </>
       </div>
@@ -421,18 +420,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   className="p-0"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
-
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

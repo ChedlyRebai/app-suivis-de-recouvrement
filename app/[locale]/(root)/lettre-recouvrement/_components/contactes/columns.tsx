@@ -128,13 +128,7 @@ export const columns: ColumnDef<any>[] = [
 
   {
     accessorKey: "etat_lettre",
-    header: ({ column }) => (
-      <Checkbox
-        onCheckedChange={(value) => {
-          console.log(value);
-        }}
-      />
-    ),
+    header: "Envoyer lettre",
     cell: ({ row }) => {
       return (
         // <Checkbox
