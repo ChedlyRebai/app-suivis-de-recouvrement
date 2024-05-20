@@ -14,6 +14,9 @@ export interface Alerte {
   rapporttype: number | null;
   ab_client: AbClient | null;
   compterendutype: Compterendutype | null;
+  types: {
+    libelle: string;
+  };
 }
 
 export interface AbClient {

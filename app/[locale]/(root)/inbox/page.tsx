@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Mail } from "@/components/shared/mail/components/mail";
 import { accounts, mails } from "@/components/shared/mail/data";
 import LoadingIcons, { Oval } from "react-loading-icons";
-import { getAllAlertes } from "@/actions/comptrendu.action";
 import { getAllAlerts } from "@/actions/Alerts.action";
 
 export default async function Page({

@@ -224,7 +224,8 @@ export const createCompteRendu = async (
     const createacess = await creteAcess("compte-rendu");
     console.log("createacess", createacess);
     const res = await axios.post(
-      `http://localhost:10004/compterendu/createcompterendu`,
+      //release2
+      `https://release2.vercel.app/compterendu/createcompterendu`,
       { suiviAgenda, compteRendu, user, cli, type: Number(type) }
     );
     revalidatePath("/");

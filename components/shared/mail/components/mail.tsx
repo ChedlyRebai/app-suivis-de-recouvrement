@@ -202,7 +202,7 @@ export function Mail({
 }
 
 export function MailList({ items, initialData, search, limit }: IProps) {
-  const [data, setData] = useState([] as any[]);
+  const [data, setData] = useState(initialData);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView();
   const [isDisable, setDisable] = useState(false);
@@ -212,6 +212,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     const next = page + 1;
     const offset = next * limit;
     const newData = await getAllAlerts(next, limit, search);
+    console.log("newData", newData);
     //const { data: newData } = await GetPokemons({ search, offset, limit })
     // const newData: any = [];
     if (newData?.alertes?.length) {
@@ -285,11 +286,9 @@ export function MailList({ items, initialData, search, limit }: IProps) {
 
             <div className="flex items-center gap-2">
               <Badge
-                variant={getBadgeVariantFromLabel(
-                  `${item?.compterendutype?.types?.libelle}`
-                )}
+                variant={getBadgeVariantFromLabel(`${item?.types?.libelle}`)}
               >
-                {item?.compterendutype?.types?.libelle}
+                {item?.types?.libelle}
               </Badge>
             </div>
           </button>
