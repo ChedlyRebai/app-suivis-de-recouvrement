@@ -81,15 +81,17 @@ export default async function Home({
                     </CardDescription> */}
             </CardHeader>
             <CardContent>
-              <DataTableDemandeDeProlongation
-                agences={agences || []}
-                groupes={groupes || []}
-                total={data.total || 0}
-                totalAccout={data.totalCount || 0}
-                totalPages={data.totalPages || 1}
-                columns={validationprolongation}
-                data={data.result || []}
-              />
+              <Suspense fallback={<div>Chargement....</div>}>
+                <DataTableDemandeDeProlongation
+                  agences={agences || []}
+                  groupes={groupes || []}
+                  total={data.total || 0}
+                  totalAccout={data.totalCount || 0}
+                  totalPages={data.totalPages || 1}
+                  columns={validationprolongation}
+                  data={data.result || []}
+                />
+              </Suspense>
             </CardContent>
           </Card>
         </div>

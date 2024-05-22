@@ -1,6 +1,6 @@
 "use client";
 
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon, ResetIcon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
 
 import { DataTableFacetedFilter } from "../../app/[locale]/(root)/listeclient/_components/contactes/data-table-faceted-filter";
@@ -20,7 +20,7 @@ import { getAgences, getGroupes } from "@/actions/client.action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -72,6 +72,19 @@ export function DataTableToolbar<TData>({
     replace(`${pathname}?${params.toString()}`);
   }, 100);
 
+  const resetAgence = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("agence");
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const resetAll = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("groupe");
+    params.delete("agence");
+
+    replace(`${pathname}?${params.toString()}`);
+  };
   const handleGroup = (group: string) => {
     const params = new URLSearchParams(searchParams);
     if (group) {
@@ -121,7 +134,7 @@ export function DataTableToolbar<TData>({
   return (
     <>
       <Input
-        placeholder="Client ID"
+        placeholder="Cli"
         defaultValue={searchParams.get("query")?.toString()}
         onChange={(e) => {
           handleSearch(e.target.value);
@@ -129,76 +142,31 @@ export function DataTableToolbar<TData>({
         className="max-w-sm mr-2"
       />
       <Popover open={agenceopen} onOpenChange={setagenceOpen}>
-        {/* <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={agenceopen}
-            className="w-[200px] justify-between"
-          >
-            {searchParams.get("agence")
-              ? agences.find(
-                  (framework: any) =>
-                    framework.codug === searchParams.get("agence")
-                )?.libelle || "Sélectionner un agence"
-              : "Sélectionner un agence"}
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-          </Button>
-        </PopoverTrigger> */}
         <PopoverTrigger asChild>
           <Button
+            variant={"outline"}
             role="combobox"
             aria-expanded={agenceopen}
             className="w-[200px] justify-between"
           >
-            {searchParams.get("agence")}
             {searchParams.get("agence")
               ? agences.find(
                   (framework: any) =>
-                    framework.codug === searchParams.get("agence")
+                    framework.codug === Number(searchParams.get("agence"))
                 )?.libelle || "Sélectionner un agence"
               : "Sélectionner un agence"}
+
+            {}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-[200px] p-0 ml-2">
+        <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandInput placeholder="Search agence" />
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
-              {agenceLoading ? (
-                <CommandItem className="text-center w-full flex justify-center">
-                  <Oval className="text-center w-7 flex justify-center" />
-                </CommandItem>
-              ) : (
-                agences.map((item: any) => (
-                  <CommandItem
-                    key={item.codug}
-                    className="flex justify-start"
-                    value={item.libelle}
-                    onSelect={(currentValue) => {
-                      handleAgence(item.codug);
-                      setAgenceValue(
-                        item.codug === searchParams.get("agence")
-                          ? ""
-                          : item.codug
-                      );
-
-                      setagenceOpen(false);
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        agenceValue === item.codug ? "opacity-100" : "opacity-0"
-                      )}
-                    />
-                    {item.codug}:{item.libelle}
-                  </CommandItem>
-                ))
-              )}
-              {/* {agences.map((item: any) => (
+              {agences.map((item: any) => (
                 <CommandItem
                   key={item.codug}
                   value={item.libelle}
@@ -219,26 +187,28 @@ export function DataTableToolbar<TData>({
                       agenceValue === item.codug ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {item.codug}:{item.libelle}
+                  {item.codug}: {item.libelle}
                 </CommandItem>
-              ))} */}
+              ))}
             </CommandGroup>
           </Command>
         </PopoverContent>
       </Popover>
+
       <div className="w-1" />
       <Popover open={groupopen} onOpenChange={setgroupOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
+            variant={"outline"}
             role="combobox"
             aria-expanded={groupopen}
             className="w-[200px] justify-between"
           >
             {searchParams.get("groupe")
               ? groupes.find(
-                  (groupe: any) => groupe.groupe == searchParams.get("groupe")
-                )?.groupe || "Sélectionner un groupe"
+                  (framework: any) =>
+                    framework.codug === Number(searchParams.get("groupe"))
+                )?.libelle || "Sélectionner un groupe"
               : "Sélectionner un groupe"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -247,48 +217,18 @@ export function DataTableToolbar<TData>({
           <Command>
             <CommandInput placeholder="Search group" />
             <CommandEmpty>No framework found.</CommandEmpty>
+
             <CommandGroup>
-              {groupLoading ? (
-                <CommandItem className="text-center w-full flex justify-center">
-                  <Oval className="text-center w-7 flex justify-center" />
-                </CommandItem>
-              ) : (
-                groupes.map((item: any) => (
-                  <CommandItem
-                    key={item.groupe}
-                    value={item.groupe}
-                    onSelect={(currentValue) => {
-                      handleGroup(item.groupe);
-                      setgroupeValue(
-                        item.groupe == searchParams.get("groupe")
-                          ? ""
-                          : item.groupe
-                      );
-                      setgroupOpen(false);
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        groupeValue === item.groupe
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                    {item.codug}:{item.libelle}
-                  </CommandItem>
-                ))
-              )}
-              {/* {groupes.map((item: any, i: number) => (
+              {groupes.map((item: any, i: number) => (
                 <CommandItem
-                  key={i}
-                  value={item.groupe}
+                  key={item.codug}
+                  value={item.libelle}
                   onSelect={(currentValue) => {
-                    handleGroup(item.groupe);
+                    handleGroup(item.codug);
                     setgroupeValue(
-                      item.groupe == searchParams.get("groupe")
+                      item.codug === searchParams.get("groupe")
                         ? ""
-                        : item.groupe
+                        : item.codug
                     );
                     setgroupOpen(false);
                   }}
@@ -296,27 +236,20 @@ export function DataTableToolbar<TData>({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      groupeValue === item.groupe ? "opacity-100" : "opacity-0"
+                      groupeValue === item.codug ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {item.codug}:{item.libelle}
                 </CommandItem>
-              ))} */}
+              ))}
             </CommandGroup>
           </Command>
         </PopoverContent>
       </Popover>
-      {isFiltered && (
-        <Button
-          variant="default"
-          onClick={() => table.resetColumnFilters()}
-          className=""
-        >
-          Reset
-          <Cross2Icon className="ml-2 h-4 w-4" />
-        </Button>
-      )}
 
+      <Button className="ml-auto mr-1" variant="outline" onClick={resetAll}>
+        <ResetIcon className="h-4 w-4" />
+      </Button>
       <DataTableViewOptions table={table} />
     </>
   );
