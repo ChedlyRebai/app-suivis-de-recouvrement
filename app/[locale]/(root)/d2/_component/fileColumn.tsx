@@ -6,7 +6,7 @@ import { deleteFile } from "@/actions/file.action";
 import AlertConfirmation from "@/components/shared/confirmationAlert";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Download, Trash2 } from "lucide-react";
+import { ArrowUpDown, Download, EyeIcon, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 export const filecolumns: ColumnDef<File>[] = [
@@ -68,7 +68,7 @@ export const filecolumns: ColumnDef<File>[] = [
               window.open(row.original.FilePath);
             }}
           >
-            <Download size={16} />
+            <EyeIcon size={16} />
           </Button>{" "}
           <AlertConfirmation
             variant="destructive"

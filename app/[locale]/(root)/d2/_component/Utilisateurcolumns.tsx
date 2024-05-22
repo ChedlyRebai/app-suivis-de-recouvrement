@@ -13,11 +13,11 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
 
   {
     accessorKey: "usr_nomprenom",
-    header: "Non & premon",
+    header: "Non & Premon",
   },
   {
     accessorKey: "flgstatut",
-    header: "Actif/Inactif",
+    header: "Status",
     cell: ({ row }) => {
       return row.original.flgstatut === "A" ? (
         <>
@@ -29,7 +29,7 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
             >
               <circle cx="4" cy="4" r="3" />
             </svg>
-            Actif
+            Connecté
           </span>
         </>
       ) : (
@@ -42,7 +42,7 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
             >
               <circle cx="4" cy="4" r="3" />
             </svg>
-            Inactif
+            Non Connecté
           </span>
         </>
       );
@@ -50,35 +50,27 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
   },
   {
     accessorKey: "email_chargee",
-    header: "email",
+    header: "Email",
   },
   {
     accessorKey: "tel_chargee",
-    header: "telephone",
+    header: "Eelephone",
   },
   {
-    accessorKey:"Fonction",
-    header:"Fonction",
+    accessorKey: "Fonction",
+    header: "Fonction",
     cell: ({ row }) => {
       console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
-      return (
-        <div>
-          {row.original?.fonction.lib_fonction}     
-        </div>
-      );
+      return <div>{row.original?.fonction.lib_fonction}</div>;
     },
   },
 
   {
-    accessorKey:"Departement",
-    header:"Department",
+    accessorKey: "Departement",
+    header: "Department",
     cell: ({ row }) => {
       console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
-      return (
-        <div>
-          {row.original?.fonction.departement.nom_depart}     
-        </div>
-      );
+      return <div>{row.original?.fonction.departement.nom_depart}</div>;
     },
   },
 
@@ -87,12 +79,7 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
     header: "Affecter A",
     cell: ({ row }) => {
       console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
-      return (
-        <div>
-          {row.original?.AffecterA?.[0]?.Zone?.libelle}
-          
-        </div>
-      );
+      return <div>{row.original?.AffecterA?.[0]?.Zone?.libelle}</div>;
     },
   },
 ];
