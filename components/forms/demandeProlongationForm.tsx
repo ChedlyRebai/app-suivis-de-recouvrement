@@ -124,21 +124,6 @@ const DemandeProlongationForm = () => {
 
         <FormField
           control={form.control}
-          name="ModuleP"
-          render={({ field }) => (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <FormLabel htmlFor="username" className="text-right">
-                ModuleP
-              </FormLabel>
-              <FormControl>
-                <Input id="username" className="col-span-3" {...field} />
-              </FormControl>
-            </div>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="codefonction"
           render={({ field }) => (
             <div className="grid grid-cols-4 items-center gap-4">
@@ -162,97 +147,6 @@ const DemandeProlongationForm = () => {
                       {item.code_fonction}: {item.lib_fonction}
                     </SelectItem>
                   ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="acces"
-          render={({ field }) => (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <FormLabel htmlFor="username" className="text-right">
-                Acees
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="O">Oui</SelectItem>
-                  <SelectItem value="N">Non</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="Creation"
-          render={({ field }) => (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <FormLabel htmlFor="username" className="text-right">
-                Creation
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="O">Oui</SelectItem>
-                  <SelectItem value="N">Non</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="Modification"
-          render={({ field }) => (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <FormLabel htmlFor="username" className="text-right">
-                Modification
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="O">Oui</SelectItem>
-                  <SelectItem value="N">Non</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="Suppression"
-          render={({ field }) => (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <FormLabel htmlFor="username" className="text-right">
-                Suppression
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="O">Oui</SelectItem>
-                  <SelectItem value="N">Non</SelectItem>
                 </SelectContent>
               </Select>
             </div>
