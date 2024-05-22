@@ -163,7 +163,7 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
             console.log(row.original?.cli);
           }}
         >
-          Transferer
+          Action
         </Button>
       );
     },
