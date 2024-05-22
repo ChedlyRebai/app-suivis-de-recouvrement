@@ -20,6 +20,7 @@ import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaire
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
 import { DataTableValidationDeTransfer } from "./_component/validation-transfer-data-table";
 import { validationTransferColumns } from "./_component/validationTransferColumns";
+import ValidationTransferModal from "@/components/shared/Modals/validation-transfer-Modal";
 
 export default async function Home({
   searchParams,
@@ -97,6 +98,7 @@ export default async function Home({
               </Suspense>
             </CardContent>
           </Card>
+          <ValidationTransferModal />
         </div>
       </div>
     </div>

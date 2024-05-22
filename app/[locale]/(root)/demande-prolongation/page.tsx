@@ -21,6 +21,7 @@ import { DataTableDemandeDeProlongationCommercial } from "./_component/demande-p
 import { demandedeprolongation } from "./_component/demandeProlongationColumns";
 import { getLettre } from "@/actions/lettre.action";
 import { getDemandeDeProlongation } from "@/actions/prologation.action";
+import DemandeProlonagationModal from "@/components/shared/Modals/demande-prolongation-modal";
 
 export default async function Home({
   searchParams,
@@ -88,6 +89,7 @@ export default async function Home({
             </CardContent>
           </Card>
         </div>
+        <DemandeProlonagationModal />
         {/* </Suspense> */}
       </div>
     </div>

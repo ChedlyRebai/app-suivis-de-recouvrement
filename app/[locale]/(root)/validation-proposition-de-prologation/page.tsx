@@ -18,6 +18,7 @@ import { demandeProlongationColumns } from "./_component/demandeProlongationColu
 import { DataTableDemandeDeProlongation } from "./_component/demande-prolongation-data-table";
 import { getvalidationprpositiondeprolongation } from "@/actions/prologation.action";
 import { validationprolongation } from "./_component/validationPropositionColumns";
+import ValidationProlonagationnModal from "@/components/shared/Modals/Validation-prolongation-modal";
 
 export default async function Home({
   searchParams,
@@ -94,6 +95,7 @@ export default async function Home({
               </Suspense>
             </CardContent>
           </Card>
+          <ValidationProlonagationnModal />
         </div>
       </div>
     </div>

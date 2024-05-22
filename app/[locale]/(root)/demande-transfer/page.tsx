@@ -20,6 +20,7 @@ import { Suspense } from "react";
 
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { demandeTransferColumns } from "./_component/demandeTransferColumns";
+import DemandeTransfernModal from "@/components/shared/Modals/demande-transfer-Modal";
 
 export default async function Home({
   searchParams,
@@ -84,6 +85,7 @@ export default async function Home({
             </CardContent>
           </Card>
         </div>
+        <DemandeTransfernModal />
         {/* </Suspense> */}
       </div>
     </div>
