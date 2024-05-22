@@ -4,6 +4,7 @@ import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal"
 import Modal from "./Modal";
 import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
 import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
+import ValidationTransferForm from "@/components/forms/ValidationTransferForm";
 
 const ValidationTransferModal = () => {
   const { isOpen, onOpen, onClose } = useValidationTransferModal();
@@ -14,7 +15,7 @@ const ValidationTransferModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      edit
+      <ValidationTransferForm />
     </Modal>
   );
 };
