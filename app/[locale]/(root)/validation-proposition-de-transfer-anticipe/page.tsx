@@ -21,6 +21,7 @@ import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentai
 import { DataTableValidationDeTransfer } from "./_component/validation-transfer-data-table";
 import { validationTransferColumns } from "./_component/validationTransferColumns";
 import ValidationTransferModal from "@/components/shared/Modals/validation-transfer-Modal";
+import { MOTT, VTRF, getMotifCommercial } from "@/actions/motif.action";
 
 export default async function Home({
   searchParams,
@@ -69,6 +70,8 @@ export default async function Home({
 
   const groupes = await getGroupes();
   const agences = await getAgences();
+  const motifs = await MOTT();
+  const validationTransfer = await VTRF();
   console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -98,7 +101,11 @@ export default async function Home({
               </Suspense>
             </CardContent>
           </Card>
-          <ValidationTransferModal />
+
+          <ValidationTransferModal
+            motifs={motifs}
+            validationTransfer={validationTransfer}
+          />
         </div>
       </div>
     </div>

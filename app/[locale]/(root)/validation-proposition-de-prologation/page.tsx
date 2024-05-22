@@ -19,6 +19,7 @@ import { DataTableDemandeDeProlongation } from "./_component/demande-prolongatio
 import { getvalidationprpositiondeprolongation } from "@/actions/prologation.action";
 import { validationprolongation } from "./_component/validationPropositionColumns";
 import ValidationProlonagationnModal from "@/components/shared/Modals/Validation-prolongation-modal";
+import { VTRF, getMotifCommercial } from "@/actions/motif.action";
 
 export default async function Home({
   searchParams,
@@ -65,6 +66,8 @@ export default async function Home({
 
   const groupes = await getGroupes();
   const agences = await getAgences();
+  const motifs = await getMotifCommercial();
+  const validationTransfer = await VTRF();
   console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -95,7 +98,10 @@ export default async function Home({
               </Suspense>
             </CardContent>
           </Card>
-          <ValidationProlonagationnModal />
+          <ValidationProlonagationnModal
+            motifs={motifs}
+            validationTransfer={validationTransfer}
+          />
         </div>
       </div>
     </div>
