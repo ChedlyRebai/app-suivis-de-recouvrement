@@ -2,6 +2,7 @@
 
 import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import Modal from "./Modal";
+import DemandeProlongationForm from "@/components/forms/demandeProlongationForm";
 
 const DemandeProlonagationModal = () => {
   const { isOpen, onOpen, onClose } = useDemandeProlongationModal();
@@ -12,7 +13,7 @@ const DemandeProlonagationModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      edit
+      <DemandeProlongationForm />
     </Modal>
   );
 };
