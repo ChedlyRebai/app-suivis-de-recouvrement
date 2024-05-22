@@ -53,8 +53,6 @@ const DemandeProlongationForm = ({ motifs }: { motifs: any[] }) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {};
 
-  const [motif, setMotif] = useState<any>([]);
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 ">

@@ -21,6 +21,8 @@ import { Suspense } from "react";
 import { DataTableDemandeDeTransfer } from "./_component/demande-transfer-data-table";
 import { demandeTransferColumns } from "./_component/demandeTransferColumns";
 import DemandeTransfernModal from "@/components/shared/Modals/demande-transfer-Modal";
+import { getTypeTransfer } from "@/actions/transfer.action";
+import { MOTT } from "@/actions/motif.action";
 
 export default async function Home({
   searchParams,
@@ -59,6 +61,9 @@ export default async function Home({
 
   const groupes = await getGroupes();
   const agences = await getAgences();
+
+  const motif = await MOTT();
+  const typeTransfer = await getTypeTransfer();
   console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -80,12 +85,15 @@ export default async function Home({
                 totalAccout={data.totalCount || 0}
                 totalPages={data.totalPages || 1}
                 columns={demandeTransferColumns}
-                data={data.result || []}
+                data={[]}
               />
             </CardContent>
           </Card>
         </div>
-        <DemandeTransfernModal />
+        <DemandeTransfernModal
+          motif={motif || []}
+          typeTransfer={typeTransfer || []}
+        />
         {/* </Suspense> */}
       </div>
     </div>

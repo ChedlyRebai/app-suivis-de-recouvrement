@@ -8,7 +8,7 @@ interface ValidationTrnasferModalStore {
 
 const useValidationTransferModal = create<ValidationTrnasferModalStore>(
   (set) => ({
-    isOpen: false,
+    isOpen: true,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),
   })

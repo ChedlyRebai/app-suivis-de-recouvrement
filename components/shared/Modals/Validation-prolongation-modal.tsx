@@ -22,7 +22,10 @@ const ValidationProlonagationnModal = ({
       isOpen={isOpen}
       onChange={onClose}
     >
-      <ValidationProlonagationForm motifs={motifs} />
+      <ValidationProlonagationForm
+        motifs={motifs}
+        validation={validationTransfer}
+      />
     </Modal>
   );
 };

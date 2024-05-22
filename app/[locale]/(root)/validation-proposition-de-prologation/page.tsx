@@ -68,7 +68,7 @@ export default async function Home({
   const agences = await getAgences();
   const motifs = await getMotifCommercial();
   const validationTransfer = await VTRF();
-  console.log("render page");
+
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -93,7 +93,7 @@ export default async function Home({
                   totalAccout={data.totalCount || 0}
                   totalPages={data.totalPages || 1}
                   columns={validationprolongation}
-                  data={data.result || []}
+                  data={[]}
                 />
               </Suspense>
             </CardContent>

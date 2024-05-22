@@ -23,10 +23,7 @@ const ValidationTransferModal = ({
       isOpen={isOpen}
       onChange={onClose}
     >
-      <ValidationTransferForm
-        motifs={motifs}
-        validationTransfer={validationTransfer}
-      />
+      <ValidationTransferForm motifs={motifs} validation={validationTransfer} />
     </Modal>
   );
 };

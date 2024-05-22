@@ -40,14 +40,28 @@ const formSchema = z.object({
   Commentaire: z.string().min(1, {
     message: "",
   }),
+  validation: z.string().min(1, {
+    message: "",
+  }),
 });
 
-const ValidationProlonagationForm = ({ motifs }: { motifs: any[] }) => {
+type Props = {
+  motifs: any[];
+  commentaire?: string;
+  validation: any[];
+};
+
+const ValidationProlonagationForm = ({
+  motifs,
+  commentaire,
+  validation,
+}: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       Motif: "",
       Commentaire: "",
+      validation: "",
     },
   });
   const { onClose } = useValidationProlongationModal();
@@ -75,6 +89,31 @@ const ValidationProlonagationForm = ({ motifs }: { motifs: any[] }) => {
                 </FormControl>
                 <SelectContent>
                   {motifs.map((item: any) => (
+                    <SelectItem key={item.codenv} value={item.libelle}>
+                      {item.codenv}: {item.libelle}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="validation"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="username">Validation</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sélectionné une motif">
+                      {field.value}
+                    </SelectValue>
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {validation.map((item: any) => (
                     <SelectItem key={item.codenv} value={item.libelle}>
                       {item.codenv}: {item.libelle}
                     </SelectItem>
