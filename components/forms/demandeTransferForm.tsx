@@ -37,10 +37,10 @@ const formSchema = z.object({
   Motif: z.string().min(1, {
     message: "",
   }),
-  typetransfer: z.string().min(1, {
+  Typetransfer: z.string().min(1, {
     message: "",
   }),
-  Commentaire: z.string().min(1, {
+  Commentaire: z.string().min(0, {
     message: "",
   }),
 });
@@ -55,12 +55,15 @@ const DemandeTransferForm = ({ motif, typeTransfer }: Props) => {
     defaultValues: {
       Motif: "",
       Commentaire: "",
+      Typetransfer: "",
     },
   });
-  const { onClose } = useDemandeTransfernModal();
+  const { onClose, id } = useDemandeTransfernModal();
 
   //const creatDroit = useStore((state) => state.creatDroit) as any;
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {};
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values, id);
+  };
 
   return (
     <Form {...form}>
@@ -92,14 +95,14 @@ const DemandeTransferForm = ({ motif, typeTransfer }: Props) => {
         />
         <FormField
           control={form.control}
-          name="typetransfer"
+          name="Typetransfer"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="username">typetransfer </FormLabel>
+              <FormLabel htmlFor="username">Transferer à</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
+                    <SelectValue placeholder="Transférer à">
                       {field.value}
                     </SelectValue>
                   </SelectTrigger>

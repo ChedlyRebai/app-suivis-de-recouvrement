@@ -53,10 +53,13 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
     },
   });
 
-  const { onClose } = useValidationTransferModal();
+  const { onClose, id } = useValidationTransferModal();
 
   //const creatDroit = useStore((state) => state.creatDroit) as any;
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {};
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+    console.log(id);
+  };
 
   return (
     <Form {...form}>
@@ -77,7 +80,7 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
                 </FormControl>
                 <SelectContent>
                   {motifs.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
+                    <SelectItem key={item.codenv} value={item.codenv}>
                       {item.codenv}: {item.libelle}
                     </SelectItem>
                   ))}
@@ -102,7 +105,7 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
                 </FormControl>
                 <SelectContent>
                   {validation.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
+                    <SelectItem key={item.codenv} value={item.codenv}>
                       {item.codenv}: {item.libelle}
                     </SelectItem>
                   ))}

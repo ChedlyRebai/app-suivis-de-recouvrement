@@ -158,9 +158,8 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
         <Button
           variant="ghost"
           onClick={() => {
-            setId(row.original?.cli);
+            setId(row.original?.id);
             onOpen();
-            console.log(row.original?.cli);
           }}
         >
           Action

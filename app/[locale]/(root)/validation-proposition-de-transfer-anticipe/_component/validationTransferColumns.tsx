@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, SearchIcon } from "lucide-react";
 
@@ -206,14 +207,15 @@ export const validationTransferColumns: ColumnDef<any>[] = [
     accessorKey: "Action",
     header: "Action",
     cell: ({ row }) => {
+      const { id, onOpen, setId } = useValidationTransferModal();
       return (
         <div className="flex justify-center">
           <Button
             variant="default"
             size="sm"
             onClick={() => {
-              // setModalData(row.original);
-              // setModalOpen(true);
+              setId(row.original?.id);
+              onOpen();
             }}
           >
             Detaille

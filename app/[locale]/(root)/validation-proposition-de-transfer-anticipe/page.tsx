@@ -96,7 +96,7 @@ export default async function Home({
                   totalAccout={data.totalCount || 0}
                   totalPages={data.totalPages || 1}
                   columns={validationTransferColumns}
-                  data={[]}
+                  data={data.result || []}
                 />
               </Suspense>
             </CardContent>

@@ -64,7 +64,7 @@ export default async function Home({
 
   const motif = await MOTT();
   const typeTransfer = await getTypeTransfer();
-  console.log("render page");
+  console.log(data.result[0] || []);
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -85,7 +85,7 @@ export default async function Home({
                 totalAccout={data.totalCount || 0}
                 totalPages={data.totalPages || 1}
                 columns={demandeTransferColumns}
-                data={[]}
+                data={data.result || []}
               />
             </CardContent>
           </Card>

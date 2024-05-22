@@ -56,99 +56,17 @@ export function DataTableValidationDeTransfer<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   console.log(data);
   const router = useRouter();
-  const pathname = usePathname();
+
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+
   const setAgences = useListAgences((state) => state.setAgences);
-  setAgences(agences);
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [inputValue, setInputValue] = useState("");
-  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
-
-  // const [groupes, setGroupes] = useState<any>([]);
-  // const [agences, setAgences] = useState<any>([]);
-
-  const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
-
-  const handleSearch = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("query", query);
-      params.set("page", "1");
-    } else {
-      params.delete("query");
-    }
-    console.log(params.get("query")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 100);
-
-  const handleGroup = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("groupe", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleFrom = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("from", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("from")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleTo = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("to");
-      params.set("page", "1");
-    } else {
-      params.set("to", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("to")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleAgence = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("from");
-      params.set("page", "1");
-    }
-    if (query) {
-      params.set("agence", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -189,38 +107,13 @@ export function DataTableValidationDeTransfer<TData, TValue>({
     [searchParams, selectedCode]
   );
 
-  const resetAgence = () => {
-    setAgenceValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const resetGroup = () => {
-    setgroupeValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("groupe");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  useEffect(() => {
-    setSearch(`${searchParams.get("code")}`);
-    console.log(search);
-  }, [searchParams.get("code")]);
-
-  const addQuery = (row: any) => {
-    console.log();
-    router.push(
-      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
-    );
-  };
   const [loader, setLoader] = useState(true);
-  // effect
+
   useEffect(() => {
+    setAgences(agences);
     setLoader(false);
   }, []);
 
-  // render
   if (loader) {
     return <div>Chargement...</div>;
   }
@@ -228,167 +121,14 @@ export function DataTableValidationDeTransfer<TData, TValue>({
   return (
     <>
       <DataTableToolbar table={table} type="contactes" />
-      {/* <div className="flex  items-center py-4 flex-wrap">
-        <>
-          <Input
-            placeholder="Cli"
-            defaultValue={searchParams.get("query")?.toString()}
-            onChange={(e) => {
-              handleSearch(e.target.value);
-            }}
-            className="max-w-sm mr-2"
-          />
-          <Popover open={agenceopen} onOpenChange={setagenceOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="default"
-                role="combobox"
-                aria-expanded={agenceopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("agence")
-                  ? agences.find(
-                      (framework: any) =>
-                        framework.codug === searchParams.get("agence")
-                    )?.libelle || "Sélectionner un agence"
-                  : "Sélectionner un agence"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput placeholder="Search agence" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-                <CommandGroup>
-                  {agences.map((item: any) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleAgence(item.codug);
-                        setAgenceValue(
-                          item.codug === searchParams.get("agence")
-                            ? ""
-                            : item.codug
-                        );
-
-                        setagenceOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          agenceValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {item.codug}: {item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover>
-          <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetAgence}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button>
-          <div className="w-1" />
-          <Popover open={groupopen} onOpenChange={setgroupOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="default"
-                role="combobox"
-                aria-expanded={groupopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("groupe")
-                  ? agences.find(
-                      (framework: any) =>
-                        framework.codug === searchParams.get("groupe")
-                    )?.libelle || "Sélectionner un groupe"
-                  : "Sélectionner un groupe"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0 ml-2">
-              <Command>
-                <CommandInput placeholder="Search group" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-
-                <CommandGroup>
-                  {groupes.map((item: any, i: number) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleGroup(item.codug);
-                        setgroupeValue(
-                          item.codug === searchParams.get("groupe")
-                            ? ""
-                            : item.codug
-                        );
-                        setgroupOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          groupeValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {item.codug}:{item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover>
-          <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetGroup}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button>
-
-          <Card className="h-10">
-            <CardContent className="flex items-center justify-center my-1">
-              <p>Nombre de jour :</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleFrom(e.target.value)}
-                placeholder="De"
-              />
-              <p className="mx-1">à</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleTo(e.target.value)}
-                placeholder="à"
-              />
-            </CardContent>
-          </Card>
-
-          <DataTableViewOptions table={table} />
-        </>
-      </div> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
+            {table.getHeaderGroups().map((headerGroup, i) => (
+              <TableRow key={i}>
+                {headerGroup.headers.map((header, i) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={i}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -403,7 +143,7 @@ export function DataTableValidationDeTransfer<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map((row, i) => (
                 <TableRow
                   className="p-"
                   onDoubleClick={() => {
@@ -418,12 +158,12 @@ export function DataTableValidationDeTransfer<TData, TValue>({
                         )
                     );
                   }}
-                  key={row.id}
+                  key={i}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map((cell, i) => (
                     <TableCell
-                      key={cell.id}
+                      key={i}
                       className="p- cursor-pointer"
                       onClick={(e) => console.log(e)}
                     >
@@ -445,23 +185,26 @@ export function DataTableValidationDeTransfer<TData, TValue>({
                 </TableCell>
               </TableRow>
             )}
+
+            <TableRow>
+              <TableCell className="font-bold">TOTAL Dossier:</TableCell>
+              <TableCell className="font-bold">{totalAccout}</TableCell>
+              <TableCell className="font-bold">TOT IMP:</TableCell>
+              <TableCell className="font-bold">{total.mnt_imp || 0} </TableCell>
+              <TableCell className="font-bold">TOT DEP:</TableCell>
+              <TableCell className="font-bold">
+                {total.depassement || 0}
+              </TableCell>
+              <TableCell className="font-bold">TOT IRR:</TableCell>
+              <TableCell className="font-bold">
+                {total.tot_creance || 0}
+              </TableCell>
+              <TableCell className="font-bold">TOT ENG:</TableCell>
+              <TableCell className="font-bold">
+                {total.engagement || 0}
+              </TableCell>
+            </TableRow>
           </TableBody>
-          <TableRow>
-            <TableCell className="font-bold">TOTAL Dossier:</TableCell>
-            <TableCell className="font-bold">{totalAccout}</TableCell>
-            <TableCell className="font-bold">TOT IMP:</TableCell>
-            <TableCell className="font-bold">{total.mnt_imp || 0} </TableCell>
-            <TableCell className="font-bold">TOT DEP:</TableCell>
-            <TableCell className="font-bold">
-              {total.depassement || 0}
-            </TableCell>
-            <TableCell className="font-bold">TOT IRR:</TableCell>
-            <TableCell className="font-bold">
-              {total.tot_creance || 0}
-            </TableCell>
-            <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.engagement || 0}</TableCell>
-          </TableRow>
         </Table>
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
