@@ -6,7 +6,15 @@ import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
 import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
 import ValidationTransferForm from "@/components/forms/ValidationTransferForm";
 
-const ValidationTransferModal = () => {
+type ValidationTransferModalProps = {
+  // Define props type here
+  motifs: any[];
+  validationTransfer: any[];
+};
+const ValidationTransferModal = ({
+  motifs,
+  validationTransfer,
+}: ValidationTransferModalProps) => {
   const { isOpen, onOpen, onClose } = useValidationTransferModal();
   return (
     <Modal
@@ -15,7 +23,10 @@ const ValidationTransferModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      <ValidationTransferForm />
+      <ValidationTransferForm
+        motifs={motifs}
+        validationTransfer={validationTransfer}
+      />
     </Modal>
   );
 };

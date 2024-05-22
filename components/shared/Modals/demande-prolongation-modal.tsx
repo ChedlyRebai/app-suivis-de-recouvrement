@@ -4,7 +4,7 @@ import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal"
 import Modal from "./Modal";
 import DemandeProlongationForm from "@/components/forms/demandeProlongationForm";
 
-const DemandeProlonagationModal = () => {
+const DemandeProlonagationModal = ({ motifs }: { motifs: any[] }) => {
   const { isOpen, onOpen, onClose } = useDemandeProlongationModal();
   return (
     <Modal
@@ -13,7 +13,7 @@ const DemandeProlonagationModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      <DemandeProlongationForm />
+      <DemandeProlongationForm motifs={motifs} />
     </Modal>
   );
 };

@@ -50,6 +50,7 @@ import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "../../../../../components/shared/data-table-toolbar";
+import DemandeProlonagationModal from "@/components/shared/Modals/demande-prolongation-modal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

@@ -58,8 +58,15 @@ const formSchema = z.object({
     message: "",
   }),
 });
-
-const ValidationTransferForm = () => {
+type ValidationTransferProps = {
+  // Define props type here
+  motifs: any[];
+  validationTransfer: any[];
+};
+const ValidationTransferForm = ({
+  motifs,
+  validationTransfer,
+}: ValidationTransferProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

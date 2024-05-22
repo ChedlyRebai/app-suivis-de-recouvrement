@@ -22,6 +22,7 @@ import { demandedeprolongation } from "./_component/demandeProlongationColumns";
 import { getLettre } from "@/actions/lettre.action";
 import { getDemandeDeProlongation } from "@/actions/prologation.action";
 import DemandeProlonagationModal from "@/components/shared/Modals/demande-prolongation-modal";
+import { getMotif, getMotifCommercial } from "@/actions/motif.action";
 
 export default async function Home({
   searchParams,
@@ -57,7 +58,8 @@ export default async function Home({
   );
   console.log("data");
   console.log(data);
-
+  const motifs = await getMotifCommercial();
+  console.log(motifs);
   const groupes = await getGroupes();
   const agences = await getAgences();
   console.log("render page");
@@ -84,12 +86,12 @@ export default async function Home({
                 totalAccout={data.totalCount || 0}
                 totalPages={data.totalPages || 1}
                 columns={demandedeprolongation}
-                data={data.result || []}
+                data={[]}
               />
             </CardContent>
           </Card>
         </div>
-        <DemandeProlonagationModal />
+        <DemandeProlonagationModal motifs={motifs} />
         {/* </Suspense> */}
       </div>
     </div>

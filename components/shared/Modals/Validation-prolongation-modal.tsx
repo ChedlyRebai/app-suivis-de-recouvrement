@@ -5,8 +5,15 @@ import Modal from "./Modal";
 import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
 import useValidationProlongationModal from "@/hooks/use-validation-prolongation-modal";
 import ValidationProlonagationForm from "@/components/forms/ValidationProlongationForm";
-
-const ValidationProlonagationnModal = () => {
+type ValidationTransferModalProps = {
+  // Define props type here
+  motifs: any[];
+  validationTransfer: any[];
+};
+const ValidationProlonagationnModal = ({
+  motifs,
+  validationTransfer,
+}: ValidationTransferModalProps) => {
   const { isOpen, onOpen, onClose } = useValidationProlongationModal();
   return (
     <Modal
@@ -15,7 +22,7 @@ const ValidationProlonagationnModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      <ValidationProlonagationForm />
+      <ValidationProlonagationForm motifs={motifs} />
     </Modal>
   );
 };
