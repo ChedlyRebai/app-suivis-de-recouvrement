@@ -7,10 +7,11 @@ import {
   clientResult,
 } from "@/actions/admin.action";
 import { deleteCompteRenduById } from "@/actions/comptrendu.action";
+import AlertConfirmation from "@/components/shared/confirmationAlert";
 import { Button } from "@/components/ui/button";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, SearchIcon, Trash2 } from "lucide-react";
+import { ArrowUpDown, EyeIcon, SearchIcon, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
@@ -60,27 +61,22 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
       const { isOpen, onClose, onOpen } = useCompteRenduModal();
 
       return (
-        // <Button
-        //   className="flex items-center h-full  justify-center"
-        //   variant="default"
-        //   onClick={() => onOpen(row.original.id)}
-        // >
-        //   <SearchIcon className="mr-" />
-        // </Button>
         <div className="flex justify-center">
           <Button
-            className="mr-1"
+            className="flex items-center mr-1 h-full  justify-center"
             variant="default"
-            onClick={() => onOpen(row?.original?.id)}
+            onClick={() => onOpen(row.original.id)}
           >
-            <SearchIcon className="mr-" size={20} />
-            {row?.original?.id}
+            <EyeIcon className="mr-" />
           </Button>
-
-          <Button
+          <AlertConfirmation
             variant="destructive"
-            onClick={async () => {
-              await deleteCompteRenduById(row?.original?.id)
+            icon={<Trash2 size={20} />}
+            buttonText={""}
+            description=" Voulez-vous vraiment supprimer ce compte rendu ?"
+            title="Suppression de compte rendu"
+            onConfirm={async () => {
+              await deleteCompteRenduById(row.original.id)
                 .then(() => {
                   toast.success("Compte rendu supprimé avec succès");
                 })
@@ -89,10 +85,34 @@ export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
                 });
               //refetch();
             }}
-          >
-            <Trash2 size={20} />
-          </Button>
+          />
         </div>
+        // <div className="flex justify-center">
+        //   <Button
+        //     className="mr-1"
+        //     variant="default"
+        //     onClick={() => onOpen(row?.original?.id)}
+        //   >
+        //     <SearchIcon className="mr-" size={20} />
+        //     {row?.original?.id}
+        //   </Button>
+
+        //   <Button
+        //     variant="destructive"
+        //     onClick={async () => {
+        //       await deleteCompteRenduById(row?.original?.id)
+        //         .then(() => {
+        //           toast.success("Compte rendu supprimé avec succès");
+        //         })
+        //         .catch((error) => {
+        //           toast.error("Erreur lors de la suppression du compte rendu");
+        //         });
+        //       //refetch();
+        //     }}
+        //   >
+        //     <Trash2 size={20} />
+        //   </Button>
+        // </div>
       );
     },
   },

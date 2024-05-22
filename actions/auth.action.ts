@@ -58,7 +58,7 @@ export const Logout = async () => {
       `${process.env.LOGIN_API_URL}/auth/logout`,
       {}
     );
-    console.log(res.data);
+
     cookies().delete("session");
     redirect("/login");
     return Promise.resolve({ status: res.status, data: res.data.message });

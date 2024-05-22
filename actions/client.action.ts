@@ -286,7 +286,6 @@ export const getValidationProposeDeTransferAnticipe = async (
       `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&cli=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
 
-    console.log(res.data);
     return res.data || ([] as ab_client);
   } catch (error) {
     return [] as ab_client;

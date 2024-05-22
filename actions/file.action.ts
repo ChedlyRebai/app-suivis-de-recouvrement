@@ -4,6 +4,7 @@ import { File } from "@/Models/file.model";
 import axios from "axios";
 import { Zone } from "./admin.action";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export interface Main {
   FileName: string;
@@ -22,6 +23,19 @@ export interface AffecterA {
   Zone: Zone;
   Agence: Agence;
 }
+
+// export const onLoadFile = async (file: any): Promise<string> => {
+//   const arrayBuffer = await file.arrayBuffer();
+//   const typedarray = new Uint8Array(arrayBuffer);
+
+//   const pdf = (await pdfjsLib.getDocument({ data: typedarray })
+//     .promise) as PDFDocumentProxy;
+//   const page = (await pdf.getPage(1)) as PDFPageProxy;
+//   const textContent = await page.getTextContent();
+//   const text = textContent.items.map((item: any) => item.str).join(" ");
+
+//   return text;
+// };
 
 export const creatFile = async (
   clientID: Number,
@@ -83,6 +97,7 @@ export const getAllfiles = async (
       `https://release4.vercel.app/file/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
 
+    revalidatePath("/files");
     return (res.data as fileresult) || ({} as fileresult);
   } catch (error) {
     console.log(error);
@@ -91,11 +106,13 @@ export const getAllfiles = async (
 };
 
 export const deleteFile = async (idFile: Number | string): Promise<File> => {
-  console.log(`http://localhost:10001/file/create`);
+  console.log(`https://release4.vercel.app  /file/create`);
   try {
     const res = await axios.delete<File>(
-      `http://localhost:10001/file/deleteById?id=${idFile}`
+      `https://release4.vercel.app/file/deleteById?id=${idFile}`
     );
+
+    revalidatePath("/files");
     return (res.data as File) || ({} as File);
   } catch (error) {
     console.log(error);

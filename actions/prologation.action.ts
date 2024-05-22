@@ -99,7 +99,7 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
       `https://release3-v2.vercel.app/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&cli=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     console.log("============================================");
-    console.log(res.data);
+
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;

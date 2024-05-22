@@ -3,9 +3,11 @@ import { ab_client } from "@/Models/ab_client.model";
 import { File } from "@/Models/file.model";
 import { Utilisateur, usersAdmin } from "@/actions/admin.action";
 import { deleteFile } from "@/actions/file.action";
+import AlertConfirmation from "@/components/shared/confirmationAlert";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, Download, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 export const filecolumns: ColumnDef<File>[] = [
   {
@@ -60,6 +62,7 @@ export const filecolumns: ColumnDef<File>[] = [
       return (
         <div className="flex justify-center items-center">
           <Button
+            className="mr-1"
             variant="default"
             onClick={() => {
               window.open(row.original.FilePath);
@@ -67,14 +70,26 @@ export const filecolumns: ColumnDef<File>[] = [
           >
             <Download size={16} />
           </Button>{" "}
-          <Button
+          <AlertConfirmation
             variant="destructive"
-            onClick={async () => {
-              await deleteFile(row.original.id);
+            icon={<Trash2 size={20} />}
+            buttonText={""}
+            description=" Voulez-vous vraiment supprimer ce compte rendu ?"
+            title="Suppression de compte rendu"
+            onConfirm={async () => {
+              await deleteFile(row.original.id)
+                .then(() => {
+                  //in french
+                  toast.success("Fichier supprimé avec succès");
+                })
+                .catch(() => {
+                  toast.error("Erreur lors de la suppression");
+                });
             }}
-          >
+          />
+          {/* <Button variant="destructive" onClick={async () => {}}>
             <Trash2 size={16} />
-          </Button>
+          </Button> */}
         </div>
       );
     },

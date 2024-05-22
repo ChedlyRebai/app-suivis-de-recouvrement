@@ -36,7 +36,6 @@ export const creteAcess = async (path: string) => {
     const res = await axios.post("http://localhost:10000/droit/createaccess", {
       page: path,
     });
-    console.log(res.data);
 
     return true;
   } catch (error) {
