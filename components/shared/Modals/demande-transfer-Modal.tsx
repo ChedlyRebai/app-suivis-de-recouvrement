@@ -3,6 +3,7 @@
 import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import Modal from "./Modal";
 import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
+import DemandeTransferForm from "@/components/forms/demandeTransferForm";
 
 const DemandeTransfernModal = () => {
   const { isOpen, onOpen, onClose } = useDemandeTransfernModal();
@@ -13,7 +14,7 @@ const DemandeTransfernModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      edit
+      <DemandeTransferForm />
     </Modal>
   );
 };
