@@ -107,7 +107,7 @@ const ValidationProlonagationForm = ({
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
+                    <SelectValue placeholder="Validation">
                       {field.value}
                     </SelectValue>
                   </SelectTrigger>
