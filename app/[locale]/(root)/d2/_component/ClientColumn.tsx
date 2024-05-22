@@ -8,7 +8,7 @@ import { ArrowUpDown } from "lucide-react";
 export const clientcolumns: ColumnDef<any>[] = [
   {
     accessorKey: "cli",
-    header: "cli",
+    header: "Cli",
   },
   {
     accessorKey: "nom",
@@ -37,21 +37,14 @@ export const clientcolumns: ColumnDef<any>[] = [
       );
     },
   },
-  {
-    accessorKey: "tel1",
-    header: "Telephone 1",
-  },
-  {
-    accessorKey: "tel2",
-    header: "Telephone 2",
-  },
+
   {
     accessorKey: "nbre_imp",
-    header: "Nombre Impayé",
+    header: "Nombre impayé",
   },
   {
     accessorKey: "mnt_imp",
-    header: "Montant Impayé",
+    header: "Montant impayé",
   },
   {
     accessorKey: "nombre_jours",
@@ -59,14 +52,22 @@ export const clientcolumns: ColumnDef<any>[] = [
   },
   {
     accessorKey: "sd",
-    header: "sd",
+    header: "Solde debiteur",
   },
   {
     accessorKey: "depassement",
-    header: "depassement",
+    header: "Depassement",
   },
   {
     accessorKey: "nombre_jours_sdb",
-    header: "nombre_jours_sdb",
+    header: "Nombre jours sdb",
+  },
+  {
+    accessorKey: "tel1",
+    header: "Telephone 1",
+  },
+  {
+    accessorKey: "tel2",
+    header: "Telephone 2",
   },
 ];

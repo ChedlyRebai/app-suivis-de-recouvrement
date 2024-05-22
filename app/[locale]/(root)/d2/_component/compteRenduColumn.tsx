@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 export const compterendutcolumns: ColumnDef<CompteRendu>[] = [
   {
     accessorKey: "cli",
-    header: "Client Cli",
+    header: "Cli",
   },
   {
     accessorKey: "ab_client.nom",

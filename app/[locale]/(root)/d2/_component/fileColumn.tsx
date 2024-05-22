@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 export const filecolumns: ColumnDef<File>[] = [
   {
     accessorKey: "cli client",
-    header: "cli client",
+    header: "Cli",
     cell: ({ row }) => {
       return row.original.ab_client.cli;
     },
@@ -20,14 +20,14 @@ export const filecolumns: ColumnDef<File>[] = [
 
   {
     accessorKey: "nom client",
-    header: "nom client",
+    header: "Nom client",
     cell: ({ row }) => {
       return row.original.ab_client.nom;
     },
   },
   {
     accessorKey: "File Name",
-    header: "File Name",
+    header: "Nom de fichier",
     cell: ({ row }) => {
       return row.original.FileName;
     },
@@ -57,7 +57,7 @@ export const filecolumns: ColumnDef<File>[] = [
 
   {
     accessorKey: "",
-    header: "download File",
+    header: "Voir",
     cell: ({ row }) => {
       return (
         <div className="flex justify-center items-center">

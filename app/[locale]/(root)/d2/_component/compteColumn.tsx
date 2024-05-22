@@ -1,6 +1,11 @@
 "use client";
 import { ab_client } from "@/Models/ab_client.model";
-import { Client, Compte, Utilisateur, clientResult } from "@/actions/admin.action";
+import {
+  Client,
+  Compte,
+  Utilisateur,
+  clientResult,
+} from "@/actions/admin.action";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
@@ -8,11 +13,11 @@ import { ArrowUpDown } from "lucide-react";
 export const comptecolumns: ColumnDef<Compte>[] = [
   {
     accessorKey: "cli",
-    header: "cli",
+    header: "Cli",
   },
   {
     accessorKey: "ncp",
-    header: "N° Compte",
+    header: "N°Compte",
   },
   {
     accessorKey: "ab_client.nom",
@@ -37,9 +42,6 @@ export const comptecolumns: ColumnDef<Compte>[] = [
 
   {
     accessorKey: "mnt_imp",
-    header: "Montant solde debiteur", 
+    header: "Montant solde debiteur",
   },
-
-
- 
 ];
