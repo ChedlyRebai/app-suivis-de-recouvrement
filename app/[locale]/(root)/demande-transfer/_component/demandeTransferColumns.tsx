@@ -12,8 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { use } from "react";
 
 export const demandeTransferColumns: ColumnDef<any>[] = [
   {
@@ -144,6 +146,25 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
             </SelectGroup>
           </SelectContent>
         </Select>
+      );
+    },
+  },
+  {
+    accessorKey: "action",
+    header: "Action",
+    cell: ({ row }) => {
+      const { onOpen, setId } = useDemandeTransfernModal();
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => {
+            setId(row.original?.cli);
+            onOpen();
+            console.log(row.original?.cli);
+          }}
+        >
+          Transferer
+        </Button>
       );
     },
   },
