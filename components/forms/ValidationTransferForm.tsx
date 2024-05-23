@@ -69,18 +69,16 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
           name="Motif"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="username">Motif de transfert</FormLabel>
+              <FormLabel htmlFor="motif">Motif de transfert</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
-                      {field.value}
-                    </SelectValue>
+                    <SelectValue placeholder="Sélectionné une motif" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {motifs.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.codenv}>
+                    <SelectItem key={item.codenv} value={`${item.codenv}`}>
                       {item.codenv}: {item.libelle}
                     </SelectItem>
                   ))}
@@ -98,9 +96,7 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
-                      {field.value}
-                    </SelectValue>
+                    <SelectValue placeholder="Sélectionné une motif" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
