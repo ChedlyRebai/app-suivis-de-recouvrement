@@ -25,15 +25,10 @@ import {
 import { DialogFooter } from "../ui/dialog";
 import { Textarea } from "../ui/textarea";
 import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
+import { Label } from "../ui/label";
 
 const formSchema = z.object({
-  Motif: z.string().min(1, {
-    message: "",
-  }),
   validation: z.string().min(1, {
-    message: "",
-  }),
-  Commentaire: z.string().min(1, {
     message: "",
   }),
 });
@@ -47,15 +42,12 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Motif: "",
-      Commentaire: "",
       validation: "",
     },
   });
 
-  const { onClose, id } = useValidationTransferModal();
+  const { onClose, id, commentaire, Motif } = useValidationTransferModal();
 
-  //const creatDroit = useStore((state) => state.creatDroit) as any;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
     console.log(id);
@@ -64,29 +56,6 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 ">
-        <FormField
-          control={form.control}
-          name="Motif"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="motif">Motif de transfert</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {motifs.map((item: any) => (
-                    <SelectItem key={item.codenv} value={`${item.codenv}`}>
-                      {item.codenv}: {item.libelle}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="validation"
@@ -111,18 +80,10 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="Commentaire"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="commentaire">Commentaire</FormLabel>
-              <FormControl>
-                <Textarea id="username" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <Label>Motif de prolongation</Label>
+        {Motif ? <p>{Motif}</p> : <p>pas de motif</p>}
+        <Label>Commentaire</Label>
+        {commentaire ? <p>{commentaire}</p> : <p>pas de commentaire</p>}
 
         <DialogFooter>
           <Button variant={"outline"} onClick={onClose}>
