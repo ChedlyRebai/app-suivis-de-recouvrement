@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
@@ -269,10 +270,21 @@ export const demandedeprolongation: ColumnDef<any>[] = [
     },
   },
   {
-    accessorKey: "",
+    accessorKey: "action",
     header: "Action",
     cell: ({ row }) => {
-      return <Button id="terms">DETAILS</Button>;
+      const { onOpen, setId } = useDemandeProlongationModal();
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => {
+            setId(row.original?.id);
+            onOpen();
+          }}
+        >
+          Action
+        </Button>
+      );
     },
   },
 ];

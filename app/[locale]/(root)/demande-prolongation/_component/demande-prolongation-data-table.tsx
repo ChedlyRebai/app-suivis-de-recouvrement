@@ -86,85 +86,6 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
 
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  // const [groupes, setGroupes] = useState<any>([]);
-  // const [agences, setAgences] = useState<any>([]);
-
-  // const [agenceopen, setagenceOpen] = useState(false);
-  // const [groupopen, setgroupOpen] = useState(false);
-  // const [agenceValue, setAgenceValue] = useState("");
-  // const [groupeValue, setgroupeValue] = useState("");
-
-  // const handleSearch = useDebouncedCallback((query: string) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   if (query) {
-  //     params.set("query", query);
-  //     params.set("page", "1");
-  //   } else {
-  //     params.delete("query");
-  //   }
-  //   console.log(params.get("query")?.toString());
-  //   replace(`${pathname}?${params.toString()}`);
-  // }, 100);
-
-  // const handleGroup = useDebouncedCallback((query: string) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   if (query) {
-  //     params.set("groupe", query);
-  //     params.set("page", "1");
-  //   }
-  //   console.log(params.get("groupe")?.toString());
-  //   replace(`${pathname}?${params.toString()}`);
-  // }, 0);
-
-  const handleFrom = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("from", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("from")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleTo = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("to");
-      params.set("page", "1");
-    } else {
-      params.set("to", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("to")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  // const handleAgence = useDebouncedCallback((query: string) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   if (
-  //     query === "" ||
-  //     query === null ||
-  //     query === undefined ||
-  //     query === "0"
-  //   ) {
-  //     console.log(query);
-  //     params.delete("from");
-  //     params.set("page", "1");
-  //   }
-  //   if (query) {
-  //     params.set("agence", query);
-  //     params.set("page", "1");
-  //   }
-  //   console.log(params.get("groupe")?.toString());
-  //   replace(`${pathname}?${params.toString()}`);
-  // }, 0);
-
   const [loadingTable, setLoadingTable] = useState(false);
 
   if (loadingTable) {
@@ -244,31 +165,11 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   const [agenceValue, setAgenceValue] = useState("");
   const [groupeValue, setgroupeValue] = useState("");
   const searchParams = useSearchParams();
-  const handleSearch = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-
-    if (query) {
-      params.set("query", query);
-      params.set("page", "1");
-    } else {
-      params.delete("query");
-    }
-    console.log(params.get("query")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 100);
 
   const handleGroup = (group: string) => {
     const params = new URLSearchParams(searchParams);
     if (group) {
       params.set("groupe", group);
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const handleAgence = (agence: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (agence) {
-      params.set("agence", agence);
     }
     replace(`${pathname}?${params.toString()}`);
   };

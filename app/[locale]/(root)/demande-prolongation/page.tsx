@@ -86,7 +86,7 @@ export default async function Home({
                 totalAccout={data.totalCount || 0}
                 totalPages={data.totalPages || 1}
                 columns={demandedeprolongation}
-                data={[]}
+                data={data.result || []}
               />
             </CardContent>
           </Card>
