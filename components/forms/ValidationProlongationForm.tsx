@@ -32,6 +32,7 @@ import { getMotif } from "@/actions/utils.actions";
 import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import { Textarea } from "../ui/textarea";
 import useValidationProlongationModal from "@/hooks/use-validation-prolongation-modal";
+import { Label } from "../ui/label";
 
 const formSchema = z.object({
   Motif: z.string().min(1, {
@@ -73,7 +74,7 @@ const ValidationProlonagationForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 ">
-        <FormField
+        {/* <FormField
           control={form.control}
           name="Motif"
           render={({ field }) => (
@@ -97,7 +98,7 @@ const ValidationProlonagationForm = ({
               </Select>
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name="validation"
@@ -123,8 +124,12 @@ const ValidationProlonagationForm = ({
             </FormItem>
           )}
         />
-        {motif}
-        {commentaire}
+        <Label>Motif de prolongation</Label>
+
+        {motif ? <p>{motif}</p> : <p>pas de motif</p>}
+
+        <Label>Commentaire</Label>
+        {commentaire ? <p>{commentaire}</p> : <p>pas de commentaire</p>}
         {/* <FormField
           control={form.control}
           name="Commentaire"
