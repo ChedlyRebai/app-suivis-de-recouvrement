@@ -67,9 +67,9 @@ const ValidationProlonagationForm = ({
   });
   const { onClose, commentaire, Motif } = useValidationProlongationModal();
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {};
-
-  const [motif, setMotif] = useState<any>([]);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values, commentaire, Motif);
+  };
 
   return (
     <Form {...form}>
@@ -113,10 +113,11 @@ const ValidationProlonagationForm = ({
                     </SelectValue>
                   </SelectTrigger>
                 </FormControl>
+
                 <SelectContent>
                   {validation.map((item: any) => (
                     <SelectItem key={item.codenv} value={item.libelle}>
-                      {item.codenv}: {item.libelle}
+                      {item.libelle}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -126,7 +127,7 @@ const ValidationProlonagationForm = ({
         />
         <Label>Motif de prolongation</Label>
 
-        {motif ? <p>{motif}</p> : <p>pas de motif</p>}
+        {Motif ? <p>{Motif}</p> : <p>pas de motif</p>}
 
         <Label>Commentaire</Label>
         {commentaire ? <p>{commentaire}</p> : <p>pas de commentaire</p>}
