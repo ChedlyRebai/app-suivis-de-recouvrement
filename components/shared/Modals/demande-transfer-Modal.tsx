@@ -2,7 +2,7 @@
 
 import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import Modal from "./Modal";
-import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
+import { useDemandeTransfernModal } from "@/hooks/use-demande-transfer-Modal";
 import DemandeTransferForm from "@/components/forms/demandeTransferForm";
 type Props = {
   motif: any[];

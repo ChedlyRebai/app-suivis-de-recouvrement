@@ -31,7 +31,7 @@ import { getAllFunctions } from "@/actions/fonction.action";
 import useStore from "@/lib/droitStore";
 import toast from "react-hot-toast";
 import { Textarea } from "../ui/textarea";
-import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
+import { useDemandeTransfernModal } from "@/hooks/use-demande-transfer-Modal";
 
 import { updateTransfer } from "@/actions/transfer.action";
 

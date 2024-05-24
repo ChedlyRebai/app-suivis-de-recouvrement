@@ -8,12 +8,12 @@ interface DemandeTransferModalStore {
   onClose: () => void;
 }
 
-const useDemandeTransfernModal = create<DemandeTransferModalStore>((set) => ({
-  id: undefined,
-  isOpen: false,
-  setId: (id) => set({ id }),
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
-}));
-
-export default useDemandeTransfernModal;
+export const useDemandeTransfernModal = create<DemandeTransferModalStore>(
+  (set) => ({
+    id: undefined,
+    isOpen: false,
+    setId: (id) => set({ id }),
+    onOpen: () => set({ isOpen: true }),
+    onClose: () => set({ isOpen: false }),
+  })
+);

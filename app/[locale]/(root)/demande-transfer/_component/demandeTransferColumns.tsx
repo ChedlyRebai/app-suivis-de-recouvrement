@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
+import { useDemandeTransfernModal } from "@/hooks/use-demande-transfer-Modal";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { use } from "react";
@@ -85,70 +85,70 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
     header: "Classe",
   },
 
-  {
-    accessorKey: "mott",
-    header: "Motif de transfer",
-    cell: async ({ row }) => {
-      const motif: any = [];
-      return (
-        <Select
-          onValueChange={(newValue) => {
-            console.log(newValue, row.original?.cli);
-            updateTransferAnti(row.original?.cli, "mott", newValue);
-          }}
-          defaultValue={row.getValue("mott") || ""}
-        >
-          <SelectTrigger className={` w-fit`}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="mott">
-              {motif.map((item: any) => (
-                <SelectItem key={item.codenv} value={item.codenv}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-  {
-    accessorKey: "obs",
-    header: "Commentaire",
-  },
+  // {
+  //   accessorKey: "mott",
+  //   header: "Motif de transfer",
+  //   cell: async ({ row }) => {
+  //     const motif: any = [];
+  //     return (
+  //       <Select
+  //         onValueChange={(newValue) => {
+  //           console.log(newValue, row.original?.cli);
+  //           updateTransferAnti(row.original?.cli, "mott", newValue);
+  //         }}
+  //         defaultValue={row.getValue("mott") || ""}
+  //       >
+  //         <SelectTrigger className={` w-fit`}>
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="mott">
+  //             {motif.map((item: any) => (
+  //               <SelectItem key={item.codenv} value={item.codenv}>
+  //                 {item.libelle}
+  //               </SelectItem>
+  //             ))}
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "obs",
+  //   header: "Commentaire",
+  // },
 
-  {
-    accessorKey: "trf_a",
-    header: "Transferer à",
-    cell: async ({ row }) => {
-      const typeTransfer = await getTypeTransfer();
-      return (
-        <Select
-          defaultValue={row.getValue("trf_a") || ""}
-          onValueChange={(newValue) => {
-            console.log(newValue, row.original?.cli);
-            updateTransferAnti(row.original?.cli, "trf_a", newValue);
-          }}
-        >
-          <SelectTrigger className={` w-fit `}>
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="trf_a">
-              {" "}
-              {typeTransfer.map((item: any) => (
-                <SelectItem key={item.codenv} value={item.codenv}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "trf_a",
+  //   header: "Transferer à",
+  //   cell: async ({ row }) => {
+  //     const typeTransfer = await getTypeTransfer();
+  //     return (
+  //       <Select
+  //         defaultValue={row.getValue("trf_a") || ""}
+  //         onValueChange={(newValue) => {
+  //           console.log(newValue, row.original?.cli);
+  //           updateTransferAnti(row.original?.cli, "trf_a", newValue);
+  //         }}
+  //       >
+  //         <SelectTrigger className={` w-fit `}>
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="trf_a">
+  //             {" "}
+  //             {typeTransfer.map((item: any) => (
+  //               <SelectItem key={item.codenv} value={item.codenv}>
+  //                 {item.libelle}
+  //               </SelectItem>
+  //             ))}
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "action",
     header: "Action",
