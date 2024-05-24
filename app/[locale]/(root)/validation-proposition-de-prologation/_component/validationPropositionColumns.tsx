@@ -314,11 +314,13 @@ export const validationprolongation: ColumnDef<any>[] = [
     accessorKey: "action",
     header: "Action",
     cell: ({ row }) => {
-      const { onOpen, setId } = useValidationProlongationModal();
+      const { onOpen, setId, setMotifCommentaire } =
+        useValidationProlongationModal();
       return (
         <Button
           variant="ghost"
           onClick={() => {
+            setMotifCommentaire(row.original?.Mott.libelle, row.original?.obs);
             setId(row.original?.id);
             onOpen();
           }}
