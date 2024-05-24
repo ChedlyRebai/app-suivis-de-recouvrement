@@ -68,3 +68,21 @@ export const updatedemandeprolongation = async (
     return [] as any;
   }
 };
+
+export const updateTransfer = async (
+  mott: string,
+  obs: string,
+  id: string | number | undefined,
+  trf_a: string
+) => {
+  try {
+    const res = await axios.put(
+      `http://localhost:10001/transfer/update?id=${id}`,
+      { mott, obs, id, trf_a }
+    );
+    console.log("res prolongationnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", res);
+    return { data: res.data, status: res.status } || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};

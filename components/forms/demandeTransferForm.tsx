@@ -33,6 +33,8 @@ import toast from "react-hot-toast";
 import { Textarea } from "../ui/textarea";
 import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
 
+import { updateTransfer } from "@/actions/transfer.action";
+
 const formSchema = z.object({
   Motif: z.string().min(1, {
     message: "",
@@ -63,6 +65,19 @@ const DemandeTransferForm = ({ motif, typeTransfer }: Props) => {
   //const creatDroit = useStore((state) => state.creatDroit) as any;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values, id);
+    await updateTransfer(
+      values.Motif,
+      values.Commentaire,
+      id,
+      values.Typetransfer
+    ).then((res) => {
+      if (res.status === 200) {
+        toast.success("Demande de transfert effectué avec succès");
+        onClose();
+      } else {
+        toast.error("Erreur lors de la demande de transfert");
+      }
+    });
   };
 
   return (
@@ -84,8 +99,8 @@ const DemandeTransferForm = ({ motif, typeTransfer }: Props) => {
                 </FormControl>
                 <SelectContent>
                   {motif.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
-                      {item.codenv}: {item.libelle}
+                    <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                      {item.libelle}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -109,8 +124,8 @@ const DemandeTransferForm = ({ motif, typeTransfer }: Props) => {
                 </FormControl>
                 <SelectContent>
                   {typeTransfer.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
-                      {item.codenv}: {item.libelle}
+                    <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                      {item.libelle}
                     </SelectItem>
                   ))}
                 </SelectContent>

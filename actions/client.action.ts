@@ -256,7 +256,7 @@ export const demandeDeTransferAnticipe = async (
     }`;
 
     const res = await axios.get(
-      `https://release3-v2.vercel.app/client/demandedetransferanticipe?page&perPage&search&groupe&agence&from&to`
+      `https://release3-v2.vercel.app/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from&to`
     );
 
     return (res.data as any) || ({} as any);
