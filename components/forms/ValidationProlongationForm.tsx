@@ -53,7 +53,7 @@ type Props = {
 
 const ValidationProlonagationForm = ({
   motifs,
-  commentaire,
+
   validation,
 }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,7 +64,7 @@ const ValidationProlonagationForm = ({
       validation: "",
     },
   });
-  const { onClose } = useValidationProlongationModal();
+  const { onClose, commentaire, Motif } = useValidationProlongationModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {};
 
@@ -123,7 +123,9 @@ const ValidationProlonagationForm = ({
             </FormItem>
           )}
         />
-        <FormField
+        {motif}
+        {commentaire}
+        {/* <FormField
           control={form.control}
           name="Commentaire"
           render={({ field }) => (
@@ -134,7 +136,7 @@ const ValidationProlonagationForm = ({
               </FormControl>
             </FormItem>
           )}
-        />
+        /> */}
 
         <DialogFooter>
           <Button variant={"outline"} onClick={onClose}>

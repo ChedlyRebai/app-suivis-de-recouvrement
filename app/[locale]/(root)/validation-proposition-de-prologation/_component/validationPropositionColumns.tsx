@@ -320,7 +320,11 @@ export const validationprolongation: ColumnDef<any>[] = [
         <Button
           variant="ghost"
           onClick={() => {
-            setMotifCommentaire(row.original?.Mott.libelle, row.original?.obs);
+            console.log(row.original?.Mott?.libelle, row.original?.obs);
+            setMotifCommentaire(
+              row.original?.Mott?.libelle || "",
+              row.original?.obs || ""
+            );
             setId(row.original?.id);
             onOpen();
           }}

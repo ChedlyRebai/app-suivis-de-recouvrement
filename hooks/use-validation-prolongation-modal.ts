@@ -16,7 +16,8 @@ const useValidationProlongationModal = create<ValidationProlongationModalStore>(
     commentaire: undefined,
     Motif: undefined,
     id: undefined,
-    setMotifCommentaire: (Motif, commentaire) => set({ Motif, commentaire }),
+    setMotifCommentaire: (Motif = "", commentaire = "") =>
+      set({ Motif, commentaire }),
     setId: (id) => set({ id }),
     isOpen: false,
     onOpen: () => set({ isOpen: true }),
