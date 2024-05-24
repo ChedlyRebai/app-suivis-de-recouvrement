@@ -11,7 +11,7 @@ interface demandeProlongationModalStore {
 const useDemandeProlongationModal = create<demandeProlongationModalStore>(
   (set) => ({
     id: undefined,
-    isOpen: true,
+    isOpen: false,
     setId: (id) => set({ id }),
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),

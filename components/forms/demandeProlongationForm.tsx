@@ -31,6 +31,8 @@ import { useEffect, useState } from "react";
 import { getMotif } from "@/actions/utils.actions";
 import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import { Textarea } from "../ui/textarea";
+import { updatePro } from "@/actions/prologation.action";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   Motif: z.string().min(1, {
@@ -49,9 +51,21 @@ const DemandeProlongationForm = ({ motifs }: { motifs: any[] }) => {
       Commentaire: "",
     },
   });
-  const { onClose } = useDemandeProlongationModal();
+  const { onClose, id } = useDemandeProlongationModal();
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {};
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+    console.log(id);
+
+    await updatePro(values.Motif, values.Commentaire, id).then((res) => {
+      if (res.status === 200) {
+        toast.success("Demande de prolonagation effectué avec succès");
+        onClose();
+      } else {
+        toast.error("Erreur lors de la demande de prolonagation");
+      }
+    });
+  };
 
   return (
     <Form {...form}>
@@ -72,8 +86,8 @@ const DemandeProlongationForm = ({ motifs }: { motifs: any[] }) => {
                 </FormControl>
                 <SelectContent>
                   {motifs.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
-                      {item.codenv}: {item.libelle}
+                    <SelectItem key={item.codenv} value={`${item.codenv}`}>
+                      {item.libelle}
                     </SelectItem>
                   ))}
                 </SelectContent>

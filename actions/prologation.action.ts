@@ -161,3 +161,21 @@ export const getDemandeDeProlongation = async (
     return {} as Main;
   }
 };
+
+export const updatePro = async (
+  motif_prol_c: string,
+  obs: string,
+  id: string | number | undefined
+) => {
+  try {
+    //release3
+    const res = await axios.put(
+      `http://localhost:10001/prolongation/update?id=${id}`,
+      { motif_prol_c, obs, id }
+    );
+    console.log("res prolongationnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", res);
+    return { data: res.data, status: res.status } || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};
