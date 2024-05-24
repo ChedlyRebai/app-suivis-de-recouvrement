@@ -82,7 +82,6 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const setAgences = useListAgences((state) => state.setAgences);
-  setAgences(agences);
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
@@ -93,11 +92,11 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const [loadingTable, setLoadingTable] = useState(false);
+  // const [loadingTable, setLoadingTable] = useState(false);
 
-  if (loadingTable) {
-    return <div>Chargement......</div>;
-  }
+  // if (loadingTable) {
+  //   return <div>Chargement......</div>;
+  // }
 
   const table = useReactTable({
     data,
@@ -135,6 +134,7 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
   const [loader, setLoader] = useState(true);
   //effect
   useEffect(() => {
+    setAgences(agences);
     setLoader(false);
   }, []);
 
