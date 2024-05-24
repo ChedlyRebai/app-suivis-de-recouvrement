@@ -99,91 +99,91 @@ export const demandedeprolongation: ColumnDef<any>[] = [
     header: "Classe",
   },
 
-  {
-    accessorKey: "motif_prol_c",
-    header: "Motif de prolongation",
-    cell: async ({ row }) => {
-      const motifCommercial = await getMotifCommercial();
-      return (
-        // <span
-        //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
-        //     row.getValue("acces") === "O"
-        //       ? "bg-green-100 text-green-800"
-        //       : "bg-red-100 text-red-800"
-        //   } `}
-        // >
-        //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
-        // </span>
-        <Select
-          // onValueChange={(newValue) =>
-          //   update(
-          //     row.getValue("code_fonction"),
-          //     row.getValue("id"),
-          //     newValue,
-          //     "acces"
-          //   )
-          // }
-          defaultValue={row.getValue("motif_prol_c") || ""}
-          onValueChange={(newValue) => {
-            console.log(newValue, row.original?.cli);
-            updatedemandeprolongation(
-              row.original?.cli,
-              "motif_prol_c",
-              newValue
-            );
-          }}
-        >
-          <SelectTrigger
-            className={` w-fit ${
-              row.getValue("motif_prol_c") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
-          >
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="motif_prol_c">
-              {" "}
-              {motifCommercial.map((item) => (
-                <SelectItem key={item.codenv} value={item.codenv}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-  {
-    accessorKey: "obs",
-    header: "Commentaire",
-    // cell: ({ row }) => {
-    //   return (
+  // {
+  //   accessorKey: "motif_prol_c",
+  //   header: "Motif de prolongation",
+  //   cell: async ({ row }) => {
+  //     const motifCommercial = await getMotifCommercial();
+  //     return (
+  //       // <span
+  //       //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+  //       //     row.getValue("acces") === "O"
+  //       //       ? "bg-green-100 text-green-800"
+  //       //       : "bg-red-100 text-red-800"
+  //       //   } `}
+  //       // >
+  //       //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
+  //       // </span>
+  //       <Select
+  //         // onValueChange={(newValue) =>
+  //         //   update(
+  //         //     row.getValue("code_fonction"),
+  //         //     row.getValue("id"),
+  //         //     newValue,
+  //         //     "acces"
+  //         //   )
+  //         // }
+  //         defaultValue={row.getValue("motif_prol_c") || ""}
+  //         onValueChange={(newValue) => {
+  //           console.log(newValue, row.original?.cli);
+  //           updatedemandeprolongation(
+  //             row.original?.cli,
+  //             "motif_prol_c",
+  //             newValue
+  //           );
+  //         }}
+  //       >
+  //         <SelectTrigger
+  //           className={` w-fit ${
+  //             row.getValue("motif_prol_c") == "O"
+  //               ? "border-green-500"
+  //               : "border-red-500"
+  //           }`}
+  //         >
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="motif_prol_c">
+  //             {" "}
+  //             {motifCommercial.map((item) => (
+  //               <SelectItem key={item.codenv} value={item.codenv}>
+  //                 {item.libelle}
+  //               </SelectItem>
+  //             ))}
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "obs",
+  //   header: "Commentaire",
+  //   // cell: ({ row }) => {
+  //   //   return (
 
-    //     <Select
+  //   //     <Select
 
-    //       defaultValue={row.getValue("OBS1")}
-    //     >
-    //       <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
-    //         <SelectValue className="" placeholder="Select a fruit" />
-    //       </SelectTrigger>
-    //       <SelectContent>
-    //         <SelectGroup id="OBS1">
-    //           {" "}
-    //           <SelectItem  value="O">
-    //             Oui
-    //           </SelectItem>
-    //           <SelectItem  value="N">
-    //             Non
-    //           </SelectItem>
-    //         </SelectGroup>
-    //       </SelectContent>
-    //     </Select>
-    //   );
-    // },
-  },
+  //   //       defaultValue={row.getValue("OBS1")}
+  //   //     >
+  //   //       <SelectTrigger className={` w-fit ${row.getValue("acces")=='O'?'border-green-500' :'border-red-500'}`}>
+  //   //         <SelectValue className="" placeholder="Select a fruit" />
+  //   //       </SelectTrigger>
+  //   //       <SelectContent>
+  //   //         <SelectGroup id="OBS1">
+  //   //           {" "}
+  //   //           <SelectItem  value="O">
+  //   //             Oui
+  //   //           </SelectItem>
+  //   //           <SelectItem  value="N">
+  //   //             Non
+  //   //           </SelectItem>
+  //   //         </SelectGroup>
+  //   //       </SelectContent>
+  //   //     </Select>
+  //   //   );
+  //   // },
+  // },
   // {
   //   accessorKey:"MOTT",
   //   header:"Motif de transfer",
@@ -241,34 +241,34 @@ export const demandedeprolongation: ColumnDef<any>[] = [
   //   },
   // },
   // PROL_PROPOSE_C
-  {
-    accessorKey: "prol_propose_c",
-    header: "checkbox",
-    cell: ({ row }) => {
-      return (
-        <Checkbox
-          onCheckedChange={(value: any) => {
-            console.log(value, row.original?.cli);
-            updatedemandeprolongation(
-              row.original?.cli,
-              "prol_propose_c",
-              value
-            );
-          }}
-          onClick={(newValue: any) => {
-            console.log(newValue.target.checked, row.original?.cli);
-            // updatedemandeprolongation(
-            //   row.original?.cli,
-            //   "prol_propose_c",
-            //   newValue
-            // );
-          }}
-          id="terms"
-          defaultChecked={row.getValue("prol_propose_c") == "O" ? true : false}
-        />
-      );
-    },
-  },
+  // {
+  //   accessorKey: "prol_propose_c",
+  //   header: "checkbox",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <Checkbox
+  //         onCheckedChange={(value: any) => {
+  //           console.log(value, row.original?.cli);
+  //           updatedemandeprolongation(
+  //             row.original?.cli,
+  //             "prol_propose_c",
+  //             value
+  //           );
+  //         }}
+  //         onClick={(newValue: any) => {
+  //           console.log(newValue.target.checked, row.original?.cli);
+  //           // updatedemandeprolongation(
+  //           //   row.original?.cli,
+  //           //   "prol_propose_c",
+  //           //   newValue
+  //           // );
+  //         }}
+  //         id="terms"
+  //         defaultChecked={row.getValue("prol_propose_c") == "O" ? true : false}
+  //       />
+  //     );
+  //   },
+  // },
   {
     accessorKey: "action",
     header: "Action",
