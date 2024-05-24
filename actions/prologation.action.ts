@@ -179,3 +179,19 @@ export const updatePro = async (
     return {} as any;
   }
 };
+
+export const validationprolongation = async (
+  id: string | undefined,
+  prol_c: string
+) => {
+  try {
+    const res = await axios.put(
+      `http://localhost:10001/prolongation/validate?id=${id}`,
+      { prol_c }
+    );
+
+    return { data: res.data, status: res.status } || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};

@@ -33,14 +33,10 @@ import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal"
 import { Textarea } from "../ui/textarea";
 import useValidationProlongationModal from "@/hooks/use-validation-prolongation-modal";
 import { Label } from "../ui/label";
+import { validationprolongation } from "@/actions/prologation.action";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
-  Motif: z.string().min(1, {
-    message: "",
-  }),
-  Commentaire: z.string().min(1, {
-    message: "",
-  }),
   validation: z.string().min(1, {
     message: "",
   }),
@@ -60,17 +56,23 @@ const ValidationProlonagationForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Motif: "",
-      Commentaire: "",
       validation: "",
     },
   });
 
-  const { onClose, commentaire, Motif } = useValidationProlongationModal();
+  const { onClose, commentaire, Motif, id } = useValidationProlongationModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values, commentaire, Motif);
-    console.log("validation", values);
+
+    await validationprolongation(id, values.validation)
+      .then((res) => {
+        toast.success("Validation effectuée avec succès");
+        onClose();
+      })
+      .catch((err) => {
+        toast.error("Erreur lors de la validation");
+      });
   };
 
   return (
@@ -93,7 +95,7 @@ const ValidationProlonagationForm = ({
 
                 <SelectContent>
                   {validation.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
+                    <SelectItem key={item.codenv} value={item.codenv}>
                       {item.libelle}
                     </SelectItem>
                   ))}
