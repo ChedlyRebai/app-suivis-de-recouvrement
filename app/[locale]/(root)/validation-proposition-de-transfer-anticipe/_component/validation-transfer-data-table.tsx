@@ -120,7 +120,9 @@ export function DataTableValidationDeTransfer<TData, TValue>({
 
   return (
     <>
-      <DataTableToolbar table={table} type="contactes" />
+      <div className="flex  items-center py-4 flex-wrap">
+        <DataTableToolbar table={table} type="contactes" />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
