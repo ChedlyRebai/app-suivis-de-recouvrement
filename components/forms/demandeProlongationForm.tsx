@@ -54,8 +54,6 @@ const DemandeProlongationForm = ({ motifs }: { motifs: any[] }) => {
   const { onClose, id } = useDemandeProlongationModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    console.log(id);
 
     await updatePro(values.Motif, values.Commentaire, id).then((res) => {
       if (res.status === 200) {
