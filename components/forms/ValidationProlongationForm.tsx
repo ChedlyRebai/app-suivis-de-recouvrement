@@ -65,40 +65,17 @@ const ValidationProlonagationForm = ({
       validation: "",
     },
   });
+
   const { onClose, commentaire, Motif } = useValidationProlongationModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values, commentaire, Motif);
+    console.log("validation", values);
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 ">
-        {/* <FormField
-          control={form.control}
-          name="Motif"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="username">Motif de prolongation</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
-                      {field.value}
-                    </SelectValue>
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {motifs.map((item: any) => (
-                    <SelectItem key={item.codenv} value={item.libelle}>
-                      {item.codenv}: {item.libelle}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        /> */}
         <FormField
           control={form.control}
           name="validation"
@@ -126,24 +103,9 @@ const ValidationProlonagationForm = ({
           )}
         />
         <Label>Motif de prolongation</Label>
-
         {Motif ? <p>{Motif}</p> : <p>pas de motif</p>}
-
         <Label>Commentaire</Label>
         {commentaire ? <p>{commentaire}</p> : <p>pas de commentaire</p>}
-        {/* <FormField
-          control={form.control}
-          name="Commentaire"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="commentaire">Commentaire</FormLabel>
-              <FormControl>
-                <Textarea id="username" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        /> */}
-
         <DialogFooter>
           <Button variant={"outline"} onClick={onClose}>
             Annuler
