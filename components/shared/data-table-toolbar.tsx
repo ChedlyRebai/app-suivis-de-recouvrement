@@ -2,19 +2,8 @@
 
 import { Cross2Icon, ResetIcon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
-
-import { DataTableFacetedFilter } from "../../app/[locale]/(root)/listeclient/_components/contactes/data-table-faceted-filter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { getAgences, getGroupes } from "@/actions/client.action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -36,8 +25,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Oval } from "react-loading-icons";
-
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   type: "contactes" | "noncontactes";
