@@ -247,7 +247,7 @@ export function DataTableToolbar<TData>({
         </PopoverContent>
       </Popover>
 
-      <Button className="ml-auto mr-1" variant="outline" onClick={resetAll}>
+      <Button className="ml-auto mr-1" variant="destructive" onClick={resetAll}>
         <ResetIcon className="h-4 w-4" />
       </Button>
       <DataTableViewOptions table={table} />
