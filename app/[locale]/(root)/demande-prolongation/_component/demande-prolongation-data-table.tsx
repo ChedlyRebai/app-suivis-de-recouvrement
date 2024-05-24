@@ -150,29 +150,31 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   //     pathname + "?" + createQueryString("code", `${selectedCode as string}`)
   //   );
   // };
-  const [loader, setLoader] = useState(true);
-  // effect
-  // useEffect(() => {
-  //   setLoader(false);
-  // }, []);
 
-  // // render
-  // if (loader) {
-  //   return <div>Chargement...</div>;
-  // }
-  const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
+  // const [agenceopen, setagenceOpen] = useState(false);
+  // const [groupopen, setgroupOpen] = useState(false);
+  // const [agenceValue, setAgenceValue] = useState("");
+  // const [groupeValue, setgroupeValue] = useState("");
   const searchParams = useSearchParams();
 
-  const handleGroup = (group: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (group) {
-      params.set("groupe", group);
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
+  // const handleGroup = (group: string) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (group) {
+  //     params.set("groupe", group);
+  //   }
+  //   replace(`${pathname}?${params.toString()}`);
+  // };
+
+  const [loader, setLoader] = useState(true);
+  // effect
+  useEffect(() => {
+    setLoader(false);
+  }, []);
+
+  // render
+  if (loader) {
+    return <div>Chargement...</div>;
+  }
 
   // useEffect(() => {
   //   const fetchGroupes = async () => {
@@ -197,41 +199,41 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   //   fetchGroupes();
   // }, []);
 
-  const groupPopoverContent = useMemo(
-    () => (
-      <PopoverContent className="w-[200px] p-0 ml-2">
-        <Command>
-          <CommandInput placeholder="Search group" />
-          <CommandEmpty>No framework found.</CommandEmpty>
+  // const groupPopoverContent = useMemo(
+  //   () => (
+  //     <PopoverContent className="w-[200px] p-0 ml-2">
+  //       <Command>
+  //         <CommandInput placeholder="Search group" />
+  //         <CommandEmpty>No framework found.</CommandEmpty>
 
-          <CommandGroup>
-            {groupes.map((item: any, i: number) => (
-              <CommandItem
-                key={i}
-                value={item.libelle}
-                onSelect={(currentValue) => {
-                  handleGroup(item.codug);
-                  setgroupeValue(
-                    item.codug === searchParams.get("groupe") ? "" : item.codug
-                  );
-                  setgroupOpen(false);
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    groupeValue === item.codug ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {item.codug}:{item.libelle}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    ),
-    [groupes, handleGroup, groupeValue, searchParams]
-  );
+  //         <CommandGroup>
+  //           {groupes.map((item: any, i: number) => (
+  //             <CommandItem
+  //               key={i}
+  //               value={item.libelle}
+  //               onSelect={(currentValue) => {
+  //                 handleGroup(item.codug);
+  //                 setgroupeValue(
+  //                   item.codug === searchParams.get("groupe") ? "" : item.codug
+  //                 );
+  //                 setgroupOpen(false);
+  //               }}
+  //             >
+  //               <Check
+  //                 className={cn(
+  //                   "mr-2 h-4 w-4",
+  //                   groupeValue === item.codug ? "opacity-100" : "opacity-0"
+  //                 )}
+  //               />
+  //               {item.codug}:{item.libelle}
+  //             </CommandItem>
+  //           ))}
+  //         </CommandGroup>
+  //       </Command>
+  //     </PopoverContent>
+  //   ),
+  //   [groupes, handleGroup, groupeValue, searchParams]
+  // );
 
   return (
     <>
