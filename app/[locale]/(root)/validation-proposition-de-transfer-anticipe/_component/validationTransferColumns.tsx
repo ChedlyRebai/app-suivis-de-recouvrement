@@ -224,8 +224,7 @@ export const validationTransferColumns: ColumnDef<any>[] = [
               onOpen();
             }}
           >
-            Detaille
-            <SearchIcon size={16} />
+            Détails
           </Button>
         </div>
       );

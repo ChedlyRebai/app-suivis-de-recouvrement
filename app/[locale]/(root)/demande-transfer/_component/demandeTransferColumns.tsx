@@ -156,13 +156,12 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
       const { onOpen, setId } = useDemandeTransfernModal();
       return (
         <Button
-          variant="ghost"
           onClick={() => {
             setId(row.original?.id);
             onOpen();
           }}
         >
-          Action
+          Détails
         </Button>
       );
     },

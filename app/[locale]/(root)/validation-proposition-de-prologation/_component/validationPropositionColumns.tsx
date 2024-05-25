@@ -318,7 +318,6 @@ export const validationprolongation: ColumnDef<any>[] = [
         useValidationProlongationModal();
       return (
         <Button
-          variant="ghost"
           onClick={() => {
             console.log(row.original?.Mott?.libelle, row.original?.obs);
             setMotifCommentaire(
@@ -329,7 +328,7 @@ export const validationprolongation: ColumnDef<any>[] = [
             onOpen();
           }}
         >
-          Action
+          Détails
         </Button>
       );
     },

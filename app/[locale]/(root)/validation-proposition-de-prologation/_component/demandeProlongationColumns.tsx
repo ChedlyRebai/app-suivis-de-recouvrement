@@ -164,7 +164,7 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
               // setModalOpen(true);
             }}
           >
-            Detaille
+            Détails
             <SearchIcon size={16} />
           </Button>
         </div>

@@ -276,13 +276,13 @@ export const demandedeprolongation: ColumnDef<any>[] = [
       const { onOpen, setId } = useDemandeProlongationModal();
       return (
         <Button
-          variant="ghost"
+          variant="default"
           onClick={() => {
             setId(row.original?.id);
             onOpen();
           }}
         >
-          Action
+          Détails
         </Button>
       );
     },
