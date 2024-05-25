@@ -92,9 +92,7 @@ const DemandeTransferForm = ({ motif, typeTransfer }: Props) => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
-                      {field.value}
-                    </SelectValue>
+                    <SelectValue placeholder="Sélectionné une motif" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

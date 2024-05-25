@@ -54,7 +54,6 @@ const DemandeProlongationForm = ({ motifs }: { motifs: any[] }) => {
   const { onClose, id } = useDemandeProlongationModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-
     await updatePro(values.Motif, values.Commentaire, id).then((res) => {
       if (res.status === 200) {
         toast.success("Demande de prolonagation effectué avec succès");
@@ -77,9 +76,7 @@ const DemandeProlongationForm = ({ motifs }: { motifs: any[] }) => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionné une motif">
-                      {field.value}
-                    </SelectValue>
+                    <SelectValue placeholder="Sélectionné une motif" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

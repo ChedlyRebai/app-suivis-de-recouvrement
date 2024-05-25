@@ -33,7 +33,7 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
     header: "Non utilisateur",
   },
   {
-    accessorKey: "dateobs",
+    accessorKey: "Date saisie",
     header: ({ column }) => {
       return (
         <Button
@@ -46,7 +46,7 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
       );
     },
     cell: ({ row }) => {
-      return <span>{row.getValue("dateobs")}</span>;
+      return <span>{row?.original?.dateobs}</span>;
     },
   },
 
@@ -55,7 +55,15 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
   //   header: "validation",
   // },
   {
-    accessorKey: "Mott.libelle",
-    header: "Motifs",
+    accessorKey: "Motif",
+    header: "Motif",
+    cell: ({ row }) => {
+      return (
+        <span>
+          {row.original?.Mott?.libelle}
+          {row.original?.Proc?.libelle}
+        </span>
+      );
+    },
   },
 ];

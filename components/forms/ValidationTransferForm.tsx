@@ -81,7 +81,7 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
                 <SelectContent>
                   {validation.map((item: any) => (
                     <SelectItem key={item.codenv} value={item.codenv}>
-                      {item.codenv}: {item.libelle}
+                      {item.libelle}
                     </SelectItem>
                   ))}
                 </SelectContent>
