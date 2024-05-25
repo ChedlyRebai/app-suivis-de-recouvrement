@@ -2,16 +2,26 @@
 import { fonction } from "@/Models/fonction.model";
 import { Historique } from "@/Models/historique.model";
 import axios from "axios";
-
-export const getAllHistorique = async () => {
+import { revalidatePath } from "next/cache";
+export interface Main {
+  result: Historique[];
+  totalCount: number;
+  totalPages: number;
+}
+export const getAllHistorique = async (
+  currentpage?: number,
+  perpage?: number,
+  search?: string
+): Promise<Main> => {
   try {
-    axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<Historique[]>(
-      `http://localhost:10001/historique/all`
+    const res = await axios.get<Main>(
+      `http://localhost:10001/historique/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-    return res.data || ([] as Historique[]);
+
+    revalidatePath("/files");
+    return (res.data as Main) || ({} as Main);
   } catch (error) {
     console.log(error);
-    return [] as Historique[];
+    return {} as Main;
   }
 };

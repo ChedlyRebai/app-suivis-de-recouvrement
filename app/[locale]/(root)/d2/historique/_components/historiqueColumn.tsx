@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
+export const HistoriqueColumn: ColumnDef<any>[] = [
   // {
   //   accessorKey: "numobs",
   //   header: ({ column }) => {
@@ -17,6 +17,19 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
   //     );
   //   },
   // },
+  {
+    accessorKey: "ab_client.cli",
+    header: "Cli Client",
+  },
+  {
+    accessorKey: "ab_client.nom",
+    header: "Non Client",
+  },
+  {
+    accessorKey:
+      "Utilisateur_ImpObstransclient_UtilisateurIdToUtilisateur.usr_nomprenom",
+    header: "Non utilisateur",
+  },
 
   {
     accessorKey: "procedure",
@@ -27,11 +40,6 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
     header: "Commentaire",
   },
 
-  {
-    accessorKey:
-      "Utilisateur_ImpObstransclient_UtilisateurIdToUtilisateur.usr_nomprenom",
-    header: "Non utilisateur",
-  },
   {
     accessorKey: "Date saisie",
     header: ({ column }) => {
