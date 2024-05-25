@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/select";
 import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, SearchIcon } from "lucide-react";
+import { ArrowUpDown, HistoryIcon, SearchIcon } from "lucide-react";
+import Link from "next/link";
 
 export const validationTransferColumns: ColumnDef<any>[] = [
   {
@@ -210,10 +211,18 @@ export const validationTransferColumns: ColumnDef<any>[] = [
       const { id, onOpen, setId, setMotifCommentaire } =
         useValidationTransferModal();
       return (
-        <div className="flex justify-center">
+        <div className="flex ">
+          <Link href={`hitoriquecommentaire?cli=${row.original?.cli}`}>
+            <Button
+              className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
+              variant="default"
+              size="sm"
+            >
+              <HistoryIcon size={16} />
+            </Button>
+          </Link>
           <Button
             variant="default"
-            size="sm"
             onClick={() => {
               console.log(row.original?.Mott?.libelle, row.original?.obs);
               setMotifCommentaire(
