@@ -100,7 +100,7 @@ export function DataTableContactes<TData, TValue>({
     }
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, 100);
+  }, 50);
 
   const handleGroup = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);

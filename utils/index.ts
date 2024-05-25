@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 // async function checkAccess(pathname) {
 //     try {
 //         // Make a POST request to your backend endpoint to check access
@@ -9,6 +9,8 @@
 //             },
 //             body: JSON.stringify({ pathname })
 //         });
+
+import { useCallback } from "react";
 
 //         // Check if the request was successful
 //         if (response.ok) {
@@ -31,3 +33,13 @@
 //         // Handle errors
 //     }
 // }
+
+const createQueryString = useCallback(
+  (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(name, value);
+
+    return params.toString();
+  },
+  [searchParams, selectedCode]
+);

@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/select";
 import { useDemandeTransfernModal } from "@/hooks/use-demande-transfer-Modal";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, HistoryIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { use } from "react";
 
 export const demandeTransferColumns: ColumnDef<any>[] = [
@@ -154,15 +155,31 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
     header: "Action",
     cell: ({ row }) => {
       const { onOpen, setId } = useDemandeTransfernModal();
+      const router = useRouter(); // import and use the router
+
       return (
-        <Button
-          onClick={() => {
-            setId(row.original?.id);
-            onOpen();
-          }}
-        >
-          Détails
-        </Button>
+        <div className="flex ">
+          <Button
+            className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
+            variant="default"
+            size="sm"
+            onClick={() => {
+              // Navigate to the new page with the cli as a query parameter
+              router.push(`hitoriquecommentaire?cli=${row.original?.cli}`);
+            }}
+          >
+            <HistoryIcon size={16} />
+          </Button>
+          <Button
+            className="h-10 w-h-10"
+            onClick={() => {
+              setId(row.original?.id);
+              onOpen();
+            }}
+          >
+            Détails
+          </Button>
+        </div>
       );
     },
   },

@@ -12,7 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, SearchIcon } from "lucide-react";
+import { ArrowUpDown, HistoryIcon, SearchIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
   {
@@ -154,8 +155,21 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
     accessorKey: "Action",
     header: "Action",
     cell: ({ row }) => {
+      const router = useRouter();
       return (
-        <div className="flex justify-center">
+        <div className="flex ">
+          <Button
+            className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
+            variant="default"
+            size="sm"
+            onClick={() => {
+              // Navigate to the new page with the cli as a query parameter
+              router.push(`hitoriquecommentaire?cli=${row.original?.cli}`);
+            }}
+          >
+            <HistoryIcon size={16} />
+          </Button>
+
           <Button
             variant="default"
             size="sm"
