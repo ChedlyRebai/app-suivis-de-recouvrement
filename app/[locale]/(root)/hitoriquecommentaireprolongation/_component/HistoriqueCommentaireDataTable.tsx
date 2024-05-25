@@ -195,18 +195,6 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   className="p-"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
-
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

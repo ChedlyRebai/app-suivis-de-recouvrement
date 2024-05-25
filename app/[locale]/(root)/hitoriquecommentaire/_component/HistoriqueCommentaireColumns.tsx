@@ -3,19 +3,24 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
+  // {
+  //   accessorKey: "numobs",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         N°
+  //         <ArrowUpDown className="ml-2 h-4 w-4" />
+  //       </Button>
+  //     );
+  //   },
+  // },
+
   {
-    accessorKey: "numobs",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          N°
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    accessorKey: "procedure",
+    header: "Procedure",
   },
   {
     accessorKey: "obs",
@@ -40,7 +45,11 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      return <span>{row.getValue("dateobs")}</span>;
+    },
   },
+
   // {
   //   accessorKey: "VTRF.libelle",
   //   header: "validation",
