@@ -169,6 +169,12 @@ export const updatePro = async (
 ) => {
   try {
     //release3
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://release3-v2.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     const res = await axios.put(
       `http://localhost:10001/prolongation/update?id=${id}`,
       { motif_prol_c, obs, id }
@@ -185,6 +191,12 @@ export const validationprolongation = async (
   prol_c: string
 ) => {
   try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://release3-v2.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     const res = await axios.put(
       `http://localhost:10001/prolongation/validate?id=${id}`,
       { prol_c }

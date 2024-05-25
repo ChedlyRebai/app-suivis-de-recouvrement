@@ -76,6 +76,12 @@ export const updateTransfer = async (
   trf_a: string
 ) => {
   try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://release3-v2.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     const res = await axios.put(
       `http://localhost:10001/transfer/update?id=${id}`,
       { mott, obs, id, trf_a }
@@ -92,6 +98,12 @@ export const validateTransfer = async (
   validation: string
 ) => {
   try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+    axios.defaults.baseURL = `https://release3-v2.vercel.app`;
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     const res = await axios.put(
       `http://localhost:10001/transfer/validate?id=${id}`,
       { id, trf_propose_v: validation }
