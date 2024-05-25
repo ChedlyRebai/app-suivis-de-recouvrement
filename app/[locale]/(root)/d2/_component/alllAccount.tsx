@@ -249,7 +249,7 @@ export function AllAccount({
           <CardDescription>Gérez vos comptes.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex  items-center py-4 flex-wrap">
+          <div className="flex justify-between items-center py-4 flex-wrap">
             <>
               <Input
                 placeholder="Cli"
