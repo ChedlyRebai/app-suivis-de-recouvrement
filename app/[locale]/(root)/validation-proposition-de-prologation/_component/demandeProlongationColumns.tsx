@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, HistoryIcon, SearchIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
@@ -155,20 +156,17 @@ export const demandeProlongationColumns: ColumnDef<ab_client>[] = [
     accessorKey: "Action",
     header: "Action",
     cell: ({ row }) => {
-      const router = useRouter();
       return (
         <div className="flex ">
-          <Button
-            className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
-            variant="default"
-            size="sm"
-            onClick={() => {
-              // Navigate to the new page with the cli as a query parameter
-              router.push(`hitoriquecommentaire?cli=${row.original?.cli}`);
-            }}
-          >
-            <HistoryIcon size={16} />
-          </Button>
+          <Link href={`hitoriquecommentaire?cli=${row.original?.cli}`}>
+            <Button
+              className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
+              variant="default"
+              size="sm"
+            >
+              <HistoryIcon size={16} />
+            </Button>
+          </Link>
 
           <Button
             variant="default"

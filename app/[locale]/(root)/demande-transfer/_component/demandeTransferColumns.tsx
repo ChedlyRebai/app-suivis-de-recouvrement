@@ -1,20 +1,11 @@
 "use client";
 
-import { ab_client } from "@/Models/ab_client.model";
-import { MOTT, getMotif } from "@/actions/motif.action";
-import { getTypeTransfer, updateTransferAnti } from "@/actions/transfer.action";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useDemandeTransfernModal } from "@/hooks/use-demande-transfer-Modal";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, HistoryIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { use } from "react";
 
@@ -155,21 +146,18 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
     header: "Action",
     cell: ({ row }) => {
       const { onOpen, setId } = useDemandeTransfernModal();
-      const router = useRouter(); // import and use the router
 
       return (
         <div className="flex ">
-          <Button
-            className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
-            variant="default"
-            size="sm"
-            onClick={() => {
-              // Navigate to the new page with the cli as a query parameter
-              router.push(`hitoriquecommentaire?cli=${row.original?.cli}`);
-            }}
-          >
-            <HistoryIcon size={16} />
-          </Button>
+          <Link href={`hitoriquecommentaire?cli=${row.original?.cli}`}>
+            <Button
+              className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
+              variant="default"
+              size="sm"
+            >
+              <HistoryIcon size={16} />
+            </Button>
+          </Link>
           <Button
             className="h-10 w-h-10"
             onClick={() => {
