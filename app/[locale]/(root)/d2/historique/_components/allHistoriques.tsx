@@ -104,7 +104,7 @@ export function AllHistoriques({
     }
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, 100);
+  }, 50);
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -135,27 +135,6 @@ export function AllHistoriques({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams, selectedCode]
-  );
-
-  useEffect(() => {
-    setSearch(`${searchParams.get("code")}`);
-    console.log(search);
-  }, [searchParams.get("code")]);
-
-  const addQuery = (row: any) => {
-    console.log();
-    router.push(
-      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
-    );
-  };
   const [loader, setLoader] = useState(true);
   // effect
   useEffect(() => {

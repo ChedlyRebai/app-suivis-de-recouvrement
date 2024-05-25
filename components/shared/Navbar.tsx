@@ -28,13 +28,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const local = useLocale();
-  const logout = () => {
-    Cookies.set("session", "");
-    Cookies.get("session");
 
-    console.log(Cookies.get("session"));
-    redirect("/login");
-  };
   return (
     <div className="fixed w-screen top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button

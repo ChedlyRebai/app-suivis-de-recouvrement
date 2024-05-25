@@ -42,7 +42,7 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
             >
               <circle cx="4" cy="4" r="3" />
             </svg>
-            Non Connecté
+            Deconnecte
           </span>
         </>
       );
