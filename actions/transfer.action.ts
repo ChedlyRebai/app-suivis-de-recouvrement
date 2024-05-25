@@ -86,3 +86,19 @@ export const updateTransfer = async (
     return {} as any;
   }
 };
+
+export const validateTransfer = async (
+  id: string | undefined,
+  validation: string
+) => {
+  try {
+    const res = await axios.put(
+      `http://localhost:10001/transfer/validate?id=${id}`,
+      { id, trf_propose_v: validation }
+    );
+    console.log("res prolongation validate", res);
+    return { data: res.data, status: res.status } || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};

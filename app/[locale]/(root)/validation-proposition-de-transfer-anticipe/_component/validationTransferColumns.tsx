@@ -114,106 +114,112 @@ export const validationTransferColumns: ColumnDef<any>[] = [
     // },
   },
 
-  {
-    accessorKey: "Mott.codenv",
-    header: "Motif de transfer",
-    cell: async ({ row }) => {
-      const motif = await MOTT();
-      console.log(motif);
-      return (
-        // <span
-        //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
-        //     row.getValue("acces") === "O"
-        //       ? "bg-green-100 text-green-800"
-        //       : "bg-red-100 text-red-800"
-        //   } `}
-        // >
-        //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
-        // </span>
-        <Select
-          onValueChange={(newValue) => {
-            console.log(newValue, row.original?.cli);
-            updateTransferAnti(row.original?.cli, "mott", newValue);
-          }}
-          defaultValue={row.original?.mott}
-        >
-          <SelectTrigger
-          // className={` w-fit ${
-          //   row.getValue("Mott.codenv") == "O"
-          //     ? "border-green-500"
-          //     : "border-red-500"
-          // }`}
-          >
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="MOTT">
-              {" "}
-              {motif.map((item: any) => (
-                <SelectItem key={item.codenv} value={item.codenv}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
-  {
-    accessorKey: "obs",
-    header: "Commentaire",
-  },
+  // {
+  //   accessorKey: "Mott.codenv",
+  //   header: "Motif de transfer",
+  //   cell: async ({ row }) => {
+  //     const motif = await MOTT();
+  //     console.log(motif);
+  //     return (
+  //       // <span
+  //       //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
+  //       //     row.getValue("acces") === "O"
+  //       //       ? "bg-green-100 text-green-800"
+  //       //       : "bg-red-100 text-red-800"
+  //       //   } `}
+  //       // >
+  //       //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
+  //       // </span>
+  //       <Select
+  //         onValueChange={(newValue) => {
+  //           console.log(newValue, row.original?.cli);
+  //           updateTransferAnti(row.original?.cli, "mott", newValue);
+  //         }}
+  //         defaultValue={row.original?.mott}
+  //       >
+  //         <SelectTrigger
+  //         // className={` w-fit ${
+  //         //   row.getValue("Mott.codenv") == "O"
+  //         //     ? "border-green-500"
+  //         //     : "border-red-500"
+  //         // }`}
+  //         >
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="MOTT">
+  //             {" "}
+  //             {motif.map((item: any) => (
+  //               <SelectItem key={item.codenv} value={item.codenv}>
+  //                 {item.libelle}
+  //               </SelectItem>
+  //             ))}
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "obs",
+  //   header: "Commentaire",
+  // },
 
-  {
-    accessorKey: "trf_propose_v",
-    header: "validations",
-    cell: async ({ row }) => {
-      const vtrf = await VTRF();
-      return (
-        <Select
-          defaultValue={row.getValue("trf_propose_v")}
-          onValueChange={(newValue) => {
-            console.log(newValue, row.original?.cli);
-            updateTransferAnti(row.original?.cli, "trf_propose_v", newValue);
-          }}
-        >
-          <SelectTrigger
-            className={` w-fit ${
-              row.getValue("trf_propose_v") == "O"
-                ? "border-green-500"
-                : "border-red-500"
-            }`}
-          >
-            <SelectValue className="" placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup id="TRAF_A">
-              {" "}
-              {vtrf.map((item: any) => (
-                <SelectItem key={item.codenv} value={item.codenv}>
-                  {item.libelle}
-                </SelectItem>
-              ))}
-              {/* <SelectItem value="O">Validé</SelectItem>
-              <SelectItem value="N">Non Validé</SelectItem> */}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "trf_propose_v",
+  //   header: "validations",
+  //   cell: async ({ row }) => {
+  //     const vtrf = await VTRF();
+  //     return (
+  //       <Select
+  //         defaultValue={row.getValue("trf_propose_v")}
+  //         onValueChange={(newValue) => {
+  //           console.log(newValue, row.original?.cli);
+  //           updateTransferAnti(row.original?.cli, "trf_propose_v", newValue);
+  //         }}
+  //       >
+  //         <SelectTrigger
+  //           className={` w-fit ${
+  //             row.getValue("trf_propose_v") == "O"
+  //               ? "border-green-500"
+  //               : "border-red-500"
+  //           }`}
+  //         >
+  //           <SelectValue className="" placeholder="Select a fruit" />
+  //         </SelectTrigger>
+  //         <SelectContent>
+  //           <SelectGroup id="TRAF_A">
+  //             {" "}
+  //             {vtrf.map((item: any) => (
+  //               <SelectItem key={item.codenv} value={item.codenv}>
+  //                 {item.libelle}
+  //               </SelectItem>
+  //             ))}
+  //             {/* <SelectItem value="O">Validé</SelectItem>
+  //             <SelectItem value="N">Non Validé</SelectItem> */}
+  //           </SelectGroup>
+  //         </SelectContent>
+  //       </Select>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "Action",
     header: "Action",
     cell: ({ row }) => {
-      const { id, onOpen, setId } = useValidationTransferModal();
+      const { id, onOpen, setId, setMotifCommentaire } =
+        useValidationTransferModal();
       return (
         <div className="flex justify-center">
           <Button
             variant="default"
             size="sm"
             onClick={() => {
+              console.log(row.original?.Mott?.libelle, row.original?.obs);
+              setMotifCommentaire(
+                row.original?.Mott?.libelle || "",
+                row.original?.obs || ""
+              );
               setId(row.original?.id);
               onOpen();
             }}

@@ -26,6 +26,8 @@ import { DialogFooter } from "../ui/dialog";
 import { Textarea } from "../ui/textarea";
 import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
 import { Label } from "../ui/label";
+import { validateTransfer } from "@/actions/transfer.action";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   validation: z.string().min(1, {
@@ -51,6 +53,14 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
     console.log(id);
+    await validateTransfer(id, values.validation)
+      .then((res) => {
+        toast.success("Validation effectuée avec succès");
+        onClose();
+      })
+      .catch((err) => {
+        toast.error("Erreur lors de la validation");
+      });
   };
 
   return (
