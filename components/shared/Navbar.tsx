@@ -29,6 +29,23 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
   const pathname = usePathname();
   const local = useLocale();
 
+  const logoutf = async () => {
+    // Remove the session cookie
+    Cookies.remove("session");
+
+    // Redirect to the login page
+    router.push(`/${local}/login`);
+
+    // Optionally, call the server-side logout function if necessary
+    // await fetch("https://login-api-v2-1eku.vercel.app/auth/logout", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+
+    await Logout();
+  };
   return (
     <div className="fixed w-screen top-0 z-10 flex-shrink-0 flex h-20  backdrop-blur-3xl shadow dark:border-b ">
       <button
@@ -93,11 +110,7 @@ const Navbar = ({ onChange, session }: NavbarProps) => {
 
           <div className="w-1" />
           <LocalSwitcher />
-          <Button
-            className="mx-2 "
-            size={"default"}
-            onClick={async () => Logout}
-          >
+          <Button className="mx-2 " size={"default"} onClick={logoutf}>
             <LogOut className="cursor-pointer" size={17} />
           </Button>
 

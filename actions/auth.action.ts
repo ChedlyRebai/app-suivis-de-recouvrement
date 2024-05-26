@@ -34,7 +34,7 @@ export const Login = async (matricule: string, password: string) => {
 
     if (res.status === 200) {
       const expires = new Date(Date.now() + 1000 * 1000 * 1000);
-      cookies().set("session", res.data.token, { expires, httpOnly: true });
+      cookies().set("session", res.data.token, { expires, secure: true });
       return Promise.resolve({ status: res.status, data: res.data.message });
     }
   } catch (error: any) {
@@ -58,12 +58,10 @@ export const Logout = async () => {
       `${process.env.LOGIN_API_URL}/auth/logout`,
       {}
     );
-
-    cookies().delete("session");
-    redirect("/login");
-    return Promise.resolve({ status: res.status, data: res.data.message });
+    console.log(res.data);
+    return res.data;
   } catch (error: any) {
-    console.error("Login error:", error?.response?.data?.message);
+    console.error("Login error:", error);
     return Promise.resolve({
       status: error?.response.status,
       data: error?.response?.data?.message,
