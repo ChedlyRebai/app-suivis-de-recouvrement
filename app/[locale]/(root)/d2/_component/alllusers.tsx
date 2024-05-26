@@ -83,7 +83,7 @@ export function AllUsers({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-  const setAgences = useListAgences((state) => state.setAgences);
+
   console.log(data);
 
   const [selectedCode, setSelectedCode] = useState("");
@@ -150,17 +150,6 @@ export function AllUsers({
     [searchParams, selectedCode]
   );
 
-  useEffect(() => {
-    setSearch(`${searchParams.get("code")}`);
-    console.log(search);
-  }, [searchParams.get("code")]);
-
-  const addQuery = (row: any) => {
-    console.log();
-    router.push(
-      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
-    );
-  };
   const [loader, setLoader] = useState(true);
   // effect
   useEffect(() => {

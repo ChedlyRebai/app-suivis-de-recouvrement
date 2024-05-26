@@ -101,11 +101,6 @@ export function AllCompteRendu({
   // const [agences, setAgences] = useState<any>([]);
   const { isOpen, onClose, onOpen } = useCompteRenduModal();
 
-  const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
-
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -156,11 +151,6 @@ export function AllCompteRendu({
     },
     [searchParams, selectedCode]
   );
-
-  useEffect(() => {
-    setSearch(`${searchParams.get("code")}`);
-    console.log(search);
-  }, [searchParams.get("code")]);
 
   const [loader, setLoader] = useState(true);
   // effect
