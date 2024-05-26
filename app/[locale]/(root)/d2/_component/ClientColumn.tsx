@@ -1,9 +1,6 @@
 "use client";
-import { ab_client } from "@/Models/ab_client.model";
-import { Client, Utilisateur, clientResult } from "@/actions/admin.action";
-import { Button } from "@/components/ui/button";
+
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
 
 export const clientcolumns: ColumnDef<any>[] = [
   {
