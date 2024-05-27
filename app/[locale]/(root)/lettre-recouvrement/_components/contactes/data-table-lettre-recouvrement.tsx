@@ -48,6 +48,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { DataTableToolbar } from "@/components/shared/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -69,12 +70,9 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   groupes,
 }: DataTableProps<TData, TValue>) {
   console.log(data);
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const setAgences = useListAgences((state) => state.setAgences);
-  setAgences(agences);
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
@@ -84,85 +82,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
-
-  // const [groupes, setGroupes] = useState<any>([]);
-  // const [agences, setAgences] = useState<any>([]);
-
-  const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
-
-  const handleSearch = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("query", query);
-      params.set("page", "1");
-    } else {
-      params.delete("query");
-    }
-    console.log(params.get("query")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 100);
-
-  const handleGroup = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("groupe", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleFrom = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("from", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("from")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleTo = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("to");
-      params.set("page", "1");
-    } else {
-      params.set("to", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("to")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
-
-  const handleAgence = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (
-      query === "" ||
-      query === null ||
-      query === undefined ||
-      query === "0"
-    ) {
-      console.log(query);
-      params.delete("from");
-      params.set("page", "1");
-    }
-    if (query) {
-      params.set("agence", query);
-      params.set("page", "1");
-    }
-    console.log(params.get("groupe")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 0);
 
   const [loadingTable, setLoadingTable] = useState(false);
 
@@ -193,59 +112,23 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+  const [loader, setLoader] = useState(true);
+  // effect
+  useEffect(() => {
+    setLoader(false);
+    setAgences(agences);
+  }, []);
 
-      return params.toString();
-    },
-    [searchParams, selectedCode]
-  );
+  // render
+  if (loader) {
+    return <div>Chargement...</div>;
+  }
 
-  const resetAgence = () => {
-    setAgenceValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("agence");
-    params.delete("groupe");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const resetGroup = () => {
-    setgroupeValue("");
-    const params = new URLSearchParams(searchParams);
-    params.delete("groupe");
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  // useEffect(() => {
-  //   setSearch(`${searchParams.get("code")}`);
-  //   console.log(search);
-  // }, [searchParams.get("code")]);
-
-  const addQuery = (row: any) => {
-    console.log();
-    router.push(
-      pathname + "?" + createQueryString("code", `${selectedCode as string}`)
-    );
-  };
-  // const [loader, setLoader] = useState(true);
-  // // effect
-  // useEffect(() => {
-  //   setLoader(false);
-  // }, []);
-
-  // // render
-  // if (loader) {
-  //   return <div>Chargement...</div>;
-  // }
-
-  // const { rows } = table.getCoreRowModel();
-  // console.log(rows);
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <>
+        <DataTableToolbar type="contactes" table={table} />
+        {/* <>
           <Input
             placeholder="Cli"
             defaultValue={searchParams.get("query")?.toString()}
@@ -393,7 +276,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
             <RefreshCcwIcon className="h-4 w-4" />
           </Button>
           <DataTableViewOptions table={table} />
-        </>
+        </> */}
       </div>
       <div className="rounded-md border">
         <Table>

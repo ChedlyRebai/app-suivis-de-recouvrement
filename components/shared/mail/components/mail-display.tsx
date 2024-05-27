@@ -223,7 +223,7 @@ export function MailDisplay() {
       <Separator />
       {!data.id && (
         <div className="p-8  w-full h-screen flex items-center justify-center text-muted-foreground">
-          No row Selected
+          Aucune ligne sélectionnée
         </div>
       )}
       {isLoading ? (
