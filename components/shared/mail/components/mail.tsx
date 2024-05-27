@@ -158,7 +158,7 @@ export function Mail({
             </div>
             <Separator />
             <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-              <form>
+              {/* <form>
                 <div className="relative">
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -171,7 +171,7 @@ export function Mail({
                     className="pl-8"
                   />
                 </div>
-              </form>
+              </form> */}
             </div>
             <TabsContent value="all" className="m-0">
               <MailList

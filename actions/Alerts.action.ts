@@ -20,6 +20,8 @@ export interface Alerte {
   created_at: Date;
 }
 
+export const getA;
+
 export interface AbClient {
   cli: string;
   Agence: Agence;
