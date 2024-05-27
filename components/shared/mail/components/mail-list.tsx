@@ -12,9 +12,10 @@ import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import useInbox from "@/hooks/use-inbox-hook";
+import { formatDistanceToNowStrict } from "date-fns";
 
 interface IProps {
-  items: Mail[];
+  items: any[];
   initialData: any[];
   search: string;
   limit: number;
@@ -79,7 +80,8 @@ export function MailList({ items, initialData, search, limit }: IProps) {
                       : "text-muted-foreground"
                   )}
                 >
-                  {/* {formatDistanceToNow(new Date(item.date), {
+                  {item.created_at}
+                  {/* {formatDistanceToNowStrict(new Date(item.created_at), {
                     addSuffix: true,
                   })} */}
                 </div>
@@ -91,7 +93,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
             </div>
             {item.labels.length ? (
               <div className="flex items-center gap-2">
-                {item.labels.map((label) => (
+                {item.labels.map((label: any) => (
                   <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
                     {label}
                   </Badge>

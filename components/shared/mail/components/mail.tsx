@@ -275,7 +275,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
                     addSuffix: true,
                   })}  */}
                   {/* {item.created_at.toString().substring(0, 10)} */}
-                  {/* {format(new Date(item.created_at?.toString()), "PPpp")} */}
+                  {format(new Date(item?.created_at?.toString()), "PP")}
                 </div>
               </div>
               <div className="text-xs font-medium">{item?.ab_client?.cli}</div>

@@ -17,6 +17,7 @@ export interface Alerte {
   types: {
     libelle: string;
   };
+  created_at: Date;
 }
 
 export interface AbClient {
