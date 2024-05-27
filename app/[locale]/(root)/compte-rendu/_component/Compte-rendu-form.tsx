@@ -23,15 +23,10 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { format, set } from "date-fns";
-
-import { APP_GEN, LISTE_CHOIX, MOTIF_IM } from "@/constants";
-
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import PromiseDereglement from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/PromiseDereglement";
 import NouvelleCoordonneeForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/NouvelleCoordonnéeForm";
-import ClientINjoignable from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/ClientINjoignable";
+
 import FaciliteDePaiementForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/FaciliteDePaiementForm";
 import NonreconnaissancedelaCreanceForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/Non-reconnaissance-de-la-créance";
 import VisiteForm from "@/app/[locale]/(root)/compte-rendu/_component/Compte-rendu-form/visiteForm";
@@ -63,12 +58,20 @@ interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
   listcompte: AbCompte[];
   historiqueCompteRendu: CompteRenduList[];
+  contactdata?: any[];
+  comptrendutypesdata?: any[];
+  Motifdata?: any[];
+  appreciationdata?: any[];
 }
 
 const CompteRenduForm = ({
   suiviAgenda: suiviagendaprops,
   listcompte,
+  appreciationdata,
   historiqueCompteRendu,
+  Motifdata,
+  comptrendutypesdata,
+  contactdata,
 }: CompteRenduFormProps) => {
   const [selectedValue, setSelectedValue] = useState("1");
   console.log(historiqueCompteRendu);
@@ -104,6 +107,7 @@ const CompteRenduForm = ({
     console.log(selectedRadio);
     setTab(e.target.value);
   };
+
   const handleTabChange = (num: string) => {
     setSelectedRadio(num);
     let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix, mnt_reg } =
@@ -119,25 +123,25 @@ const CompteRenduForm = ({
     setTab(num);
   };
 
-  const { isPending: MotifPending, data: Motifdata } = useQuery({
-    queryKey: ["getMotif"],
-    queryFn: async () => await getMotif(),
-  });
+  // const { isPending: MotifPending, data: Motifdata } = useQuery({
+  //   queryKey: ["getMotif"],
+  //   queryFn: async () => await getMotif(),
+  // });
 
-  const { isPending: contactpending, data: contactdata } = useQuery({
-    queryKey: ["getcontact"],
-    queryFn: async () => await getcontact(),
-  });
-  const { isPending: comptrendutypespending, data: comptrendutypesdata } =
-    useQuery({
-      queryKey: ["getconptrendutypes"],
-      queryFn: async () => await getcomptrendutypes(),
-    });
-  console.log(contactdata);
-  const { isPending: appreciationpending, data: appreciationdata } = useQuery({
-    queryKey: ["appreciation"],
-    queryFn: async () => await getappreciation(),
-  });
+  // const { isPending: contactpending, data: contactdata } = useQuery({
+  //   queryKey: ["getcontact"],
+  //   queryFn: async () => await getcontact(),
+  // });
+  // const { isPending: comptrendutypespending, data: comptrendutypesdata } =
+  //   useQuery({
+  //     queryKey: ["getconptrendutypes"],
+  //     queryFn: async () => await getcomptrendutypes(),
+  //   });
+  // console.log(contactdata);
+  // const { isPending: appreciationpending, data: appreciationdata } = useQuery({
+  //   queryKey: ["appreciation"],
+  //   queryFn: async () => await getappreciation(),
+  // });
 
   const searchParams = useSearchParams();
   const cli = searchParams.get("cli");
@@ -147,7 +151,6 @@ const CompteRenduForm = ({
 
   const onTabChange = (value: string) => {
     setTab(value);
-
     console.log(tab);
   };
 
@@ -177,22 +180,6 @@ const CompteRenduForm = ({
       }`;
       console.log("Nouvelle coordonnee");
     } else if (selectedRadio === "3") {
-      // compte_rendu = `Facilité de paiement : Montant global = ${
-      //   client.mnt_imp
-      // } Nombre d'echeance = ${suiviAgenda.nb_ech} Mnt. 1ére ech. = ${
-      //   suiviAgenda.mntech1
-      // } Date 1ére ech. = ${suiviAgenda.date_prem_ver?.toLocaleDateString()} Mnt. 2ème ech. = ${
-      //   suiviAgenda.mntech2
-      // } Date 2ème ech. = ${suiviAgenda.date_deuxi_ech?.toLocaleDateString()} Mnt. 3ème ech. = ${
-      //   suiviAgenda.mntech3
-      // } Date 3éme ech. = ${suiviAgenda.date_trois_ech?.toLocaleDateString()} Mnt. 4ème ech. = ${
-      //   suiviAgenda.mntech4
-      // } Date 4éme ech. = ${suiviAgenda.date_quat_ech?.toLocaleDateString()} Mnt. 5ème ech. = ${
-      //   suiviAgenda.mntech5
-      // } Date 5éme ech. = ${suiviAgenda.date_cinq_ech?.toLocaleDateString()} ${
-      //   suiviAgenda.compte_rendu || ""
-      // }`;
-      // console.log("Facilite de paiement");
       compte_rendu = `Facilité de paiement : Montant global = ${
         client.mnt_imp
       } Nombre d'echeance = ${suiviAgenda.nb_ech} ${
@@ -263,15 +250,15 @@ const CompteRenduForm = ({
     //   });
   };
 
-  // const getDefaultTab = () => {
-  //   if (selectedRadio === "2") {
-  //     return "Nouvelles coordonnées"; // Ensure consistent spelling with the TabsTrigger values
-  //   } else if (selectedRadio === "1") {
-  //     return "Promesse de règlement";
-  //   } else {
-  //     return "Facilité de paiement";
-  //   }
-  // };
+  const getDefaultTab = () => {
+    if (selectedRadio === "2") {
+      return "Nouvelles coordonnées"; // Ensure consistent spelling with the TabsTrigger values
+    } else if (selectedRadio === "1") {
+      return "Promesse de règlement";
+    } else {
+      return "Facilité de paiement";
+    }
+  };
 
   const queryClient = new QueryClient();
   return (
@@ -627,55 +614,6 @@ const CompteRenduForm = ({
                   onValueChange={onTabChange}
                 >
                   <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                    {/* <TabsTrigger
-                      onClick={() => handleTabChange("1")}
-                      className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      // disabled
-                      value="1"
-                    >
-                      Promesse de règlement
-                    </TabsTrigger>
-                    <TabsTrigger
-                      onClick={() => handleTabChange("2")}
-                      className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      // disabled
-                      value="2"
-                    >
-                      Nouvelles coordonnées
-                    </TabsTrigger>
-                    <TabsTrigger
-                      className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      onClick={() => handleTabChange("3")}
-                      // disabled
-                      value="3"
-                    >
-                      Facilité de paiement
-                    </TabsTrigger>
-                    <TabsTrigger
-                      className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      // disabled
-                      onClick={() => handleTabChange("4")}
-                      value="4"
-                    >
-                      Non reconnaissance de la créance
-                    </TabsTrigger>
-                    <TabsTrigger
-                      className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      // disabled
-                      value="5"
-                      onClick={() => handleTabChange("5")}
-                    >
-                      Visite
-                    </TabsTrigger>
-                    <TabsTrigger
-                      className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
-                      onClick={() => handleTabChange("6")}
-                      // disabled
-                      value="6"
-                    >
-                      Client injoignable
-                    </TabsTrigger> */}
-
                     {comptrendutypesdata?.map((item: any) => (
                       <TabsTrigger
                         className="relative rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none focus-visible:ring-0 data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none "
@@ -763,7 +701,6 @@ const CompteRenduForm = ({
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            {/* <SelectLabel></SelectLabel> */}
                             {appreciationdata?.map((item: any) => (
                               <SelectItem
                                 key={item.code}

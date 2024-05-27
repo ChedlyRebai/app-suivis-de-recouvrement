@@ -16,6 +16,7 @@ import {
 import {
   ArrowUpDown,
   ChevronDown,
+  FileSearch,
   MoreHorizontal,
   SearchIcon,
   Trash2,
@@ -157,8 +158,7 @@ const CompteRenduHistorique = ({
               variant="default"
               onClick={() => onOpen(row.original.id)}
             >
-              {row.original.id}
-              <SearchIcon className="mr-" size={20} />
+              <FileSearch className="mr-" size={20} />
             </Button>
 
             <AlertConfirmation
