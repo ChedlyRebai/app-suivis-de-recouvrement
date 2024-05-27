@@ -47,12 +47,12 @@ const CompteRenduModal = () => {
           </p>
         </>
       )}
-      {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+      {/* {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 1 && (
         <div className="">
           <Label className="text-primary">Promesse</Label>
         </div>
-      )}
+      )} */}
 
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 2 && (

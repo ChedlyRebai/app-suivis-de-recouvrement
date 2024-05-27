@@ -40,7 +40,7 @@ export const getLettre = async (
     );
 
     const res = await axios.get<any>(
-      `http://localhost:10001/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
+      `https://release2.vercel.app/lettre/getlettre?page=${currentpage}&perPage=${perpage}&search=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
 
     // revalidatePath("/lettre-recouvrement");
@@ -56,7 +56,7 @@ export const updateEtatLetttre = async (
 ): Promise<any> => {
   try {
     const res = await axios.put(
-      `http://localhost:10001/lettre/updatelettre?ncp=${ncp}`,
+      `https://release2.vercel.app/lettre/updatelettre?ncp=${ncp}`,
       { etat: etat_lettre }
     );
     console.log(res.data);
