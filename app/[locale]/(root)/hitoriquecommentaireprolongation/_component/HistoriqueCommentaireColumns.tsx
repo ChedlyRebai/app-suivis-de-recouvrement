@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 import { ArrowUpDown } from "lucide-react";
 export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
   // {
@@ -43,6 +44,9 @@ export const HistoriqueCommentaireColumns: ColumnDef<any>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      return <span> {format(new Date(row.original.dateobs), "PP")}</span>;
     },
   },
 
