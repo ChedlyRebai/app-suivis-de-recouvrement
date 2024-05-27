@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Mail } from "@/components/shared/mail/components/mail";
 import { accounts, mails } from "@/components/shared/mail/data";
 import LoadingIcons, { Oval } from "react-loading-icons";
-import { getAllAlerts } from "@/actions/Alerts.action";
+import { getAlertesTypes, getAllAlerts } from "@/actions/Alerts.action";
 
 export default async function Page({
   searchParams,
@@ -22,6 +22,7 @@ export default async function Page({
   const search = searchParams?.query || "";
   const limit = 20;
   const initialdata = await getAllAlerts(1, limit, search);
+  const alertesTypes = await getAlertesTypes();
   console.log("initialData", initialdata);
   return (
     <>
@@ -47,6 +48,7 @@ export default async function Page({
         <div className="hidden flex-col md:flex">
           <Suspense key={search} fallback={<Oval />}>
             <Mail
+              alertesTypes={alertesTypes}
               initialData={initialdata.alertes || []}
               limit={5}
               search={search}

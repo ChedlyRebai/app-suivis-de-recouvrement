@@ -44,7 +44,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
 
 import { format } from "date-fns/format";
-import { Alerte, getAllAlerts } from "@/actions/Alerts.action";
+import { Alerte, AlertesTypes, getAllAlerts } from "@/actions/Alerts.action";
 interface MailProps {
   accounts: {
     label: string;
@@ -58,6 +58,7 @@ interface MailProps {
   initialData: any[];
   search: string;
   limit: number;
+  alertesTypes: AlertesTypes[];
 }
 export function Mail({
   accounts,
@@ -68,6 +69,7 @@ export function Mail({
   search,
   limit,
   initialData,
+  alertesTypes,
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const [mail] = useMail();
@@ -77,16 +79,17 @@ export function Mail({
   console.log("initialData", initialData);
   const { alerte, setAlert, setId } = useInbox();
 
-  const handleSearch = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("query", query);
-      params.set("page", "1");
-    } else {
-      params.delete("query");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  // const handleSearch = useDebouncedCallback((query: string) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (query) {
+  //     params.set("query", query);
+  //     params.set("page", "1");
+  //   } else {
+  //     params.delete("query");
+  //   }
+  //   replace(`${pathname}?${params.toString()}`);
+  // }, 300);
+
   return (
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
@@ -154,6 +157,16 @@ export function Mail({
                 >
                   Unread
                 </TabsTrigger> */}
+                {/* {alertesTypes.map((item, i) => {
+                  return (
+                    <TabsTrigger
+                      value={`${item.rapporttype}`}
+                      className="text-zinc-600 dark:text-zinc-200"
+                    >
+                      {item.types?.libelle}
+                    </TabsTrigger>
+                  );
+                })} */}
               </TabsList>
             </div>
             <Separator />

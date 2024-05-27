@@ -20,7 +20,26 @@ export interface Alerte {
   created_at: Date;
 }
 
-export const getA;
+export interface AlertesTypes {
+  rapporttype: number;
+  types: Types | null;
+}
+
+export interface Types {
+  libelle: string;
+}
+
+export const getAlertesTypes = async () => {
+  try {
+    const res = await axios.get<AlertesTypes[]>(
+      `https://release2.vercel.app/alerts/types`
+    );
+
+    return res.data || ([] as AlertesTypes[]);
+  } catch (error) {
+    return [] as AlertesTypes[];
+  }
+};
 
 export interface AbClient {
   cli: string;
