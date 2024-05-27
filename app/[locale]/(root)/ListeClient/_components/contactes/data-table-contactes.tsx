@@ -48,6 +48,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { DataTableToolbar } from "@/components/shared/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: any[];
@@ -252,7 +253,7 @@ export function DataTableContactes<TData, TValue>({
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <>
+        {/* <>
           <Input
             placeholder="Cli"
             defaultValue={searchParams.get("query")?.toString()}
@@ -403,7 +404,8 @@ export function DataTableContactes<TData, TValue>({
           )}
 
           <DataTableViewOptions table={table} />
-        </>
+        </> */}
+        <DataTableToolbar table={table} type="contactes" />
       </div>
       <div className="rounded-md border">
         <Table>
@@ -484,7 +486,7 @@ export function DataTableContactes<TData, TValue>({
               TOT IRR: {total.tot_creance}
             </TableCell>
             <TableCell className="font-bold">
-              TOT ENG: {total.tot_eng}
+              TOT ENG: {total.engagement}
             </TableCell>
           </TableRow>
         </Table>
