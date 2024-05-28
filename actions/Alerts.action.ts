@@ -78,10 +78,15 @@ export const getAllAlerts = async (
 ) => {
   try {
     // axios.defaults.baseURL = `${process.env.API_URL}`;
-    const res = await axios.get<AlertsMain>(
-      `https://release2.vercel.app/alerts/all?page=${page}&perpage=8&search=${search}`
+    console.log(
+      `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
     );
-    console.log("alertes", res.data);
+
+    const res = await axios.get<AlertsMain>(
+      `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
+    );
+
+    // console.log("alertes", res.data);
     revalidatePath("/alerts/all");
     revalidatePath("/inbox");
     revalidatePath("/");

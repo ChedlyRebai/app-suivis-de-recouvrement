@@ -228,13 +228,12 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     console.log("newData", newData);
     //const { data: newData } = await GetPokemons({ search, offset, limit })
     // const newData: any = [];
+    console.log("next page", next);
     if (newData?.alertes?.length) {
       setPage(next);
-
-      setData((prev: any[] | undefined) => [
-        ...(prev?.length ? prev : []),
-        ...newData.alertes,
-      ]);
+      setData(newData.alertes);
+      console.log("newData", newData);
+      // setData((prev: any) => [...prev, ...newData.alertes]);
       console.log("newData length", data.length);
     } else {
       setDisable(true);
@@ -288,7 +287,7 @@ export function MailList({ items, initialData, search, limit }: IProps) {
                     addSuffix: true,
                   })}  */}
                   {/* {item.created_at.toString().substring(0, 10)} */}
-                  {format(new Date(item?.created_at?.toString()), "PP")}
+                  {/* {format(new Date(item?.created_at?.toString()), "PP")} */}
                 </div>
               </div>
               <div className="text-xs font-medium">{item?.ab_client?.cli}</div>

@@ -23,7 +23,7 @@ export default async function Page({
   const limit = 20;
   const initialdata = await getAllAlerts(1, limit, search);
   const alertesTypes = await getAlertesTypes();
-  console.log("initialData", initialdata);
+  // console.log("initialData", initialdata);
   return (
     <>
       <div className="" />
