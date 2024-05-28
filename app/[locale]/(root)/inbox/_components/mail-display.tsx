@@ -1,53 +1,24 @@
-import addDays from "date-fns/addDays";
-import addHours from "date-fns/addHours";
-import format from "date-fns/format";
-import nextSaturday from "date-fns/nextSaturday";
-import {
-  Archive,
-  ArchiveX,
-  Check,
-  Clock,
-  Forward,
-  Mail,
-  MoreVertical,
-  Phone,
-  Reply,
-  ReplyAll,
-  Trash2,
-} from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
-import {
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui//dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Label } from "@/components/ui/label";
+
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { formatDate } from "date-fns";
 import useInbox from "@/hooks/use-inbox-hook";
 import { useQuery } from "@tanstack/react-query";
-
-import { CompteRenduList } from "@/constants/types";
-import { getCompteRenduById } from "@/actions/comptrendu.action";
 import { Oval } from "react-loading-icons";
 import { Alerte, getAlerteById } from "@/actions/Alerts.action";
 import Link from "next/link";
@@ -437,6 +408,22 @@ export function MailDisplay() {
               </div>
             )}
           </div> */}
+          {data.ab_client?.tel1 && (
+            <div className="flex items-center p-2 ">
+              <Phone className="h-4 w-4 mr-2" />
+              <Link href={`tel:${data?.ab_client?.tel1}`}>
+                {data?.ab_client?.tel1}
+              </Link>
+            </div>
+          )}
+          {data.ab_client?.email && (
+            <div className="flex items-center p-2 ">
+              <Mail className="h-4 w-4 mr-2" />
+              <Link href={`mailto:${data?.ab_client?.email}`}>
+                {data?.ab_client?.email}
+              </Link>
+            </div>
+          )}
         </div>
       )}
 

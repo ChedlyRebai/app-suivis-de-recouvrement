@@ -1,6 +1,8 @@
 "use server";
+import { getSession } from "@/lib";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export interface AlertsMain {
   alertes: Alerte[];
@@ -78,13 +80,21 @@ export const getAllAlerts = async (
   search: string
 ) => {
   try {
+    const user = await getSession();
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
     // axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(
       `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
     );
 
     const res = await axios.get<AlertsMain>(
-      `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
+      `https://release2.vercel.app/alerts/all?page=${page}&perpage=8&search=${search}`
     );
 
     revalidatePath("/inbox");
