@@ -3,10 +3,10 @@ import React, { Suspense } from "react";
 import MailPage from "@/components/shared/mail/page";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { Mail } from "@/components/shared/mail/components/mail";
 import { accounts, mails } from "@/components/shared/mail/data";
 import LoadingIcons, { Oval } from "react-loading-icons";
 import { getAlertesTypes, getAllAlerts } from "@/actions/Alerts.action";
+import { Mail } from "./_components/mail";
 
 export default async function Page({
   searchParams,
