@@ -23,7 +23,7 @@ export default async function Page({
   const limit = 20;
   const initialdata = await getAllAlerts(1, limit, search);
   const alertesTypes = await getAlertesTypes();
-  // console.log("initialData", initialdata);
+  console.log("initialData", initialdata);
   return (
     <>
       <div className="" />
@@ -48,7 +48,6 @@ export default async function Page({
         <div className="hidden flex-col md:flex">
           <Suspense key={search} fallback={<Oval />}>
             <Mail
-              alertesTypes={alertesTypes}
               initialData={initialdata.alertes || []}
               limit={5}
               search={search}
@@ -57,6 +56,7 @@ export default async function Page({
               defaultLayout={defaultLayout}
               defaultCollapsed={defaultCollapsed}
               navCollapsedSize={4}
+              alertesTypes={alertesTypes}
             />
           </Suspense>
         </div>
