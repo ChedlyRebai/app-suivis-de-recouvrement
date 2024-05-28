@@ -12,15 +12,12 @@ import { AlertCircle, Archive, Bell, Search } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
 import { Nav } from "./nav";
-import { type Mail } from "../data";
-import { useMail } from "../use-mail";
-
 import useInbox from "@/hooks/use-inbox-hook";
 
 import { format } from "date-fns/format";
 
 interface IProps {
-  items: Mail[];
+  items: any[];
   initialData: Alerte[];
   search: string;
   limit: number;
@@ -52,7 +49,6 @@ export function MailList({ items, initialData, search, limit }: IProps) {
     }
   }, [inView, page, limit]);
 
-  const [mail, setMail] = useMail();
   const { alerte, setAlert, setId } = useInbox();
 
   return (
@@ -70,12 +66,10 @@ export function MailList({ items, initialData, search, limit }: IProps) {
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
-                  <div className="font-semibold">
-                    {item?.ab_client?.nom} {item?.id}
-                  </div>
-                  {!item?.compterendutype?.types.libelle && (
+                  <div className="font-semibold">{item?.ab_client?.nom}</div>
+                  {/* {!item?.compterendutype?.types.libelle && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
-                  )}
+                  )} */}
                 </div>
                 <div className="ml-auto text-xs text-muted-foreground">
                   {/* {formatDistanceToNow(new Date(item.created_at), {

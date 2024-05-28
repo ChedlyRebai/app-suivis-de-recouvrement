@@ -12,7 +12,7 @@ import { AlertCircle, Archive, Bell, Search } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
 interface IProps {
-  items: Mail[];
+  items: any[];
   initialData: Alerte[];
   search: string;
   limit: number;
@@ -32,8 +32,7 @@ import { AccountSwitcher } from "./account-switcher";
 import { MailDisplay } from "./mail-display";
 
 import { Nav } from "./nav";
-import { type Mail } from "../data";
-import { useMail } from "../use-mail";
+
 import { Input } from "@/components/ui/input";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -52,7 +51,7 @@ interface MailProps {
     email: string;
     icon: React.ReactNode;
   }[];
-  mails: Mail[];
+  mails: any[];
   defaultLayout: number[] | undefined;
   defaultCollapsed?: boolean;
   navCollapsedSize: number;
@@ -73,10 +72,7 @@ export function Mail({
   alertesTypes,
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
-  const [mail] = useMail();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+
   console.log("initialData", initialData);
   const { alerte, setAlert, setId } = useInbox();
 

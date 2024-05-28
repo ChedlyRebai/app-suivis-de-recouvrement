@@ -204,7 +204,7 @@ export function MailDisplay() {
             <TooltipContent>Forward</TooltipContent>
           </Tooltip> */}
         </div>
-        <Separator orientation="vertical" className="mx-2 h-6" />
+        {/* <Separator orientation="vertical" className="mx-2 h-6" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" disabled={!data}>
@@ -218,7 +218,7 @@ export function MailDisplay() {
             <DropdownMenuItem>Add label</DropdownMenuItem>
             <DropdownMenuItem>Mute thread</DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
       <Separator />
       {!data.id && (
