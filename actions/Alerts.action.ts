@@ -1,3 +1,4 @@
+"use server";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
 
@@ -86,8 +87,6 @@ export const getAllAlerts = async (
       `http://localhost:10001/alerts/all?page=${page}&perpage=8&search=${search}`
     );
 
-    // console.log("alertes", res.data);
-    revalidatePath("/alerts/all");
     revalidatePath("/inbox");
     revalidatePath("/");
     return res.data || ({} as AlertsMain);

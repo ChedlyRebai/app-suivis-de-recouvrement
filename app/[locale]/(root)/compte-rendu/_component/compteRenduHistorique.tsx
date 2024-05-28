@@ -50,6 +50,7 @@ import { deleteFile } from "@/actions/file.action";
 import { deleteCompteRenduById } from "@/actions/comptrendu.action";
 import AlertConfirmation from "../../../../../components/shared/confirmationAlert";
 import toast from "react-hot-toast";
+import { format } from "date-fns";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: CompteRenduList[];
@@ -116,7 +117,8 @@ const CompteRenduHistorique = ({
       },
       cell: ({ row }) => (
         <div className="lowercase">
-          {new Date(row.getValue("created_at")).toLocaleDateString()}
+          {format(new Date(row.getValue("created_at")), "PP")}
+          {/* {new Date(row.getValue("created_at")).toLocaleDateString()} */}
         </div>
       ),
     },
