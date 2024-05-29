@@ -308,6 +308,8 @@ export interface ClientDetails {
   depassement: string;
   nombre_jours_sdb: number;
   tel1: string;
+  email: string;
+  addresse: string;
   tel2: null;
   Zone: Zone;
 }

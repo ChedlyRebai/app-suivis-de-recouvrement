@@ -1,5 +1,4 @@
 import { ClientDetails } from "@/actions/client.action";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -8,16 +7,8 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import { Separator } from "@/components/ui/separator";
 
-import { Copy, Truck, MoreVertical, CreditCard } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const ClientInfo = ({ client }: { client: ClientDetails }) => {
   console.log(client);
@@ -63,7 +54,7 @@ const ClientInfo = ({ client }: { client: ClientDetails }) => {
       </CardHeader>
       <CardContent className="p-6 text-sm">
         <div className="grid gap-3">
-          <div className="font-semibold">Client Details</div>
+          <div className="font-semibold">Détails du client</div>
           <ul className="grid gap-3">
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">
@@ -121,31 +112,33 @@ const ClientInfo = ({ client }: { client: ClientDetails }) => {
             </div> */}
         {/* <Separator className="my-4" /> */}
         <div className="grid gap-3">
-          <div className="font-semibold">Contact inforamation</div>
+          <div className="font-semibold">Coordonnées</div>
           <dl className="grid gap-3">
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">Address</dt>
-              <dd>Liam Johnson</dd>
+              <dd>{client.addresse}</dd>
             </div>
 
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">Email</dt>
               <dd>
-                <a href="mailto:">liam@acme.com</a>
+                <a href={`mailto:${client.email}`}>{client.email}</a>
               </dd>
             </div>
             <div className="flex items-center justify-between">
               <dt className="text-muted-foreground">Telephone 1</dt>
               <dd>
-                <a href="tel:">{client?.tel1}</a>
+                <a href={`tel:${client.tel1}`}>{client?.tel1}</a>
               </dd>
             </div>
-            <div className="flex items-center justify-between">
-              <dt className="text-muted-foreground">Telephone 2</dt>
-              <dd>
-                <a href="tel:">{client?.tel2}</a>
-              </dd>
-            </div>
+            {client?.tel2 && (
+              <div className="flex items-center justify-between">
+                <dt className="text-muted-foreground">Telephone 2</dt>
+                <dd>
+                  <a href={`tel:${client.tel2}`}>{client?.tel2}</a>
+                </dd>
+              </div>
+            )}
           </dl>
         </div>
         <Separator className="my-4" />
