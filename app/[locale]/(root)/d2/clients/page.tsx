@@ -1,4 +1,5 @@
 import {
+  exportClient,
   getAllAccount,
   getAllClient,
   getAllCompteRendu,
@@ -27,6 +28,7 @@ export default async function Home({
   const clients = await getAllClient(currentPage, perPage, search);
   return (
     <AllClient
+      onExport={exportClient}
       columns={clientcolumns}
       totalPages={clients.totalPages || 0}
       data={clients.result || []}

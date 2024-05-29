@@ -63,12 +63,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Client, Utilisateur } from "@/actions/admin.action";
+import { Client, Utilisateur, exportClient } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
+import { on } from "events";
+import Link from "next/link";
 
 interface DataTableProps {
   columns: any[];
-
+  onExport?: (data: any) => void;
   data: Client[];
   totalAccout?: number;
   totalPages?: number;
@@ -79,6 +81,7 @@ export function AllClient({
   data,
   totalAccout,
   totalPages = 0,
+  onExport,
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -353,18 +356,22 @@ export function AllClient({
           </Card> */}
 
               <div>
-                <Button variant="outline" className=" gap-1 mr-1">
-                  <File className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    PDF
-                  </span>
-                </Button>
-                <Button variant="outline" className=" gap-1 ">
-                  <File className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Excel
-                  </span>
-                </Button>
+                <Link href="https://release4.vercel.app/client/exfclient">
+                  <Button variant="outline" className=" gap-1 mr-1">
+                    <File className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      PDFs
+                    </span>{" "}
+                  </Button>{" "}
+                </Link>
+                <Link href="https://release4.vercel.app/client/exclient">
+                  <Button variant="outline" className=" gap-1 ">
+                    <File className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      Excel
+                    </span>
+                  </Button>
+                </Link>
                 <DataTableViewOptions table={table} />
               </div>
             </>

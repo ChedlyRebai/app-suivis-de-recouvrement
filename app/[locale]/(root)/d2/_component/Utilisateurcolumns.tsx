@@ -79,7 +79,12 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
     header: "Affecter A",
     cell: ({ row }) => {
       console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
-      return <div>{row.original?.AffecterA?.[0]?.Zone?.libelle}</div>;
+      return (
+        <div>
+          {row.original?.AffecterA?.[0]?.Zone?.libelle}
+          {row.original?.AffecterA?.[0]?.Agence?.libelle}
+        </div>
+      );
     },
   },
 ];

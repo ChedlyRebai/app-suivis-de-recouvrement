@@ -289,7 +289,7 @@ export const getUserStat = async (id: number) => {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(`http://localhost:10004/stat/userstat?id=${id}`);
     const res = await axios.get<any>(
-      `http://localhost:10004/stat/userstat?id=${id}`
+      `https://release4.vercel.app/stat/userstat?id=${id}`
     );
 
     return (res.data as {}) || ({} as any);
@@ -303,9 +303,22 @@ export const getClientStat = async (id: number) => {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     console.log(`http://localhost:10004/stat/clientstat?id=${id}`);
     const res = await axios.get<any>(
-      `http://localhost:10004/stat/clientstat?id=${id}`
+      `https://release4.vercel.app/stat/clientstat?id=${id}`
     );
 
+    return (res.data as {}) || ({} as any);
+  } catch (error) {
+    return {} as any;
+  }
+};
+
+export const exportClient = async (search?: string) => {
+  try {
+    axios.defaults.baseURL = `${process.env.API_URL}`;
+    console.log(`http://localhost:10004/stat/clientstat?id=${search}`);
+    const res = await axios.get<any>(
+      `https://release4.vercel.app/client/exfclient?id=${search}`
+    );
     return (res.data as {}) || ({} as any);
   } catch (error) {
     return {} as any;
