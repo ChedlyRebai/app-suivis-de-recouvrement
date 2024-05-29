@@ -23,7 +23,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
+import { Check, ChevronsUpDown, File, RefreshCcwIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -352,7 +352,21 @@ export function AllClient({
             </CardContent>
           </Card> */}
 
-              <DataTableViewOptions table={table} />
+              <div>
+                <Button variant="outline" className=" gap-1 mr-1">
+                  <File className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    PDF
+                  </span>
+                </Button>
+                <Button variant="outline" className=" gap-1 ">
+                  <File className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Excel
+                  </span>
+                </Button>
+                <DataTableViewOptions table={table} />
+              </div>
             </>
           </div>
           <div className="rounded-md border">
