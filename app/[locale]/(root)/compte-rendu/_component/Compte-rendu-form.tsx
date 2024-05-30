@@ -45,12 +45,7 @@ import {
 } from "@/components/ui/accordion";
 import CompteRenduHistorique from "./CompteRenduHistorique";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { getMotif } from "@/actions/motif.action";
-import {
-  getappreciation,
-  getcomptrendutypes,
-  getcontact,
-} from "@/actions/utils.actions";
+
 import { CompteRenduList } from "@/constants/types";
 import toast from "react-hot-toast";
 
