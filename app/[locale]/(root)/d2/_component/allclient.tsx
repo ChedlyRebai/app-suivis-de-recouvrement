@@ -67,6 +67,8 @@ import { Client, Utilisateur, exportClient } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
 import { on } from "events";
 import Link from "next/link";
+import { getAgences, getGroupes } from "@/actions/client.action";
+import { ResetIcon } from "@radix-ui/react-icons";
 
 interface DataTableProps {
   columns: any[];
@@ -83,10 +85,75 @@ export function AllClient({
   totalPages = 0,
   onExport,
 }: DataTableProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [groupes, setGroupes] = useState<any>([]);
+  const [agences, setAgences] = useState<any>([]);
   const { replace } = useRouter();
+  const pathname = usePathname();
+
+  const [agenceopen, setagenceOpen] = useState(false);
+  const [groupLoading, setGroupLoading] = useState(false);
+  const [agenceLoading, setAgenceLoading] = useState(false);
+  const [groupopen, setgroupOpen] = useState(false);
+  const [agenceValue, setAgenceValue] = useState("");
+  const [groupeValue, setgroupeValue] = useState("");
+
+  const resetAll = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("groupe");
+    params.delete("agence");
+
+    replace(`${pathname}?${params.toString()}`);
+  };
+  const handleGroup = (group: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (group) {
+      params.set("groupe", group);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const handleAgence = (agence: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (agence) {
+      params.set("agence", agence);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  useEffect(() => {
+    const fetchGroupes = async () => {
+      try {
+        setGroupLoading(true);
+        const groupesData = await getGroupes();
+
+        setGroupes(groupesData);
+        console.log("groupes", groupesData);
+      } catch (error) {
+        console.error("Error fetching groupes:", error);
+      } finally {
+        setGroupLoading(false);
+      }
+    };
+
+    const fetchAgences = async () => {
+      try {
+        setAgenceLoading(true);
+        const agencesData = await getAgences();
+        setAgences(agencesData);
+      } catch (error) {
+        console.error("Error fetching agences:", error);
+      } finally {
+        setAgenceLoading(false);
+      }
+    };
+
+    fetchAgences();
+    fetchGroupes();
+  }, []);
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
 
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
@@ -99,11 +166,6 @@ export function AllClient({
 
   // const [groupes, setGroupes] = useState<any>([]);
   // const [agences, setAgences] = useState<any>([]);
-
-  const [agenceopen, setagenceOpen] = useState(false);
-  const [groupopen, setgroupOpen] = useState(false);
-  const [agenceValue, setAgenceValue] = useState("");
-  const [groupeValue, setgroupeValue] = useState("");
 
   const handleSearch = useDebouncedCallback((query: string) => {
     const params = new URLSearchParams(searchParams);
@@ -204,7 +266,7 @@ export function AllClient({
           <CardDescription>Gérez vos Clients.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-between items-center py-4 flex-wrap">
+          <div className="flex justify-betwee items-center py-4 flex-wrap">
             <>
               <Input
                 placeholder="Cli"
@@ -214,6 +276,120 @@ export function AllClient({
                 }}
                 className="max-w-sm mr-2"
               />
+              <div className="flex mr-auto">
+                <Popover open={agenceopen} onOpenChange={setagenceOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      role="combobox"
+                      aria-expanded={agenceopen}
+                      className="w-[200px] justify-between"
+                    >
+                      {searchParams.get("agence")
+                        ? agences.find(
+                            (framework: any) =>
+                              framework.codug ===
+                              Number(searchParams.get("agence"))
+                          )?.libelle || "Sélectionner un agence"
+                        : "Sélectionner un agence"}
+
+                      {}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+
+                  <PopoverContent className="w-[200px] p-0">
+                    <Command>
+                      <CommandInput placeholder="Search agence" />
+                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandGroup>
+                        {agences.map((item: any) => (
+                          <CommandItem
+                            key={item.codug}
+                            value={item.libelle}
+                            onSelect={(currentValue) => {
+                              handleAgence(item.codug);
+                              setAgenceValue(
+                                item.codug === searchParams.get("agence")
+                                  ? ""
+                                  : item.codug
+                              );
+
+                              setagenceOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                agenceValue === item.codug
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {item.codug}: {item.libelle}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+
+                <div className="w-1" />
+                <Popover open={groupopen} onOpenChange={setgroupOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      role="combobox"
+                      aria-expanded={groupopen}
+                      className="w-[200px] justify-between"
+                    >
+                      {searchParams.get("groupe")
+                        ? groupes.find(
+                            (framework: any) =>
+                              framework.codug ===
+                              Number(searchParams.get("groupe"))
+                          )?.libelle || "Sélectionner un groupe"
+                        : "Sélectionner un groupe"}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[200px] p-0 ml-2">
+                    <Command>
+                      <CommandInput placeholder="Search group" />
+                      <CommandEmpty>No framework found.</CommandEmpty>
+
+                      <CommandGroup>
+                        {groupes.map((item: any, i: number) => (
+                          <CommandItem
+                            key={item.codug}
+                            value={item.libelle}
+                            onSelect={(currentValue) => {
+                              handleGroup(item.codug);
+                              setgroupeValue(
+                                item.codug === searchParams.get("groupe")
+                                  ? ""
+                                  : item.codug
+                              );
+                              setgroupOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                groupeValue === item.codug
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {item.codug}:{item.libelle}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+              </div>
+
               <Popover open={agenceopen} onOpenChange={setagenceOpen}>
                 {/* <PopoverTrigger asChild>
               <Button
@@ -267,111 +443,31 @@ export function AllClient({
               </Command>
             </PopoverContent> */}
               </Popover>
-              {/* <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetAgence}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button> */}
-              <div className="w-1" />
-              {/* <Popover open={groupopen} onOpenChange={setgroupOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="default"
-                role="combobox"
-                aria-expanded={groupopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("groupe")
-                  ? agences.find(
-                      (framework: any) =>
-                        framework.codug === searchParams.get("groupe")
-                    )?.libelle || "Sélectionner un groupe"
-                  : "Sélectionner un groupe"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0 ml-2">
-              <Command>
-                <CommandInput placeholder="Search group" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-
-                <CommandGroup>
-                  {groupes.map((item: any, i: number) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleGroup(item.codug);
-                        setgroupeValue(
-                          item.codug === searchParams.get("groupe")
-                            ? ""
-                            : item.codug
-                        );
-                        setgroupOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          groupeValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      
-                      {item.codug}:{item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover> */}
-              {/* <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetGroup}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button> */}
-
-              {/* <Card className="h-10">
-            <CardContent className="flex items-center justify-center my-1">
-              <p>Nombre de jour :</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleFrom(e.target.value)}
-                placeholder="De"
-              />
-              <p className="mx-1">à</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleTo(e.target.value)}
-                placeholder="à"
-              />
-            </CardContent>
-          </Card> */}
 
               <div>
                 <Link href="https://release4.vercel.app/client/exfclient">
                   <Button variant="outline" className=" gap-1 mr-1">
                     <File className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      PDFs
+                      PDF
                     </span>{" "}
                   </Button>{" "}
                 </Link>
                 <Link href="https://release4.vercel.app/client/exclient">
-                  <Button variant="outline" className=" gap-1 ">
+                  <Button variant="outline" className=" gap-1 mr-1">
                     <File className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                       Excel
                     </span>
                   </Button>
                 </Link>
+                <Button
+                  className="ml-auto mr-1"
+                  variant="destructive"
+                  onClick={resetAll}
+                >
+                  <ResetIcon className="h-4 w-4" />
+                </Button>
                 <DataTableViewOptions table={table} />
               </div>
             </>

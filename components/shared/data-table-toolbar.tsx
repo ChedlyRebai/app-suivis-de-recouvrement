@@ -237,6 +237,7 @@ export function DataTableToolbar<TData>({
       <Button className="ml-auto mr-1" variant="destructive" onClick={resetAll}>
         <ResetIcon className="h-4 w-4" />
       </Button>
+      
       <DataTableViewOptions table={table} />
     </>
   );
