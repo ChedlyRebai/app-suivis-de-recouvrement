@@ -64,6 +64,7 @@ import {
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { Compte, Utilisateur } from "@/actions/admin.action";
 import { utilisateur } from "@/Models/utilisateur.model";
+import Link from "next/link";
 
 interface DataTableProps {
   columns: any[];
@@ -337,18 +338,22 @@ export function AllAccount({
           </Card> */}
 
               <div>
-                <Button variant="outline" className=" gap-1 mr-1">
-                  <File className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    PDF
-                  </span>
-                </Button>
-                <Button variant="outline" className=" gap-1 ">
-                  <File className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Excel
-                  </span>
-                </Button>
+                <Link href="https://release4.vercel.app/compte/exf">
+                  <Button variant="outline" className=" gap-1 mr-1">
+                    <File className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      PDF
+                    </span>
+                  </Button>
+                </Link>
+                <Link href="https://release4.vercel.app/compte/ex">
+                  <Button variant="outline" className=" gap-1 ">
+                    <File className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      Excel
+                    </span>
+                  </Button>
+                </Link>
                 <DataTableViewOptions table={table} />
               </div>
             </>
