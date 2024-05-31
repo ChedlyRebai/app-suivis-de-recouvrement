@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import Image from "next/image";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ThemeButton from "@/components/shared/ThemeButton";
 import { useTranslations } from "next-intl";
 import LocalSwitcher from "@/components/shared/Local-switcher";
+import Image from "next/image";
+import Link from "next/link";
 export default function RootLayout({
   children,
 }: Readonly<{
