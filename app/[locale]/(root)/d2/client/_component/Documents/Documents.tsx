@@ -23,6 +23,8 @@ import Link from "next/link";
 import React from "react";
 import OpenModelButton from "./openModelButton";
 import { deleteFile } from "@/actions/file.action";
+import { ConfirmationDialog } from "@uploadcare/blocks";
+import AlertConfirmation from "@/components/shared/confirmationAlert";
 
 const Documents = ({ file }: { file: File[] }) => {
   return (
@@ -79,15 +81,26 @@ const Documents = ({ file }: { file: File[] }) => {
                       >
                         <EyeIcon size={16} />
                       </Button>{" "}
-                      <Button
-                        className="ml-1"
+                      <AlertConfirmation
+                        description="Voulez-vous vraiment supprimer ce fichier ?"
+                        title="Suppression"
                         variant="destructive"
-                        onClick={async () => {
+                        buttonText=""
+                        icon={<Trash2 size={16} />}
+                        onConfirm={async () => {
                           await deleteFile(file?.id);
                         }}
                       >
-                        <Trash2 size={16} />
-                      </Button>
+                        {/* <Button
+                          className="ml-1"
+                          variant="destructive"
+                          onClick={async () => {
+                            await deleteFile(file?.id);
+                          }}
+                        >
+                          <Trash2 size={16} />
+                        </Button> */}
+                      </AlertConfirmation>
                     </TableCell>
                   </TableRow>
                 );

@@ -155,14 +155,23 @@ export default function Uploader() {
             headers: {
               "content-type": file?.type || "application/octet-stream",
             },
-            body: formData,
+            body: file,
           }).then(async (res) => {
             if (res.ok) {
-              const { url } = await res.json();
+              const result = await res.json();
+              await creatFile(id, file.name, result.url)
+                .then(() => {
+                  toast.success("Fichiers téléchargés avec succès !");
+                  onClose();
+                })
+                .catch(() => {
+                  toast.error("error");
+                });
+              console.log(result);
+
+              const url = result.url;
               await creatFile(id, file.name, url)
                 .then(() => {
-                  toast.success("Fichiers téléchargés avec succès !");
-
                   onClose();
                 })
                 .catch(() => {
@@ -173,6 +182,7 @@ export default function Uploader() {
               // Handle error
               const error = await res.text();
               toast.error(error);
+              console.log(error);
             }
             setSaving(false);
           });
