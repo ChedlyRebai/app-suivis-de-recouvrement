@@ -108,7 +108,7 @@ export default function Uploader() {
         setSaving(true);
         const formData = new FormData();
 
-        files.forEach(async (file) => {
+        files.forEach(async (file: File) => {
           formData.append("files", file);
           //const reader = new FileReader();
           // extractTextFromPDF(file).then((data) => {
@@ -150,6 +150,8 @@ export default function Uploader() {
           //     );
           //     console.log(data.message.content);
           //   });
+          console.log(file);
+
           fetch("/api/upload", {
             method: "POST",
             headers: {
@@ -197,22 +199,25 @@ export default function Uploader() {
               e.preventDefault();
               e.stopPropagation();
               setDragActive(true);
+              console.log(e.dataTransfer.files);
             }}
             onDragEnter={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              console.log(e.dataTransfer.files);
               setDragActive(true);
             }}
             onDragLeave={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              console.log(e.dataTransfer.files);
               setDragActive(false);
             }}
             onDrop={(e) => {
               e.preventDefault();
               e.stopPropagation();
               setDragActive(false);
-
+              console.log(e.dataTransfer.files);
               const fileList = e.dataTransfer.files;
               if (fileList) {
                 const newFiles = Array.from(fileList);

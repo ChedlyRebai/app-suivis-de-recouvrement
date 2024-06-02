@@ -119,3 +119,17 @@ export const deleteFile = async (idFile: Number | string): Promise<File> => {
     return {} as File;
   }
 };
+
+export const uploadfile = async (file: any): Promise<File> => {
+  try {
+    const res = await axios.post<File>(
+      `https://release4.vercel.app/file/upload`,
+      file
+    );
+
+    return (res.data as File) || ({} as File);
+  } catch (error) {
+    console.log(error);
+    return {} as File;
+  }
+};
