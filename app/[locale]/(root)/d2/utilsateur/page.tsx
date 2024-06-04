@@ -57,7 +57,9 @@ export default async function page({
             </Card> */}
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>Nbr compte rendu cette semaine</CardDescription>
+              <CardDescription>
+                Nombre compte rendu cette semaine
+              </CardDescription>
               <CardTitle className="text-4xl">
                 <CountUp
                   end={stat.comptrenduThisWeek}
@@ -86,7 +88,7 @@ export default async function page({
 
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>Nbr documents ce mois-ci</CardDescription>
+              <CardDescription>Nombre documents ce mois-ci</CardDescription>
               <CardTitle className="text-4xl">
                 <CountUp end={stat.filesThisMonth} duration={2} preserveValue />
               </CardTitle>
@@ -110,7 +112,7 @@ export default async function page({
           </Card>
           <Card x-chunk="dashboard-05-chunk-1">
             <CardHeader className="pb-2">
-              <CardDescription>Nbr documents Cette semaine</CardDescription>
+              <CardDescription>Nombre documents Cette semaine</CardDescription>
               <CardTitle className="text-4xl">
                 <CountUp end={stat.filesThisWeek} duration={2} preserveValue />
               </CardTitle>
@@ -135,7 +137,7 @@ export default async function page({
 
           <Card x-chunk="dashboard-05-chunk-2">
             <CardHeader className="pb-2">
-              <CardDescription>Nbr compte rendu ce mois-ci</CardDescription>
+              <CardDescription>Nombre compte rendu ce mois-ci</CardDescription>
               <CardTitle className="text-4xl">
                 <CountUp
                   end={stat.compterenduThisMonth}
