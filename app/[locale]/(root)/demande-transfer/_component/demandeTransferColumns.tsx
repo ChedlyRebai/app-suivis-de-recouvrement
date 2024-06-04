@@ -165,7 +165,7 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
               onOpen();
             }}
           >
-            Détails
+            Demande
           </Button>
         </div>
       );

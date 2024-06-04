@@ -295,7 +295,7 @@ export const demandedeprolongation: ColumnDef<any>[] = [
               onOpen();
             }}
           >
-            Détails
+            Demande
           </Button>
         </div>
       );
