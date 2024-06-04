@@ -177,20 +177,7 @@ export default async function RootLayout({
               <TooltipContent side="right">Historiques</TooltipContent>
             </Tooltip>
           </nav>
-          <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="/en/d2/compterendu"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                >
-                  <File className="h-5 w-5" />
-                  <span className="sr-only">Compte Rendu</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Compte Rendu</TooltipContent>
-            </Tooltip>
-          </nav>
+          <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4"></nav>
         </aside>
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
