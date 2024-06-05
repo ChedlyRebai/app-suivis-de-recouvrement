@@ -736,7 +736,7 @@ const CompteRenduForm = ({
                       await queryClient.refetchQueries();
                     }}
                   >
-                    Save
+                    Sauvegarder
                   </Button>
                 </CardContent>
               </Card>
