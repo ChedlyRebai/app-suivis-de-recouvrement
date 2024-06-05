@@ -30,9 +30,11 @@ const NouvelleCoordonneeForm = () => {
             Telephone 2
           </Label>
           <Input
-            onChange={(e) =>
-              handleIputChangeSuiviAgenda("nouv_tel2", e.target.value)
-            }
+            onChange={(e) => {
+              console.log(suiviAgenda.nouv_te2);
+              handleIputChangeSuiviAgenda("nouv_te2", e.target.value);
+              handleIputChangeSuiviAgenda("nouv_tel2", e.target.value);
+            }}
             value={suiviAgenda.nouv_te2}
             className="border p-2"
             id="location"
