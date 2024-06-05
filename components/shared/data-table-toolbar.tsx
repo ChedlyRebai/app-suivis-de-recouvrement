@@ -10,7 +10,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import * as React from "react";
 import { Check, ChevronsUpDown, RefreshCcwIcon } from "lucide-react";
-
+import Cookies from "js-cookie";
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -25,6 +25,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { decodeJwt, jwtDecrypt } from "jose";
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   type: "contactes" | "noncontactes";
@@ -57,7 +58,7 @@ export function DataTableToolbar<TData>({
     }
     console.log(params.get("query")?.toString());
     replace(`${pathname}?${params.toString()}`);
-  }, 100);
+  }, 50);
 
   const resetAgence = () => {
     const params = new URLSearchParams(searchParams);
@@ -102,7 +103,9 @@ export function DataTableToolbar<TData>({
         setGroupLoading(false);
       }
     };
-
+    const token = Cookies.get("session");
+    const user = decodeJwt(token as string);
+    console.log("code_function", user.code_function);
     const fetchAgences = async () => {
       try {
         setAgenceLoading(true);
@@ -237,7 +240,7 @@ export function DataTableToolbar<TData>({
       <Button className="ml-auto mr-1" variant="destructive" onClick={resetAll}>
         <ResetIcon className="h-4 w-4" />
       </Button>
-      
+
       <DataTableViewOptions table={table} />
     </>
   );
