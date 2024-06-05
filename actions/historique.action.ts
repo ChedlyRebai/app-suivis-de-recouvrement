@@ -15,9 +15,9 @@ export const getAllHistorique = async (
 ): Promise<Main> => {
   try {
     const res = await axios.get<Main>(
-      `http://localhost:10001/historique/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/historique/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
-
+    console.log(res.data);
     revalidatePath("/files");
     return (res.data as Main) || ({} as Main);
   } catch (error) {
