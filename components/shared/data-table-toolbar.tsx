@@ -103,9 +103,7 @@ export function DataTableToolbar<TData>({
         setGroupLoading(false);
       }
     };
-    const token = Cookies.get("session");
-    const user = decodeJwt(token as string);
-    console.log("code_function", user.code_function);
+
     const fetchAgences = async () => {
       try {
         setAgenceLoading(true);
@@ -121,6 +119,9 @@ export function DataTableToolbar<TData>({
     fetchAgences();
     fetchGroupes();
   }, []);
+  const token = Cookies.get("session");
+  const userConnected: any = decodeJwt(token as string);
+  console.log("code_function", userConnected.code_function);
   return (
     <>
       <Input
@@ -135,6 +136,7 @@ export function DataTableToolbar<TData>({
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
+            disabled={true}
             role="combobox"
             aria-expanded={agenceopen}
             className="w-[200px] justify-between"
@@ -189,6 +191,7 @@ export function DataTableToolbar<TData>({
       <Popover open={groupopen} onOpenChange={setgroupOpen}>
         <PopoverTrigger asChild>
           <Button
+            disabled={userConnected.code_function === 14 ? true : false}
             variant={"outline"}
             role="combobox"
             aria-expanded={groupopen}
