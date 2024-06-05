@@ -21,7 +21,7 @@ const NouvelleCoordonneeForm = () => {
             }
             value={suiviAgenda.nouv_tel}
             id="amount"
-            placeholder="850 672.280"
+            placeholder="e.x: 28 651 733"
           />
         </div>
 
@@ -36,7 +36,7 @@ const NouvelleCoordonneeForm = () => {
             value={suiviAgenda.nouv_te2}
             className="border p-2"
             id="location"
-            placeholder="Lieu"
+            placeholder="e.x: 21 652 433"
           />
         </div>
       </div>
@@ -51,7 +51,7 @@ const NouvelleCoordonneeForm = () => {
           value={suiviAgenda.nouv_adresse}
           className="border p-2"
           id="location"
-          placeholder="Lieu"
+          placeholder="e.x: Tunis, Ariana"
         />
       </div>
     </div>
