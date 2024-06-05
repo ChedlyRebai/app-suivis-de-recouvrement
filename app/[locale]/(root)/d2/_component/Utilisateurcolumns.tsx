@@ -48,29 +48,13 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
       );
     },
   },
-  {
-    accessorKey: "email_chargee",
-    header: "Email",
-  },
-  {
-    accessorKey: "tel_chargee",
-    header: "Eelephone",
-  },
+
   {
     accessorKey: "Fonction",
     header: "Fonction",
     cell: ({ row }) => {
       console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
       return <div>{row.original?.fonction.lib_fonction}</div>;
-    },
-  },
-
-  {
-    accessorKey: "Departement",
-    header: "Department",
-    cell: ({ row }) => {
-      console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
-      return <div>{row.original?.fonction.departement.nom_depart}</div>;
     },
   },
 
@@ -86,5 +70,21 @@ export const Utilisateurcolumns: ColumnDef<usersAdmin>[] = [
         </div>
       );
     },
+  },
+  {
+    accessorKey: "Departement",
+    header: "Department",
+    cell: ({ row }) => {
+      console.log(row.original?.AffecterA?.[0]?.Zone?.libelle);
+      return <div>{row.original?.fonction.departement.nom_depart}</div>;
+    },
+  },
+  {
+    accessorKey: "email_chargee",
+    header: "Email",
+  },
+  {
+    accessorKey: "tel_chargee",
+    header: "Telephone",
   },
 ];
