@@ -70,10 +70,7 @@ export default async function Home({
   //   );
 
   //const data: any = [];
-  console.log("dataazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-  console.log(data);
-  const groupes = await getGroupes();
-  const agences = await getAgences();
+
   console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
