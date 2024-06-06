@@ -2,7 +2,7 @@
 
 import useDemandeProlongationModal from "@/hooks/use-demande-prolongation-Modal";
 import Modal from "./Modal";
-import useDemandeTransfernModal from "@/hooks/use-demande-transfer-Modal";
+
 import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
 import ValidationTransferForm from "@/components/forms/ValidationTransferForm";
 
@@ -18,8 +18,8 @@ const ValidationTransferModal = ({
   const { isOpen, onOpen, onClose } = useValidationTransferModal();
   return (
     <Modal
-      title="Actualisez vos droits d'accès"
-      description="Trouvez et mettez à jour vos fonctions en quelques clics"
+      title="Validation du transfert anticipé"
+      description="Veuillez remplir le formulaire ci-dessous pour valider le transfert anticipé."
       isOpen={isOpen}
       onChange={onClose}
     >

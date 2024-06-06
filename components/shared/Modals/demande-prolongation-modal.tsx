@@ -8,8 +8,8 @@ const DemandeProlonagationModal = ({ motifs }: { motifs: any[] }) => {
   const { isOpen, onOpen, onClose } = useDemandeProlongationModal();
   return (
     <Modal
-      title="Actualisez vos droits d'accès"
-      description="Trouvez et mettez à jour vos fonctions en quelques clics"
+      title="Demander une prolongation"
+      description="Veuillez remplir le formulaire ci-dessous pour demander une prolongation."
       isOpen={isOpen}
       onChange={onClose}
     >

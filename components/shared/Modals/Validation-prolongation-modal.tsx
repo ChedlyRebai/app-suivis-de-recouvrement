@@ -17,8 +17,8 @@ const ValidationProlonagationnModal = ({
   const { isOpen, onOpen, onClose } = useValidationProlongationModal();
   return (
     <Modal
-      title="Actualisez vos droits d'accès"
-      description="Trouvez et mettez à jour vos fonctions en quelques clics"
+      title="Validation de la prolongation"
+      description="Veuillez remplir le formulaire ci-dessous pour valider la prolongation."
       isOpen={isOpen}
       onChange={onClose}
     >

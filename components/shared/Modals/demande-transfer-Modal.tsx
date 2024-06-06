@@ -12,8 +12,8 @@ const DemandeTransfernModal = ({ motif, typeTransfer }: Props) => {
   const { isOpen, onOpen, onClose } = useDemandeTransfernModal();
   return (
     <Modal
-      title="Actualisez vos droits d'accès"
-      description="Trouvez et mettez à jour vos fonctions en quelques clics"
+      title="Demande de transfert Anticipé"
+      description="Veuillez remplir le formulaire ci-dessous pour demander un transfert anticipé."
       isOpen={isOpen}
       onChange={onClose}
     >
