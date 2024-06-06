@@ -81,7 +81,10 @@ export default async function Home({
           <div className=" mx-auto px-4 sm:px-6 md:px-8">
             <Card>
               <CardHeader>
-                <CardTitle>Historique Commentaire</CardTitle>
+                <CardTitle>Historique </CardTitle>
+                {/* <CardDescription>
+                  Historique des demandes de transfert anticipé
+                </CardDescription> */}
                 {/* <CardDescription>
                     Manage your products and view their sales performance.
                   </CardDescription> */}

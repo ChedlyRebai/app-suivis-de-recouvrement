@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import Mainlayout from "./access-management/_component/MainLayout";
 import { redirect } from "next/navigation";
 import { acces } from "@/actions/acess.action";
+import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
 
 function classNames(...classes: String[]) {
   return classes.filter(Boolean).join(" ");
@@ -31,6 +32,7 @@ export default async function RootLayout({
     >
       {/* {access ? children : <ForBidden />} */}
       {children}
+      <UploadFiles />
     </Mainlayout>
   );
 }

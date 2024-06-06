@@ -113,7 +113,7 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
             }}
             className="max-w-sm mr-2"
           /> */}
-
+          <div className="mr-auto" />
           <DataTableViewOptions table={table} />
         </>
       </div>
