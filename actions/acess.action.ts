@@ -34,7 +34,6 @@ export const createAcess = async (path: string) => {
       session?.value as string
     }`;
     const headersList = headers();
-    const getPath = headersList.get("referer") || "";
 
     const res = await axios.post(
       "https://sprint1-v2-beta.vercel.app/droit/createaccess",
@@ -50,7 +49,7 @@ export const createAcess = async (path: string) => {
   }
 };
 
-export const deleteAccess = async () => {
+export const deleteAccess = async (path: string) => {
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
@@ -58,13 +57,11 @@ export const deleteAccess = async () => {
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-    const headersList = headers();
-    const getPath = headersList.get("referer") || "";
 
     const res = await axios.post(
       "https://sprint1-v2-beta.vercel.app/droit/deleteaccess",
       {
-        page: getPath,
+        page: path,
       }
     );
 
@@ -72,7 +69,7 @@ export const deleteAccess = async () => {
   } catch (error) {}
 };
 
-export const modifyAccess = async () => {
+export const modifyAccess = async (path: string) => {
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
@@ -80,13 +77,11 @@ export const modifyAccess = async () => {
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-    const headersList = headers();
-    const getPath = headersList.get("referer") || "";
 
     const res = await axios.post(
       "https://sprint1-v2-beta.vercel.app/droit/modifyaccess",
       {
-        page: getPath,
+        page: path,
       }
     );
 

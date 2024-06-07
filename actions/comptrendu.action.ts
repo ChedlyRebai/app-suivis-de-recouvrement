@@ -1,6 +1,7 @@
 import { CompteRenduList } from "@/constants/types";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
+import { deleteAccess } from "./acess.action";
 export interface Main {
   CompteRendu: CompteRenduList[];
   totalCount: number;
@@ -64,6 +65,7 @@ export const deleteCompteRenduById = async (idCompRendu: Number | string) => {
     // revalidatePath("/en/compte-rendu");
     // revalidatePath("/compte-rendu");
     // revalidatePath("/en/compte-rendu?cli=049105812036");
+    const acces = await deleteAccess("compte-rendu");
     revalidatePath("/compterendu");
     return res.data;
   } catch (error) {
