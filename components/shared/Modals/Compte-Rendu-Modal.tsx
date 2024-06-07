@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { ClipboardListIcon } from "lucide-react";
 import Oval from "react-loading-icons/dist/esm/components/oval";
 import { getCompteRenduById } from "@/actions/comptrendu.action";
+import { format } from "date-fns";
 
 const CompteRenduModal = () => {
   const { id, isOpen, onOpen, onClose } = useCompteRenduModal();
@@ -85,9 +86,40 @@ const CompteRenduModal = () => {
         </div>
       )}
 
+      {}
       {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
         ?.types?.code === 3 && (
-        <div className="flex justify-center items-center">
+        // <div className="flex justify-start items-start flex-col">
+        //   <Label className="text-primary">Montant</Label>
+        //   <p>
+        //     {
+        //       data
+        //         ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+        //         ?.FacilitePaiment.mnt_rec
+        //     }
+        //   </p>
+        //   <Label className="text-primary">Nombre echeance</Label>
+        //   <p>
+        //     {
+        //       data
+        //         ?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]
+        //         ?.FacilitePaiment.nb_ech
+        //     }
+        //   </p>
+        //   {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.FacilitePaiment?.montantFacilites?.map(
+        //     (item: any, index: number) => (
+        //       <div key={index}>
+        //         <Label className="text-primary">
+        //           Montant echeance N°{index}:
+        //         </Label>
+        //         <p>{item.mntech} DT</p>
+        //         <Label className="text-primary">Date echeance N°{index}:</Label>
+        //         <p> {format(new Date(item.date_ech), "PP")}</p>
+        //       </div>
+        //     )
+        //   )}
+        // </div>
+        <div className="flex justify-start items-start flex-col">
           <Label className="text-primary">Montant</Label>
           <p>
             {
@@ -104,13 +136,15 @@ const CompteRenduModal = () => {
                 ?.FacilitePaiment.nb_ech
             }
           </p>
-          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.FacilitePaiment?.montantFacilites?.map(
+          {data?.compterendutype_compterendutype_compterenduidTosuivi_agenda?.[0]?.FacilitePaiment.montantFacilites?.map(
             (item: any, index: number) => (
               <div key={index}>
-                <Label className="text-primary">Montant echeance</Label>
-                <p>{item.mntech}</p>
-                <Label className="text-primary">Date echeance</Label>
-                <p>{item.date_ech}</p>
+                <Label className="text-primary">
+                  Montant echeance N°{index}:
+                </Label>
+                <p>{item.mntech} DT</p>
+                <Label className="text-primary">Date echeance N°{index}:</Label>
+                <p> {format(new Date(item.date_ech), "PP")}</p>
               </div>
             )
           )}
