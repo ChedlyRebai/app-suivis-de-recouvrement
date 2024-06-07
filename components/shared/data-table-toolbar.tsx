@@ -122,6 +122,25 @@ export function DataTableToolbar<TData>({
   const token = Cookies.get("session");
   const userConnected: any = decodeJwt(token as string);
   console.log("code_function", userConnected.code_function);
+
+  let zoneBtnDiasbled = false;
+  let agenceBtnDiasbled = false;
+
+  // if (userConnected.code_function === 14) {
+  //   zoneBtnDiasbled = true;
+  //   agenceBtnDiasbled = true;
+  // }
+
+  if (userConnected.code_function === 11) {
+    zoneBtnDiasbled = true;
+    agenceBtnDiasbled = true;
+  }
+
+  if (userConnected.code_function === 13) {
+    zoneBtnDiasbled = true;
+    agenceBtnDiasbled = false;
+  }
+
   return (
     <>
       <Input
@@ -136,7 +155,7 @@ export function DataTableToolbar<TData>({
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
-            disabled={true}
+            disabled={agenceBtnDiasbled}
             role="combobox"
             aria-expanded={agenceopen}
             className="w-[200px] justify-between"
@@ -191,7 +210,7 @@ export function DataTableToolbar<TData>({
       <Popover open={groupopen} onOpenChange={setgroupOpen}>
         <PopoverTrigger asChild>
           <Button
-            disabled={userConnected.code_function === 14 ? true : false}
+            disabled={zoneBtnDiasbled}
             variant={"outline"}
             role="combobox"
             aria-expanded={groupopen}
