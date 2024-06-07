@@ -109,7 +109,7 @@ const Documents = ({ file }: { file: File[] }) => {
         </Table>
         {file?.length === 0 && (
           <TableRow className="w-full">
-            <TableCell className="h-24 text-center  text-center">
+            <TableCell className="h-24  text-center">
               Pas de résultats.
             </TableCell>
           </TableRow>
