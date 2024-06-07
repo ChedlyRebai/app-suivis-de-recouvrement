@@ -69,7 +69,7 @@ const CompteRenduForm = ({
   contactdata,
 }: CompteRenduFormProps) => {
   const [selectedValue, setSelectedValue] = useState("1");
-  console.log(historiqueCompteRendu);
+  console.log(listcompte);
   const {
     client,
     handleIputChangeSuiviAgenda,
@@ -435,7 +435,7 @@ const CompteRenduForm = ({
                   <TableRow>
                     <TableHead className="w-[100px]">Agence</TableHead>
                     <TableHead>Ncp</TableHead>
-                    <TableHead>Nom</TableHead>
+
                     <TableHead className="text-right">Montant Impaye</TableHead>
                     <TableHead className="text-right">Nbj Imp</TableHead>
                     <TableHead className="text-right">Solde debiteur</TableHead>
@@ -448,9 +448,12 @@ const CompteRenduForm = ({
                   {listcompte &&
                     listcompte.map((item) => (
                       <TableRow key={item.ncp}>
-                        <TableCell>{item.age}</TableCell>
+                        <TableCell>
+                          {item?.ab_client?.Agence?.codug}:
+                          {item?.ab_client?.Agence?.libelle}
+                        </TableCell>
                         <TableCell>{item.ncp}</TableCell>
-                        <TableCell>{item.nom}</TableCell>
+
                         <TableCell className="text-right">
                           {item.mnt_imp}
                         </TableCell>

@@ -1,3 +1,6 @@
+import { Agence } from "./agence.model";
+import { Zone } from "./zone.model";
+
 export type ab_client = {
   cli?: string;
   nom?: string;
@@ -15,4 +18,6 @@ export type ab_client = {
   classe?: number;
   tel1?: string;
   tel2?: string | null;
+  Zone?: Zone;
+  Agence?: Agence;
 };

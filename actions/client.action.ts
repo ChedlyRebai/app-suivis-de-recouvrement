@@ -162,6 +162,7 @@ export const getListCompte = async (IdClient?: string) => {
     const res = await axios.get<AbCompte[]>(
       `https://release2.vercel.app/client/listcompte?cli=${IdClient}`
     );
+    console.log(res.data);
     return res.data;
   } catch (error) {
     return [] as AbCompte[];
