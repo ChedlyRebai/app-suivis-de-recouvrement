@@ -14,15 +14,18 @@ export const acces = async () => {
     const headersList = headers();
     const getPath = headersList.get("referer") || "";
 
-    const res = await axios.post("http://localhost:10000/droit/accesspage", {
-      page: getPath,
-    });
-
+    const res = await axios.post(
+      "https://sprint1-v2-beta.vercel.app/droit/accesspage",
+      {
+        page: getPath,
+      }
+    );
     return res.data;
+    return { message: res.data.message, success: res.data.success };
   } catch (error) {}
 };
 
-export const creteAcess = async (path: string) => {
+export const createAcess = async (path: string) => {
   try {
     const cookieStore = cookies();
     const session = cookieStore.get("session");
@@ -33,11 +36,15 @@ export const creteAcess = async (path: string) => {
     const headersList = headers();
     const getPath = headersList.get("referer") || "";
 
-    const res = await axios.post("http://localhost:10000/droit/createaccess", {
-      page: path,
-    });
-
-    return true;
+    const res = await axios.post(
+      "https://sprint1-v2-beta.vercel.app/droit/createaccess",
+      {
+        page: path,
+      }
+    );
+    console.log(res.data);
+    //{ message: 'Access granted', success: true }
+    return { message: res.data.message, success: res.data.success };
   } catch (error) {
     console.log(error);
   }
@@ -54,11 +61,14 @@ export const deleteAccess = async () => {
     const headersList = headers();
     const getPath = headersList.get("referer") || "";
 
-    const res = await axios.post("http://localhost:10000/droit/deleteaccess", {
-      page: getPath,
-    });
+    const res = await axios.post(
+      "https://sprint1-v2-beta.vercel.app/droit/deleteaccess",
+      {
+        page: getPath,
+      }
+    );
 
-    return res.data;
+    return { message: res.data.message, success: res.data.success };
   } catch (error) {}
 };
 
@@ -73,10 +83,13 @@ export const modifyAccess = async () => {
     const headersList = headers();
     const getPath = headersList.get("referer") || "";
 
-    const res = await axios.post("http://localhost:10000/droit/modifyaccess", {
-      page: getPath,
-    });
+    const res = await axios.post(
+      "https://sprint1-v2-beta.vercel.app/droit/modifyaccess",
+      {
+        page: getPath,
+      }
+    );
 
-    return res.data;
+    return { message: res.data.message, success: res.data.success };
   } catch (error) {}
 };
