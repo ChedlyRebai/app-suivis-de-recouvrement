@@ -165,7 +165,7 @@ const Mainlayout = ({
                                 item.current
                                   ? "bg-gray-900 text-white"
                                   : "text-white hover:bg-gray-700 hover:text-white",
-                                "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                                "group  flex items-center px-2 py-2 text-sm font-medium rounded-md"
                               )}
                             >
                               {/* <item.icon
@@ -178,7 +178,7 @@ const Mainlayout = ({
                               )}
                               aria-hidden="true"
                             /> */}
-                              {item.name}
+                              {item.name.toLowerCase()}
                             </Link>
                           </div>
                         ) : (
@@ -231,7 +231,7 @@ const Mainlayout = ({
                                         className="group capitalize w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
                                       >
                                         <Link href={subItem.href}>
-                                          {subItem.name} {subItem.href}
+                                          {subItem.name}
                                         </Link>
                                       </Disclosure.Button>
                                     ))}

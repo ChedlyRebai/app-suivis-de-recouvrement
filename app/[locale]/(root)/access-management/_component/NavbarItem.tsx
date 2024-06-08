@@ -56,12 +56,18 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                     aria-hidden="true"
                   />
 
-                  <Link
-                    href={`en/${href}`}
-                    className="hover:underline capitalize dark:text-inherit text-black text-sm text-nowrap"
-                  >
-                    {name}
-                  </Link>
+                  {children && children.length > 0 ? (
+                    <span className="hover:underline  dark:text-inherit text-black text-sm text-nowrap">
+                      {name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={`en/${href}`}
+                      className="hover:underline capitalize dark:text-inherit text-black text-sm text-nowrap"
+                    >
+                      {name}
+                    </Link>
+                  )}
 
                   {children.length !== 0 && (
                     <svg
@@ -96,7 +102,7 @@ const NavbarItem = ({ name, icon, current, children, href }: Navigation) => {
                               children={subItem.children}
                               icon={subItem.icon}
                               href={subItem.href}
-                              name={`${subItem.name} ${subItem.href}`}
+                              name={`${subItem.name}  `}
                             />
                           </div>
                         );
