@@ -6,25 +6,8 @@ import { Button } from "../ui/button";
 const ChatUi = () => {
   const [messages, setMessages] = useState<any>([]);
   const [inputMessage, setInputMessage] = useState("");
-  // const sendMessage = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:10004/openai/ai", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ message }),
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //     setResponse(data.finalContent); // assuming your API returns a response key
-  //   } catch (error) {
-  //     console.error("Error sending message:", error);
-  //   }
-  // };
   const sendMessage = async () => {
-    if (!inputMessage.trim()) return; // Don't send empty messages
-
+    if (!inputMessage.trim()) return;
     setMessages((prevMessages: any) => [
       ...prevMessages,
       { text: inputMessage, sender: "user" },
@@ -83,15 +66,7 @@ const ChatUi = () => {
                   </div>
                 </span>
               )}
-              <p
-                className={`text-sm ${
-                  message.sender === "AI"
-                    ? "text-muted-foreground"
-                    : "text-white"
-                }`}
-              >
-                {message.text}
-              </p>
+              <p className={`text-sm text-white `}>{message.text}</p>
             </div>
           ))}
         </div>
@@ -102,6 +77,11 @@ const ChatUi = () => {
               placeholder="Type your message"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
             />
             <Button
               variant={"secondary"}
