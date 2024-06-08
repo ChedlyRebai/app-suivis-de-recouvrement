@@ -24,6 +24,7 @@ interface AlertProps {
     | "link";
   title?: string;
   description?: string;
+  disabled?: boolean;
   onConfirm: () => void;
 }
 
@@ -32,12 +33,17 @@ const AlertConfirmation: React.FC<AlertProps> = ({
   buttonText,
   title,
   variant,
+  disabled,
   description,
   onConfirm,
 }) => (
   <AlertDialog>
     <AlertDialogTrigger className="flex items-center justify-center">
-      <Button className="flex items-center" variant={variant}>
+      <Button
+        className="flex items-center"
+        disabled={disabled}
+        variant={variant}
+      >
         {buttonText} {icon}
       </Button>
     </AlertDialogTrigger>
