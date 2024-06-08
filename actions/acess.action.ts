@@ -2,6 +2,31 @@
 import axios from "axios";
 import { Console } from "console";
 import { cookies, headers } from "next/headers";
+export interface Access {
+  creation: string;
+  modification: string;
+  suppression: string;
+  acces: string;
+}
+
+export const acccess = async (path: string) => {
+  try {
+    const cookieStore = cookies();
+    const session = cookieStore.get("session");
+
+    axios.defaults.headers.common["Authorization"] = ` ${
+      session?.value as string
+    }`;
+
+    const res = await axios.post<Access>(
+      `https://sprint1-v2-beta.vercel.app/droit/access?page=${path}`
+    );
+    return res.data as Access | {} as Access;
+  } catch (error) {
+    console.log(error);
+    return {} as Access;
+  }
+};
 
 export const acces = async () => {
   try {

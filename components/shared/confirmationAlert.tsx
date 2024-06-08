@@ -36,9 +36,9 @@ const AlertConfirmation: React.FC<AlertProps> = ({
   disabled,
   description,
   onConfirm,
-}) => (
-  <AlertDialog>
-    <AlertDialogTrigger className="flex items-center justify-center">
+}) => {
+  if (disabled) {
+    return (
       <Button
         className="flex items-center"
         disabled={disabled}
@@ -46,18 +46,31 @@ const AlertConfirmation: React.FC<AlertProps> = ({
       >
         {buttonText} {icon}
       </Button>
-    </AlertDialogTrigger>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>{title}</AlertDialogTitle>
-        <AlertDialogDescription>{description}</AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction onClick={onConfirm}>Continue</AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-);
+    );
+  }
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger className="flex items-center justify-center">
+        <Button
+          className="flex items-center"
+          disabled={disabled}
+          variant={variant}
+        >
+          {buttonText} {icon}
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Annuler</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
 
 export default AlertConfirmation;

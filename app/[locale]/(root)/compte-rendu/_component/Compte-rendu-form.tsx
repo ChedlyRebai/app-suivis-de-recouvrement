@@ -48,6 +48,7 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 
 import { CompteRenduList } from "@/constants/types";
 import toast from "react-hot-toast";
+import { Access } from "@/actions/acess.action";
 
 interface CompteRenduFormProps {
   suiviAgenda: SuiviAgenda;
@@ -57,6 +58,7 @@ interface CompteRenduFormProps {
   comptrendutypesdata?: any[];
   Motifdata?: any[];
   appreciationdata?: any[];
+  access: Access;
 }
 
 const CompteRenduForm = ({
@@ -67,9 +69,10 @@ const CompteRenduForm = ({
   Motifdata,
   comptrendutypesdata,
   contactdata,
+  access,
 }: CompteRenduFormProps) => {
   const [selectedValue, setSelectedValue] = useState("1");
-  console.log(listcompte);
+
   const {
     client,
     handleIputChangeSuiviAgenda,
@@ -732,6 +735,7 @@ const CompteRenduForm = ({
                     </div>
                   </div>
                   <Button
+                    disabled={access?.creation !== "O"}
                     onClick={async () => {
                       handleSubmit();
 
@@ -749,7 +753,10 @@ const CompteRenduForm = ({
           <AccordionItem value="item-7">
             <AccordionTrigger>List de Compte Rendu</AccordionTrigger>
             <AccordionContent>
-              <CompteRenduHistorique listHistorique={historiqueCompteRendu} />
+              <CompteRenduHistorique
+                access={access}
+                listHistorique={historiqueCompteRendu}
+              />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

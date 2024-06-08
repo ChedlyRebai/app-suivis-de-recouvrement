@@ -1,3 +1,4 @@
+import { acccess } from "@/actions/acess.action";
 import CompteRenduForm from "./_component/Compte-rendu-form";
 import {
   getCompterendu,
@@ -44,6 +45,8 @@ export default async function Home({
   const suiviAgenda = await getCompterendu(cli);
   const appreciationdata = await getappreciation();
   const listecompte = await getListCompte(cli);
+  const access = await acccess("compte-rendu");
+  console.log("access:", access);
   const historiqueCompteRendu = await getListCompteRenduHistorique(cli);
   console.log("suiviAgenda", suiviAgenda);
   return (
@@ -56,6 +59,7 @@ export default async function Home({
           </CardHeader>
           <CardContent>
             <CompteRenduForm
+              access={access}
               appreciationdata={appreciationdata}
               Motifdata={Motifdata}
               contactdata={contactdata}

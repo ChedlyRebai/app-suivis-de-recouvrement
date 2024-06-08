@@ -51,13 +51,16 @@ import { deleteCompteRenduById } from "@/actions/comptrendu.action";
 import AlertConfirmation from "../../../../../components/shared/confirmationAlert";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { Access } from "@/actions/acess.action";
 
 interface CompteRenduHistoriqueProps {
   listHistorique: CompteRenduList[];
+  access: Access;
 }
 
 const CompteRenduHistorique = ({
   listHistorique: daa,
+  access,
 }: CompteRenduHistoriqueProps) => {
   const { onOpen } = useCompteRenduModal();
   const {
@@ -169,6 +172,7 @@ const CompteRenduHistorique = ({
               icon={<Trash2 size={20} />}
               description=" Voulez-vous vraiment supprimer ce compte rendu ?"
               title="Suppression de compte rendu"
+              disabled={access?.suppression !== "O"}
               onConfirm={async () => {
                 await deleteCompteRenduById(row.original.id)
                   .then(() => {
