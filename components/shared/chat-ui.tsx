@@ -2,8 +2,10 @@
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import useChatUiBubble from "@/hooks/use-chat";
 
 const ChatUi = () => {
+  const { isOpen, onClose, onOpen } = useChatUiBubble();
   const [messages, setMessages] = useState<any>([]);
   const [inputMessage, setInputMessage] = useState("");
   const sendMessage = async () => {
@@ -33,9 +35,13 @@ const ChatUi = () => {
     }
   };
 
+  if (!isOpen) {
+    return "";
+  }
+
   return (
     <div>
-      <div className="fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-background p-6 rounded-lg border border-[#e5e7eb] w-[400px] ">
+      <div className="fixed bottom-[calc(4rem+1.5rem)] right-0 mr-4 bg-background p-6 rounded-lg border dark:border-[#e5e7eb] border-black w-[400px] ">
         <div className="pr-4 h-[365px] overflow-y-auto">
           {messages.map((message: any, index: number) => (
             <div
@@ -66,7 +72,12 @@ const ChatUi = () => {
                   </div>
                 </span>
               )}
-              <p className={`text-sm text-white `}>{message.text}</p>
+              <p
+                className={`text-sm dark:text-white text-black`}
+                style={{ whiteSpace: "pre-line" }}
+              >
+                {message.text}
+              </p>
             </div>
           ))}
         </div>
@@ -88,7 +99,7 @@ const ChatUi = () => {
               className="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
               onClick={sendMessage}
             >
-              Send
+              Envoyer
             </Button>
           </div>
         </div>

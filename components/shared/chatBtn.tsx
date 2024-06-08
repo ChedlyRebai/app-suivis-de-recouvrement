@@ -1,10 +1,15 @@
+"use client";
 import React from "react";
+import { Button } from "../ui/button";
+import useChatUiBubble from "@/hooks/use-chat";
 
 const ChatBtn = () => {
+  const { toggle } = useChatUiBubble();
   return (
-    <button
-      className="fixed bottom-4 right-4 inline-flex items-center justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 border rounded-full w-14 h-14 bg-black hover:bg-gray-700 m-0 cursor-pointer border-gray-200 bg-none p-0 normal-case leading-5 hover:text-gray-900"
+    <Button
+      className="fixed bottom-4 right-4 inline-flex items-center justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 border rounded-full w-14 h-14 bg-black hover:bg-gray-900 m-0 cursor-pointer border-gray-200 bg-none p-0 normal-case leading-5 hover:text-gray-900"
       type="button"
+      onClick={toggle}
       aria-haspopup="dialog"
       aria-expanded="false"
       data-state="closed"
@@ -26,7 +31,7 @@ const ChatBtn = () => {
           className="border-gray-200"
         ></path>
       </svg>
-    </button>
+    </Button>
   );
 };
 
