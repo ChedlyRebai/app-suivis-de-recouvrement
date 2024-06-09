@@ -3,6 +3,15 @@ import React from "react";
 import { getAllfiles } from "@/actions/file.action";
 import { FileTable } from "./components/files";
 import { filecolumns } from "./components/fileColumn";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import OpenModelButton from "../d2/client/_component/Documents/openModelButton";
+import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 export default async function Home({
   searchParams,
@@ -27,10 +36,36 @@ export default async function Home({
   const files = await getAllfiles(currentPage, perPage, search);
 
   return (
-    <FileTable
-      columns={filecolumns}
-      totalPages={files.totalPages || 0}
-      data={files.result || []}
-    />
+    <div className="bg-muted/40 min-h-screen">
+      <div className="py-6 mt-16">
+        <div className=" mx-auto px-4 sm:px-6 md:px-8">
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white"></h1>
+        </div>
+
+        {/* <Suspense fallback={<div>Chargement......</div>}> */}
+        <div className=" mx-auto px-4 sm:px-6 md:px-8">
+          <Card>
+            <CardHeader>
+              <div className="flex justify-between">
+                <div>
+                  <CardTitle>Documents</CardTitle>
+                  <CardDescription>Gérez vos Documents.</CardDescription>
+                </div>
+                <OpenModelButton />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <FileTable
+                columns={filecolumns}
+                totalPages={files.totalPages || 0}
+                data={files.result || []}
+              />
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* </Suspense> */}
+      </div>
+    </div>
   );
 }

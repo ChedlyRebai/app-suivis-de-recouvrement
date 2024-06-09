@@ -243,7 +243,7 @@ export default function Uploader() {
             <FilePlus2Icon className="mx-auto h-12 w-12 text-gray-400" />
 
             <span className="mt-2 block text-sm font-medium dark:text-gray-100 text-gray-900">
-              Drag And DROP File
+              faites glisser et déposez les fichiers ici
             </span>
           </div>
         </label>

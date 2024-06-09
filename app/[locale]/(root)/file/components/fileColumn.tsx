@@ -11,14 +11,6 @@ import toast from "react-hot-toast";
 
 export const filecolumns: ColumnDef<File>[] = [
   {
-    accessorKey: "cli client",
-    header: "Cli",
-    cell: ({ row }) => {
-      return row.original.ab_client.cli;
-    },
-  },
-
-  {
     accessorKey: "nom client",
     header: "Nom client",
     cell: ({ row }) => {

@@ -122,16 +122,6 @@ export function FileTable({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams, selectedCode]
-  );
-
   const [loader, setLoader] = useState(true);
   // effect
   useEffect(() => {
@@ -145,112 +135,71 @@ export function FileTable({
 
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/en/d2">Tableau de bord </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Documents</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Card x-chunk="dashboard-06-chunk-0">
-        <CardHeader>
-          <CardTitle>Documents</CardTitle>
-          <CardDescription>Gérez vos Documents.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex justify-between items-center py-4 flex-wrap">
-            <>
-              <Input
-                placeholder="Cli"
-                defaultValue={searchParams.get("query")?.toString()}
-                onChange={(e) => {
-                  handleSearch(e.target.value);
-                }}
-                className="max-w-sm mr-2"
-              />
-              <div className="w-1 mr-auto" />
-
-              <OpenModelButton />
-              <div className="w-1" />
-              <DataTableViewOptions table={table} />
-            </>
-          </div>
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => {
-                      return (
-                        <TableHead key={header.id}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </TableHead>
-                      );
-                    })}
-                  </TableRow>
-                ))}
-              </TableHeader>
-              <TableBody>
-                {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map((row) => (
-                    <TableRow
-                      className="p-"
-                      key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell
-                          key={cell.id}
-                          className="p- cursor-pointer"
-                          onClick={(e) => console.log(e)}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
                           )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
+                    </TableHead>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  className="p-"
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
                     <TableCell
-                      colSpan={columns.length}
-                      className="h-24 text-center"
+                      key={cell.id}
+                      className="p- cursor-pointer"
+                      onClick={(e) => console.log(e)}
                     >
-                      Pas de résultats.
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </div>
-          <div className="mt-2 flex items-center justify-between px-2">
-            <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
-              <div className="flex items-center space-x-2"></div>
-            </div>
-            <DataTablePagination
-              TotalAccount={totalAccout}
-              totalPages={totalPages}
-              table={table}
-            />
-          </div>
-        </CardContent>
-      </Card>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  Pas de résultats.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="mt-2 flex items-center justify-between px-2">
+        <div className="flex items-center space-x-6 lg:space-x-8 mt-2">
+          <div className="flex items-center space-x-2"></div>
+        </div>
+        <DataTablePagination
+          TotalAccount={totalAccout}
+          totalPages={totalPages}
+          table={table}
+        />
+      </div>
     </>
   );
 }
