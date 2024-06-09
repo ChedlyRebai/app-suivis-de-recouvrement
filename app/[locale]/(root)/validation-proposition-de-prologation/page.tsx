@@ -20,6 +20,7 @@ import { getvalidationprpositiondeprolongation } from "@/actions/prologation.act
 import { validationprolongation } from "./_component/validationPropositionColumns";
 import ValidationProlonagationnModal from "@/components/shared/Modals/Validation-prolongation-modal";
 import { VTRF, getMotifCommercial } from "@/actions/motif.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -63,7 +64,7 @@ export default async function Home({
     from,
     to
   );
-
+  const access = await acccess("validation-proposition-de-prologation");
   const groupes = await getGroupes();
   const agences = await getAgences();
   const motifs = await getMotifCommercial();
@@ -87,6 +88,7 @@ export default async function Home({
             <CardContent>
               <Suspense fallback={<div>Chargement....</div>}>
                 <DataTableDemandeDeProlongation
+                  access={access}
                   agences={agences || []}
                   groupes={groupes || []}
                   total={data.total || 0}

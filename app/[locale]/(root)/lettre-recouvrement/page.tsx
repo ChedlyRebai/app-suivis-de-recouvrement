@@ -18,6 +18,7 @@ import {
 import { Suspense } from "react";
 import { DataTableLettreDeRecouvrement } from "./_components/contactes/data-table-lettre-recouvrement";
 import { getLettre } from "@/actions/lettre.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -57,6 +58,7 @@ export default async function Home({
   const groupes = await getGroupes();
   const agences = await getAgences();
   console.log("render page");
+  const access = await acccess("lettre-recouvrement");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -76,6 +78,7 @@ export default async function Home({
               </CardHeader>
               <CardContent>
                 <DataTableLettreDeRecouvrement
+                  access={access}
                   agences={agences || []}
                   groupes={groupes || []}
                   total={data.total || 0}

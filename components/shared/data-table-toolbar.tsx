@@ -26,13 +26,15 @@ import {
 } from "@/components/ui/popover";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { decodeJwt, jwtDecrypt } from "jose";
+import { Card, CardContent } from "../ui/card";
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
-  type: "contactes" | "noncontactes";
+  type?: "contactes" | "noncontactes";
 }
 
 export function DataTableToolbar<TData>({
   table,
+  type,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const [groupes, setGroupes] = useState<any>([]);
@@ -258,7 +260,26 @@ export function DataTableToolbar<TData>({
           </Command>
         </PopoverContent>
       </Popover>
-
+      {/* {type === "contactes" && (
+        <Card className="h-10">
+          <CardContent className="flex items-center justify-center my-1">
+            <p>Nombre de jour :</p>
+            <Input
+              type="number"
+              className="w-16 h-8"
+              // onChange={(e) => handleFrom(e.target.value)}
+              placeholder="De"
+            />
+            <p className="mx-1">à</p>
+            <Input
+              type="number"
+              className="w-16 h-8"
+              // onChange={(e) => handleTo(e.target.value)}
+              placeholder="à"
+            />
+          </CardContent>
+        </Card>
+      )} */}
       <Button className="ml-auto mr-1" variant="destructive" onClick={resetAll}>
         <ResetIcon className="h-4 w-4" />
       </Button>

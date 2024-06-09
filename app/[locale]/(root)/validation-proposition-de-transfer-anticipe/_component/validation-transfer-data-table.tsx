@@ -34,6 +34,7 @@ import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "../../../../../components/shared/data-table-toolbar";
+import { Access } from "@/actions/acess.action";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -43,11 +44,13 @@ interface DataTableProps<TData, TValue> {
   totalPages?: number;
   groupes: any[];
   agences: any[];
+  acess: Access;
 }
 
 export function DataTableValidationDeTransfer<TData, TValue>({
   columns,
   data,
+  acess,
   totalAccout,
   totalPages = 0,
   total,

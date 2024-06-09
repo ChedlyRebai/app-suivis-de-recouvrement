@@ -42,7 +42,7 @@ import {
 } from "@/actions/admin.action";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { acces } from "@/actions/acess.action";
+import { acccess, acces } from "@/actions/acess.action";
 import { redirect } from "next/navigation";
 // export default function RootLayout({
 //   children,
@@ -70,7 +70,7 @@ export default async function RootLayout({
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
-  const access = await acces();
+  const access = await acccess("d2");
   // if (!access) {
   //   return < />;
   // }

@@ -19,6 +19,7 @@ import {
 import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaireColumns";
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
 import { getHistoriqueDemandDeTransferAnticipe } from "@/actions/dmandeTransfer.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -55,22 +56,7 @@ export default async function Home({
     from,
     to
   );
-  //   const dataNon = await getClientNonContactes(
-  //     search,
-  //     currentPage,
-  //     perPage,
-  //     group,
-  //     agence,
-  //     from,
-  //     to
-  //   );
-
-  //const data: any = [];
-  console.log("dataazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-  console.log(data);
-  const groupes = await getGroupes();
-  const agences = await getAgences();
-  console.log("render page");
+  const accesss = await acccess("historique");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -91,6 +77,7 @@ export default async function Home({
               </CardHeader>
               <CardContent>
                 <HistoriqueCommentaireDataTable
+                  access={accesss}
                   totalAccout={data.totalCount || 0}
                   totalPages={data.totalPages || 1}
                   columns={HistoriqueCommentaireColumns}

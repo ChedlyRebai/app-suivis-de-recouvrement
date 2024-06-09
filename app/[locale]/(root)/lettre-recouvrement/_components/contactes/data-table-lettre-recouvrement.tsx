@@ -49,6 +49,7 @@ import useListAgences from "@/hooks/use-agences-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "@/components/shared/data-table-toolbar";
+import { Access } from "@/actions/acess.action";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,6 +59,7 @@ interface DataTableProps<TData, TValue> {
   totalPages?: number;
   groupes: any[];
   agences: any[];
+  access: Access;
 }
 
 export function DataTableLettreDeRecouvrement<TData, TValue>({
@@ -68,8 +70,9 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   total,
   agences,
   groupes,
+  access,
 }: DataTableProps<TData, TValue>) {
-  console.log(data);
+  console.log(access);
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const setAgences = useListAgences((state) => state.setAgences);
@@ -128,155 +131,6 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     <>
       <div className="flex  items-center py-4 flex-wrap">
         <DataTableToolbar type="contactes" table={table} />
-        {/* <>
-          <Input
-            placeholder="Cli"
-            defaultValue={searchParams.get("query")?.toString()}
-            onChange={(e) => {
-              handleSearch(e.target.value);
-            }}
-            className="max-w-sm mr-2"
-          />
-          <Popover open={agenceopen} onOpenChange={setagenceOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant={"outline"}
-                role="combobox"
-                aria-expanded={agenceopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("agence")
-                  ? agences.find(
-                      (framework: any) =>
-                        framework.codug === Number(searchParams.get("agence"))
-                    )?.libelle || "Sélectionner un agence"
-                  : "Sélectionner un agence"}
-
-                {}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput placeholder="Search agence" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-                <CommandGroup>
-                  {agences.map((item: any) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleAgence(item.codug);
-                        setAgenceValue(
-                          item.codug === searchParams.get("agence")
-                            ? ""
-                            : item.codug
-                        );
-
-                        setagenceOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          agenceValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {item.codug}: {item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover>
-
-          <div className="w-1" />
-          <Popover open={groupopen} onOpenChange={setgroupOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant={"outline"}
-                role="combobox"
-                aria-expanded={groupopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("groupe")
-                  ? groupes.find(
-                      (framework: any) =>
-                        framework.codug === Number(searchParams.get("groupe"))
-                    )?.libelle || "Sélectionner un groupe"
-                  : "Sélectionner un groupe"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0 ml-2">
-              <Command>
-                <CommandInput placeholder="Search group" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-
-                <CommandGroup>
-                  {groupes.map((item: any, i: number) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleGroup(item.codug);
-                        setgroupeValue(
-                          item.codug === searchParams.get("groupe")
-                            ? ""
-                            : item.codug
-                        );
-                        setgroupOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          groupeValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {item.codug}:{item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover>
-
-          <Card className="h-10">
-            <CardContent className="flex items-center justify-center my-1">
-              <p>Nombre de jour :</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleFrom(e.target.value)}
-                placeholder="De"
-              />
-              <p className="mx-1">à</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleTo(e.target.value)}
-                placeholder="à"
-              />
-            </CardContent>
-          </Card>
-          <Button
-            className="ml-auto mr-1"
-            variant="outline"
-            onClick={() => {
-              resetAgence();
-              resetGroup();
-            }}
-          >
-            <RefreshCcwIcon className="h-4 w-4" />
-          </Button>
-          <DataTableViewOptions table={table} />
-        </> */}
       </div>
       <div className="rounded-md border">
         <Table>

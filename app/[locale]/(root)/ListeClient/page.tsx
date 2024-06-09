@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Suspense } from "react";
 import { Total } from "@/actions/lettre.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -64,13 +65,8 @@ export default async function Home({
 
   const groupes = await getGroupes();
   const agences = await getAgences();
-  console.log("datatpa", data.totalPages);
-  console.log("datatac", data.totalCount);
-  console.log("datat", data.total);
-  console.log("datar", data.result);
 
-  console.log();
-  console.log("render page");
+  const access = await acccess("listeclient");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -98,6 +94,7 @@ export default async function Home({
                 </CardHeader>
                 <CardContent>
                   <DataTableContactes
+                    access={access}
                     agences={agences || []}
                     groupes={groupes || []}
                     total={dataNon.total || ({} as Total)}
@@ -120,6 +117,7 @@ export default async function Home({
                 </CardHeader>
                 <CardContent>
                   <DataTableContactes
+                    access={access}
                     agences={agences || []}
                     groupes={groupes || []}
                     total={data.total || ({} as Total)}

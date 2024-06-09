@@ -22,6 +22,7 @@ import { DataTableValidationDeTransfer } from "./_component/validation-transfer-
 import { validationTransferColumns } from "./_component/validationTransferColumns";
 import ValidationTransferModal from "@/components/shared/Modals/validation-transfer-Modal";
 import { MOTT, VTRF, getMotifCommercial } from "@/actions/motif.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -72,6 +73,7 @@ export default async function Home({
   const agences = await getAgences();
   const motifs = await MOTT();
   const validationTransfer = await VTRF();
+  const access = await acccess("validation-proposition-de-transfer-anticipe");
   console.log("render page");
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -90,6 +92,7 @@ export default async function Home({
             <CardContent>
               <Suspense fallback={<div>Chargement....</div>}>
                 <DataTableValidationDeTransfer
+                  acess={access}
                   agences={agences || []}
                   groupes={groupes || []}
                   total={data.total || 0}
