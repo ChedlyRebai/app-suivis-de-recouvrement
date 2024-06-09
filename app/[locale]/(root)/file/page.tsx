@@ -1,6 +1,10 @@
 import React from "react";
 
-import { getAllfiles, getAllfilesByClientId } from "@/actions/file.action";
+import {
+  getAllfiles,
+  getAllfilesByCli,
+  getAllfilesByClientId,
+} from "@/actions/file.action";
 import { FileTable } from "./components/files";
 import { filecolumns } from "./components/fileColumn";
 import {
@@ -17,6 +21,7 @@ export default async function Home({
   searchParams,
 }: {
   searchParams?: {
+    cli?: string;
     query?: string;
     page?: string;
     limit?: string;
@@ -33,7 +38,11 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const files = await getAllfilesByClientId(1);
+  const data = await getAllfilesByCli(
+    Number(searchParams?.cli),
+    currentPage,
+    perPage
+  );
 
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -55,7 +64,11 @@ export default async function Home({
               </div>
             </CardHeader>
             <CardContent>
-              <FileTable columns={filecolumns} totalPages={2} data={files} />
+              <FileTable
+                columns={filecolumns}
+                totalPages={data.totalPages}
+                data={data.result}
+              />
             </CardContent>
           </Card>
         </div>
