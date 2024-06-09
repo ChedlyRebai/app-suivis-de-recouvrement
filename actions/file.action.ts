@@ -81,6 +81,19 @@ export const getAllfilesByClientId = async (
     return {} as File[];
   }
 };
+export const getAllfilesByCli = async (cli: Number): Promise<fileresult> => {
+  console.log(`https://release4.vercel.app/file/allbycli?cli=${cli}`);
+  try {
+    const res = await axios.get<fileresult>(
+      `https://release4.vercel.app/file/allbycli?cli=${cli}`
+    );
+
+    return (res.data as fileresult) || ({} as fileresult);
+  } catch (error) {
+    console.log(error);
+    return {} as fileresult;
+  }
+};
 
 export interface fileresult {
   result: File[];
