@@ -14,26 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import {
-  Check,
-  ChevronsUpDown,
-  File as FileIcon,
-  RefreshCcwIcon,
-} from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover } from "@/components/ui/popover";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -52,13 +33,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useCallback, useEffect, useState } from "react";
-import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import useListAgences from "@/hooks/use-agences-list";
 import {
   Card,
   CardContent,
@@ -67,20 +45,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Utilisateur, usersAdmin } from "@/actions/admin.action";
-import { utilisateur } from "@/Models/utilisateur.model";
-import { fileresult } from "@/actions/file.action";
 import { File } from "@/Models/file.model";
 
 interface DataTableProps {
   columns: any[];
-
   data: File[];
   totalAccout?: number;
   totalPages?: number;
 }
 
-export function AllFilles({
+export function FileTable({
   columns,
   data,
   totalAccout,
