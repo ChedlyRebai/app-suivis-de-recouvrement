@@ -10,13 +10,13 @@ import { ArrowUpDown, Download, EyeIcon, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 export const filecolumns: ColumnDef<File>[] = [
-  {
-    accessorKey: "nom client",
-    header: "Nom client",
-    cell: ({ row }) => {
-      return row.original.ab_client.nom;
-    },
-  },
+  // {
+  //   accessorKey: "nom client",
+  //   header: "Nom client",
+  //   cell: ({ row }) => {
+  //     return row.original.ab_client.nom;
+  //   },
+  // },
   {
     accessorKey: "File Name",
     header: "Nom de fichier",
@@ -49,7 +49,7 @@ export const filecolumns: ColumnDef<File>[] = [
 
   {
     accessorKey: "",
-    header: "Voir",
+    header: "Actions",
     cell: ({ row }) => {
       return (
         <div className="flex justify-center items-center">
@@ -66,8 +66,8 @@ export const filecolumns: ColumnDef<File>[] = [
             variant="destructive"
             icon={<Trash2 size={20} />}
             buttonText={""}
-            description=" Voulez-vous vraiment supprimer ce compte rendu ?"
-            title="Suppression de compte rendu"
+            description=" Voulez-vous vraiment supprimer cette fichier"
+            title="Suppression de fichier"
             onConfirm={async () => {
               await deleteFile(row.original.id)
                 .then(() => {

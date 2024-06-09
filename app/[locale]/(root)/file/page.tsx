@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getAllfiles } from "@/actions/file.action";
+import { getAllfiles, getAllfilesByClientId } from "@/actions/file.action";
 import { FileTable } from "./components/files";
 import { filecolumns } from "./components/fileColumn";
 import {
@@ -33,7 +33,7 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const files = await getAllfiles(currentPage, perPage, search);
+  const files = await getAllfilesByClientId(1);
 
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -49,17 +49,13 @@ export default async function Home({
               <div className="flex justify-between">
                 <div>
                   <CardTitle>Documents</CardTitle>
-                  <CardDescription>Gérez vos Documents.</CardDescription>
+                  <CardDescription>Amal hamdy </CardDescription>
                 </div>
                 <OpenModelButton />
               </div>
             </CardHeader>
             <CardContent>
-              <FileTable
-                columns={filecolumns}
-                totalPages={files.totalPages || 0}
-                data={files.result || []}
-              />
+              <FileTable columns={filecolumns} totalPages={2} data={files} />
             </CardContent>
           </Card>
         </div>

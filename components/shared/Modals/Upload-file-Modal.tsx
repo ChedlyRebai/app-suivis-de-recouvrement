@@ -14,7 +14,7 @@ const UploadFiles = () => {
   return (
     <Modal
       title="Téléverser un fichier"
-      description="Formats acceptés : .pdf , .word"
+      description="Formats acceptés : .pdf "
       isOpen={isOpen}
       onChange={onClose}
     >

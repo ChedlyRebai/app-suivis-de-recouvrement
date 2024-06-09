@@ -288,7 +288,11 @@ export default function Uploader() {
       ))}
 
       <Button disabled={saveDisabled}>
-        {saving ? <LoadingDots color="#808080" /> : <>Confirm upload</>}
+        {saving ? (
+          <LoadingDots color="#808080" />
+        ) : (
+          <>confirmer le téléchargement</>
+        )}
       </Button>
     </form>
   );
