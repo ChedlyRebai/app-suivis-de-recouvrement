@@ -1,4 +1,5 @@
 import { File } from "@/Models/file.model";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -14,7 +15,7 @@ import {
   TableCell,
   Table,
 } from "@/components/ui/table";
-import { Download, ListPlusIcon } from "lucide-react";
+import { Download, EyeIcon, ListPlusIcon, Trash2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -38,7 +39,7 @@ const UserDocuments = ({ file }: { file: File[] }) => {
               <TableHead>Nom de documents</TableHead>
               <TableHead>Agence de client</TableHead>
               <TableHead>Date</TableHead>
-              <TableHead>Download</TableHead>
+              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -55,10 +56,23 @@ const UserDocuments = ({ file }: { file: File[] }) => {
                   <TableCell className="p-3">
                     {file?.created_at?.toString()?.substring(0, 10)}
                   </TableCell>
-                  <TableCell className="p-3">
-                    <Link download href={file?.FilePath}>
-                      <Download className="text-center" />
-                    </Link>
+
+                  <TableCell className="text-right flex">
+                    {/*  */}
+                    {file?.FilePath ? (
+                      <Link download href={file?.FilePath}>
+                        <Button className="ml-1" variant="default">
+                          <EyeIcon size={16} />
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button className="ml-1" variant="default" disabled>
+                        <EyeIcon size={16} />
+                      </Button>
+                    )}
+                    <Button className="ml-1" variant="destructive">
+                      <Trash2 size={16} />
+                    </Button>
                   </TableCell>
                 </TableRow>
               );

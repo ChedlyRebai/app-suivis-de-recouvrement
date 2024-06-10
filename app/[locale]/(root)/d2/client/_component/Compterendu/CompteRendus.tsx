@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import { CompteRenduList } from "@/constants/types";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
-import { SearchIcon } from "lucide-react";
+import { EyeIcon, SearchIcon, Trash2 } from "lucide-react";
 
 import React from "react";
 
@@ -72,7 +72,14 @@ const CompteRendu = ({ compterendus }: { compterendus: CompteRenduList[] }) => {
                           variant="default"
                           onClick={() => onOpen(compterendu.id)}
                         >
-                          <SearchIcon size={16} />
+                          <EyeIcon size={16} />
+                        </Button>
+                        <Button
+                          className="ml-1"
+                          variant="destructive"
+                          onClick={() => onOpen(compterendu.id)}
+                        >
+                          <Trash2 size={16} />
                         </Button>
                       </TableCell>
                     </TableRow>

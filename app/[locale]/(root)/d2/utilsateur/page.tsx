@@ -199,10 +199,10 @@ export default async function page({
             </div>
           </div>
           <TabsContent value="Documents">
-            <UserDocuments file={User.Files} />
+            <UserDocuments file={User.Files || ([] as File[])} />
           </TabsContent>
           <TabsContent value="comptrendu">
-            <UserCompteRendu compterendus={User.suivi_agenda} />
+            <UserCompteRendu compterendus={User.suivi_agenda || []} />
           </TabsContent>
         </Tabs>
       </div>

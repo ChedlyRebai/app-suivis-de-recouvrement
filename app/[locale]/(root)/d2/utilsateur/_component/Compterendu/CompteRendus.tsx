@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/table";
 import { CompteRenduList } from "@/constants/types";
 import useCompteRenduModal from "@/hooks/use-compte-rendu-modal";
-import { SearchIcon } from "lucide-react";
+import { EyeIcon, SearchIcon, Trash2 } from "lucide-react";
 
 import React from "react";
 
@@ -79,13 +79,29 @@ const UserCompteRendu = ({
                   <TableCell className="p-3">
                     {compterendu.created_at.toString().substring(0, 10)}
                   </TableCell>
-                  <TableCell className="p-3">
-                    <Button
+
+                  {/* <Button
                       className="flex items-center h-full  justify-center"
                       variant="default"
                       onClick={() => onOpen(compterendu.id)}
                     >
                       <SearchIcon className="mr-" />
+                    </Button> */}
+
+                  <TableCell className="text-right flex">
+                    <Button
+                      className="ml-1"
+                      variant="default"
+                      onClick={() => onOpen(compterendu.id)}
+                    >
+                      <EyeIcon size={16} />
+                    </Button>
+                    <Button
+                      className="ml-1"
+                      variant="destructive"
+                      onClick={() => onOpen(compterendu.id)}
+                    >
+                      <Trash2 size={16} />
                     </Button>
                   </TableCell>
                 </TableRow>
