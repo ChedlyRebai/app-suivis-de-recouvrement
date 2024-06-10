@@ -48,7 +48,8 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
     },
   });
 
-  const { onClose, id, commentaire, Motif } = useValidationTransferModal();
+  const { onClose, id, commentaire, Motif, creationAcces } =
+    useValidationTransferModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
@@ -72,7 +73,11 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel htmlFor="username">Validation </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                disabled={creationAcces}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Sélectionné une motif" />
@@ -99,7 +104,9 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
           <Button variant={"outline"} onClick={onClose}>
             Annuler
           </Button>
-          <Button type="submit">Submit</Button>
+          <Button disabled={creationAcces} type="submit">
+            Submit
+          </Button>
         </DialogFooter>
       </form>
     </Form>

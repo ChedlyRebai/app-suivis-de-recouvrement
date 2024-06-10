@@ -60,7 +60,8 @@ const ValidationProlonagationForm = ({
     },
   });
 
-  const { onClose, commentaire, Motif, id } = useValidationProlongationModal();
+  const { onClose, commentaire, Motif, id, creationAcces } =
+    useValidationProlongationModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values, commentaire, Motif);
@@ -84,7 +85,11 @@ const ValidationProlonagationForm = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel htmlFor="username">Validation</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                disabled={creationAcces}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Validation" />
@@ -110,7 +115,9 @@ const ValidationProlonagationForm = ({
           <Button variant={"outline"} onClick={onClose}>
             Annuler
           </Button>
-          <Button type="submit">Submit</Button>
+          <Button disabled={creationAcces} type="submit">
+            Submit
+          </Button>
         </DialogFooter>
       </form>
     </Form>
