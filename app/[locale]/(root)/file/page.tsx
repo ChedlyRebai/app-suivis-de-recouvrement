@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import OpenModelButton from "../d2/client/_component/Documents/openModelButton";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { acccess, acces } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -43,6 +44,7 @@ export default async function Home({
     currentPage,
     perPage
   );
+  const accesss = await acccess("file");
 
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -65,6 +67,7 @@ export default async function Home({
             </CardHeader>
             <CardContent>
               <FileTable
+                access={accesss}
                 columns={filecolumns}
                 totalPages={data.totalPages}
                 data={data.result}

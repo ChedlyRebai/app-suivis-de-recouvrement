@@ -91,7 +91,7 @@ export const getAllfilesByCli = async (
   );
   try {
     const res = await axios.get<fileresult>(
-      `http://localhost:10004/file/allbycli?cli=${cli}&page=${currentPage}&perpage=${perPage}`
+      `https://release4.vercel.app/file/allbycli?cli=${cli}&page=${currentPage}&perpage=${perPage}`
     );
 
     return (res.data as fileresult) || ({} as fileresult);

@@ -47,12 +47,14 @@ import {
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { File } from "@/Models/file.model";
 import OpenModelButton from "../../d2/client/_component/Documents/openModelButton";
+import { Access } from "@/actions/acess.action";
 
 interface DataTableProps {
   columns: any[];
   data: File[];
   totalAccout?: number;
   totalPages?: number;
+  access: Access;
 }
 
 export function FileTable({
@@ -60,14 +62,14 @@ export function FileTable({
   data,
   totalAccout,
   totalPages = 0,
+  access,
 }: DataTableProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
-  console.log(data);
-
+  console.log(access);
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -120,6 +122,9 @@ export function FileTable({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      access,
+    },
   });
 
   const [loader, setLoader] = useState(true);

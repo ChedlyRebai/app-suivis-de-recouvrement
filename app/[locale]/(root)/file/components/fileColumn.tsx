@@ -5,18 +5,17 @@ import { Utilisateur, usersAdmin } from "@/actions/admin.action";
 import { deleteFile } from "@/actions/file.action";
 import AlertConfirmation from "@/components/shared/confirmationAlert";
 import { Button } from "@/components/ui/button";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, TableMeta } from "@tanstack/react-table";
 import { ArrowUpDown, Download, EyeIcon, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
-export const filecolumns: ColumnDef<File>[] = [
-  // {
-  //   accessorKey: "nom client",
-  //   header: "Nom client",
-  //   cell: ({ row }) => {
-  //     return row.original.ab_client.nom;
-  //   },
-  // },
+interface CustomTableMeta extends TableMeta<File> {
+  access: {
+    canDelete: boolean;
+    canView: boolean;
+  };
+}
+export const filecolumns: ColumnDef<File, CustomTableMeta>[] = [
   {
     accessorKey: "File Name",
     header: "Nom de fichier",
@@ -24,11 +23,6 @@ export const filecolumns: ColumnDef<File>[] = [
       return row.original.FileName;
     },
   },
-
-  //   {
-  //     accessorKey: "FilePath",
-  //     header: "FilePath",
-  //   },
 
   {
     accessorKey: "created_at",
@@ -50,12 +44,17 @@ export const filecolumns: ColumnDef<File>[] = [
   {
     accessorKey: "",
     header: "Actions",
-    cell: ({ row }) => {
+    cell: ({ row, column, table }) => {
+      // const canDelete = (table?.options?.meta?.access as any) || {};
+
+      const canView = table?.options?.meta as any;
+      console.log(canView);
       return (
         <div className="flex justify-center items-center">
           <Button
             className="mr-1"
             variant="default"
+            // disabled={!canView}
             onClick={() => {
               window.open(row.original.FilePath);
             }}
@@ -66,12 +65,12 @@ export const filecolumns: ColumnDef<File>[] = [
             variant="destructive"
             icon={<Trash2 size={20} />}
             buttonText={""}
-            description=" Voulez-vous vraiment supprimer cette fichier"
+            description="Voulez-vous vraiment supprimer cette fichier"
             title="Suppression de fichier"
+            disabled={canView.access.suppression !== "O"}
             onConfirm={async () => {
               await deleteFile(row.original.id)
                 .then(() => {
-                  //in french
                   toast.success("Fichier supprimé avec succès");
                 })
                 .catch(() => {
@@ -79,11 +78,47 @@ export const filecolumns: ColumnDef<File>[] = [
                 });
             }}
           />
-          {/* <Button variant="destructive" onClick={async () => {}}>
-            <Trash2 size={16} />
-          </Button> */}
         </div>
       );
     },
   },
+  // {
+  //   accessorKey: "",
+  //   header: "Actions",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="flex justify-center items-center">
+  //         <Button
+  //           className="mr-1"
+  //           variant="default"
+  //           onClick={() => {
+  //             window.open(row.original.FilePath);
+  //           }}
+  //         >
+  //           <EyeIcon size={16} />
+  //         </Button>{" "}
+  //         <AlertConfirmation
+  //           variant="destructive"
+  //           icon={<Trash2 size={20} />}
+  //           buttonText={""}
+  //           description=" Voulez-vous vraiment supprimer cette fichier"
+  //           title="Suppression de fichier"
+  //           onConfirm={async () => {
+  //             await deleteFile(row.original.id)
+  //               .then(() => {
+  //                 //in french
+  //                 toast.success("Fichier supprimé avec succès");
+  //               })
+  //               .catch(() => {
+  //                 toast.error("Erreur lors de la suppression");
+  //               });
+  //           }}
+  //         />
+  //         {/* <Button variant="destructive" onClick={async () => {}}>
+  //           <Trash2 size={16} />
+  //         </Button> */}
+  //       </div>
+  //     );
+  //   },
+  // },
 ];
