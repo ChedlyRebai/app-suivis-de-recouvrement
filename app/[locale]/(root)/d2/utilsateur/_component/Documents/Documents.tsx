@@ -1,4 +1,7 @@
+"use client";
 import { File } from "@/Models/file.model";
+import { deleteFile } from "@/actions/file.action";
+import AlertConfirmation from "@/components/shared/confirmationAlert";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +21,7 @@ import {
 import { Download, EyeIcon, ListPlusIcon, Trash2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 
 const UserDocuments = ({ file }: { file: File[] }) => {
   return (
@@ -56,11 +60,9 @@ const UserDocuments = ({ file }: { file: File[] }) => {
                   <TableCell className="p-3">
                     {file?.created_at?.toString()?.substring(0, 10)}
                   </TableCell>
-
-                  <TableCell className="text-right flex">
-                    {/*  */}
+                  <TableCell className="text-right flex space-x-1">
                     {file?.FilePath ? (
-                      <Link download href={file?.FilePath}>
+                      <Link target="_blank" href={file?.FilePath}>
                         <Button className="ml-1" variant="default">
                           <EyeIcon size={16} />
                         </Button>
@@ -70,9 +72,22 @@ const UserDocuments = ({ file }: { file: File[] }) => {
                         <EyeIcon size={16} />
                       </Button>
                     )}
-                    <Button className="ml-1" variant="destructive">
-                      <Trash2 size={16} />
-                    </Button>
+                    <AlertConfirmation
+                      variant="destructive"
+                      icon={<Trash2 size={20} />}
+                      buttonText={""}
+                      description="Voulez-vous vraiment supprimer cette fichier"
+                      title="Suppression de fichier"
+                      onConfirm={async () => {
+                        await deleteFile(file?.id)
+                          .then(() => {
+                            toast.success("Fichier supprimé avec succès");
+                          })
+                          .catch(() => {
+                            toast.error("Erreur lors de la suppression");
+                          });
+                      }}
+                    />
                   </TableCell>
                 </TableRow>
               );
