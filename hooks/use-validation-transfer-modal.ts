@@ -9,6 +9,8 @@ interface ValidationTrnasferModalStore {
   setId: (id: string) => void;
   onOpen: () => void;
   onClose: () => void;
+  creationAcces: boolean;
+  setCreationAcces: (creationAcces: boolean) => void;
 }
 
 const useValidationTransferModal = create<ValidationTrnasferModalStore>(
@@ -22,6 +24,8 @@ const useValidationTransferModal = create<ValidationTrnasferModalStore>(
     isOpen: false,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),
+    creationAcces: false,
+    setCreationAcces: (creationAcces) => set({ creationAcces }),
   })
 );
 
