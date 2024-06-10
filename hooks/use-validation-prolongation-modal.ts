@@ -9,6 +9,8 @@ interface ValidationProlongationModalStore {
   setId: (id: string) => void;
   onOpen: () => void;
   onClose: () => void;
+  creationAcces: boolean;
+  setCreationAcces: (creationAcces: boolean) => void;
 }
 
 const useValidationProlongationModal = create<ValidationProlongationModalStore>(
@@ -20,6 +22,8 @@ const useValidationProlongationModal = create<ValidationProlongationModalStore>(
       set({ Motif, commentaire }),
     setId: (id) => set({ id }),
     isOpen: false,
+    creationAcces: false,
+    setCreationAcces: (creationAcces) => set({ creationAcces }),
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),
   })
