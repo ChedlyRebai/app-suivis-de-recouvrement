@@ -97,7 +97,8 @@ export default async function Home({
             <CardContent>
               <Suspense fallback={<div>Chargement....</div>}>
                 <DataTableValidationDeTransfer
-                  acess={access}
+                  histoariqueAccess={historiqueAccess}
+                  access={access}
                   agences={agences || []}
                   groupes={groupes || []}
                   total={data.total || 0}

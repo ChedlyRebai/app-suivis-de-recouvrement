@@ -61,6 +61,7 @@ interface DataTableProps<TData, TValue> {
   groupes: any[];
   agences: any[];
   access: Access;
+  histoariqueAccess: Access;
 }
 
 export function DataTableDemandeDeProlongation<TData, TValue>({
@@ -72,6 +73,7 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
   agences,
   groupes,
   access,
+  histoariqueAccess,
 }: DataTableProps<TData, TValue>) {
   console.log(agences);
   console.log(groupes);
@@ -124,6 +126,7 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     meta: {
       access,
+      histoariqueAccess,
     },
   });
 

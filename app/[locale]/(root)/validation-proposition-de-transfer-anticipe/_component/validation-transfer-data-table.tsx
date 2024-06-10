@@ -44,18 +44,20 @@ interface DataTableProps<TData, TValue> {
   totalPages?: number;
   groupes: any[];
   agences: any[];
-  acess: Access;
+  access: Access;
+  histoariqueAccess: Access;
 }
 
 export function DataTableValidationDeTransfer<TData, TValue>({
   columns,
   data,
-  acess,
+  access,
   totalAccout,
   totalPages = 0,
   total,
   agences,
   groupes,
+  histoariqueAccess,
 }: DataTableProps<TData, TValue>) {
   console.log(data);
   const router = useRouter();
@@ -98,6 +100,10 @@ export function DataTableValidationDeTransfer<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      access,
+      histoariqueAccess,
+    },
   });
 
   const createQueryString = useCallback(

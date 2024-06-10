@@ -92,6 +92,7 @@ export default async function Home({
             <CardContent>
               <Suspense fallback={<div>Chargement....</div>}>
                 <DataTableDemandeDeProlongation
+                  histoariqueAccess={historiqueAccess}
                   access={access}
                   agences={agences || []}
                   groupes={groupes || []}
