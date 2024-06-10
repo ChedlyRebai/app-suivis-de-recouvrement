@@ -133,6 +133,9 @@ export function AllHistoriques({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      access,
+    },
   });
 
   const [loader, setLoader] = useState(true);

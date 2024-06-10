@@ -205,6 +205,9 @@ export function DataTableContactes<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      access,
+    },
   });
 
   const createQueryString = useCallback(

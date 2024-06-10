@@ -5,6 +5,7 @@ import { getSession } from "@/lib";
 import { redirect } from "next/navigation";
 import { GetServerSideProps } from "next";
 import TakePathnameComponent from "@/components/shared/TakePathnameComponent";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -17,7 +18,7 @@ export default async function Home({
   };
 }) {
   const session = await getSession();
-
+  const access = await acccess("access-management");
   if (!session) {
     return redirect("login");
   }

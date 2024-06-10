@@ -23,6 +23,7 @@ import { getLettre } from "@/actions/lettre.action";
 import { getDemandeDeProlongation } from "@/actions/prologation.action";
 import DemandeProlonagationModal from "@/components/shared/Modals/demande-prolongation-modal";
 import { getMotif, getMotifCommercial } from "@/actions/motif.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -63,6 +64,7 @@ export default async function Home({
   const groupes = await getGroupes();
   const agences = await getAgences();
   console.log("render page");
+  const access = await acccess("demande-prolongation");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -80,6 +82,7 @@ export default async function Home({
             </CardHeader>
             <CardContent>
               <DataTableDemandeDeProlongationCommercial
+                access={access}
                 agences={agences || []}
                 groupes={groupes || []}
                 total={data.total || 0}

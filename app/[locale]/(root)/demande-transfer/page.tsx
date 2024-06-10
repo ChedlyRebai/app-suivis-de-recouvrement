@@ -23,6 +23,7 @@ import { demandeTransferColumns } from "./_component/demandeTransferColumns";
 import DemandeTransfernModal from "@/components/shared/Modals/demande-transfer-Modal";
 import { getTypeTransfer } from "@/actions/transfer.action";
 import { MOTT } from "@/actions/motif.action";
+import { acccess } from "@/actions/acess.action";
 
 export default async function Home({
   searchParams,
@@ -64,6 +65,7 @@ export default async function Home({
 
   const motif = await MOTT();
   const typeTransfer = await getTypeTransfer();
+  const access = await acccess("demande-transfer");
   console.log(data.result[0] || []);
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -79,6 +81,7 @@ export default async function Home({
             </CardHeader>
             <CardContent>
               <DataTableDemandeDeTransfer
+                access={access}
                 agences={agences || []}
                 groupes={groupes || []}
                 total={data.total || 0}

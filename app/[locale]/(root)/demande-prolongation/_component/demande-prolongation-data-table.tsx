@@ -51,6 +51,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "../../../../../components/shared/data-table-toolbar";
 import DemandeProlonagationModal from "@/components/shared/Modals/demande-prolongation-modal";
+import { Access } from "@/actions/acess.action";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -60,6 +61,7 @@ interface DataTableProps<TData, TValue> {
   totalPages?: number;
   groupes: any[];
   agences: any[];
+  access: Access;
 }
 
 export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
@@ -70,6 +72,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   total,
   agences,
   groupes,
+  access,
 }: DataTableProps<TData, TValue>) {
   console.log("historique demande data table", data);
   const router = useRouter();
@@ -113,6 +116,9 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      access,
+    },
   });
 
   // const createQueryString = useCallback(

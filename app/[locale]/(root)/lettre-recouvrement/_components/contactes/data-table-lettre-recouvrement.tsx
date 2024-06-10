@@ -113,6 +113,9 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: {
+      access,
+    },
   });
 
   const [loader, setLoader] = useState(true);
