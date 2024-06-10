@@ -125,6 +125,7 @@ export function DataTableValidationDeTransfer<TData, TValue>({
   useEffect(() => {
     setAgences(agences);
     setLoader(false);
+    setCreationAcces(access.creation === "N");
   }, []);
 
   if (loader) {
