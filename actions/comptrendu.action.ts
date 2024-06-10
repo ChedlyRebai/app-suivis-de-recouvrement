@@ -59,10 +59,10 @@ export const deleteCompteRenduById = async (idCompRendu: Number | string) => {
   try {
     axios.defaults.baseURL = `${process.env.API_URL}`;
     const res = await axios.delete(
-      `https://release4.vercel.app/compterendu/deleteById?id=${idCompRendu}`
+      `http://localhost:10004/compterendu/deleteById?id=${idCompRendu}`
     );
-    // revalidatePath("");
-    // revalidatePath("/en/compte-rendu");
+    revalidatePath("/");
+    revalidatePath("/en/d2/compterendu");
     // revalidatePath("/compte-rendu");
     // revalidatePath("/en/compte-rendu?cli=049105812036");
     const acces = await deleteAccess("compte-rendu");
