@@ -1,6 +1,5 @@
 "use client";
 import {
-  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
@@ -15,28 +14,15 @@ import {
 } from "@tanstack/react-table";
 import {
   Breadcrumb,
-  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Check, ChevronsUpDown, File, RefreshCcwIcon } from "lucide-react";
+import { File } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover } from "@/components/ui/popover";
 
 import {
   Table,
@@ -49,11 +35,10 @@ import {
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useCallback, useEffect, useState } from "react";
-import { ab_client } from "@/Models/ab_client.model";
+import React, { useEffect, useState } from "react";
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import useListAgences from "@/hooks/use-agences-list";
 import {
   Card,
   CardContent,
@@ -62,8 +47,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
-import { Compte, Utilisateur } from "@/actions/admin.action";
-import { utilisateur } from "@/Models/utilisateur.model";
+import { Compte } from "@/actions/admin.action";
+
 import Link from "next/link";
 
 interface DataTableProps {
@@ -136,9 +121,6 @@ export function AllAccount({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    meta: {
-      access,
-    },
   });
 
   const [loader, setLoader] = useState(true);
