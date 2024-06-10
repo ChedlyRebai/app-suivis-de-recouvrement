@@ -304,9 +304,9 @@ export const validationprolongation: ColumnDef<any>[] = [
 
       const canView = table?.options?.meta as any;
       console.log(canView);
-      const { onOpen, setId, setMotifCommentaire, setCreationAcces } =
+      const { onOpen, setId, setMotifCommentaire } =
         useValidationProlongationModal();
-      setCreationAcces(canView?.access?.creation === "O");
+
       return (
         <div className="flex ">
           <Button

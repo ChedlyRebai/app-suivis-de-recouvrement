@@ -35,6 +35,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "../../../../../components/shared/data-table-toolbar";
 import { Access } from "@/actions/acess.action";
+import useValidationTransferModal from "@/hooks/use-validation-transfer-modal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -70,7 +71,10 @@ export function DataTableValidationDeTransfer<TData, TValue>({
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-
+  const { id, onOpen, setId, setMotifCommentaire, setCreationAcces } =
+    useValidationTransferModal();
+  console.log("access:", access);
+  //setCreationAcces(access?.creation === "O");
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const [loadingTable, setLoadingTable] = useState(false);

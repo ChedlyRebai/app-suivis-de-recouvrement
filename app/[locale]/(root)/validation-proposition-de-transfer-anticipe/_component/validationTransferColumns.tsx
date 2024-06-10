@@ -212,9 +212,9 @@ export const validationTransferColumns: ColumnDef<any>[] = [
 
       const canView = table?.options?.meta as any;
       console.log(canView);
-      const { id, onOpen, setId, setMotifCommentaire, setCreationAcces } =
+      const { id, onOpen, setId, setMotifCommentaire } =
         useValidationTransferModal();
-      setCreationAcces(canView?.access?.creation === "O");
+
       return (
         <div className="flex ">
           <Link href={`hitoriquecommentaire?cli=${row.original?.cli}`}>

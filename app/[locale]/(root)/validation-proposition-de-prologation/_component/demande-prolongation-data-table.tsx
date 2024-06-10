@@ -51,6 +51,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "../../../../../components/shared/data-table-toolbar";
 import { Access } from "@/actions/acess.action";
+import useValidationProlongationModal from "@/hooks/use-validation-prolongation-modal";
 
 interface DataTableProps<TData, TValue> {
   columns: any[];
@@ -129,6 +130,7 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
       histoariqueAccess,
     },
   });
+  const { creationAcces, setCreationAcces } = useValidationProlongationModal();
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -143,6 +145,7 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
   const [loader, setLoader] = useState(true);
   //effect
   useEffect(() => {
+    setCreationAcces(access.creation === "O");
     setAgences(agences);
     setLoader(false);
   }, []);
