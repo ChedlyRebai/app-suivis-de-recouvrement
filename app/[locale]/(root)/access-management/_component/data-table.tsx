@@ -50,19 +50,20 @@ import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { Oval } from "react-loading-icons";
 import Pagination from "@/components/shared/pagination";
+import { Access } from "@/actions/acess.action";
 
 interface DataTableProps<droit_accees, TValue> {
   //columns: ColumnDef<droit_accees, TValue>[];
+  access: Access;
 }
 
-export function AccessManagementDataTable<
-  droit_accees,
-  TValue
->({}: DataTableProps<droit_accees, TValue>) {
+export function AccessManagementDataTable<droit_accees, TValue>({
+  access,
+}: DataTableProps<droit_accees, TValue>) {
   const [data, setData] = useState<droit_accees[]>([]);
   const [TotalPages, setTotalPages] = useState(0);
   const [TotalAccount, setTotalAccount] = useState(0);
-
+  console.log("access:", access);
   const columns: ColumnDef<droit_accees>[] = [
     {
       accessorKey: "id",
@@ -134,6 +135,7 @@ export function AccessManagementDataTable<
           //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
           // </span>
           <Select
+            disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
                 row.getValue("code_fonction"),
@@ -185,6 +187,7 @@ export function AccessManagementDataTable<
       cell: ({ row }) => {
         return (
           <Select
+            disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
                 row.getValue("code_fonction"),
@@ -223,6 +226,7 @@ export function AccessManagementDataTable<
       cell: ({ row }) => {
         return (
           <Select
+            disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
                 row.getValue("code_fonction"),
@@ -270,6 +274,7 @@ export function AccessManagementDataTable<
           //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
           // </span>
           <Select
+            disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
                 row.getValue("code_fonction"),
@@ -358,9 +363,9 @@ export function AccessManagementDataTable<
           })
           .then(() => setIsLoading(false)),
         {
-          loading: "Loading...",
-          success: "Success",
-          error: <b>Could not save.</b>,
+          loading: "Chargement...",
+          success: "Données chargées avec succès.",
+          error: "Erreur lors du chargement des données",
         }
       );
     }
@@ -453,7 +458,12 @@ export function AccessManagementDataTable<
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button onClick={() => onOpenAddDroit()} variant="default" className="">
+        <Button
+          onClick={() => onOpenAddDroit()}
+          disabled={access.creation === "N"}
+          variant="default"
+          className=""
+        >
           <ListPlusIcon className="mr-2 h-4 w-4" />
           {lang("access-management.Add")}
         </Button>

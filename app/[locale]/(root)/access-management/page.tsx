@@ -22,7 +22,7 @@ export default async function Home({
   if (!session) {
     return redirect("login");
   }
-
+  console.log("access access-management:", access);
   return (
     <div className="bg-hero-patter px-3 bg-slate-100 min-h-screen py-6 mt-16  dark:bg-muted/40 ">
       <div className="py-6 min-h-60">
@@ -32,7 +32,7 @@ export default async function Home({
             <CardTitle>Gestion des accès</CardTitle>
           </CardHeader>
           <CardContent>
-            <AccessManagementDataTable />
+            <AccessManagementDataTable access={access} />
           </CardContent>
         </Card>{" "}
       </div>

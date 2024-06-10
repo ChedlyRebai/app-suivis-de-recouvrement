@@ -129,7 +129,11 @@ export const columns: ColumnDef<any>[] = [
   {
     accessorKey: "etat_lettre",
     header: "Envoyer lettre",
-    cell: ({ row }) => {
+    cell: ({ row, column, table }) => {
+      // const canDelete = (table?.options?.meta?.access as any) || {};
+
+      const canView = table?.options?.meta as any;
+      console.log(canView);
       return (
         // <Checkbox
         //   defaultChecked={row.original.etat_lettre === "O"}
@@ -144,6 +148,7 @@ export const columns: ColumnDef<any>[] = [
 
         <AlertConfirmation
           // icon={<Send size={13} />}
+          disabled={canView.access.creation === "N"}
           buttonText="Envoyer"
           title="Êtes-vous absolument sûr ?"
           description="Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs."

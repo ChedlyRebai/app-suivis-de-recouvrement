@@ -46,7 +46,7 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
   totalAccout,
   totalPages = 0,
 }: DataTableProps<TData, TValue>) {
-  console.log("historique commentaire data table", data);
+  console.log("historique commentaire data table", access);
 
   const searchParams = useSearchParams();
   const { replace } = useRouter();

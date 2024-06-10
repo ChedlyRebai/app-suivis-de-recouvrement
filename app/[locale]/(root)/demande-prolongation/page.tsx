@@ -65,6 +65,7 @@ export default async function Home({
   const agences = await getAgences();
   console.log("render page");
   const access = await acccess("demande-prolongation");
+  const historiqueAccess = await acccess("hitoriquecommentaire");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
@@ -82,6 +83,7 @@ export default async function Home({
             </CardHeader>
             <CardContent>
               <DataTableDemandeDeProlongationCommercial
+                histoariqueAccess={historiqueAccess}
                 access={access}
                 agences={agences || []}
                 groupes={groupes || []}

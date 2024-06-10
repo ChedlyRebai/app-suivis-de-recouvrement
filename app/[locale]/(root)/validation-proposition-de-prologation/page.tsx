@@ -21,6 +21,7 @@ import { validationprolongation } from "./_component/validationPropositionColumn
 import ValidationProlonagationnModal from "@/components/shared/Modals/Validation-prolongation-modal";
 import { VTRF, getMotifCommercial } from "@/actions/motif.action";
 import { acccess } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -69,7 +70,9 @@ export default async function Home({
   const agences = await getAgences();
   const motifs = await getMotifCommercial();
   const validationTransfer = await VTRF();
-
+  if (access.acces === "N") {
+    redirect("/forbidden");
+  }
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">

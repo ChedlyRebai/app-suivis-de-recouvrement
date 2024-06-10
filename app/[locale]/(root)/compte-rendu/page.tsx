@@ -12,6 +12,7 @@ import {
   getcontact,
 } from "@/actions/utils.actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -49,6 +50,9 @@ export default async function Home({
   console.log("access:", access);
   const historiqueCompteRendu = await getListCompteRenduHistorique(cli);
   console.log("suiviAgenda", suiviAgenda);
+  if (!access.acces) {
+    redirect("/forbidden");
+  }
   return (
     <div className="bg-hero-patter px-3 bg-slate-100 min-h-screen py-6 mt-16  dark:bg-muted/40 ">
       <div className="py-6 min-h-60">

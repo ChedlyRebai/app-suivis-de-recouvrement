@@ -66,6 +66,7 @@ export default async function Home({
   const motif = await MOTT();
   const typeTransfer = await getTypeTransfer();
   const access = await acccess("demande-transfer");
+  const historiqueAccess = await acccess("hitoriquecommentaire");
   console.log(data.result[0] || []);
   return (
     <div className="bg-muted/40 min-h-screen">
@@ -81,6 +82,7 @@ export default async function Home({
             </CardHeader>
             <CardContent>
               <DataTableDemandeDeTransfer
+                histoariqueAccess={historiqueAccess}
                 access={access}
                 agences={agences || []}
                 groupes={groupes || []}

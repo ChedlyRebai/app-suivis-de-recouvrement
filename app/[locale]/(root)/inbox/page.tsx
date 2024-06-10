@@ -8,6 +8,7 @@ import LoadingIcons, { Oval } from "react-loading-icons";
 import { getAlertesTypes, getAllAlerts } from "@/actions/Alerts.action";
 import { Mail } from "./_components/mail";
 import { acccess } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 
 export default async function Page({
   searchParams,
@@ -25,7 +26,10 @@ export default async function Page({
   const initialdata = await getAllAlerts(1, limit, search);
   const alertesTypes = await getAlertesTypes();
   const access = await acccess("inbox");
-  console.log("initialData", initialdata);
+  console.log("initialData", acccess);
+  if (access.acces === "N") {
+    redirect("/forbidden");
+  }
   return (
     <>
       <div className="" />

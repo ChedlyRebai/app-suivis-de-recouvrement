@@ -19,6 +19,7 @@ import { Suspense } from "react";
 import { DataTableLettreDeRecouvrement } from "./_components/contactes/data-table-lettre-recouvrement";
 import { getLettre } from "@/actions/lettre.action";
 import { acccess } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -59,6 +60,9 @@ export default async function Home({
   const agences = await getAgences();
   console.log("render page");
   const access = await acccess("lettre-recouvrement");
+  if (access.acces === "N") {
+    redirect("/forbidden");
+  }
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">

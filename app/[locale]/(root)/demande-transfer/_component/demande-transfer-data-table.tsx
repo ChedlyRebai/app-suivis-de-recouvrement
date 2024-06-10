@@ -74,6 +74,7 @@ interface DataTableProps<TData, TValue> {
   groupes: any[];
   agences: any[];
   access: Access;
+  histoariqueAccess: Access;
 }
 
 export function DataTableDemandeDeTransfer<TData, TValue>({
@@ -85,6 +86,7 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
   agences,
   groupes,
   access,
+  histoariqueAccess,
 }: DataTableProps<TData, TValue>) {
   console.log(data);
   const router = useRouter();
@@ -129,6 +131,7 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     meta: {
       access,
+      histoariqueAccess,
     },
   });
 

@@ -20,6 +20,7 @@ import { HistoriqueCommentaireColumns } from "./_component/HistoriqueCommentaire
 import { HistoriqueCommentaireDataTable } from "./_component/HistoriqueCommentaireDataTable";
 import { getHistoriqueDemandDeTransferAnticipe } from "@/actions/dmandeTransfer.action";
 import { acccess } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -56,7 +57,10 @@ export default async function Home({
     from,
     to
   );
-  const accesss = await acccess("historique");
+  const accesss = await acccess("hitoriquecommentaire");
+  if (accesss.acces === "N") {
+    redirect("/forbidden");
+  }
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">

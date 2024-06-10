@@ -23,6 +23,7 @@ import { validationTransferColumns } from "./_component/validationTransferColumn
 import ValidationTransferModal from "@/components/shared/Modals/validation-transfer-Modal";
 import { MOTT, VTRF, getMotifCommercial } from "@/actions/motif.action";
 import { acccess } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -75,6 +76,9 @@ export default async function Home({
   const validationTransfer = await VTRF();
   const access = await acccess("validation-proposition-de-transfer-anticipe");
   console.log("render page");
+  if (access.acces === "N") {
+    redirect("/forbidden");
+  }
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">

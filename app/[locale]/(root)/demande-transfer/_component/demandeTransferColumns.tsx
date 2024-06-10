@@ -144,21 +144,27 @@ export const demandeTransferColumns: ColumnDef<any>[] = [
   {
     accessorKey: "action",
     header: "Action",
-    cell: ({ row }) => {
+    cell: ({ row, column, table }) => {
+      // const canDelete = (table?.options?.meta?.access as any) || {};
+
+      const canView = table?.options?.meta as any;
+      console.log(canView);
       const { onOpen, setId } = useDemandeTransfernModal();
 
       return (
         <div className="flex ">
-          <Link href={`hitoriquecommentaire?cli=${row.original?.cli}`}>
-            <Button
-              className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
-              variant="default"
-              size="sm"
-            >
-              <HistoryIcon size={16} />
-            </Button>
-          </Link>
           <Button
+            disabled={canView?.histoariqueAccess.acces === "N"}
+            className="h-10 w-h-10 mr-1 hover:bg-blue-800 bg-blue-700 text-white"
+            variant="default"
+            size="sm"
+          >
+            <Link href={`hitoriquecommentaire?cli=${row.original?.cli}`}>
+              <HistoryIcon size={16} />
+            </Link>
+          </Button>
+          <Button
+            disabled={canView?.access.creation === "N"}
             className="h-10 w-h-10"
             onClick={() => {
               setId(row.original?.id);

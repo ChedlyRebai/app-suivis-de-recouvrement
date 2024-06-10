@@ -62,6 +62,7 @@ interface DataTableProps<TData, TValue> {
   groupes: any[];
   agences: any[];
   access: Access;
+  histoariqueAccess: Access;
 }
 
 export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
@@ -73,6 +74,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
   agences,
   groupes,
   access,
+  histoariqueAccess,
 }: DataTableProps<TData, TValue>) {
   console.log("historique demande data table", data);
   const router = useRouter();
@@ -118,6 +120,7 @@ export function DataTableDemandeDeProlongationCommercial<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     meta: {
       access,
+      histoariqueAccess,
     },
   });
 

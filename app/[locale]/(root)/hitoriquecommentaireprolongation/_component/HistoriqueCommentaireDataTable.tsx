@@ -29,12 +29,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
+import { Access } from "@/actions/acess.action";
 
 interface DataTableProps<TData, TValue> {
   columns: any[];
 
   data: any[];
   totalAccout?: number;
+  access: Access;
   totalPages?: number;
 }
 
@@ -43,8 +45,9 @@ export function HistoriqueCommentaireDataTable<TData, TValue>({
   data,
   totalAccout,
   totalPages = 0,
+  access,
 }: DataTableProps<TData, TValue>) {
-  console.log("historique commentaire data table", data);
+  console.log("access:", access);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

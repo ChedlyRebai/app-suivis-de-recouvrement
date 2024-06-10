@@ -315,7 +315,10 @@ export const validationprolongation: ColumnDef<any>[] = [
   {
     accessorKey: "action",
     header: "Action",
-    cell: ({ row }) => {
+    cell: ({ row, column, table }) => {
+      // const canDelete = (table?.options?.meta?.access as any) || {};
+
+      const canView = table?.options?.meta as any;
       const { onOpen, setId, setMotifCommentaire } =
         useValidationProlongationModal();
 
