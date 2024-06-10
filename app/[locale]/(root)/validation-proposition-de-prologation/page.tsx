@@ -71,7 +71,7 @@ export default async function Home({
   const motifs = await getMotifCommercial();
   const validationTransfer = await VTRF();
   if (access.acces === "N") {
-    redirect("/forbidden");
+    return redirect("/forbidden");
   }
   const historiqueAccess = await acccess("hitoriquecommentaire");
   return (

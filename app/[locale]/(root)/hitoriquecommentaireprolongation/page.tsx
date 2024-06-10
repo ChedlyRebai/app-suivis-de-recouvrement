@@ -76,7 +76,7 @@ export default async function Home({
   console.log("data", access);
   console.log("render page");
   if (access.acces === "N") {
-    redirect("/forbidden");
+    return redirect("/forbidden");
   }
   return (
     <div className="bg-muted/40 min-h-screen">

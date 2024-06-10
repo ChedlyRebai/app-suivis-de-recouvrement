@@ -22,6 +22,9 @@ export default async function Home({
   if (!session) {
     return redirect("login");
   }
+  if (access.acces === "N") {
+    return redirect("/forbidden");
+  }
   console.log("access access-management:", access);
   return (
     <div className="bg-hero-patter px-3 bg-slate-100 min-h-screen py-6 mt-16  dark:bg-muted/40 ">
