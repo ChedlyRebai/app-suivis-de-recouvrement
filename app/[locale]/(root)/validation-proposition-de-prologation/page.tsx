@@ -73,6 +73,7 @@ export default async function Home({
   if (access.acces === "N") {
     redirect("/forbidden");
   }
+  const historiqueAccess = await acccess("hitoriquecommentaire");
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
