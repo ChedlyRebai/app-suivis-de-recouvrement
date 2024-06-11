@@ -20,6 +20,7 @@ import { Total } from "@/actions/lettre.action";
 import { acccess } from "@/actions/acess.action";
 import { DataTableContactes } from "../listeclient/_components/contactes/data-table-contactes";
 import { columns } from "../listeclient/_components/contactes/columns";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -57,7 +58,10 @@ export default async function Home({
   const groupes = await getGroupes();
   const agences = await getAgences();
 
-  const access = await acccess("listeclient");
+  const access = await acccess("listclientnoncontactes");
+  if (access.acces === "N") {
+    return redirect("/fr/forbidden");
+  }
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">
