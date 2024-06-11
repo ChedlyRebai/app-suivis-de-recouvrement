@@ -2,7 +2,7 @@
 import { PowerBIEmbed } from "powerbi-client-react";
 import React from "react";
 import { models } from "powerbi-client";
-const Co = () => {
+const PowerBi = () => {
   return (
     <div className=" h-[90vh]">
       <PowerBIEmbed
@@ -57,4 +57,4 @@ const Co = () => {
   );
 };
 
-export default Co;
+export default PowerBi;

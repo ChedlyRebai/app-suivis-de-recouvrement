@@ -10,11 +10,12 @@ import { PowerBIEmbed } from "powerbi-client-react";
 import { models } from "powerbi-client";
 import { AllUsers } from "../_component/alllusers";
 import { Utilisateurcolumns } from "../_component/Utilisateurcolumns";
-import Co from "./c";
+
+import PowerBi from "./PowerBi";
 const page = () => {
   return (
     <>
-      <Co />
+      <PowerBi />
     </>
   );
 };
