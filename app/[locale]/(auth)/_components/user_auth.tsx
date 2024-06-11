@@ -3,11 +3,9 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,11 +21,9 @@ import { FormEvent, useState } from "react";
 import { Login } from "@/actions/auth.action";
 import toast from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
-import { getSession, login } from "@/lib";
-import WrongPassword from "./WrongPassword";
 import { getUserBuMatricule } from "@/actions/utilisateur.action";
 import useInvalidCredentialModal from "@/hooks/useInvalidCredential";
-import useAddDroitModal from "@/hooks/useAddDroitModal";
+
 import { useLocale } from "next-intl";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
