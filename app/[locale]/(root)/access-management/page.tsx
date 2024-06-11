@@ -23,7 +23,7 @@ export default async function Home({
     return redirect("login");
   }
   if (access.acces === "N") {
-    return redirect("/forbidden");
+    return redirect("/fr/forbidden");
   }
   console.log("access access-management:", access);
   return (

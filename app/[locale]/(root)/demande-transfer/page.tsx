@@ -24,6 +24,7 @@ import DemandeTransfernModal from "@/components/shared/Modals/demande-transfer-M
 import { getTypeTransfer } from "@/actions/transfer.action";
 import { MOTT } from "@/actions/motif.action";
 import { acccess } from "@/actions/acess.action";
+import { redirect } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -68,6 +69,10 @@ export default async function Home({
   const access = await acccess("demande-transfer");
   const historiqueAccess = await acccess("hitoriquecommentaire");
   console.log(data.result[0] || []);
+  console.log("access demande-transfer:", access);
+  if (access.acces === "N") {
+    return redirect("/fr/forbidden");
+  }
   return (
     <div className="bg-muted/40 min-h-screen">
       <div className="py-6 mt-16">

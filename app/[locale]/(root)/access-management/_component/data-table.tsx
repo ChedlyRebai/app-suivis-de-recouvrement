@@ -64,16 +64,16 @@ export function AccessManagementDataTable<droit_accees, TValue>({
   const [TotalPages, setTotalPages] = useState(0);
   const [TotalAccount, setTotalAccount] = useState(0);
   console.log("access:", access);
-  const columns: ColumnDef<droit_accees>[] = [
-    {
-      accessorKey: "id",
-      header: ({ column }) => {
-        return <></>;
-      },
-      cell: ({ row }) => {
-        return <></>;
-      },
-    },
+  const columns: ColumnDef<any>[] = [
+    // {
+    //   accessorKey: "id",
+    //   header: ({ column }) => {
+    //     return <></>;
+    //   },
+    //   cell: ({ row }) => {
+    //     return <></>;
+    //   },
+    // },
     {
       accessorKey: "nom",
       header: ({ column }) => {
@@ -138,8 +138,8 @@ export function AccessManagementDataTable<droit_accees, TValue>({
             disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
-                row.getValue("code_fonction"),
-                row.getValue("id"),
+                row.original?.code_fonction,
+                row.original?.id,
                 newValue,
                 "acces"
               )
@@ -190,8 +190,8 @@ export function AccessManagementDataTable<droit_accees, TValue>({
             disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
-                row.getValue("code_fonction"),
-                row.getValue("id"),
+                row.original?.code_fonction,
+                row.original?.id,
                 newValue,
                 "creation"
               )
@@ -229,8 +229,8 @@ export function AccessManagementDataTable<droit_accees, TValue>({
             disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
-                row.getValue("code_fonction"),
-                row.getValue("id"),
+                row.original?.code_fonction,
+                row.original?.id,
                 newValue,
                 "modification"
               )
@@ -277,8 +277,8 @@ export function AccessManagementDataTable<droit_accees, TValue>({
             disabled={access.modification === "N"}
             onValueChange={(newValue) =>
               update(
-                row.getValue("code_fonction"),
-                row.getValue("id"),
+                row.original?.code_fonction,
+                row.original?.id,
                 newValue,
                 "suppression"
               )

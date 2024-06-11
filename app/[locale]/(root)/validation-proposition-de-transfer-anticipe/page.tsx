@@ -77,7 +77,7 @@ export default async function Home({
   const access = await acccess("validation-proposition-de-transfer-anticipe");
   console.log("render page");
   if (access.acces === "N") {
-    return redirect("/forbidden");
+    return redirect("/fr/forbidden");
   }
   const historiqueAccess = await acccess("hitoriquecommentaire");
   return (

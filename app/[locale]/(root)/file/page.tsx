@@ -47,7 +47,7 @@ export default async function Home({
   );
   const accesss = await acccess("file");
   if (accesss.acces === "N") {
-    redirect("/forbidden");
+    redirect("/fr/forbidden");
   }
   return (
     <div className="bg-muted/40 min-h-screen">

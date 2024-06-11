@@ -1,8 +1,7 @@
 "use server";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DataTableContactes } from "./_components/contactes/data-table-contactes";
-import { columns } from "./_components/contactes/columns";
+
 import {
   getAgences,
   getClientContactes,
@@ -19,6 +18,8 @@ import {
 import { Suspense } from "react";
 import { Total } from "@/actions/lettre.action";
 import { acccess } from "@/actions/acess.action";
+import { DataTableContactes } from "../listeclient/_components/contactes/data-table-contactes";
+import { columns } from "../listeclient/_components/contactes/columns";
 
 export default async function Home({
   searchParams,
@@ -43,7 +44,7 @@ export default async function Home({
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
 
-  const data = await getClientContactes(
+  const dataNon = await getClientNonContactes(
     search,
     currentPage,
     perPage,
@@ -66,22 +67,22 @@ export default async function Home({
         <div className=" mx-auto px-4 sm:px-6 md:px-8">
           <Card>
             <CardHeader>
-              <CardTitle>Liste des clients contactés</CardTitle>
+              <CardTitle>Liste des clients Non contactés</CardTitle>
               {/* <CardDescription>
-                    Manage your products and view their sales performance.
-                  </CardDescription> */}
+                      Manage your products and view their sales performance.
+                    </CardDescription> */}
             </CardHeader>
             <CardContent>
               <DataTableContactes
                 access={access}
                 agences={agences || []}
                 groupes={groupes || []}
-                total={data.total || ({} as Total)}
-                totalAccout={data.totalCount || 0}
-                totalPages={data.totalPages || 0}
+                total={dataNon.total || ({} as Total)}
+                totalAccout={dataNon.totalCount || 0}
+                totalPages={dataNon.totalPages || 0}
                 columns={columns || []}
-                data={data.result || []}
-                type="noncontactes"
+                data={dataNon.result || []}
+                type="contactes"
               />
             </CardContent>
           </Card>

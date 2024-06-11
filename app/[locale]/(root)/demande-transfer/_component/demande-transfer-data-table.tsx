@@ -88,7 +88,8 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
   access,
   histoariqueAccess,
 }: DataTableProps<TData, TValue>) {
-  console.log(data);
+  console.log("hsit", histoariqueAccess);
+  console.log("access", access);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -187,18 +188,6 @@ export function DataTableDemandeDeTransfer<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   className="p-"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
-
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

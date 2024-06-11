@@ -28,7 +28,7 @@ export default async function Page({
   const access = await acccess("inbox");
   console.log("initialData", acccess);
   if (access.acces === "N") {
-    return redirect("/forbidden");
+    return redirect("/fr/forbidden");
   }
   return (
     <>

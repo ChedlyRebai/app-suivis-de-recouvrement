@@ -17,7 +17,7 @@ const ChatUi = () => {
     setInputMessage("");
 
     try {
-      const response = await fetch("http://localhost:10004/openai/ai", {
+      const response = await fetch("https://release4.vercel.app/openai/ai", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

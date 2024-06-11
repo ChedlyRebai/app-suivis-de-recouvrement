@@ -61,7 +61,7 @@ export default async function Home({
   console.log("render page");
   const access = await acccess("lettre-recouvrement");
   if (access.acces === "N") {
-    return redirect("/forbidden");
+    return redirect("/fr/forbidden");
   }
   return (
     <div className="bg-muted/40 min-h-screen">
