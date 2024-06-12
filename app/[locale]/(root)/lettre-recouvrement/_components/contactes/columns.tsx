@@ -69,7 +69,7 @@ export const columns: ColumnDef<any>[] = [
     },
   },
   {
-    accessorKey: "nom",
+    accessorKey: "ab_client.nom",
     header: "Non",
   },
 

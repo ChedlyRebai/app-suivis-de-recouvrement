@@ -73,6 +73,7 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   access,
 }: DataTableProps<TData, TValue>) {
   console.log(access);
+  console.log(data);
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const setAgences = useListAgences((state) => state.setAgences);
