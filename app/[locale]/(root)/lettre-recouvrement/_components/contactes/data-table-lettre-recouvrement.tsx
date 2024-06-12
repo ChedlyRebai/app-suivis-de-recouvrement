@@ -189,23 +189,24 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
                 </TableCell>
               </TableRow>
             )}
+
+            <TableRow>
+              <TableCell className="font-bold">TOTAL Dossier:</TableCell>
+              <TableCell className="font-bold">{totalAccout}</TableCell>
+              <TableCell className="font-bold">TOT IMP:</TableCell>
+              <TableCell className="font-bold">{total.mnt_imp || 0} </TableCell>
+              <TableCell className="font-bold">TOT DEP:</TableCell>
+              <TableCell className="font-bold">
+                {total.depassement || 0}
+              </TableCell>
+              <TableCell className="font-bold">TOT IRR:</TableCell>
+              <TableCell className="font-bold">
+                {total.tot_creance || 0}
+              </TableCell>
+              <TableCell className="font-bold">TOT ENG:</TableCell>
+              <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
+            </TableRow>
           </TableBody>
-          <TableRow>
-            <TableCell className="font-bold">TOTAL Dossier:</TableCell>
-            <TableCell className="font-bold">{totalAccout}</TableCell>
-            <TableCell className="font-bold">TOT IMP:</TableCell>
-            <TableCell className="font-bold">{total.mnt_imp || 0} </TableCell>
-            <TableCell className="font-bold">TOT DEP:</TableCell>
-            <TableCell className="font-bold">
-              {total.depassement || 0}
-            </TableCell>
-            <TableCell className="font-bold">TOT IRR:</TableCell>
-            <TableCell className="font-bold">
-              {total.tot_creance || 0}
-            </TableCell>
-            <TableCell className="font-bold">TOT ENG:</TableCell>
-            <TableCell className="font-bold">{total.tot_eng || 0}</TableCell>
-          </TableRow>
         </Table>
       </div>
       <div className="mt-2 flex items-center justify-between px-2">
