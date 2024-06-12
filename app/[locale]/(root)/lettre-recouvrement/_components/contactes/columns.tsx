@@ -150,8 +150,8 @@ export const columns: ColumnDef<any>[] = [
           // icon={<Send size={13} />}
           disabled={canView.access.creation === "N"}
           buttonText="Envoyer"
-          title="Êtes-vous absolument sûr ?"
-          description="Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs."
+          title="Envoyer la lettre de recouvrement"
+          description="Voulez-vous vraiment envoyer la lettre de recouvrement ?"
           onConfirm={async () => {
             await updateEtatLetttre(row.original.ncp, "O")
               .then((res) => {
