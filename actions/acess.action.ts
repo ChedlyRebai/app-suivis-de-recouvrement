@@ -1,6 +1,7 @@
 "use server";
 import axios from "axios";
 import { Console } from "console";
+import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
 export interface Access {
   creation: string;
@@ -21,6 +22,7 @@ export const acccess = async (path: string) => {
     const res = await axios.post<Access>(
       `https://sprint1-v2-beta.vercel.app/droit/access?page=${path}`
     );
+    revalidatePath("/");
     return res.data as Access | {} as Access;
   } catch (error) {
     console.log(error);
