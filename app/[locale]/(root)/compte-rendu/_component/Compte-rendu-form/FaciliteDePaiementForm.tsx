@@ -80,9 +80,8 @@ const FaciliteDePaiementForm = () => {
               handleIputChangeSuiviAgenda("nb_ech", e.target.value);
             }}
             id="Nombreech"
-            max={5}
             min={0}
-            value={suiviAgenda.nb_ech || 5}
+            value={suiviAgenda.nb_ech || 0}
             type="number"
           />
         </div>
