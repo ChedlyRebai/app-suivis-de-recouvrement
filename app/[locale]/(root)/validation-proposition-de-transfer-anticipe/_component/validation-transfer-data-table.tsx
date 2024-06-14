@@ -110,16 +110,6 @@ export function DataTableValidationDeTransfer<TData, TValue>({
     },
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams, selectedCode]
-  );
-
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
@@ -162,18 +152,6 @@ export function DataTableValidationDeTransfer<TData, TValue>({
               table.getRowModel().rows.map((row, i) => (
                 <TableRow
                   className="p-"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
-
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
                   key={i}
                   data-state={row.getIsSelected() && "selected"}
                 >

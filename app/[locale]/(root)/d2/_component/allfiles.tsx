@@ -123,16 +123,6 @@ export function AllFilles({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams, selectedCode]
-  );
-
   const [loader, setLoader] = useState(true);
   // effect
   useEffect(() => {
@@ -360,18 +350,6 @@ export function AllFilles({
                   table.getRowModel().rows.map((row) => (
                     <TableRow
                       className="p-"
-                      // onDoubleClick={() => {
-                      //   console.log((row.original as { cli: string }).cli);
-
-                      //   router.push(
-                      //     "compte-rendu" +
-                      //       "?" +
-                      //       createQueryString(
-                      //         "cli",
-                      //         `${(row.original as { cli: string }).cli}`
-                      //       )
-                      //   );
-                      // }}
                       key={row.id}
                       data-state={row.getIsSelected() && "selected"}
                     >

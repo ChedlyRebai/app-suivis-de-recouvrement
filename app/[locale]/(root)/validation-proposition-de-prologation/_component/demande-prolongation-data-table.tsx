@@ -182,18 +182,6 @@ export function DataTableDemandeDeProlongation<TData, TValue>({
               table.getRowModel().rows.map((row, i) => (
                 <TableRow
                   className="p-"
-                  onDoubleClick={() => {
-                    console.log((row.original as { cli: string }).cli);
-
-                    router.push(
-                      "compte-rendu" +
-                        "?" +
-                        createQueryString(
-                          "cli",
-                          `${(row.original as { cli: string }).cli}`
-                        )
-                    );
-                  }}
                   key={i}
                   data-state={row.getIsSelected() && "selected"}
                 >
