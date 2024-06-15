@@ -127,14 +127,22 @@ export function Mail({
           <Separator />
           <Nav
             isCollapsed={isCollapsed}
-            links={[
-              {
-                title: "Alertes",
+            // links={[
+            //   {
+            //     title: "Alertes",
+            //     label: "128",
+            //     icon: Bell,
+            //     variant: "default",
+            //   },
+            // ]}
+            links={alertesTypes.map((item: alertTypes, i) => {
+              return {
+                title: item.types?.libelle,
                 label: "128",
                 icon: Bell,
                 variant: "default",
-              },
-            ]}
+              };
+            })}
           />
         </ResizablePanel>
         <ResizableHandle withHandle />
