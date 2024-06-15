@@ -37,7 +37,7 @@ export const getAlertesTypes = async () => {
     const res = await axios.get<AlertesTypes[]>(
       `https://release2.vercel.app/alerts/types`
     );
-
+    console.log("alertes types", res.data);
     return res.data || ([] as AlertesTypes[]);
   } catch (error) {
     return [] as AlertesTypes[];

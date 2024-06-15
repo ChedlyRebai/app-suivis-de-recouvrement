@@ -140,7 +140,7 @@ export function Mail({
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <Tabs defaultValue="all">
             <div className="flex items-center px-4 py-2">
-              <h1 className="text-xl font-bold">Alertes</h1>
+              <h1 className="text-xl font-bold">Notifications</h1>
               <TabsList className="ml-auto">
                 {/* <TabsTrigger
                   value="all"
@@ -154,7 +154,7 @@ export function Mail({
                 >
                   Unread
                 </TabsTrigger> */}
-                {/* {alertesTypes.map((item, i) => {
+                {alertesTypes.map((item, i) => {
                   return (
                     <TabsTrigger
                       value={`${item.rapporttype}`}
@@ -163,7 +163,7 @@ export function Mail({
                       {item.types?.libelle}
                     </TabsTrigger>
                   );
-                })} */}
+                })}
               </TabsList>
             </div>
             <Separator />
