@@ -45,6 +45,7 @@ import useInbox from "@/hooks/use-inbox-hook";
 import { format } from "date-fns/format";
 import { Alerte, AlertesTypes, getAllAlerts } from "@/actions/Alerts.action";
 import { MailList } from "./mail-list";
+import { alertTypes } from "@/Models/alertTypes.model";
 interface MailProps {
   accounts: {
     label: string;
@@ -58,7 +59,7 @@ interface MailProps {
   initialData: any[];
   search: string;
   limit: number;
-  alertesTypes: AlertesTypes[];
+  alertesTypes: alertTypes[];
 }
 export function Mail({
   accounts,
@@ -75,7 +76,7 @@ export function Mail({
 
   console.log("initialData", initialData);
   const { alerte, setAlert, setId } = useInbox();
-
+  console.log(alertesTypes);
   // const handleSearch = useDebouncedCallback((query: string) => {
   //   const params = new URLSearchParams(searchParams);
   //   if (query) {
@@ -154,7 +155,7 @@ export function Mail({
                 >
                   Unread
                 </TabsTrigger> */}
-                {alertesTypes.map((item, i) => {
+                {/* {alertesTypes.map((item: alertTypes, i) => {
                   return (
                     <TabsTrigger
                       value={`${item.rapporttype}`}
@@ -163,7 +164,7 @@ export function Mail({
                       {item.types?.libelle}
                     </TabsTrigger>
                   );
-                })}
+                })} */}
               </TabsList>
             </div>
             <Separator />

@@ -1,4 +1,5 @@
 "use server";
+import { alertTypes } from "@/Models/alertTypes.model";
 import { getSession } from "@/lib";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
@@ -34,13 +35,13 @@ export interface Types {
 
 export const getAlertesTypes = async () => {
   try {
-    const res = await axios.get<AlertesTypes[]>(
+    const res = await axios.get<alertTypes[]>(
       `https://release2.vercel.app/alerts/types`
     );
     console.log("alertes types", res.data);
-    return res.data || ([] as AlertesTypes[]);
+    return res.data || ([] as alertTypes[]);
   } catch (error) {
-    return [] as AlertesTypes[];
+    return [] as alertTypes[];
   }
 };
 
