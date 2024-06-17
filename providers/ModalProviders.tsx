@@ -11,7 +11,6 @@ import React from "react";
 const ModalProviders = () => {
   return (
     <>
-      <EditDroitModal />
       <AddDroitModal />
       <ListeAgenceModal />
       <SearchFonctionModal />

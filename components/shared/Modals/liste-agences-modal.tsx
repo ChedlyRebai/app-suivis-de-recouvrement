@@ -12,7 +12,7 @@ import { ListeAgenceDataTable } from "./liste-agences-datatable";
 import useListAgences from "@/hooks/use-agences-list";
 
 const ListeAgenceModal = () => {
-  const { isOpen, onOpen, onClose,column } = useListeAgencestModal();
+  const { isOpen, onOpen, onClose, column } = useListeAgencestModal();
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
@@ -35,7 +35,11 @@ const ListeAgenceModal = () => {
         );
       },
       cell: ({ row }) => {
-        return <span onClick={e=>console.log(e)}>{`${row.getValue("codug")}`}</span>;
+        return (
+          <span onClick={(e) => console.log(e)}>{`${row.getValue(
+            "codug"
+          )}`}</span>
+        );
       },
       accessorFn: (originalRow) => {
         return originalRow.codug.toString();
@@ -58,17 +62,16 @@ const ListeAgenceModal = () => {
     },
   ];
 
-  const listAgences=useListAgences((state)=>state.listAgences)
-  const setAgences=useListAgences((state)=>state.setAgences)
-  
+  const listAgences = useListAgences((state) => state.listAgences);
+  const setAgences = useListAgences((state) => state.setAgences);
+
   const [data, setData] = useState<any>([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAgences();
-    
-      setData(data);
-      setAgences(data)
-    
+
+      setData(data || []);
+      setAgences(data || []);
     };
     fetchData();
   }, []);
@@ -80,7 +83,7 @@ const ListeAgenceModal = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-     <ListeAgenceDataTable  columns={columns} data={data} />
+      <ListeAgenceDataTable columns={columns} data={data} />
     </Modal>
   );
 };

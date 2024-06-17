@@ -95,7 +95,7 @@ const ValidationTransferForm = ({ motifs, validation }: Props) => {
           )}
         />
 
-        <Label>Motif de prolongation</Label>
+        <Label>Motif de Tranfert</Label>
         {Motif ? <p>{Motif}</p> : <p>pas de motif</p>}
         <Label>Commentaire</Label>
         {commentaire ? <p>{commentaire}</p> : <p>pas de commentaire</p>}

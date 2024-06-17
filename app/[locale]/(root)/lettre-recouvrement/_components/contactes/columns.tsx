@@ -4,20 +4,11 @@ import { updateEtatLetttre } from "@/actions/lettre.action";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Send } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { ArrowUpDown, Send, UploadIcon } from "lucide-react";
+
 import toast from "react-hot-toast";
 import AlertConfirmation from "../../../../../../components/shared/confirmationAlert";
+import Link from "next/link";
 
 export const columns: ColumnDef<any>[] = [
   // {
@@ -127,6 +118,22 @@ export const columns: ColumnDef<any>[] = [
   },
 
   {
+    header: "Télécharger un fichier",
+    cell: ({ row, column, table }) => {
+      return (
+        <>
+          <Button variant="outline" size="sm">
+            <Link
+              href={`/fr/file?cli=${row.original.cli}&id=${row.original.id}`}
+            >
+              <UploadIcon size={16} />
+            </Link>{" "}
+          </Button>
+        </>
+      );
+    },
+  },
+  {
     accessorKey: "etat_lettre",
     header: "Envoyer lettre",
     cell: ({ row, column, table }) => {
@@ -135,19 +142,7 @@ export const columns: ColumnDef<any>[] = [
       const canView = table?.options?.meta as any;
       console.log(canView);
       return (
-        // <Checkbox
-        //   defaultChecked={row.original.etat_lettre === "O"}
-        //   onCheckedChange={async (value) => {
-        //     await updateEtatLetttre(
-        //       row.original.ncp,
-        //       row.original.etat_lettre === "N" ? "O" : "N"
-        //     );
-        //     console.log(row.original.etat_lettre);
-        //   }}
-        // />
-
         <AlertConfirmation
-          // icon={<Send size={13} />}
           disabled={canView.access.creation === "N"}
           buttonText="Envoyer"
           title="Envoyer la lettre de recouvrement"

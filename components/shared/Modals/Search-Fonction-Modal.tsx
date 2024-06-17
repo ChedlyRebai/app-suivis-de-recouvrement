@@ -67,7 +67,7 @@ function SearchFonctionModal() {
     const fetchData = async () => {
       const data = await getAllFunctions();
       console.log(data);
-      setData(data);
+      setData(data || []);
     };
     fetchData();
   }, []);
