@@ -50,8 +50,8 @@ export default async function Home({
   console.log("access:", access);
   const historiqueCompteRendu = await getListCompteRenduHistorique(cli);
   console.log("suiviAgenda", suiviAgenda);
-  if (!access.acces) {
-    redirect("/forbidden");
+  if (access.acces === "N") {
+    redirect("/fr/forbidden");
   }
   return (
     <div className="bg-hero-patter px-3 bg-slate-100 min-h-screen py-6 mt-16  dark:bg-muted/40 ">

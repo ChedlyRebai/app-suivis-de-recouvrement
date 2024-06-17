@@ -22,6 +22,7 @@ export const acccess = async (path: string) => {
     const res = await axios.post<Access>(
       `https://sprint1-v2-beta.vercel.app/droit/access?page=${path}`
     );
+    console.log("access", path, res.data);
     revalidatePath("/");
     return res.data as Access | {} as Access;
   } catch (error) {

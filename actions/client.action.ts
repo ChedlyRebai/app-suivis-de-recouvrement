@@ -193,11 +193,11 @@ export const getListCompteRenduHistorique = async (IdClient?: string) => {
       `https://release2.vercel.app/client/getcompterendu/${IdClient}`
     );
     const res = await axios.get<CompteRenduList[]>(
-      `https://release4.vercel.app/compterendu/getcompterendu?cli=${IdClient}`
+      `https://release2.vercel.app/compterendu/getcompterendu?cli=${IdClient}`
     );
     revalidatePath("/");
-    revalidatePath("/en/compte-rendu");
-    revalidatePath("/compte-rendu");
+    // revalidatePath("/en/compte-rendu");
+    // revalidatePath("/compte-rendu");
     // revalidatePath("/en/compte-rendu?cli=049105812036");
     return res.data || ([] as CompteRenduList[]);
   } catch (error) {

@@ -72,7 +72,7 @@ const CompteRenduForm = ({
   access,
 }: CompteRenduFormProps) => {
   const [selectedValue, setSelectedValue] = useState("1");
-
+  console.log("access ", access);
   const {
     client,
     handleIputChangeSuiviAgenda,
@@ -90,21 +90,21 @@ const CompteRenduForm = ({
 
   const [selectedRadio, setSelectedRadio] = useState("0"); // State to manage the selected radio value
 
-  const handleRadioChange = (e: any) => {
-    e.preventDefault();
-    setSelectedRadio(e.target.value);
-    let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix } =
-      suiviAgenda;
-    setSuiviAgenda({
-      compte_rendu,
-      app_gen,
-      motif_imp,
-      info_motif,
-      liste_choix,
-    } as SuiviAgenda);
-    console.log(selectedRadio);
-    setTab(e.target.value);
-  };
+  // const handleRadioChange = (e: any) => {
+  //   e.preventDefault();
+  //   setSelectedRadio(e.target.value);
+  //   let { compte_rendu, app_gen, motif_imp, info_motif, liste_choix } =
+  //     suiviAgenda;
+  //   setSuiviAgenda({
+  //     compte_rendu,
+  //     app_gen,
+  //     motif_imp,
+  //     info_motif,
+  //     liste_choix,
+  //   } as SuiviAgenda);
+  //   console.log(selectedRadio);
+  //   setTab(e.target.value);
+  // };
 
   const handleTabChange = (num: string) => {
     setSelectedRadio(num);
@@ -735,7 +735,7 @@ const CompteRenduForm = ({
                     </div>
                   </div>
                   <Button
-                    disabled={access?.creation !== "O"}
+                    disabled={access?.creation === "N"}
                     onClick={async () => {
                       handleSubmit();
 

@@ -68,7 +68,7 @@ export function FileTable({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-
+  console.log(data);
   console.log(access);
   const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});

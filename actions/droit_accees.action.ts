@@ -34,12 +34,15 @@ export const updateDroitAction = async (
   champ: string
 ) => {
   //console.log(`${process.env.API_URL}/droit/updateDroit`);
-  const res = await axios.put(`http://localhost:10000/droit/updateDroit`, {
-    id,
-    codef,
-    value,
-    champ,
-  });
+  const res = await axios.put(
+    `https://sprint1-v2-beta.vercel.app/droit/updateDroit`,
+    {
+      id,
+      codef,
+      value,
+      champ,
+    }
+  );
   // ;
   // console.log(id);
   // ;
