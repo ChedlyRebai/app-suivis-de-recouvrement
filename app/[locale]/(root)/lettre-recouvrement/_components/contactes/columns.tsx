@@ -124,7 +124,7 @@ export const columns: ColumnDef<any>[] = [
         <>
           <Button variant="outline" size="sm">
             <Link
-              href={`/fr/file?cli=${row.original.cli}&id=${row.original.id}`}
+              href={`/fr/file?cli=${row.original.cli}&id=${row.original?.ab_client?.id}`}
             >
               <UploadIcon size={16} />
             </Link>{" "}

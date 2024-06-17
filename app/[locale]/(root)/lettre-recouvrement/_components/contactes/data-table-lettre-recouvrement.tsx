@@ -39,15 +39,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/shared/Data-Table-pagination";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import React, { useCallback, useEffect, useState } from "react";
-import { ab_client } from "@/Models/ab_client.model";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 import useListAgences from "@/hooks/use-agences-list";
-import { Card, CardContent } from "@/components/ui/card";
-import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 import { DataTableToolbar } from "@/components/shared/data-table-toolbar";
 import { Access } from "@/actions/acess.action";
 
@@ -75,15 +69,13 @@ export function DataTableLettreDeRecouvrement<TData, TValue>({
   console.log(access);
   console.log(data);
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+
   const setAgences = useListAgences((state) => state.setAgences);
 
-  const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
 

@@ -35,10 +35,10 @@ export default function page() {
                 <div className="mt-6">
                   <div className="mt-6">
                     <Link
-                      href="/"
+                      href="javascript:history.back()"
                       className="text-base font-medium text-indigo-600 hover:text-indigo-500"
                     >
-                      Retourner à la page d'accueil
+                      Retourner à la page précédente
                       <span aria-hidden="true"> &rarr;</span>
                     </Link>
                   </div>
