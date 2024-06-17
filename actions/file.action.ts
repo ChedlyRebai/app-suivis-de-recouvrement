@@ -4,7 +4,7 @@ import { File } from "@/Models/file.model";
 import axios from "axios";
 import { Zone } from "./admin.action";
 import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export interface Main {
   FileName: string;
@@ -58,6 +58,8 @@ export const creatFile = async (
         path: path,
       }
     );
+    revalidatePath("/");
+    revalidatePath("");
     return (res.data as File) || ({} as File);
   } catch (error) {
     console.log(error);
@@ -92,7 +94,9 @@ export const getAllfilesByCli = async (
     const res = await axios.get<fileresult>(
       `https://release4.vercel.app/file/allbycli?cli=${cli}&page=${currentPage}&perpage=${perPage}`
     );
-
+    revalidateTag("/");
+    revalidatePath("/");
+    revalidatePath("/file");
     return (res.data as fileresult) || ({} as fileresult);
   } catch (error) {
     console.log(error);
@@ -116,6 +120,7 @@ export const getAllfiles = async (
     );
 
     revalidatePath("/files");
+    revalidatePath("/");
     return (res.data as fileresult) || ({} as fileresult);
   } catch (error) {
     console.log(error);
