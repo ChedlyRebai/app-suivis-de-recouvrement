@@ -47,6 +47,7 @@ import {
 import { DataTableViewOptions } from "@/components/shared/data-table-view-options";
 
 import { File } from "@/Models/file.model";
+import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
 
 interface DataTableProps {
   columns: any[];
@@ -181,146 +182,9 @@ export function AllFilles({
                 }}
                 className="max-w-sm mr-2"
               />
-              <Popover open={agenceopen} onOpenChange={setagenceOpen}>
-                {/* <PopoverTrigger asChild>
-              <Button
-                variant="default"
-                role="combobox"
-                aria-expanded={agenceopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("agence")
-                  ? agences.find(
-                      (framework: any) =>
-                        framework.codug === searchParams.get("agence")
-                    )?.libelle || "Sélectionner un agence"
-                  : "Sélectionner un agence"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger> */}
+              <Popover open={agenceopen} onOpenChange={setagenceOpen}></Popover>
 
-                {/* <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput placeholder="Search agence" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-                <CommandGroup>
-                  {agences.map((item: any) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleAgence(item.codug);
-                        setAgenceValue(
-                          item.codug === searchParams.get("agence")
-                            ? ""
-                            : item.codug
-                        );
-
-                        setagenceOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          agenceValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      {item.codug}: {item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent> */}
-              </Popover>
-              {/* <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetAgence}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button> */}
               <div className="w-1" />
-              {/* <Popover open={groupopen} onOpenChange={setgroupOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="default"
-                role="combobox"
-                aria-expanded={groupopen}
-                className="w-[200px] justify-between"
-              >
-                {searchParams.get("groupe")
-                  ? agences.find(
-                      (framework: any) =>
-                        framework.codug === searchParams.get("groupe")
-                    )?.libelle || "Sélectionner un groupe"
-                  : "Sélectionner un groupe"}
-                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0 ml-2">
-              <Command>
-                <CommandInput placeholder="Search group" />
-                <CommandEmpty>No framework found.</CommandEmpty>
-
-                <CommandGroup>
-                  {groupes.map((item: any, i: number) => (
-                    <CommandItem
-                      key={item.codug}
-                      value={item.libelle}
-                      onSelect={(currentValue) => {
-                        handleGroup(item.codug);
-                        setgroupeValue(
-                          item.codug === searchParams.get("groupe")
-                            ? ""
-                            : item.codug
-                        );
-                        setgroupOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          groupeValue === item.codug
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                      
-                      {item.codug}:{item.libelle}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover> */}
-              {/* <Button
-            variant="default"
-            className="font-black mx-1"
-            onClick={resetGroup}
-          >
-            <RefreshCcwIcon className="font-b" />
-          </Button> */}
-
-              {/* <Card className="h-10">
-            <CardContent className="flex items-center justify-center my-1">
-              <p>Nombre de jour :</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleFrom(e.target.value)}
-                placeholder="De"
-              />
-              <p className="mx-1">à</p>
-              <Input
-                type="number"
-                className="w-16 h-8"
-                onChange={(e) => handleTo(e.target.value)}
-                placeholder="à"
-              />
-            </CardContent>
-          </Card> */}
 
               <DataTableViewOptions table={table} />
             </>

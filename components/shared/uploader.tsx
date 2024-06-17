@@ -110,6 +110,7 @@ export default function Uploader() {
 
         files.forEach(async (file: File) => {
           formData.append("files", file);
+          console.log(file.name);
           //const reader = new FileReader();
           // extractTextFromPDF(file).then((data) => {
           //   console.log(data);
@@ -150,7 +151,6 @@ export default function Uploader() {
           //     );
           //     console.log(data.message.content);
           //   });
-          console.log(file);
 
           fetch("/api/upload", {
             method: "POST",

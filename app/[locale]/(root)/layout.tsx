@@ -36,7 +36,6 @@ export default async function RootLayout({
       {children}
       <ChatBtn />
       <ChatUi />
-      <UploadFiles />
     </Mainlayout>
   );
 }

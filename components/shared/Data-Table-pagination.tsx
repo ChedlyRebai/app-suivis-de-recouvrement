@@ -35,7 +35,7 @@ export function DataTablePagination<TData>({
   const currentPage = Number(searchParams.get("page")) || 1;
   const perPage = Number(searchParams.get("perPage")) || 5;
   const params = new URLSearchParams(searchParams);
-  
+
   const createPageURL = (pageNumber: number | string) => {
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
@@ -46,8 +46,8 @@ export function DataTablePagination<TData>({
     params.set("perPage", perPage.toString());
     params.set("page", "1"); // Reset page to 1
     console.log("params", params.toString());
-    console.log("pathname", pathname)
-    console.log(`${pathname}?${params.toString()}`)
+    console.log("pathname", pathname);
+    console.log(`${pathname}?${params.toString()}`);
     return `${pathname}?${params.toString()}`;
   };
 
@@ -69,18 +69,16 @@ export function DataTablePagination<TData>({
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[5, 8, 10, 20, 30, 40, 50, 80]
-                
-                .map((pageSize) => (
-                  <SelectItem key={pageSize} value={`${pageSize}`}>
-                    {pageSize}
-                  </SelectItem>
-                ))}
+              {[5, 8, 10, 20, 30, 40, 50, 80].map((pageSize) => (
+                <SelectItem key={pageSize} value={`${pageSize}`}>
+                  {pageSize}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {currentPage} {lang("pagination.of")} {totalPages }
+          Page {currentPage} {lang("pagination.of")} {totalPages}
         </div>
         <div className="flex items-center space-x-2">
           {" "}

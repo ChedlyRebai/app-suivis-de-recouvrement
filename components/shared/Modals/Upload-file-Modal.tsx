@@ -5,12 +5,13 @@ import Modal from "./Modal";
 import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 
 const UploadFiles = () => {
-  const { isOpen, onClose } = useUploadFileModal();
+  const { isOpen, onClose, id } = useUploadFileModal();
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
     }
   };
+  console.log(id);
   return (
     <Modal
       title="Téléverser un fichier"

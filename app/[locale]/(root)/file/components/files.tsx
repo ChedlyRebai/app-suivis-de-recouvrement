@@ -48,6 +48,8 @@ import { DataTableViewOptions } from "@/components/shared/data-table-view-option
 import { File } from "@/Models/file.model";
 import OpenModelButton from "../../d2/client/_component/Documents/openModelButton";
 import { Access } from "@/actions/acess.action";
+import UploadFiles from "@/components/shared/Modals/Upload-file-Modal";
+import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 
 interface DataTableProps {
   columns: any[];
@@ -64,43 +66,20 @@ export function FileTable({
   totalPages = 0,
   access,
 }: DataTableProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
   console.log(data);
   console.log(access);
-  const [selectedCode, setSelectedCode] = useState("");
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [search, setSearch] = useState<String>(searchParams.get("code") || "");
   const [sorting, setSorting] = useState<SortingState>([]);
-
-  // const [groupes, setGroupes] = useState<any>([]);
-  // const [agences, setAgences] = useState<any>([]);
-
-  const [agenceopen, setagenceOpen] = useState(false);
-
-  const handleSearch = useDebouncedCallback((query: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (query) {
-      params.set("query", query);
-      params.set("page", "1");
-    } else {
-      params.delete("query");
-    }
-    console.log(params.get("query")?.toString());
-    replace(`${pathname}?${params.toString()}`);
-  }, 100);
 
   const [loadingTable, setLoadingTable] = useState(false);
 
   if (loadingTable) {
     return <div>Chargement......</div>;
   }
-
+  const { setID, id } = useUploadFileModal();
   const table = useReactTable({
     data,
     columns,
@@ -131,6 +110,7 @@ export function FileTable({
   // effect
   useEffect(() => {
     setLoader(false);
+    setID(2);
   }, []);
 
   // render
@@ -204,6 +184,7 @@ export function FileTable({
           totalPages={totalPages}
           table={table}
         />
+        <UploadFiles />
       </div>
     </>
   );
