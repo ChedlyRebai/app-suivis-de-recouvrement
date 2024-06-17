@@ -110,7 +110,6 @@ export function FileTable({
   // effect
   useEffect(() => {
     setLoader(false);
-    setID(2);
   }, []);
 
   // render
@@ -184,7 +183,6 @@ export function FileTable({
           totalPages={totalPages}
           table={table}
         />
-        <UploadFiles />
       </div>
     </>
   );

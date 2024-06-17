@@ -47,7 +47,7 @@ export default function Uploader() {
 
   const SUMARIZE_URL = "http://localhost:3000/api/summarize";
 
-  const id = Number(params.get("id"));
+  const id = Number(params.get("id")) || 0;
 
   const [saving, setSaving] = useState(false);
 
