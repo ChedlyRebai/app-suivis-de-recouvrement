@@ -24,28 +24,27 @@ export default function page() {
               </div>
               <div className="flex-shrink-0 my-auto py-16 sm:py-32">
                 <p className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">
-                  Erreur 403
+                  Erreur 404
                 </p>
                 <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-                  Accès refusé
+                  Page non trouvée
                 </h1>
                 <p className="mt-2 text-base text-gray-500">
-                  Désolé, vous n'avez pas accès à cette page.
+                  Désolé, la page que vous recherchez est introuvable.
                 </p>
                 <div className="mt-6">
-                  <div className="mt-6">
-                    <Link
-                      href="/"
-                      className="text-base font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Retourner à la page d'accueil
-                      <span aria-hidden="true"> &rarr;</span>
-                    </Link>
-                  </div>
+                  <Link
+                    href="javascript:history.back()"
+                    className="text-base font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Retourner à la page précédente
+                    <span aria-hidden="true"> &rarr;</span>
+                  </Link>
                 </div>
               </div>
             </div>
           </main>
+
           <footer className="flex-shrink-0 bg-gray-50">
             <div className="mx-auto max-w-7xl w-full px-4 py-16 sm:px-6 lg:px-8"></div>
           </footer>
