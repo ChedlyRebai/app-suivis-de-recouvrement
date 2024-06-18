@@ -255,10 +255,10 @@ export default function Uploader() {
             id="image-upload"
             name="image"
             type="file"
-            accept="*"
+            accept=".pdf"
             className="sr-only"
-            multiple
             onChange={onChangePicture}
+            multiple
           />
         </div>
       </div>
