@@ -160,10 +160,10 @@ export default function Uploader() {
                   title: file.name,
                   description: data,
                 });
-                console.log(data);
+                resumme = data;
               });
 
-              await creatFile(id, file.name, result.url)
+              await creatFile(id, file.name, result.url, resumme)
                 .then(() => {
                   toast.success(
                     `Fichiers téléchargés avec succès ! (${file.name})`

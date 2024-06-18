@@ -40,7 +40,8 @@ export interface AffecterA {
 export const creatFile = async (
   clientID: Number,
   name: string,
-  path: string
+  path: string,
+  resume?: string
 ): Promise<File> => {
   console.log(`https://release4.vercel.app/file/create`);
   try {
@@ -56,6 +57,7 @@ export const creatFile = async (
         clientID: clientID,
         name: name,
         path: path,
+        resume: resume,
       }
     );
     revalidatePath("/");
