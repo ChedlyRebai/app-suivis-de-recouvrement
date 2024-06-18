@@ -42,6 +42,11 @@ export const filecolumns: ColumnDef<File, CustomTableMeta>[] = [
   },
 
   {
+    accessorKey: "resume",
+    header: "Resume",
+  },
+
+  {
     accessorKey: "",
     header: "Actions",
     cell: ({ row, column, table }) => {

@@ -84,7 +84,7 @@ export default function Uploader() {
   //     setSaving(false);
   //   }
   // };
-  let resumme = "";
+  const [resume, setResume] = useState("");
   const saveDisabled = useMemo(() => {
     return files.length === 0 || saving;
   }, [files.length, saving]);
@@ -160,10 +160,10 @@ export default function Uploader() {
                   title: file.name,
                   description: data,
                 });
-                resumme = data;
+                setResume(data);
               });
 
-              await creatFile(id, file.name, result.url, resumme)
+              await creatFile(id, file.name, result.url, resume)
                 .then(() => {
                   toast.success(
                     `Fichiers téléchargés avec succès ! (${file.name})`
