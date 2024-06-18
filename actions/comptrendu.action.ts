@@ -69,6 +69,7 @@ export const deleteCompteRenduById = async (idCompRendu: Number | string) => {
     revalidatePath("/compterendu");
     return res.data;
   } catch (error) {
-    return {} as any;
+    console.log(error);
+    throw Error("can't delete");
   }
 };

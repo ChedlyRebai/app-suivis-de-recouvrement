@@ -165,7 +165,7 @@ const CompteRenduHistorique = ({
             >
               <FileSearch className="mr-" size={20} />
             </Button>
-
+            {row.original.id}
             <AlertConfirmation
               buttonText={""}
               variant="destructive"

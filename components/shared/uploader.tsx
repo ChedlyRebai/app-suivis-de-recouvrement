@@ -138,6 +138,7 @@ export default function Uploader() {
           //   );
           //   console.log(data.message.content);
           // });
+
           // fetch("/api/summarize", {
           //   method: "POST",
           //   body: JSON.stringify({
@@ -163,7 +164,9 @@ export default function Uploader() {
               const result = await res.json();
               await creatFile(id, file.name, result.url)
                 .then(() => {
-                  toast.success("Fichiers téléchargés avec succès !");
+                  toast.success(
+                    `Fichiers téléchargés avec succès ! (${file.name})`
+                  );
                   onClose();
                 })
                 .catch(() => {
