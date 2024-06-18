@@ -2,23 +2,16 @@
 import { useState, useCallback, useMemo, ChangeEvent } from "react";
 import toast from "react-hot-toast";
 import LoadingDots from "./loading-dots";
-import { PutBlobResult } from "@vercel/blob";
 import { File, FilePlus2Icon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
-import { creatFile } from "@/actions/file.action";
+import { creatFile, getResumme } from "@/actions/file.action";
 import { useParams, useSearchParams } from "next/navigation";
-// import pdfToText from 'react-pdftotext'
 
-// function extractText(event) {
-//     const file = event.target.files[0]
-//     pdfToText(file)
-//         .then(text => console.log(text))
-//         .catch(error => console.error("Failed to extract text from pdf"))
-// }
 import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
-import extractTextFromPDF from "@/actions/utils.actions";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Uploader() {
+  const { toast: shadecnToast } = useToast();
   const [data, setData] = useState({
     images: [] as string[],
   });
@@ -91,7 +84,7 @@ export default function Uploader() {
   //     setSaving(false);
   //   }
   // };
-
+  let resumme = "";
   const saveDisabled = useMemo(() => {
     return files.length === 0 || saving;
   }, [files.length, saving]);
@@ -110,7 +103,7 @@ export default function Uploader() {
 
         files.forEach(async (file: File) => {
           formData.append("files", file);
-          console.log(file.name);
+
           //const reader = new FileReader();
           // extractTextFromPDF(file).then((data) => {
           //   console.log(data);
@@ -162,6 +155,14 @@ export default function Uploader() {
           }).then(async (res) => {
             if (res.ok) {
               const result = await res.json();
+              await getResumme(result.url).then((data: string) => {
+                shadecnToast({
+                  title: file.name,
+                  description: data,
+                });
+                console.log(data);
+              });
+
               await creatFile(id, file.name, result.url)
                 .then(() => {
                   toast.success(

@@ -67,6 +67,19 @@ export const creatFile = async (
   }
 };
 
+export const getResumme = async (url: string) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:10004/file/upload?url=${url}`
+    );
+    console.log(response.data);
+    return response.data.message || "";
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
+};
+
 export const getAllfilesByClientId = async (
   clientID: Number
 ): Promise<File[]> => {
