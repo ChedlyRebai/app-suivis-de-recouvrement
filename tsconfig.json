@@ -19,7 +19,6 @@
     ],
     "paths": {
       "@/*": ["./*"]
-      
     },
     "types": ["@uploadcare/blocks/types/jsx"],
   },

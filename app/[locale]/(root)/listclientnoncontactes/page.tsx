@@ -8,8 +8,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Total } from "@/actions/lettre.action";
 import { acccess } from "@/actions/acess.action";
-import { DataTableContactes } from "@/app/[locale]/(root)/listeclient/_components/contactes/data-table-contactes";
-import { columns } from "../listeclient/_components/contactes/columns";
+import { DataTableContactes } from "./_components/data-table-contactes";
+import { columns } from "./_components/columns";
 import { redirect } from "next/navigation";
 
 export default async function Home({
@@ -33,7 +33,6 @@ export default async function Home({
   const to = searchParams?.to || "";
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
-  const limit = Number(searchParams?.limit) || 20;
 
   const dataNon = await getClientNonContactes(
     search,
