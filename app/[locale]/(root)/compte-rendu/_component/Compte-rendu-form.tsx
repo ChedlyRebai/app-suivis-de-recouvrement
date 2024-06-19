@@ -43,7 +43,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import CompteRenduHistorique from "./CompteRenduHistorique";
+import CompteRenduHisto from "./CompteRenduHistorique";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 
 import { CompteRenduList } from "@/constants/types";
@@ -753,7 +753,7 @@ const CompteRenduForm = ({
           <AccordionItem value="item-7">
             <AccordionTrigger>List de Compte Rendu</AccordionTrigger>
             <AccordionContent>
-              <CompteRenduHistorique
+              <CompteRenduHisto
                 access={access}
                 listHistorique={historiqueCompteRendu}
               />

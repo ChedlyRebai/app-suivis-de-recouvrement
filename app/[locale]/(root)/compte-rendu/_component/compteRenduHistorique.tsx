@@ -58,7 +58,7 @@ interface CompteRenduHistoriqueProps {
   access: Access;
 }
 
-const CompteRenduHistorique = ({
+const CompteRenduHisto = ({
   listHistorique: daa,
   access,
 }: CompteRenduHistoriqueProps) => {
@@ -95,16 +95,6 @@ const CompteRenduHistorique = ({
       },
       cell: ({ row }) => <div className="capitalize">{row.index + 1}</div>,
     },
-    // {
-    //   accessorKey: "id",
-    //   // header: ({ column }) => {
-    //   //   return (
-    //   //     <div className="hidden"/>
-    //   //   );
-    //   // },
-    //   cell: ({ row }) => <div className="hidden">{row.getValue("id")}</div>,
-    // },
-
     {
       accessorKey: "created_at",
       header: ({ column }) => {
@@ -240,14 +230,6 @@ const CompteRenduHistorique = ({
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        {/* <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("num")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("num")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        /> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -333,4 +315,4 @@ const CompteRenduHistorique = ({
   );
 };
 
-export default CompteRenduHistorique;
+export default CompteRenduHisto;
