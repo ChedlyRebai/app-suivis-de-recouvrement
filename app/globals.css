@@ -57,3 +57,17 @@
       @apply bg-background text-foreground;
     }
   }
+  
+  .demo-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-width: 240px;
+  }
+  .demo-2 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }

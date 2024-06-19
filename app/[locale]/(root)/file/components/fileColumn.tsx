@@ -8,6 +8,12 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef, TableMeta } from "@tanstack/react-table";
 import { ArrowUpDown, Download, EyeIcon, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface CustomTableMeta extends TableMeta<File> {
   access: {
@@ -44,6 +50,20 @@ export const filecolumns: ColumnDef<File, CustomTableMeta>[] = [
   {
     accessorKey: "resume",
     header: "Resume",
+    cell: ({ row }) => {
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <p className="demo-1">{row.original.resume?.toString()}</p>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-44">
+              <p>{row.original.resume?.toString()}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    },
   },
 
   {
