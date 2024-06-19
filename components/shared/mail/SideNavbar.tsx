@@ -15,7 +15,7 @@ import {
 
 import { useWindowWidth } from "@react-hook/window-size";
 import { Button } from "@/components/ui/button";
-import { Nav } from "./components/nav";
+import { Nav } from "@/app/[locale]/(root)/inbox/_components/nav";
 
 export default function SideNavbar({}: Props) {
   const [isCollapsed, setIsCollapsed] = useState(false);
