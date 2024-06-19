@@ -171,19 +171,7 @@ export function AccessManagementDataTable<droit_accees, TValue>({
       header: ({ column }) => {
         return <span>{lang("access-management.Creat")}</span>;
       },
-      // cell: ({ row }) => {
-      //   return (
-      //     <span
-      //       className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
-      //         row.getValue("creation") === "O"
-      //           ? "bg-green-100 text-green-800"
-      //           : "bg-red-100 text-red-800"
-      //       } `}
-      //     >
-      //       {row.getValue("creation") === "O" ? "Oui" : "Non"}
-      //     </span>
-      //   );
-      // },
+
       cell: ({ row }) => {
         return (
           <Select

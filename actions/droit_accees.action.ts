@@ -46,6 +46,7 @@ export const updateDroitAction = async (
   // ;
   // console.log(id);
   // ;
+  revalidatePath("/");
   return { data: res.data, ok: res.status };
 };
 
