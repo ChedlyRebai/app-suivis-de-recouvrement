@@ -60,9 +60,6 @@
     "next-themes": "^0.2.1",
     "npm": "^10.7.0",
     "npx": "^10.2.2",
-    "pdf-parse": "^1.1.1",
-    "pdf.js-extract": "^0.2.1",
-    "pdfjs-dist": "^4.2.67",
     "powerbi-client-react": "^1.4.0",
     "radix-ui": "^1.0.1",
     "react": "^18",
@@ -89,7 +86,6 @@
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
-    "@types/pdf-parse": "^1.1.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
