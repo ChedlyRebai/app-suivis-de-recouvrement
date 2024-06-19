@@ -155,24 +155,25 @@ export default function Uploader() {
           }).then(async (res) => {
             if (res.ok) {
               const result = await res.json();
-              await getResumme(result.url).then((data: string) => {
+              await getResumme(result.url).then(async (data: string) => {
                 shadecnToast({
                   title: file.name,
                   description: data,
                 });
-                setResume(data);
-              });
 
-              await creatFile(id, file.name, result.url, resume)
-                .then(() => {
-                  toast.success(
-                    `Fichiers téléchargés avec succès ! (${file.name})`
-                  );
-                  onClose();
-                })
-                .catch(() => {
-                  toast.error("error");
-                });
+                await creatFile(id, file.name, result.url, data)
+                  .then(() => {
+                    toast.success(
+                      `Fichiers téléchargés avec succès ! (${file.name})`
+                    );
+                    onClose();
+                  })
+                  .catch(() => {
+                    toast.error("error");
+                  });
+              });
+              console.log("resume:", resume);
+
               console.log(result);
 
               const url = result.url;

@@ -107,43 +107,4 @@ export const filecolumns: ColumnDef<File, CustomTableMeta>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: "",
-  //   header: "Actions",
-  //   cell: ({ row }) => {
-  //     return (
-  //       <div className="flex justify-center items-center">
-  //         <Button
-  //           className="mr-1"
-  //           variant="default"
-  //           onClick={() => {
-  //             window.open(row.original.FilePath);
-  //           }}
-  //         >
-  //           <EyeIcon size={16} />
-  //         </Button>{" "}
-  //         <AlertConfirmation
-  //           variant="destructive"
-  //           icon={<Trash2 size={20} />}
-  //           buttonText={""}
-  //           description=" Voulez-vous vraiment supprimer cette fichier"
-  //           title="Suppression de fichier"
-  //           onConfirm={async () => {
-  //             await deleteFile(row.original.id)
-  //               .then(() => {
-  //                 //in french
-  //                 toast.success("Fichier supprimé avec succès");
-  //               })
-  //               .catch(() => {
-  //                 toast.error("Erreur lors de la suppression");
-  //               });
-  //           }}
-  //         />
-  //         {/* <Button variant="destructive" onClick={async () => {}}>
-  //           <Trash2 size={16} />
-  //         </Button> */}
-  //       </div>
-  //     );
-  //   },
-  // },
 ];
