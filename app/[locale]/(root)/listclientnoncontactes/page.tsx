@@ -8,7 +8,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Total } from "@/actions/lettre.action";
 import { acccess } from "@/actions/acess.action";
-import { DataTableContactes } from "../listeclient/_components/contactes/data-table-contactes";
+import { DataTableContactes } from "@/app/[locale]/(root)/listeclient/_components/contactes/data-table-contactes";
 import { columns } from "../listeclient/_components/contactes/columns";
 import { redirect } from "next/navigation";
 
