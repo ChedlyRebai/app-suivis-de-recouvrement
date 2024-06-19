@@ -1,21 +1,11 @@
 "use server";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 import {
   getAgences,
-  getClientContactes,
   getClientNonContactes,
   getGroupes,
 } from "@/actions/client.action";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Suspense } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Total } from "@/actions/lettre.action";
 import { acccess } from "@/actions/acess.action";
 import { DataTableContactes } from "../listeclient/_components/contactes/data-table-contactes";

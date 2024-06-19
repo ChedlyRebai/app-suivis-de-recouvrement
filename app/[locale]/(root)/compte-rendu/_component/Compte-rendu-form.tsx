@@ -43,7 +43,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import CompteRenduHisto from "./CompteRenduHistorique";
+
+import CompteRenduHisto from "@/app/[locale]/(root)/compte-rendu/_component/CompteRenduHisto";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 
 import { CompteRenduList } from "@/constants/types";
