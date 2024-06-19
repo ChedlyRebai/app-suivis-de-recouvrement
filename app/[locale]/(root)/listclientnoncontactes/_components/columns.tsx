@@ -17,6 +17,7 @@ export const columns: ColumnDef<client>[] = [
       );
     },
   },
+
   {
     accessorKey: "nom",
     header: "Nom",
@@ -24,9 +25,9 @@ export const columns: ColumnDef<client>[] = [
       return (
         <div className="flex items-center text-xs">
           <span className="text-[0.90rem]">{row.original.nom}</span>
-        </div> 
+        </div>
       );
-    }
+    },
   },
 
   {
@@ -35,11 +36,12 @@ export const columns: ColumnDef<client>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center text-xs">
-          <span className="text-[0.90rem]">{row.original.Zone.codug} : {row.original.Zone.libelle}</span>
+          <span className="text-[0.90rem]">
+            {row.original.Zone.codug} : {row.original.Zone.libelle}
+          </span>
         </div>
-      
       );
-    }
+    },
   },
 
   {
@@ -48,10 +50,12 @@ export const columns: ColumnDef<client>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center text-xs">
-          <span className="text-[0.90rem]">{row.original.Agence.codug} : {row.original.Agence.libelle}</span>
+          <span className="text-[0.90rem]">
+            {row.original.Agence.codug} : {row.original.Agence.libelle}
+          </span>
         </div>
       );
-    }
+    },
   },
 
   {

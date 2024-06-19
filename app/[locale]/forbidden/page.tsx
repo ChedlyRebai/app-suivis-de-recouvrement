@@ -13,7 +13,7 @@ export default function page() {
             ```
           */}
       <div className="bg-white min-h-full flex flex-col lg:relative">
-        <div className="flex-grow flex flex-col">
+        <div className="flex-grow flex h-screen flex-col">
           <main className="flex-grow flex flex-col bg-white">
             <div className="flex-grow mx-auto max-w-7xl w-full flex flex-col px-4 sm:px-6 lg:px-8">
               <div className="flex-shrink-0 pt-10 sm:pt-16">
