@@ -46,7 +46,7 @@ export const updateDroitAction = async (
   // ;
   // console.log(id);
   // ;
-  return res.data;
+  return { data: res.data, ok: res.status };
 };
 
 export const createDroit = async (

@@ -332,7 +332,7 @@ export function AccessManagementDataTable<droit_accees, TValue>({
   ) => {
     console.log(codef, id, value, champ);
     const response = await updateDroit(id, codef, value, champ);
-    console.log(response);
+
     // Find the index of the updated row in the data array
     const rowIndex = data.findIndex((row: any) => row.id === id);
     console.log(rowIndex);
