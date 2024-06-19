@@ -4,7 +4,6 @@ import { Client } from "@octoai/client";
 const client = new Client(process.env.OCTO_CLIENT_TOKEN as string);
 
 export async function POST(req: NextRequest) {
-  // Convert the ReadableStream to JSON
   const body = await req.json();
   console.log(body.text);
   try {
@@ -25,10 +24,6 @@ export async function POST(req: NextRequest) {
       temperature: 0.9,
       top_p: 0.9,
     });
-
-    console.log(
-      "*************************************************************************************************************************"
-    );
     console.log(completion.choices[0].message);
 
     return NextResponse.json({ message: completion.choices[0].message });
