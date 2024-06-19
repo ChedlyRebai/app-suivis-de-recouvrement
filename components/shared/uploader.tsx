@@ -101,7 +101,7 @@ export default function Uploader() {
         setSaving(true);
         const formData = new FormData();
 
-        files.forEach(async (file: File) => {
+        files.forEach(async (file: File, i: number) => {
           formData.append("files", file);
 
           //const reader = new FileReader();
@@ -145,7 +145,7 @@ export default function Uploader() {
           //     );
           //     console.log(data.message.content);
           //   });
-
+          console.log("index: ", i);
           fetch("/api/upload", {
             method: "POST",
             headers: {
@@ -177,13 +177,13 @@ export default function Uploader() {
               console.log(result);
 
               const url = result.url;
-              await creatFile(id, file.name, url)
-                .then(() => {
-                  onClose();
-                })
-                .catch(() => {
-                  toast.error("error");
-                });
+              // await creatFile(id, file.name, url)
+              //   .then(() => {
+              //     onClose();
+              //   })
+              //   .catch(() => {
+              //     toast.error("error");
+              //   });
               console.log(url);
             } else {
               // Handle error

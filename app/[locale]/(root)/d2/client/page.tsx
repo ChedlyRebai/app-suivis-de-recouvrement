@@ -215,7 +215,6 @@ export default async function page({
         </Tabs>
       </div>
       <CompteRenduModal />
-      <UploadFiles />
     </main>
   );
 }
