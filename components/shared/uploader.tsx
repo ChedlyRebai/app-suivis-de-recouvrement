@@ -160,7 +160,6 @@ export default function Uploader() {
                   title: file.name,
                   description: data,
                 });
-
                 await creatFile(id, file.name, result.url, data)
                   .then(() => {
                     toast.success(
@@ -173,20 +172,10 @@ export default function Uploader() {
                   });
               });
               console.log("resume:", resume);
-
               console.log(result);
-
               const url = result.url;
-              // await creatFile(id, file.name, url)
-              //   .then(() => {
-              //     onClose();
-              //   })
-              //   .catch(() => {
-              //     toast.error("error");
-              //   });
               console.log(url);
             } else {
-              // Handle error
               const error = await res.text();
               toast.error(error);
               console.log(error);
