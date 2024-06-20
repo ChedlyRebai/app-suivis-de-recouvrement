@@ -54,7 +54,7 @@ const FaciliteDePaiementForm = () => {
     suiviAgenda.montantFacilites = montantFacilites;
     console.log(suiviAgenda.montantFacilites);
   };
-
+  const currentDate = new Date();
   return (
     <div className="-auto my p-2  rounded-lg shadow-md">
       <div className="flex flex-col   w-[280px] ">
@@ -131,6 +131,7 @@ const FaciliteDePaiementForm = () => {
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
                   <Calendar
+                    fromDate={currentDate}
                     mode="single"
                     // onSelect={(e: any) =>
                     //   handleInputChange(i, "date_ech", e.target.value)

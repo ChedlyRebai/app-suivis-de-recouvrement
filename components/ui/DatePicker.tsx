@@ -15,27 +15,30 @@ import {
 import { Button } from "./button";
 
 interface datePickerProps {
-  date:Date | string | any;
+  date: Date | string | any;
   setDate: (champ: string, value: string | any) => void;
-  champ: string ;
-  disabled?:boolean;
+  champ: string;
+  disabled?: boolean;
 }
 export function DatePickerDemo({
   date,
   setDate,
   champ,
-  disabled:disable
+  disabled: disable,
 }: datePickerProps) {
-  
+  const currentDate = new Date();
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
-        disabled={disable}
+          disabled={disable}
           variant={"outline"}
           className={cn(
             "w-[280px] justify-start  text-left font-normal",
-            !date && `text-muted-foreground cursor-not-allowe ${disable && "cursor-not-allowed"} `, 
+            !date &&
+              `text-muted-foreground cursor-not-allowe ${
+                disable && "cursor-not-allowed"
+              } `
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4 w" />
@@ -44,10 +47,11 @@ export function DatePickerDemo({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
+          fromDate={currentDate}
           mode="single"
           onSelect={(selectedDate) => {
             console.log(selectedDate);
-            setDate(champ?.toString(), selectedDate)
+            setDate(champ?.toString(), selectedDate);
           }}
         />
       </PopoverContent>
