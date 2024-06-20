@@ -25,7 +25,17 @@ export const getDroitAccessByCodeFonction = async (
   );
   return res.data;
 };
-
+export const getFonctionName = async (codef: string) => {
+  try {
+    //console.log(`${process.env.API_URL}/droit/updateDroit`);
+    const res = await axios.get(
+      `https://sprint1-v2-beta.vercel.app/droit/getFonctionByCode?codef=${codef}`
+    );
+    return res.data || "";
+  } catch (error) {
+    return "";
+  }
+};
 //localhost:10000/droit/updateDroit
 export const updateDroitAction = async (
   id: number,
