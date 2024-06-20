@@ -4,10 +4,14 @@ import useUploadFileModal from "@/hooks/use-UploadFile-Modal";
 import { ListPlusIcon } from "lucide-react";
 import React from "react";
 
-const OpenModelButton = () => {
+type OpenModelButtonProps = {
+  access?: boolean;
+};
+const OpenModelButton = ({ access }: OpenModelButtonProps) => {
   const { onOpen } = useUploadFileModal();
+  console.log(access, ":button");
   return (
-    <Button onClick={onOpen} variant="default" className="">
+    <Button disabled={access} onClick={onOpen} variant="default" className="">
       <ListPlusIcon className="mr-2 h-4 w-4" />
       Ajouter un document
     </Button>

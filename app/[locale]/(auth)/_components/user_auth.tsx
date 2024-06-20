@@ -1,7 +1,5 @@
 "use client";
-
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,10 +18,9 @@ import { Input } from "@/components/ui/input";
 import { FormEvent, useState } from "react";
 import { Login } from "@/actions/auth.action";
 import toast from "react-hot-toast";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { getUserBuMatricule } from "@/actions/utilisateur.action";
 import useInvalidCredentialModal from "@/hooks/useInvalidCredential";
-
 import { useLocale } from "next-intl";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -48,15 +45,12 @@ export function UserAuthForm({
 }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
-  const [invalidCredential, setInvalidCredential] = useState(null);
-  const local = useLocale();
   const { onOpen, setTextError } = useInvalidCredentialModal();
   const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
       const res = await Login(values.matricule, values.password);
-
       if (res?.status === 200) {
         toast.success(res.data);
         router.push("/");

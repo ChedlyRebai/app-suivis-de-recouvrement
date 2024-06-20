@@ -61,7 +61,7 @@ export default async function Home({
                   <CardTitle>Documents</CardTitle>
                   <CardDescription>Amal hamdy </CardDescription>
                 </div>
-                <OpenModelButton />
+                <OpenModelButton access={accesss.creation === "N"} />
               </div>
             </CardHeader>
             <CardContent>
