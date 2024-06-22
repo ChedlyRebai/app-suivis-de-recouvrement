@@ -85,7 +85,7 @@ const ChatUi = () => {
         <div className="flex items-center pt-0">
           <div className="flex items-center justify-center w-full space-x-2">
             <Input
-              placeholder="Type your message"
+              placeholder="Tapez votre message"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={(e) => {

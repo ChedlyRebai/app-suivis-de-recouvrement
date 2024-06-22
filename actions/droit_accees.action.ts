@@ -36,6 +36,7 @@ export const getFonctionName = async (codef: string) => {
     return "";
   }
 };
+
 //localhost:10000/droit/updateDroit
 export const updateDroitAction = async (
   id: number,
