@@ -51,12 +51,15 @@ export const creatFile = async (
     axios.defaults.headers.common["Authorization"] = ` ${
       session?.value as string
     }`;
-    const res = await axios.post<File>(`http://localhost:10004/file/create`, {
-      clientID: clientID,
-      name: name,
-      path: path,
-      resume: resume,
-    });
+    const res = await axios.post<File>(
+      `https://release4.vercel.app/file/create`,
+      {
+        clientID: clientID,
+        name: name,
+        path: path,
+        resume: resume,
+      }
+    );
 
     console.log(
       "file create",
