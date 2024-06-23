@@ -81,7 +81,7 @@ export const columns: ColumnDef<any>[] = [
   },
   {
     accessorKey: "nbre_imp",
-    header: "Nbr.IMP",
+    header: "Nb.impayée",
   },
   {
     accessorKey: "mnt_imp",
