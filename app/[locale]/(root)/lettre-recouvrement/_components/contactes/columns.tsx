@@ -87,10 +87,10 @@ export const columns: ColumnDef<any>[] = [
     accessorKey: "mnt_imp",
     header: "Impayé",
   },
-  {
-    accessorKey: "nombre_jours",
-    header: "Nbj.Imp",
-  },
+  // {
+  //   accessorKey: "nombre_jours",
+  //   header: "Nbj.Imp",
+  // },
   {
     accessorKey: "mnt_sdb",
     header: "Solde Debiteur",
