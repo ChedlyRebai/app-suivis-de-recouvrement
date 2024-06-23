@@ -125,15 +125,6 @@ export function AccessManagementDataTable<droit_accees, TValue>({
       },
       cell: ({ row }) => {
         return (
-          // <span
-          //   className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-lg font-medium ${
-          //     row.getValue("acces") === "O"
-          //       ? "bg-green-100 text-green-800"
-          //       : "bg-red-100 text-red-800"
-          //   } `}
-          // >
-          //   {row.getValue("acces") === "O" ? "Oui" : "Non"}
-          // </span>
           <Select
             disabled={access.modification === "N"}
             onValueChange={(newValue) =>

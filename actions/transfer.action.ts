@@ -83,7 +83,7 @@ export const updateTransfer = async (
       session?.value as string
     }`;
     const res = await axios.put(
-      `http://localhost:10001/transfer/update?id=${id}`,
+      `https://release3-v2.vercel.app/transfer/update?id=${id}`,
       { mott, obs, id, trf_a }
     );
     console.log("res prolongationnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", res);
@@ -105,7 +105,7 @@ export const validateTransfer = async (
       session?.value as string
     }`;
     const res = await axios.put(
-      `http://localhost:10001/transfer/validate?id=${id}`,
+      `https://release3-v2.vercel.app/transfer/validate?id=${id}`,
       { id, trf_propose_v: validation }
     );
     console.log("res prolongation validate", res);

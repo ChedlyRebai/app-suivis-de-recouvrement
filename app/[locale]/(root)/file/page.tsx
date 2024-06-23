@@ -41,6 +41,7 @@ export default async function Home({
     currentPage,
     perPage
   );
+
   const accesss = await acccess("file");
   if (accesss.acces === "N") {
     redirect("/fr/forbidden");
