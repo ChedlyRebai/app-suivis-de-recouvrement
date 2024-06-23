@@ -1,12 +1,11 @@
 import { Pinecone } from "@pinecone-database/pinecone";
 import { StreamingTextResponse } from "ai";
-
+import { getVectorStore } from "./vector-store";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { BytesOutputParser } from "@langchain/core/output_parsers";
 import { formatDocumentsAsString } from "langchain/util/document";
 import { ChatOpenAI } from "@langchain/openai";
-import { getVectorStore } from "./vector-store";
 
 const questionPrompt = PromptTemplate.fromTemplate(
   `You are an enthusiastic AI assistant. Use the following pieces of context to answer the question at the end to someone that does not have techical knowledge about machine learning. When you come across a machine learning term, explain it briefly.

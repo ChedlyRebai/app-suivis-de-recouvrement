@@ -25,7 +25,10 @@ const ChatUi = () => {
         body: JSON.stringify({ message: inputMessage }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log(
+        "*****************************************************************************",
+        data
+      );
       setMessages((prevMessages: any) => [
         ...prevMessages,
         { text: data.finalContent, sender: "AI" },
