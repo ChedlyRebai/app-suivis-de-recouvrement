@@ -179,3 +179,16 @@ export const uploadfile = async (file: any): Promise<File> => {
     return {} as File;
   }
 };
+
+export const getNameByCli = async (cli: string) => {
+  try {
+    const res = await axios.get(
+      `https://release4.vercel.app/file/name?cli=${cli}`
+    );
+
+    return (res.data as {}) || ({} as any);
+  } catch (error) {
+    console.log(error);
+    return {} as any;
+  }
+};

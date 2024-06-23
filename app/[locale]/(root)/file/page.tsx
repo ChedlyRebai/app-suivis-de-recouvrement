@@ -4,6 +4,7 @@ import {
   getAllfiles,
   getAllfilesByCli,
   getAllfilesByClientId,
+  getNameByCli,
 } from "@/actions/file.action";
 import { FileTable } from "./components/files";
 import { filecolumns } from "./components/fileColumn";
@@ -35,7 +36,7 @@ export default async function Home({
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
   const limit = Number(searchParams?.limit) || 20;
-
+  const clientName = await getNameByCli(searchParams?.cli || "");
   const data = await getAllfilesByCli(
     Number(searchParams?.cli),
     currentPage,
@@ -60,7 +61,7 @@ export default async function Home({
               <div className="flex justify-between">
                 <div>
                   <CardTitle>Documents</CardTitle>
-                  <CardDescription>Amal hamdy </CardDescription>
+                  <CardDescription>{clientName.nom} </CardDescription>
                 </div>
                 <OpenModelButton access={accesss.creation === "N"} />
               </div>
