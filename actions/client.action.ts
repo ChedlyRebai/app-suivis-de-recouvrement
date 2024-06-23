@@ -260,7 +260,7 @@ export const demandeDeTransferAnticipe = async (
     const res = await axios.get(
       `https://release3-v2.vercel.app/client/demandedetransferanticipe?page=${currentpage}&perPage=${perpage}&search=${cli}&groupe=${groupe}&agence=${agence}&from&to`
     );
-
+    revalidatePath("/");
     return (res.data as any) || ({} as any);
   } catch (error) {
     return {} as any;
@@ -287,6 +287,7 @@ export const getValidationProposeDeTransferAnticipe = async (
     const res = await axios.get(
       `https://release3-v2.vercel.app/transfer/getvalidationpropsedetransfertanticipe?page=${currentpage}&groupe=${groupe}&agence=${agence}&perPage=${perpage}&cli=${IdClient}&from=${dayfrom}&to=${dayto}`
     );
+    revalidatePath("/");
 
     return res.data || ([] as ab_client);
   } catch (error) {
@@ -323,6 +324,7 @@ export const getClientById = async (IdClient?: string | number) => {
     const res = await axios.get<ClientDetails>(
       `https://release4.vercel.app/client/byid?id=${IdClient}`
     );
+    revalidatePath("/");
     return res.data || ({} as ClientDetails);
   } catch (error) {
     return {} as ClientDetails;

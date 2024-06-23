@@ -2,6 +2,7 @@
 
 import { Cxuntges } from "@/Models/Cxuntges.model";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export const getTypeTransfer = async (): Promise<Cxuntges[]> => {
@@ -10,6 +11,7 @@ export const getTypeTransfer = async (): Promise<Cxuntges[]> => {
     const response = await axios.get<Cxuntges[]>(
       `https://release3-v2.vercel.app/client/typetransfer`
     );
+    revalidatePath("/");
     return response.data || ([] as Cxuntges[]);
   } catch (error) {
     console.log(error);
@@ -61,7 +63,7 @@ export const updatedemandeprolongation = async (
       `https://release3-v2.vercel.app/prolongation/updateprolongation?cli=${cli}`,
       { data: newdata, column: column }
     );
-
+    revalidatePath("/");
     return response.data || ([] as any);
   } catch (error) {
     console.log(error);
@@ -87,6 +89,7 @@ export const updateTransfer = async (
       { mott, obs, id, trf_a }
     );
     console.log("res prolongationnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", res);
+    revalidatePath("/");
     return { data: res.data, status: res.status } || ({} as any);
   } catch (error) {
     return {} as any;
@@ -108,6 +111,7 @@ export const validateTransfer = async (
       `https://release3-v2.vercel.app/transfer/validate?id=${id}`,
       { id, trf_propose_v: validation }
     );
+    revalidatePath("/");
     console.log("res prolongation validate", res);
     return { data: res.data, status: res.status } || ({} as any);
   } catch (error) {
