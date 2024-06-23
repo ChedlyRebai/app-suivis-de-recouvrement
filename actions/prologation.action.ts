@@ -176,7 +176,7 @@ export const updatePro = async (
       session?.value as string
     }`;
     const res = await axios.put(
-      `http://localhost:10001/prolongation/update?id=${id}`,
+      `https://release3-v2.vercel.app/prolongation/update?id=${id}`,
       { motif_prol_c, obs, id }
     );
     console.log("res prolongationnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", res);
@@ -198,7 +198,7 @@ export const validationprolongation = async (
       session?.value as string
     }`;
     const res = await axios.put(
-      `http://localhost:10001/prolongation/validate?id=${id}`,
+      `https://release3-v2.vercel.app/prolongation/validate?id=${id}`,
       { prol_c }
     );
 
