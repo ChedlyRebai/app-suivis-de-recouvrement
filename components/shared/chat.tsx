@@ -10,6 +10,13 @@ import { Input } from "../ui/input";
 import { Spinner } from "./spinner";
 
 export function Chat() {
+  const [suggestions, setSuggestions] = useState([
+    "Who authored this paper?",
+    "What is this paper about?",
+    "Explain transformer architecture",
+    "What is attention mechanism?",
+  ]);
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [enterKeyPressed, setEnterKeyPressed] = useState(false);
@@ -26,6 +33,7 @@ export function Chat() {
   } = useChat({
     initialMessages,
     onFinish() {
+      setShowSuggestions(true);
       setTimeout(() => scrollToBottom(containerRef), 100);
     },
   });
@@ -43,6 +51,19 @@ export function Chat() {
     });
   }, []);
 
+  const handleSuggestionClick = (text: string, index: number) => {
+    if (enterKeyPressed) {
+      setTimeout(() => setShowSuggestions(false), 0);
+      return;
+    }
+    setInput(text);
+    setTimeout(() => {
+      setShowSuggestions(false);
+      const newSuggestions = suggestions.filter((_s, i) => i !== index);
+      setSuggestions(newSuggestions);
+    }, 0);
+  };
+
   const handleDelete = (id: string) => {
     setMessages(messages.filter((m) => m.id !== id));
   };
@@ -59,6 +80,15 @@ export function Chat() {
             handleDelete={handleDelete}
           />
         ))}
+        {showSuggestions &&
+          suggestions.map((s: string, i: number) => (
+            <PromptSuggestion
+              key={s}
+              handleClick={handleSuggestionClick}
+              text={s}
+              index={i}
+            />
+          ))}
       </div>
 
       {isLoading && (
