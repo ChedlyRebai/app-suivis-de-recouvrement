@@ -66,7 +66,9 @@ export interface Departement {
 export const getAllClient = async (
   currentpage?: number,
   perpage?: number,
-  search?: string
+  search?: string,
+  agence?: string,
+  group?: string
 ) => {
   try {
     const cookieStore = cookies();
@@ -84,7 +86,7 @@ export const getAllClient = async (
       `https://release4.vercel.app/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
     );
     const res = await axios.get<clientResult>(
-      `https://release4.vercel.app/client/all?perpage=${perpage}&page=${currentpage}&search=${search}`
+      `https://release4.vercel.app/client/all?perpage=${perpage}&page=${currentpage}&search=${search}&group=${group}&agence=${agence}`
     );
 
     return (res.data as clientResult) || ({} as clientResult);

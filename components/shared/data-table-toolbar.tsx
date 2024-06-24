@@ -62,6 +62,32 @@ export function DataTableToolbar<TData>({
     replace(`${pathname}?${params.toString()}`);
   }, 50);
 
+  const handlefrom = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (query) {
+      params.set("from", query);
+      params.set("page", "1");
+    } else {
+      params.delete("query");
+    }
+    console.log(params.get("query")?.toString());
+    replace(`${pathname}?${params.toString()}`);
+  }, 0);
+
+  const handleto = useDebouncedCallback((query: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (query) {
+      params.set("to", query);
+      params.set("page", "1");
+    } else {
+      params.delete("query");
+    }
+    console.log(params.get("query")?.toString());
+    replace(`${pathname}?${params.toString()}`);
+  }, 0);
+
   const resetAgence = () => {
     const params = new URLSearchParams(searchParams);
     params.delete("agence");
@@ -72,6 +98,8 @@ export function DataTableToolbar<TData>({
     const params = new URLSearchParams(searchParams);
     params.delete("groupe");
     params.delete("agence");
+    params.delete("to");
+    params.delete("from");
 
     replace(`${pathname}?${params.toString()}`);
   };
@@ -260,26 +288,28 @@ export function DataTableToolbar<TData>({
           </Command>
         </PopoverContent>
       </Popover>
-      {/* {type === "contactes" && (
+      {type === "noncontactes" && (
         <Card className="h-10">
           <CardContent className="flex items-center justify-center my-1">
             <p>Nombre de jour :</p>
             <Input
               type="number"
               className="w-16 h-8"
-              // onChange={(e) => handleFrom(e.target.value)}
+              onChange={(e) => handlefrom(e.target.value)}
+              defaultValue={Number(searchParams.get("from"))}
               placeholder="De"
             />
             <p className="mx-1">à</p>
             <Input
               type="number"
               className="w-16 h-8"
-              // onChange={(e) => handleTo(e.target.value)}
+              onChange={(e) => handleto(e.target.value)}
               placeholder="à"
+              defaultValue={Number(searchParams.get("to"))}
             />
           </CardContent>
         </Card>
-      )} */}
+      )}
       <Button className="ml-auto mr-1" variant="destructive" onClick={resetAll}>
         <ResetIcon className="h-4 w-4" />
       </Button>

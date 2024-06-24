@@ -155,7 +155,7 @@ export function DataTableContactes<TData, TValue>({
   return (
     <>
       <div className="flex  items-center py-4 flex-wrap">
-        <DataTableToolbar table={table} type="contactes" />
+        <DataTableToolbar table={table} type="noncontactes" />
       </div>
       <div className="rounded-md border">
         <Table>

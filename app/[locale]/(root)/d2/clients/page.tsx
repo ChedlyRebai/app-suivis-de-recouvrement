@@ -25,7 +25,16 @@ export default async function Home({
   const search = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   const perPage = Number(searchParams?.perPage) || 5;
-  const clients = await getAllClient(currentPage, perPage, search);
+  const agence = String(searchParams?.agence) || "";
+  const group = String(searchParams?.groupe);
+  const clients = await getAllClient(
+    currentPage,
+    perPage,
+    search,
+    agence,
+    group
+  );
+
   return (
     <AllClient
       onExport={exportClient}
