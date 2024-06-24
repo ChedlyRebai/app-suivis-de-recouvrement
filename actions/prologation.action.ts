@@ -1,6 +1,7 @@
 "use server";
 
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 export interface Main {
   result: any[];
@@ -39,6 +40,7 @@ export const getHistoriqueDemandDeProlongation = async (
       `https://release3-v2.vercel.app/prolongation/historiquedemandeprolongation?page=${currentpage}&perPage=${perpage}&cli=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
       //`http://localhost:10001/prolongation/historiquedemandeprolongation?page&perPage&search&groupe&agence&from&to&cli=109101102315`
     );
+    revalidatePath("/");
     return res.data || ({} as any);
   } catch (error) {
     return [];
@@ -68,6 +70,7 @@ export const getvalidationprpositiondeprolongation = async (
     const res = await axios.get<any>(
       `https://release3-v2.vercel.app/prolongation/validationprolongation?page=${currentpage}&perPage=${perpage}&cli=${cli}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
+    revalidatePath("/");
     console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data);
     return res.data || ({} as any);
   } catch (error) {
@@ -99,7 +102,7 @@ export const getHistoriquevalidationpropsedetransfertanticipeByCli = async (
       `https://release3-v2.vercel.app/transfer/gethistoriquevalidationpropsedetransfertanticipeByCli?page=${currentpage}&perPage=${perpage}&cli=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
     console.log("============================================");
-
+    revalidatePath("/");
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -126,6 +129,7 @@ export const createhistoriquevalidationpropsedetransfertanticipe = async ({
       `https://release3-v2.vercel.app/transfer/createhistoriquevalidationpropsedetransfertanticipe`,
       { matricule, obs, numobs, cli, motif, flag_trf }
     );
+    revalidatePath("/");
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -156,6 +160,7 @@ export const getDemandeDeProlongation = async (
     const res = await axios.get<Main>(
       `https://release3-v2.vercel.app/prolongation/demandeprolongation?page=${currentpage}&perPage=${perpage}&cli=${IdClient}&groupe=${groupe}&agence=${agence}&from=${dayfrom}&to=${dayto}`
     );
+    revalidatePath("/");
     return res.data || ({} as Main);
   } catch (error) {
     return {} as Main;
@@ -179,6 +184,7 @@ export const updatePro = async (
       `https://release3-v2.vercel.app/prolongation/update?id=${id}`,
       { motif_prol_c, obs, id }
     );
+    revalidatePath("/");
     console.log("res prolongationnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", res);
     return { data: res.data, status: res.status } || ({} as any);
   } catch (error) {
@@ -201,7 +207,7 @@ export const validationprolongation = async (
       `https://release3-v2.vercel.app/prolongation/validate?id=${id}`,
       { prol_c }
     );
-
+    revalidatePath("/");
     return { data: res.data, status: res.status } || ({} as any);
   } catch (error) {
     return {} as any;
