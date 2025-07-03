@@ -6,10 +6,24 @@ Ce projet est une application de suivi de recouvrement. Elle aide les utilisateu
 
 ## Fonctionnalités
 
-- Suivi des dossiers de recouvrement
-- Gestion des statuts de paiement
-- Historique des actions et communications de relance
-- Génération de rapports d’avancement
+- **Suivi des dossiers de recouvrement** : Visualisation, recherche et gestion des dossiers clients en phase de recouvrement.
+- **Gestion des statuts de paiement** : Suivi de l’avancement des paiements, changements de statuts (payé, en attente, impayé, etc.).
+- **Historique des actions et communications** : Journalisation de toutes les actions réalisées sur chaque dossier (appels, visites, lettres, relances, etc.).
+- **Génération de rapports d’avancement** : Création de rapports sur l’état du recouvrement pour analyse ou export.
+- **Gestion des comptes clients** : Affichage, filtrage et recherche des comptes à recouvrer.
+- **Gestion des comptes rendus** : Saisie et consultation des comptes rendus de suivi, appréciations et motifs d’impayé.
+- **Historique des comptes rendus** : Accès à la liste et au détail des anciens comptes rendus pour chaque client.
+- **Gestion des contacts associés** : Suivi des coordonnées et des changements de contacts des clients.
+- **Gestion des motifs d’impayé** : Sélection et gestion des causes d’impayé (salaire suspendu, client injoignable, etc.).
+- **Gestion des moyens de relance** : Choix du moyen de relance (appel, visite, lettre, sommation, etc.).
+- **Gestion des types de clients** : Classification selon le comportement (coopérant, agressif, normal, etc.).
+- **Gestion des utilisateurs/admins** : Connexion par matricule et mot de passe, droits d’accès et restrictions.
+- **Filtrage, recherche et tri avancés** : Sur les dossiers, comptes, historiques, fichiers et comptes rendus.
+- **Gestion des fichiers et pièces jointes** : Consultation et gestion de fichiers liés aux dossiers.
+- **Interface de visualisation et de saisie rapide** : Tableaux interactifs pour les dossiers, comptes, historiques et fichiers.
+- **Sécurité des accès** : Redirection automatique si accès non autorisé à certains modules.
+
+Tu peux reprendre cette liste pour enrichir la section "Fonctionnalités" de ton README ou demander une reformulation ou une version plus synthétique si besoin !
 
 ## Accès administrateur (par défaut)
 
