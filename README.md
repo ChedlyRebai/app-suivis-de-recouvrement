@@ -1,3 +1,5 @@
+
+
 # app-suivis-de-recouvrement
 
 ## Présentation
@@ -42,14 +44,14 @@ Tu peux reprendre cette liste pour enrichir la section "Fonctionnalités" de ton
 
 ### Installation
 
-Clonez le dépôt :
+Clonez le dépôt :
 
 ```bash
 git clone https://github.com/ChedlyRebai/app-suivis-de-recouvrement.git
 cd app-suivis-de-recouvrement
 ```
 
-Installez les dépendances :
+Installez les dépendances :
 
 ```bash
 npm install
@@ -59,12 +61,12 @@ yarn install
 
 ### Lancement
 
-Démarrez le serveur de développement :
+Démarrez le serveur de développement :
 
 ```bash
-npm start
+npm run dev
 # ou
-yarn start
+yarn dev
 ```
 
 Rendez-vous sur `http://localhost:3000` dans votre navigateur (ajustez le port si nécessaire).
